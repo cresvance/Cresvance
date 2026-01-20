@@ -208,6 +208,29 @@
         <p>&copy; 2026 CRESVANCE - Expat Advisory Solutions. All rights reserved.</p>
     </footer>
 
+    <div id="cookie-banner" style="display: none; position: fixed; bottom: 0; left: 0; width: 100%; background: #2d453e; color: #f5f5f0; padding: 20px; text-align: center; z-index: 9999; box-shadow: 0 -5px 15px rgba(0,0,0,0.2); font-size: 0.85rem;">
+    <p style="margin-bottom: 15px;">
+        We use cookies to ensure you get the best experience on our website. By continuing to browse, you agree to our use of cookies. 
+        <a href="#legal" style="color: #d1d1c4; text-decoration: underline;">Learn more</a>
+    </p>
+    <button onclick="acceptCookies()" style="background: #f5f5f0; color: #2d453e; border: none; padding: 8px 25px; border-radius: 5px; cursor: pointer; font-weight: 600;">
+        Accept All
+    </button>
+</div>
+
+<script>
+    function acceptCookies() {
+        localStorage.setItem('cresvance_cookies_accepted', 'true');
+        document.getElementById('cookie-banner').style.display = 'none';
+    }
+
+    window.onload = function() {
+        if (!localStorage.getItem('cresvance_cookies_accepted')) {
+            document.getElementById('cookie-banner').style.display = 'block';
+        }
+    };
+</script>
 </body>
 </html>
+
 
