@@ -353,10 +353,69 @@
                 <span style="font-size: 0.8rem; font-weight: 600;">Essential</span>
                 <span style="font-size: 0.7rem; color: #25D366;">Always Active</span>
             </div>
-            <div style="display: flex; justify-content: space-between; align-items
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
+                <span style="font-size: 0.8rem; font-weight: 600;">Analytics</span>
+                <input type="checkbox" id="analytics-check" checked>
+            </div>
+        </div>
 
+        <div class="cookie-btns">
+            <button onclick="acceptAllCookies()" class="btn-accept">Accept All</button>
+            <button onclick="toggleCookieSettings()" class="btn-settings" id="settings-btn">Customize</button>
+        </div>
+    </div>
 
+    <script>
+        // Animación Scroll Reveal
+        const observerOptions = { threshold: 0.15 };
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                }
+            });
+        }, observerOptions);
 
+        document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 
+        // Cookie Logic
+        function toggleCookieSettings() {
+            const options = document.getElementById('cookie-options');
+            const btn = document.getElementById('settings-btn');
+            if (options.style.display === 'none') {
+                options.style.display = 'block';
+                btn.innerText = 'Save';
+                btn.onclick = saveCustomCookies;
+            }
+        }
 
+        function acceptAllCookies() {
+            localStorage.setItem('cresvance_cookies', 'all');
+            closeCookieBanner();
+        }
 
+        function saveCustomCookies() {
+            const analytics = document.getElementById('analytics-check').checked;
+            localStorage.setItem('cresvance_cookies', analytics ? 'analytics' : 'essential');
+            closeCookieBanner();
+        }
+
+        function closeCookieBanner() {
+            const banner = document.getElementById('cookie-banner');
+            banner.style.transition = 'all 0.5s ease';
+            banner.style.opacity = '0';
+            banner.style.transform = 'translateY(40px)';
+            setTimeout(() => { banner.style.display = 'none'; }, 500);
+        }
+
+        window.onload = () => {
+            if (!localStorage.getItem('cresvance_cookies')) {
+                const banner = document.getElementById('cookie-banner');
+                banner.style.display = 'block';
+                setTimeout(() => { banner.style.opacity = '1'; }, 100);
+            }
+            document.querySelector('.hero .reveal').classList.add('active');
+        };
+    </script>
+</body>
+</html>
