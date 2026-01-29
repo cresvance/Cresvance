@@ -21,7 +21,7 @@
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { font-family: 'Manrope', sans-serif; color: var(--text-main); background: var(--white); line-height: 1.6; overflow-x: hidden; }
 
-        /* --- LOGO ANIMATION: THE "BREATHING" CE EFFECT --- */
+        /* --- TOP NAVIGATION LOGO ANIMATION (Scroll based) --- */
         nav { 
             padding: 1.5rem 8%; display: flex; justify-content: space-between; align-items: center;
             background: rgba(255,255,255,0.95); backdrop-filter: blur(10px); position: sticky; top: 0; z-index: 1000;
@@ -35,14 +35,14 @@
         
         .logo .retract {
             display: inline-block;
-            max-width: 500px; /* Suficiente para el nombre */
+            max-width: 500px;
             opacity: 1;
             transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
             white-space: nowrap;
             overflow: hidden;
         }
 
-        /* Clase para colapsar a CE */
+        /* Clase para colapsar el de arriba al hacer scroll */
         .logo.collapsed .retract {
             max-width: 0;
             opacity: 0;
@@ -92,7 +92,31 @@
 
         /* --- FOOTER --- */
         footer { background: var(--navy); color: white; padding: 100px 8%; text-align: center; }
-        .footer-logo { font-size: 2.5rem; font-weight: 800; margin-bottom: 10px; }
+        
+        /* Estilos específicos para la animación del footer logo */
+        .footer-logo-container {
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: 10px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .footer-retract {
+            display: inline-block;
+            max-width: 0; /* Empieza cerrado (CE) */
+            opacity: 0;
+            white-space: nowrap;
+            overflow: hidden;
+            transition: all 0.8s cubic-bezier(0.22, 1, 0.36, 1); /* Expansión suave */
+        }
+
+        /* Clase que se añade con JS para abrir el logo */
+        .footer-logo-container.expanded .footer-retract {
+            max-width: 300px; /* Se abre */
+            opacity: 1;
+        }
 
         /* --- COOKIE BANNER (COMPLETO) --- */
         #cookie-banner { 
@@ -118,7 +142,7 @@
 <body>
 
     <nav id="navbar">
-        <a href="#" class="logo" id="logo">C<span class="retract">RESVANC</span>E</a>
+        <a href="#" class="logo" id="top-logo">C<span class="retract">RESVANC</span>E</a>
         <div class="nav-links">
             <a href="#services">Expertise</a>
             <a href="#contact">Contact</a>
@@ -212,7 +236,10 @@
     </section>
 
     <footer id="contact">
-        <div class="footer-logo">CRESVANCE</div>
+        <div class="footer-logo-container" id="footer-logo">
+            C<span class="footer-retract">RESVANC</span>E
+        </div>
+        
         <p style="opacity: 0.7; margin-bottom: 30px;">Simplifying Spanish bureaucracy for you.</p>
         <div class="socials">
             <a href="https://www.linkedin.com/company/cresvance" target="_blank" style="color:white; font-size: 1.5rem; margin: 0 15px;"><i class="fab fa-linkedin"></i></a>
@@ -240,7 +267,8 @@
     </div>
 
     <script>
-        const logo = document.getElementById("logo");
+        // --- ANIMACIÓN LOGO SUPERIOR (Scroll) ---
+        const topLogo = document.getElementById("top-logo");
         const nav = document.getElementById("navbar");
         let isScrolled = false;
 
@@ -248,27 +276,34 @@
             if (window.scrollY > 80) {
                 if (!isScrolled) {
                     nav.classList.add("scrolled");
-                    logo.classList.add("collapsed"); // Se cierra a CE
-                    
-                    // Después de 2 segundos, se vuelve a abrir
-                    setTimeout(() => {
-                        logo.classList.remove("collapsed");
-                    }, 2000);
-                    
+                    topLogo.classList.add("collapsed"); // Se cierra a CE
+                    setTimeout(() => { topLogo.classList.remove("collapsed"); }, 2000); // Se abre a los 2s
                     isScrolled = true;
                 }
             } else {
                 nav.classList.remove("scrolled");
-                logo.classList.remove("collapsed");
+                topLogo.classList.remove("collapsed");
                 isScrolled = false;
             }
         };
 
+        // --- ANIMACIÓN LOGO FOOTER (Carga inicial) ---
+        window.addEventListener('load', () => {
+            const footerLogo = document.getElementById('footer-logo');
+            // Empieza como CE (por CSS default). Espera 2 segundos y se expande.
+            setTimeout(() => {
+                footerLogo.classList.add('expanded');
+            }, 2000);
+        });
+
+
+        // --- SCROLL REVEAL ---
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('active'); });
         }, { threshold: 0.1 });
         document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 
+        // --- COOKIES ---
         function toggleCookieSettings() {
             const panel = document.getElementById('cookie-settings-panel');
             panel.style.display = panel.style.display === 'block' ? 'none' : 'block';
@@ -277,9 +312,10 @@
             localStorage.setItem('cresvance_consent', type); 
             document.getElementById('cookie-banner').style.display = 'none'; 
         }
-        window.onload = () => { 
-            if (!localStorage.getItem('cresvance_consent')) document.getElementById('cookie-banner').style.display = 'block'; 
-        };
+        if (!localStorage.getItem('cresvance_consent')) {
+             // Pequeño retraso para que no sea agresivo al cargar
+             setTimeout(() => { document.getElementById('cookie-banner').style.display = 'block'; }, 1000);
+        }
     </script>
 </body>
 </html>
