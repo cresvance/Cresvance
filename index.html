@@ -42,7 +42,7 @@
             overflow: hidden;
         }
 
-        /* Efecto al bajar: Se queda en CE */
+        /* Comportamiento: Se cierra a CE al bajar, se abre al subir */
         nav.scrolled .logo .retract {
             max-width: 0;
             opacity: 0;
@@ -58,7 +58,7 @@
         .hero h1 span { color: var(--electric); }
         .hero p { font-size: 1.25rem; color: var(--text-muted); max-width: 650px; margin-bottom: 35px; font-weight: 500; }
 
-        .lang-badge { display: inline-flex; gap: 15px; margin-bottom: 30px; font-weight: 700; font-size: 0.9rem; color: var(--navy); }
+        .lang-badge { display: inline-flex; gap: 12px; margin-bottom: 30px; font-weight: 700; font-size: 0.8rem; color: var(--navy); flex-wrap: wrap; }
         .lang-badge span::before { content: "●"; color: var(--electric); margin-right: 5px; }
 
         /* --- BUTTONS --- */
@@ -103,7 +103,7 @@
         
         .footer-retract {
             display: inline-block;
-            max-width: 0; /* Empieza cerrado */
+            max-width: 0; /* Inicia como CE */
             opacity: 0;
             white-space: nowrap;
             overflow: hidden;
@@ -149,7 +149,7 @@
     <section class="hero">
         <div class="reveal">
             <div class="lang-badge">
-                <span>ENGLISH</span> <span>DEUTSCH</span> <span>ESPAÑOL</span>
+                <span>ENGLISH</span> <span>DEUTSCH</span> <span>ESPAÑOL</span> <span>FRANÇAIS</span> <span>ITALIANO</span>
             </div>
             <h1>We walk you <br> <span>through it.</span></h1>
             <p>Direct and personal advisory for expats in Spain. Professional expertise and on-site support for your peace of mind.</p>
@@ -242,7 +242,7 @@
             <a href="https://www.instagram.com/Cresvance_support" target="_blank" style="color:white; font-size: 1.5rem; margin: 0 15px;"><i class="fab fa-instagram"></i></a>
             <a href="mailto:hello@cresvance.com" style="color:white; font-size: 1.5rem; margin: 0 15px;"><i class="fas fa-envelope"></i></a>
         </div>
-        <p style="margin-top: 40px; opacity: 0.5; font-size: 0.8rem;">Málaga and Remote | DE · EN · ES</p>
+        <p style="margin-top: 40px; opacity: 0.5; font-size: 0.8rem;">Málaga and Remote | EN · DE · ES · FR · IT</p>
     </footer>
 
     <div id="cookie-banner">
@@ -263,7 +263,7 @@
     </div>
 
     <script>
-        // --- NAVBAR LOGO: COLLAPSE ON SCROLL DOWN, EXPAND ON SCROLL UP ---
+        // --- NAVBAR LOGO: Se cierra al bajar, se abre al subir ---
         const navbar = document.getElementById("navbar");
         window.onscroll = function() {
             if (window.scrollY > 50) {
@@ -273,7 +273,7 @@
             }
         };
 
-        // --- FOOTER LOGO: INITIAL ANIMATION (WAIT 2S THEN OPEN) ---
+        // --- FOOTER LOGO: Se abre tras 2 segundos de carga ---
         window.addEventListener('load', () => {
             const footerLogo = document.getElementById('footer-logo');
             setTimeout(() => {
@@ -287,7 +287,7 @@
         }, { threshold: 0.1 });
         document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 
-        // --- COOKIE LOGIC ---
+        // --- COOKIES ---
         function toggleCookieSettings() {
             const panel = document.getElementById('cookie-settings-panel');
             panel.style.display = panel.style.display === 'block' ? 'none' : 'block';
