@@ -38,12 +38,31 @@
         .hero h1 span { color: var(--primary-blue); }
         .hero p { font-size: 1.2rem; max-width: 650px; margin: 0 auto 2.5rem; color: var(--text-sec); }
         
+        /* Buttons with shadows */
         .cta-container { display: flex; justify-content: center; gap: 15px; flex-wrap: wrap; }
         .btn { padding: 16px 32px; text-decoration: none; font-weight: 600; border-radius: 40px; transition: 0.4s; display: inline-flex; align-items: center; gap: 10px; font-size: 0.95rem; cursor: pointer; border: none; }
-        .btn-primary { background-color: var(--primary-blue); color: white; }
-        .btn-whatsapp { background-color: var(--whatsapp); color: white; }
+        
+        .btn-primary { 
+            background-color: var(--primary-blue); 
+            color: white; 
+            box-shadow: 0 10px 25px rgba(0, 113, 227, 0.35); 
+        }
+        .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 15px 30px rgba(0, 113, 227, 0.45); }
 
-        /* Bento Grid */
+        .btn-whatsapp { 
+            background-color: var(--whatsapp); 
+            color: white; 
+            box-shadow: 0 10px 25px rgba(37, 211, 102, 0.3); 
+        }
+        .btn-whatsapp:hover { transform: translateY(-2px); box-shadow: 0 15px 30px rgba(37, 211, 102, 0.4); }
+
+        /* Insights (Now Second Section) */
+        .blog-section { padding: 60px 10%; background: var(--bg-light); }
+        .blog-card { background: #fff; border-radius: 24px; padding: 40px; max-width: 900px; margin: 0 auto; box-shadow: 0 4px 20px rgba(0,0,0,0.03); }
+        .blog-tag { background: #000; color: #fff; padding: 4px 12px; border-radius: 12px; font-size: 0.7rem; font-weight: 700; text-transform: uppercase; }
+        .article-content { display: none; margin-top: 25px; padding-top: 25px; border-top: 1px solid #eee; line-height: 1.7; font-size: 0.95rem; color: #444; }
+
+        /* Bento Grid Services */
         .services { padding: 100px 10%; }
         .services h2 { text-align: center; margin-bottom: 60px; font-size: 2.8rem; font-weight: 800; }
         .bento-grid { display: grid; grid-template-columns: repeat(6, 1fr); gap: 20px; }
@@ -52,18 +71,13 @@
         .bento-content h3 { font-size: 1.3rem; margin-bottom: 10px; font-weight: 700; }
         .bento-content ul { list-style: none; font-size: 0.85rem; font-weight: 600; }
         .bento-content ul li { margin-bottom: 5px; display: flex; align-items: center; gap: 8px; }
-        .bento-content ul li::before { content: "•"; color: var(--primary-blue); margin-right: 8px; }
+        .bento-content ul li::before { content: "•"; color: var(--primary-blue); font-weight: bold; }
         
         .card-1 { grid-column: span 3; grid-row: span 2; background: #eef6ff; }
         .card-2 { grid-column: span 3; }
         .card-3 { grid-column: span 3; }
         .card-4 { grid-column: span 2; }
         .card-5 { grid-column: span 4; }
-
-        /* Insights */
-        .blog-section { padding: 80px 10%; background: var(--bg-light); }
-        .blog-card { background: #fff; border-radius: 24px; padding: 40px; max-width: 900px; margin: 0 auto; }
-        .article-content { display: none; margin-top: 25px; padding-top: 25px; border-top: 1px solid #eee; line-height: 1.7; font-size: 0.95rem; color: #444; }
 
         /* Footer */
         footer { background: #000; color: #fff; padding: 80px 10% 60px; text-align: center; }
@@ -74,21 +88,15 @@
 
         /* Cookies */
         #cookie-banner { display: none; position: fixed; bottom: 20px; right: 20px; left: 20px; max-width: 450px; background: #fff; padding: 30px; border-radius: 24px; z-index: 10000; box-shadow: 0 20px 50px rgba(0,0,0,0.2); border: 1px solid #eee; margin-left: auto; }
-        .cookie-options { margin: 15px 0; display: none; font-size: 0.8rem; }
-        .cookie-row { display: flex; justify-content: space-between; margin-bottom: 8px; }
-        .btn-cookie-sec { background: #f0f0f2; color: #333; font-size: 0.8rem; padding: 10px 15px; }
 
-        @media (max-width: 900px) { 
-            .bento-grid { grid-template-columns: 1fr; } 
-            .card-1, .card-2, .card-3, .card-4, .card-5 { grid-column: span 1; grid-row: span 1; }
-        }
+        @media (max-width: 900px) { .bento-grid { grid-template-columns: 1fr; } .card-1, .card-2, .card-3, .card-4, .card-5 { grid-column: span 1; grid-row: span 1; } }
     </style>
 </head>
 <body>
 
     <nav>
         <a href="#" class="logo" id="animated-logo"></a>
-        <div><a href="#services">Services</a><a href="#blog">Insights</a><a href="#contact">Contact</a></div>
+        <div><a href="#blog">Insights</a><a href="#services">Services</a><a href="#contact">Contact</a></div>
     </nav>
 
     <section class="hero">
@@ -102,19 +110,38 @@
         </div>
     </section>
 
+    <section id="blog" class="blog-section">
+        <div class="blog-card reveal">
+            <span class="blog-tag">Andalusia 2026</span>
+            <h3 style="margin: 15px 0; font-size: 1.6rem; font-weight: 800;">Exclusive Tax Deductions in Andalusia</h3>
+            <p>The Junta de Andalucía has approved new tax credits for 2026. From sports activities to pet healthcare, find out how much you can recover.</p>
+            <a href="javascript:void(0)" onclick="toggleArticle()" id="read-more-btn" style="color: var(--primary-blue); font-weight: 700; text-decoration: none; display: inline-block; margin-top: 15px;">Explore deductions ↓</a>
+            
+            <div id="article-body" class="article-content">
+                <p><strong>1. Sports and Gym Deduction:</strong> Andalusian taxpayers can deduct <strong>15%</strong> of expenses related to sports services (gyms, sports centers, and federated clubs) with a maximum limit of €100.</p>
+                <br>
+                <p><strong>2. Veterinary Expenses:</strong> A major update for pet owners! You can now deduct <strong>15%</strong> of veterinary costs, including medical check-ups and preventive treatments, with a limit of €50 per animal.</p>
+                <br>
+                <p><strong>3. Renting Property:</strong> Deduct <strong>15%</strong> of your annual rent (up to €600, or €900 for people with disabilities). This applies to tenants under 35 years old or over 65.</p>
+                <br>
+                <p><strong>4. Work and Family Balance:</strong> Credits available for domestic help and childcare, alongside deductions for investment in protected or social housing.</p>
+            </div>
+        </div>
+    </section>
+
     <section id="services" class="services">
         <h2 class="reveal">Our Expertise.</h2>
         <div class="bento-grid reveal">
             <div class="bento-item card-1">
                 <div class="bento-content">
-                    <h3>Taxation & Compliance</h3>
+                    <h3>Taxation and Compliance</h3>
                     <p>End-to-end tax management for expats and nomads in Spain.</p>
                     <ul>
                         <li>Annual Income Tax Return (Modelo 100)</li>
-                        <li>Quarterly Tax Returns & Annual Summaries</li>
+                        <li>Quarterly Tax Returns and Annual Summaries</li>
                         <li>Self-Employed (Autónomo) Registration</li>
                         <li>Rental Tax Withholding (Modelo 115)</li>
-                        <li>Invoicing & Digital Bookkeeping</li>
+                        <li>Invoicing and Digital Bookkeeping</li>
                     </ul>
                 </div>
                 <i class="fas fa-calculator" style="color:var(--primary-blue); opacity:0.1; font-size:2rem; align-self: flex-end;"></i>
@@ -122,11 +149,11 @@
             
             <div class="bento-item card-2">
                 <div class="bento-content">
-                    <h3>Digital ID & Subsidies</h3>
+                    <h3>Digital ID and Subsidies</h3>
                     <p>Modern solutions for your administrative needs.</p>
                     <ul>
                         <li>Remote Digital Certificate Setup</li>
-                        <li>Kit Digital Advisory & Grant Support</li>
+                        <li>Kit Digital Advisory and Grant Support</li>
                         <li>Cl@ve System Identification</li>
                     </ul>
                 </div>
@@ -139,7 +166,7 @@
                     <ul>
                         <li>Rental Deposits (Modelo 806)</li>
                         <li>Social Security Number (SSN)</li>
-                        <li>Padron & Residency Support</li>
+                        <li>Padron and Residency Support</li>
                     </ul>
                 </div>
             </div>
@@ -156,34 +183,13 @@
 
             <div class="bento-item card-5">
                 <div class="bento-content">
-                    <h3>Residency & NIE</h3>
+                    <h3>Residency and NIE</h3>
                     <p>Documentation for your life and work in Spain.</p>
                     <ul>
-                        <li>White NIE & EU Certificates</li>
-                        <li>TIE Appointments & Fingerprinting</li>
+                        <li>White NIE and EU Certificates</li>
+                        <li>TIE Appointments and Fingerprinting</li>
                     </ul>
                 </div>
-            </div>
-        </div>
-    </section>
-
-    <section id="blog" class="blog-section">
-        <div class="blog-card reveal">
-            <span class="blog-tag">Andalusia 2026</span>
-            <h3 style="margin: 15px 0; font-size: 1.6rem; font-weight: 800;">Exclusive Tax Deductions in Andalusia</h3>
-            <p>The Junta de Andalucía has approved new tax credits for 2026. From sports activities to pet healthcare, find out how much you can recover.</p>
-            <a href="javascript:void(0)" onclick="toggleArticle()" id="read-more-btn" style="color: var(--primary-blue); font-weight: 700; text-decoration: none; display: inline-block; margin-top: 15px;">Explore deductions ↓</a>
-            
-            <div id="article-body" class="article-content">
-                <p><strong>1. Sports & Gym Deduction:</strong> Andalusian taxpayers can deduct <strong>15%</strong> of expenses related to sports services (gyms, sports centers, and federated clubs) with a maximum limit of €100. This is a key measure to promote health through the regional tax system.</p>
-                <br>
-                <p><strong>2. Veterinary Expenses:</strong> A major update for pet owners! You can now deduct <strong>15%</strong> of veterinary costs, including medical check-ups, preventive treatments, and diagnostic tests for your pets, with a limit of €50 per animal.</p>
-                <br>
-                <p><strong>3. Renting Property:</strong> If you live in a rented home, you can deduct <strong>15%</strong> of the annual rent (up to €600, or €900 for people with disabilities). This applies to tenants under 35 years old or over 65.</p>
-                <br>
-                <p><strong>4. Work & Family Balance:</strong> Andalusia also offers credits for domestic help and childcare, as well as significant deductions for investment in your permanent residence (Vivienda Habitual) if it is protected or social housing.</p>
-                <br>
-                <p><em>*Note: To apply these credits, you must hold official invoices and comply with regional income limits. We can help you audit your expenses to ensure you don't miss any savings.</em></p>
             </div>
         </div>
     </section>
@@ -196,7 +202,7 @@
         </div>
         <div class="footer-info reveal">
             <p><strong>© 2026 CRESVANCE</strong></p>
-            <p>Spain-wide Support · Málaga & Remote</p>
+            <p>Málaga and Remote Support</p>
             <p>Expat Advisory Solutions</p>
         </div>
     </footer>
@@ -204,14 +210,9 @@
     <div id="cookie-banner">
         <h4 style="margin-bottom: 10px;">Privacy Preferences</h4>
         <p style="font-size: 0.8rem; color: #555; margin-bottom: 15px;">We use cookies to optimize your experience. Accept all, reject, or customize.</p>
-        <div id="cookie-config" class="cookie-options">
-            <div class="cookie-row"><span>Essential</span><span style="color:green;">Always active</span></div>
-            <div class="cookie-row"><span>Analytics</span><input type="checkbox" checked></div>
-        </div>
         <div style="display: flex; gap: 10px; flex-wrap: wrap;">
             <button onclick="saveCookies('all')" class="btn btn-primary" style="flex:1; padding:10px; font-size:0.8rem;">Accept All</button>
-            <button onclick="saveCookies('essential')" class="btn btn-cookie-sec" style="flex:1;">Reject All</button>
-            <button onclick="showSettings()" class="btn btn-cookie-sec" id="set-btn">Settings</button>
+            <button onclick="saveCookies('essential')" class="btn btn-cookie-sec" style="flex:1;">Reject</button>
         </div>
     </div>
 
@@ -237,7 +238,6 @@
             btn.innerText = body.style.display === 'block' ? 'Show less ↑' : 'Explore deductions ↓';
         }
 
-        function showSettings() { document.getElementById('cookie-config').style.display = 'block'; document.getElementById('set-btn').style.display = 'none'; }
         function saveCookies(type) { localStorage.setItem('cresvance_consent', type); document.getElementById('cookie-banner').style.display = 'none'; }
         window.onload = () => { 
             if (!localStorage.getItem('cresvance_consent')) document.getElementById('cookie-banner').style.display = 'block';
