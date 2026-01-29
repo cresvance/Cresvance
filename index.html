@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cresvance | Professional Expat Advisory</title>
+    <title>Cresvance | Professional and Personal Advisory</title>
     
     <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
@@ -21,23 +21,35 @@
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { font-family: 'Manrope', sans-serif; color: var(--text-main); background: var(--white); line-height: 1.6; overflow-x: hidden; }
 
-        /* --- SMART LOGO & NAV --- */
+        /* --- LOGO ANIMATION "COLLAPSE TO CE" --- */
         nav { 
-            padding: 1.2rem 8%; display: flex; justify-content: space-between; align-items: center;
+            padding: 1.5rem 8%; display: flex; justify-content: space-between; align-items: center;
             background: rgba(255,255,255,0.95); backdrop-filter: blur(10px); position: sticky; top: 0; z-index: 1000;
-            transition: all 0.4s ease; border-bottom: 1px solid #eee;
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1); border-bottom: 1px solid #eee;
         }
 
-        /* El logo cambia con el scroll (clase .scrolled se añade por JS) */
         .logo { 
-            font-weight: 800; font-size: 1.6rem; color: var(--navy); text-decoration: none; 
-            letter-spacing: -1px; transition: all 0.4s cubic-bezier(0.22, 1, 0.36, 1);
-            display: inline-block;
+            font-weight: 800; font-size: 1.8rem; color: var(--navy); text-decoration: none; 
+            letter-spacing: -1px; display: flex; align-items: center; overflow: hidden;
         }
         
+        /* Contenedor de las letras que desaparecen */
+        .logo .retract {
+            display: inline-block;
+            max-width: 300px;
+            opacity: 1;
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            white-space: nowrap;
+        }
+
+        /* Estado cuando hacemos scroll */
         nav.scrolled { padding: 0.8rem 8%; }
-        nav.scrolled .logo { font-size: 1.8rem; color: var(--electric); }
-        nav.scrolled .logo span { display: none; } /* Oculta el resto de letras */
+        nav.scrolled .logo .retract {
+            max-width: 0;
+            opacity: 0;
+            margin: 0;
+        }
+        nav.scrolled .logo { color: var(--electric); }
 
         .nav-links a { text-decoration: none; color: var(--navy); font-weight: 700; margin-left: 30px; font-size: 0.85rem; text-transform: uppercase; }
 
@@ -57,36 +69,37 @@
         .btn-whatsapp { background: #fff; color: var(--navy); border: 2px solid #E2E8F0; margin-left: 10px; }
         .btn-whatsapp:hover { border-color: var(--navy); transform: translateY(-3px); }
 
-        /* --- DEDUCTIONS (Explicación mejorada) --- */
+        /* --- DEDUCCIONES EXPLICADAS 2026 --- */
         .insights { padding: 80px 8%; background: var(--white); }
-        .insight-card { background: var(--bg-light); padding: 50px; border-radius: 20px; border-left: 8px solid var(--electric); }
-        .insight-card h3 { font-size: 2.2rem; margin-bottom: 25px; letter-spacing: -1px; }
+        .insight-card { background: var(--bg-light); padding: 50px; border-radius: 24px; border-left: 8px solid var(--electric); }
+        .insight-card h3 { font-size: 2.2rem; margin-bottom: 25px; letter-spacing: -1px; color: var(--navy); }
         
-        .deduction-box { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px; }
-        .deduction-box h4 { color: var(--electric); font-size: 1.2rem; margin-bottom: 10px; display: flex; align-items: center; gap: 10px; }
-        .deduction-box p { font-size: 0.95rem; color: var(--text-main); opacity: 0.8; }
+        .deduction-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 40px; }
+        .deduction-item h4 { color: var(--electric); font-size: 1.2rem; margin-bottom: 12px; display: flex; align-items: center; gap: 10px; }
+        .deduction-item p { font-size: 0.95rem; color: var(--text-main); line-height: 1.6; }
+        .deduction-item b { color: var(--navy); }
 
         /* --- SERVICES GRID --- */
         .services { padding: 100px 8%; background: #fafafa; }
         .bento-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 25px; }
-        .bento-item { background: var(--white); padding: 40px; border-radius: 20px; border: 1px solid #eee; transition: 0.4s; position: relative; overflow: hidden; display: flex; flex-direction: column; justify-content: space-between; }
+        .bento-item { background: var(--white); padding: 40px; border-radius: 20px; border: 1px solid #eee; transition: 0.4s; display: flex; flex-direction: column; justify-content: space-between; }
         .bento-item:hover { transform: translateY(-10px); box-shadow: 0 20px 40px rgba(0,0,0,0.05); border-color: var(--electric); }
         
-        .bento-item i { font-size: 2.5rem; color: var(--navy); margin-bottom: 20px; opacity: 0.9; }
+        .bento-item i { font-size: 2.5rem; color: var(--navy); margin-bottom: 20px; }
         .bento-item h3 { font-size: 1.5rem; margin-bottom: 15px; font-weight: 800; }
         .bento-item ul { list-style: none; }
-        .bento-item ul li { margin-bottom: 10px; font-size: 0.95rem; font-weight: 600; color: var(--text-muted); display: flex; align-items: center; gap: 10px; }
-        .bento-item ul li::before { content: "→"; color: var(--electric); }
+        .bento-item ul li { margin-bottom: 12px; font-size: 0.95rem; font-weight: 600; color: var(--text-muted); display: flex; align-items: center; gap: 10px; }
+        .bento-item ul li::before { content: "→"; color: var(--electric); font-weight: 900; }
         
         .span-2 { grid-column: span 2; }
 
         /* --- FOOTER --- */
         footer { background: var(--navy); color: white; padding: 100px 8%; text-align: center; }
         .footer-logo { font-size: 2.5rem; font-weight: 800; margin-bottom: 10px; display: block; }
-        .footer-slogan { font-size: 1.1rem; opacity: 0.7; margin-bottom: 40px; }
+        .footer-slogan { font-size: 1.1rem; opacity: 0.8; margin-bottom: 40px; }
 
         /* --- COOKIES --- */
-        #cookie-banner { display: none; position: fixed; bottom: 20px; right: 20px; width: 350px; background: white; padding: 25px; border-radius: 15px; box-shadow: 0 20px 50px rgba(0,0,0,0.3); z-index: 10000; }
+        #cookie-banner { display: none; position: fixed; bottom: 20px; right: 20px; width: 350px; background: white; padding: 25px; border-radius: 15px; box-shadow: 0 20px 50px rgba(0,0,0,0.3); z-index: 10000; border: 1px solid #eee; }
 
         .reveal { opacity: 0; transform: translateY(30px); transition: 0.8s ease-out; }
         .reveal.active { opacity: 1; transform: translateY(0); }
@@ -97,7 +110,7 @@
 <body>
 
     <nav id="navbar">
-        <a href="#" class="logo" id="main-logo">C<span>RESVANCE</span></a>
+        <a href="#" class="logo">C<span class="retract">RESVANC</span>E</a>
         <div class="nav-links">
             <a href="#services">Expertise</a>
             <a href="#contact">Contact</a>
@@ -110,7 +123,7 @@
                 <span>ENGLISH</span> <span>DEUTSCH</span> <span>ESPAÑOL</span>
             </div>
             <h1>We walk you <br> <span>through it.</span></h1>
-            <p>From the moment you arrive until you are fully settled. Professional advisory with a personal touch for expats in Spain.</p>
+            <p>Direct and personal advisory for expats in Spain. We combine professional expertise with on-site support to ensure your peace of mind.</p>
             <div class="cta-container">
                 <a href="https://calendly.com/hello-cresvance/new-meeting" target="_blank" class="btn btn-primary">Free Consultation</a>
                 <a href="https://wa.me/34602593904" target="_blank" class="btn btn-whatsapp"><i class="fab fa-whatsapp"></i> Chat with us</a>
@@ -120,22 +133,34 @@
 
     <section class="insights">
         <div class="insight-card reveal">
-            <span style="color: var(--electric); font-weight: 800; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 1px;">Regional Intelligence</span>
-            <h3>Andalusia 2026 Tax Benefits</h3>
-            <p style="margin-bottom: 35px; font-weight: 500;">Moving to Andalusia comes with exclusive fiscal advantages. We help you recover money on your next tax filing:</p>
+            <span style="color: var(--electric); font-weight: 800; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 1px;">Andalusia Fiscal Intelligence 2026</span>
+            <h3>Maximize your Tax Returns</h3>
+            <p style="margin-bottom: 40px; font-weight: 500;">Living in Andalusia allows you to claim specific regional deductions. Our team ensures you recover every euro you are entitled to:</p>
             
-            <div class="deduction-box">
-                <div>
-                    <h4><i class="fas fa-dumbbell"></i> Sports & Health</h4>
-                    <p>Get a <b>15% refund</b> on gym memberships, sports center fees, and federated club costs. (Up to €100 back).</p>
+            <div class="deduction-grid">
+                <div class="deduction-item">
+                    <h4><i class="fas fa-dumbbell"></i> Sports and Health</h4>
+                    <p>You can recover <b>15% of your gym fees</b> and sports club memberships. This is designed to promote a healthy lifestyle among residents. Limit of 100 euros annually.</p>
                 </div>
-                <div>
+                <div class="deduction-item">
                     <h4><i class="fas fa-paw"></i> Pet Healthcare</h4>
-                    <p>Love your pet? You can deduct <b>15% of veterinary expenses</b> for medical check-ups and preventive care.</p>
+                    <p>Andalusia is a pioneer in supporting pet owners. Claim <b>15% of your veterinary expenses</b> for preventive treatments and check-ups for your pets.</p>
                 </div>
-                <div>
-                    <h4><i class="fas fa-home"></i> Renting Support</h4>
-                    <p>Tenants under 35 or over 65 can claim a <b>15% deduction</b> on their annual rent payment.</p>
+                <div class="deduction-item">
+                    <h4><i class="fas fa-home"></i> Renting and Housing</h4>
+                    <p>Residents under 35 or over 65 years old can deduct <b>15% of their rent</b>. Additionally, there are deductions for purchasing habitual residences in protected areas.</p>
+                </div>
+                <div class="deduction-item">
+                    <h4><i class="fas fa-baby"></i> Family and Birth</h4>
+                    <p>Up to <b>200 euros per child</b> for birth or adoption. This increases significantly in cases of international adoption or for residents in smaller municipalities.</p>
+                </div>
+                <div class="deduction-item">
+                    <h4><i class="fas fa-book"></i> Educational Expenses</h4>
+                    <p>Deduct costs related to <b>language classes and textbooks</b> for your children. We help you categorize these expenses to lower your final tax bill.</p>
+                </div>
+                <div class="deduction-item">
+                    <h4><i class="fas fa-wheelchair"></i> Disability Support</h4>
+                    <p>Dedicated tax credits for families supporting members with disabilities, ranging from <b>100 to 150 euros</b> depending on the specific situation.</p>
                 </div>
             </div>
         </div>
@@ -146,13 +171,13 @@
             <div class="bento-item span-2 reveal">
                 <i class="fas fa-calculator"></i>
                 <div class="bento-content">
-                    <h3>Taxation & Invoicing</h3>
-                    <p>Clear, English-speaking tax advice for individuals and the self-employed.</p>
+                    <h3>Taxation and Invoicing</h3>
+                    <p>Clear tax management for individuals and freelancers. No technical jargon, just results.</p>
                     <ul>
-                        <li>Annual Income Tax returns (Renta)</li>
-                        <li>Autónomo / Freelance management</li>
-                        <li>Professional Invoicing setup & guidance</li>
-                        <li>Wealth and Asset reporting</li>
+                        <li>Annual Income Tax filings for residents</li>
+                        <li>Self-employed Autónomo registration and management</li>
+                        <li>Professional Invoicing setup and monthly guidance</li>
+                        <li>Wealth and asset reporting for international clients</li>
                     </ul>
                 </div>
             </div>
@@ -160,12 +185,12 @@
             <div class="bento-item reveal">
                 <i class="fas fa-passport"></i>
                 <div class="bento-content">
-                    <h3>Residency (NIE)</h3>
-                    <p>Personalized support. We accompany you to the office.</p>
+                    <h3>Residency and NIE</h3>
+                    <p>We are your local partners. We don't just send emails, we go with you.</p>
                     <ul>
-                        <li>White NIE (In-person accompaniment)</li>
-                        <li>Green NIE (EU Citizen Registry)</li>
-                        <li>TIE Fingerprinting appointments</li>
+                        <li>White NIE with in-person accompaniment</li>
+                        <li>Green NIE for European Union Citizen Registry</li>
+                        <li>TIE Fingerprinting and card collection appointments</li>
                     </ul>
                 </div>
             </div>
@@ -175,10 +200,10 @@
                 <div class="bento-content">
                     <h3>Bureaucracy</h3>
                     <ul>
-                        <li>Rental Deposit management</li>
-                        <li>Notification tracking (Peace of mind)</li>
-                        <li>Social Security registration</li>
-                        <li>Banking: Local recommendations & setup</li>
+                        <li>Rental Deposit management and legal filings</li>
+                        <li>Digital Notification tracking and alerts</li>
+                        <li>Social Security registration and updates</li>
+                        <li>Banking: Local recommendations and account setup</li>
                     </ul>
                 </div>
             </div>
@@ -186,12 +211,13 @@
             <div class="bento-item span-2 reveal">
                 <i class="fas fa-fingerprint"></i>
                 <div class="bento-content">
-                    <h3>Digital Certificates</h3>
-                    <p>We handle the application process for you so you can sign documents remotely.</p>
+                    <h3>Digital and Kit Digital</h3>
+                    <p>We bridge the gap between you and the Spanish digital administration.</p>
                     <ul>
-                        <li>Request & Setup of your Digital Certificate</li>
-                        <li>Remote identification solutions</li>
-                        <li>Healthcare (SIP) setup for public access</li>
+                        <li><b>Kit Digital for Autónomos:</b> Complete grant application and management</li>
+                        <li>Full Digital Certificate request and personal installation</li>
+                        <li>Remote identification solutions for administrative tasks</li>
+                        <li>Spanish Healthcare SIP card registration</li>
                     </ul>
                 </div>
             </div>
@@ -199,42 +225,43 @@
     </section>
 
     <footer id="contact">
-        <span class="footer-logo">CRESVANCE</span>
+        <span class="footer-logo">CE</span>
         <p class="footer-slogan">Simplifying Spanish bureaucracy for you.</p>
         <div class="socials" style="margin-bottom: 30px;">
             <a href="https://www.linkedin.com/company/cresvance" target="_blank" style="color:white; font-size: 1.5rem; margin: 0 15px;"><i class="fab fa-linkedin"></i></a>
             <a href="https://www.instagram.com/Cresvance_support" target="_blank" style="color:white; font-size: 1.5rem; margin: 0 15px;"><i class="fab fa-instagram"></i></a>
             <a href="mailto:hello@cresvance.com" style="color:white; font-size: 1.5rem; margin: 0 15px;"><i class="fas fa-envelope"></i></a>
         </div>
-        <p style="opacity: 0.5; font-size: 0.8rem;">Málaga & Remote | DE · EN · ES</p>
+        <p style="opacity: 0.6; font-size: 0.85rem;">Málaga and Remote Advisory | DE · EN · ES</p>
     </footer>
 
     <div id="cookie-banner">
         <h4 style="margin-bottom: 10px;">Privacy</h4>
-        <p style="font-size: 0.8rem; color: #666; margin-bottom: 15px;">We use cookies to improve your experience. Manage your preferences.</p>
+        <p style="font-size: 0.8rem; color: #666; margin-bottom: 15px;">We use cookies to enhance your experience on our site. Manage your preferences below.</p>
         <div style="display: flex; gap: 10px;">
-            <button onclick="saveCookies('all')" class="btn btn-primary" style="padding: 10px; font-size: 0.8rem; flex: 1; justify-content: center;">Accept</button>
+            <button onclick="saveCookies('all')" class="btn btn-primary" style="padding: 10px; font-size: 0.8rem; flex: 1; justify-content: center;">Accept All</button>
             <button onclick="saveCookies('min')" class="btn btn-whatsapp" style="padding: 10px; font-size: 0.8rem; flex: 1; justify-content: center; border-color: #ddd;">Reject</button>
         </div>
     </div>
 
     <script>
-        // Scroll Effect for Logo
+        // Scroll Effect for Logo (Collapses to CE)
         window.onscroll = function() {
             const nav = document.getElementById("navbar");
-            if (document.body.scrollTop > 50 || document.documentElement.scrollTop > 50) {
+            if (document.body.scrollTop > 60 || document.documentElement.scrollTop > 60) {
                 nav.classList.add("scrolled");
             } else {
                 nav.classList.remove("scrolled");
             }
         };
 
-        // Scroll Reveal
+        // Scroll Reveal Animation
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('active'); });
         }, { threshold: 0.1 });
         document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 
+        // Cookies Logic
         function saveCookies(type) { localStorage.setItem('cresvance_consent', type); document.getElementById('cookie-banner').style.display = 'none'; }
         window.onload = () => { if (!localStorage.getItem('cresvance_consent')) document.getElementById('cookie-banner').style.display = 'block'; };
     </script>
