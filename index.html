@@ -5,17 +5,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cresvance | Expat Advisory Solutions</title>
     
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 
     <style>
         :root {
-            /* PALETA DE COLORES CRESVANCE */
-            --brand-green: #2d453e;
-            --brand-cream: #f2f2eb;
+            /* NUEVA PALETA: Apple Blue & Monochrome */
+            --primary-blue: #0071e3;   /* El azul icónico de Apple */
+            --dark-blue: #004d99;      /* Para hovers */
+            --bg-light: #f5f5f7;       /* Gris muy suave de fondo */
             --white: #ffffff;
-            --text-dark: #1d1d1f;
-            --glass: rgba(255, 255, 255, 0.9);
+            --text-main: #1d1d1f;      /* Negro suave */
+            --text-sec: #86868b;       /* Gris texto secundario */
+            --glass: rgba(255, 255, 255, 0.85);
             --whatsapp: #25D366;
         }
 
@@ -24,7 +26,7 @@
         body {
             font-family: 'Inter', sans-serif;
             line-height: 1.5;
-            color: var(--text-dark);
+            color: var(--text-main);
             background-color: var(--white);
             scroll-behavior: smooth;
             overflow-x: hidden;
@@ -45,12 +47,12 @@
             border-bottom: 1px solid rgba(0,0,0,0.05);
         }
 
-        /* --- NUEVO LOGO ANIMADO LETRA POR LETRA --- */
+        /* LOGO ANIMADO (Negro Sólido) */
         .logo {
             font-family: 'Inter', sans-serif;
             font-weight: 800;
             text-decoration: none;
-            color: #000; /* Negro elegante */
+            color: #000;
             letter-spacing: 1px;
             display: flex;
             font-size: 1.3rem;
@@ -61,8 +63,6 @@
             transform: translateY(10px);
             animation: letterReveal 0.5s forwards cubic-bezier(0.215, 0.610, 0.355, 1.000);
         }
-
-        /* Retardo para cada letra */
         .logo span:nth-child(1) { animation-delay: 0.1s; }
         .logo span:nth-child(2) { animation-delay: 0.2s; }
         .logo span:nth-child(3) { animation-delay: 0.3s; }
@@ -73,47 +73,46 @@
         .logo span:nth-child(8) { animation-delay: 0.8s; }
         .logo span:nth-child(9) { animation-delay: 0.9s; }
 
-        @keyframes letterReveal {
-            to { opacity: 1; transform: translateY(0); }
-        }
+        @keyframes letterReveal { to { opacity: 1; transform: translateY(0); } }
 
         nav a:not(.logo) {
-            color: var(--brand-green);
+            color: var(--text-main);
             text-decoration: none;
             margin-left: 25px;
             font-size: 0.9rem;
-            font-weight: 600;
+            font-weight: 500;
             transition: color 0.3s;
         }
-
-        nav a:not(.logo):hover { color: #000; }
+        nav a:not(.logo):hover { color: var(--primary-blue); }
 
         /* --- Hero Section --- */
         .hero {
             padding: 140px 10% 100px;
             text-align: center;
-            background: radial-gradient(circle at center, var(--brand-cream) 0%, #ffffff 70%);
+            /* Fondo limpio radial */
+            background: radial-gradient(circle at center, #fbfbfd 0%, #ffffff 80%);
         }
 
-        /* Corrección de visibilidad: estado inicial visible si falla JS */
         .reveal { opacity: 0; transform: translateY(30px); transition: all 0.8s ease-out; }
         .reveal.active { opacity: 1; transform: translateY(0); }
 
         .hero h1 { 
-            font-family: 'Inter', sans-serif;
             font-size: clamp(3rem, 8vw, 5rem); 
             font-weight: 800; 
-            letter-spacing: -1.5px; 
+            letter-spacing: -2px; 
             line-height: 1.1;
             margin-bottom: 1.5rem;
-            color: var(--brand-green);
+            color: #000;
         }
+        
+        /* Acento azul en la palabra principal */
+        .hero h1 span { color: var(--primary-blue); }
 
         .hero p { 
             font-size: 1.3rem; 
             max-width: 700px; 
             margin: 0 auto 2.5rem; 
-            color: #555;
+            color: var(--text-sec);
             font-weight: 400;
         }
 
@@ -131,97 +130,136 @@
             font-size: 1rem;
         }
 
+        /* Botón Azul Apple */
         .btn-primary { 
-            background-color: var(--brand-green); 
-            color: var(--brand-cream); 
-            box-shadow: 0 10px 25px rgba(45, 69, 62, 0.2);
+            background-color: var(--primary-blue); 
+            color: white; 
+            box-shadow: 0 10px 25px rgba(0, 113, 227, 0.3);
         }
         .btn-primary:hover { 
-            background-color: #1a2e28; 
-            transform: scale(1.05); 
+            background-color: var(--dark-blue); 
+            transform: scale(1.03); 
         }
 
         .btn-whatsapp { background-color: var(--whatsapp); color: white; }
-        .btn-whatsapp:hover { transform: scale(1.05); box-shadow: 0 10px 20px rgba(37, 211, 102, 0.2); }
+        .btn-whatsapp:hover { transform: scale(1.03); box-shadow: 0 10px 20px rgba(37, 211, 102, 0.2); }
 
-        /* --- Services: Bento Grid (Colores Mixtos) --- */
+        /* --- Services: Bento Grid --- */
         .services { padding: 100px 10%; background: #ffffff; }
         .services h2 { 
             text-align: center; 
             margin-bottom: 60px; 
             font-size: 3rem; 
             font-weight: 800;
-            color: var(--brand-green);
+            letter-spacing: -1px;
         }
 
         .bento-grid {
             display: grid;
             grid-template-columns: repeat(6, 1fr);
-            grid-auto-rows: 240px;
+            grid-auto-rows: minmax(240px, auto);
             gap: 25px;
         }
 
         .bento-item {
-            border-radius: 32px;
+            border-radius: 30px;
             padding: 35px;
-            transition: all 0.5s cubic-bezier(0.165, 0.84, 0.44, 1);
+            transition: all 0.4s ease;
             display: flex;
             flex-direction: column;
-            justify-content: flex-end;
+            justify-content: space-between;
             position: relative;
             overflow: hidden;
             border: 1px solid rgba(0,0,0,0.05);
+            background: var(--bg-light);
         }
 
-        .bento-item:hover { transform: translateY(-5px); box-shadow: 0 20px 40px rgba(0,0,0,0.08); }
-        
-        .bento-item h3 { font-size: 1.6rem; margin-bottom: 10px; font-weight: 700; z-index: 2; }
-        .bento-item ul { list-style: none; font-size: 0.95rem; z-index: 2; line-height: 1.4; opacity: 0.9; }
-        .bento-item i { position: absolute; top: 30px; right: 30px; font-size: 2.5rem; opacity: 0.15; transition: 0.4s; }
-        .bento-item:hover i { transform: rotate(-10deg) scale(1.1); opacity: 0.25; }
+        .bento-item:hover { 
+            transform: translateY(-5px); 
+            box-shadow: 0 20px 40px rgba(0,0,0,0.08); 
+            border-color: rgba(0, 113, 227, 0.1);
+        }
 
-        /* Grid Cards Colors */
-        .card-1 { grid-column: span 3; grid-row: span 2; background: var(--brand-green); color: var(--brand-cream); }
-        .card-1 i { color: var(--brand-cream); opacity: 0.1; }
-        .card-2 { grid-column: span 3; grid-row: span 1; background: var(--brand-cream); color: var(--brand-green); }
-        .card-3 { grid-column: span 3; grid-row: span 1; background: var(--brand-cream); color: var(--brand-green); }
-        .card-4 { grid-column: span 2; grid-row: span 1; background: var(--brand-green); color: var(--brand-cream); }
-        .card-5 { grid-column: span 4; grid-row: span 1; background: linear-gradient(135deg, #e8e8e1 0%, #f7f7f2 100%); color: var(--brand-green); border: 1px solid var(--brand-green); }
+        .bento-content h3 { font-size: 1.5rem; margin-bottom: 10px; font-weight: 700; color: #000; }
+        .bento-content p { font-size: 0.95rem; color: var(--text-sec); margin-bottom: 15px; line-height: 1.4; }
+        .bento-content ul { list-style: none; font-size: 0.9rem; font-weight: 500; color: var(--text-main); }
+        .bento-content ul li { margin-bottom: 5px; display: flex; align-items: center; gap: 8px; }
+        .bento-content ul li::before { content: "•"; color: var(--primary-blue); font-weight: bold; }
+        
+        .bento-item i { position: absolute; top: 30px; right: 30px; font-size: 2.2rem; color: var(--primary-blue); opacity: 0.1; transition: 0.4s; }
+        .bento-item:hover i { transform: rotate(-10deg) scale(1.1); opacity: 1; }
+
+        /* Layout Grid */
+        .card-1 { grid-column: span 3; grid-row: span 2; background: linear-gradient(135deg, #f0f8ff 0%, #e6f2ff 100%); } /* Azul muy pálido */
+        .card-2 { grid-column: span 3; grid-row: span 1; }
+        .card-3 { grid-column: span 3; grid-row: span 1; }
+        .card-4 { grid-column: span 2; grid-row: span 1; }
+        .card-5 { grid-column: span 4; grid-row: span 1; }
+
+        /* --- NEW SECTION: BLOG / INSIGHTS --- */
+        .blog-section { padding: 80px 10%; background: var(--bg-light); }
+        .blog-section h2 { font-size: 2.5rem; font-weight: 700; margin-bottom: 40px; text-align: center; }
+        
+        .blog-card {
+            background: #fff;
+            border-radius: 25px;
+            padding: 40px;
+            display: flex;
+            align-items: center;
+            gap: 40px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+            transition: 0.3s;
+            cursor: pointer;
+        }
+        .blog-card:hover { transform: scale(1.01); box-shadow: 0 15px 40px rgba(0,0,0,0.1); }
+        
+        .blog-icon { 
+            background: #eef6ff; 
+            width: 80px; height: 80px; 
+            border-radius: 50%; 
+            display: flex; align-items: center; justify-content: center;
+            font-size: 2rem; color: var(--primary-blue);
+            flex-shrink: 0;
+        }
+        
+        .blog-content h3 { font-size: 1.4rem; font-weight: 700; margin-bottom: 10px; }
+        .blog-content p { color: var(--text-sec); margin-bottom: 15px; }
+        .blog-tag { background: #000; color: #fff; padding: 5px 12px; border-radius: 15px; font-size: 0.75rem; font-weight: 600; text-transform: uppercase; }
 
         /* --- Contact --- */
-        .contact-section { padding: 100px 10%; text-align: center; background: var(--brand-cream); border-radius: 60px 60px 0 0; margin-top: 50px; }
-        .contact-section h2 { font-size: 2.8rem; font-weight: 800; color: var(--brand-green); margin-bottom: 40px; }
+        .contact-section { padding: 100px 10%; text-align: center; background: #fff; }
+        .contact-section h2 { font-size: 2.8rem; font-weight: 800; margin-bottom: 40px; }
 
         .languages { display: flex; justify-content: center; gap: 30px; margin-bottom: 40px; flex-wrap: wrap; }
-        .lang-item { display: flex; flex-direction: column; align-items: center; gap: 5px; font-weight: 600; color: var(--brand-green); font-size: 0.9rem; }
+        .lang-item { display: flex; flex-direction: column; align-items: center; gap: 5px; font-weight: 600; font-size: 0.9rem; }
         .lang-item span:first-child { font-size: 2rem; }
 
         .social-links { margin: 40px 0; display: flex; justify-content: center; gap: 30px; }
-        .social-links a { color: var(--brand-green); font-size: 2rem; transition: 0.3s; }
-        .social-links a:hover { transform: translateY(-5px); opacity: 0.7; }
+        .social-links a { color: var(--text-main); font-size: 2rem; transition: 0.3s; }
+        .social-links a:hover { transform: translateY(-5px); color: var(--primary-blue); }
 
-        .legal { padding: 50px 10%; background: #fff; font-size: 0.8rem; color: #777; text-align: justify; }
-        footer { background: var(--brand-green); color: var(--brand-cream); padding: 50px 10%; text-align: center; font-size: 0.9rem; }
+        .legal { padding: 50px 10%; background: var(--bg-light); font-size: 0.8rem; color: #777; text-align: justify; }
+        footer { background: #000; color: #86868b; padding: 50px 10%; text-align: center; font-size: 0.9rem; }
 
         /* --- Cookie Banner --- */
         #cookie-banner {
-            display: none; 
-            position: fixed; bottom: 30px; right: 30px; left: 30px; max-width: 420px; 
+            display: none; position: fixed; bottom: 30px; right: 30px; left: 30px; max-width: 420px; 
             background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); 
             color: #1d1d1f; padding: 28px; border-radius: 30px; z-index: 9999; 
             box-shadow: 0 15px 50px rgba(0,0,0,0.15); border: 1px solid rgba(0,0,0,0.05); margin-left: auto;
         }
         .cookie-btns { display: flex; gap: 12px; margin-top: 20px; }
         .cookie-btns button { padding: 12px 20px; border-radius: 14px; border: none; font-weight: 600; cursor: pointer; font-size: 0.85rem; transition: 0.3s; }
-        .btn-accept { background: var(--brand-green); color: #fff; flex: 2; }
+        .btn-accept { background: var(--primary-blue); color: #fff; flex: 2; }
         .btn-settings { background: #f0f0f2; color: #333; flex: 1; }
 
         @media (max-width: 900px) {
             .bento-grid { grid-template-columns: 1fr; grid-auto-rows: auto; }
-            .bento-item { grid-column: span 1 !important; grid-row: span 1 !important; padding: 30px; min-height: 200px; }
+            .bento-item { grid-column: span 1 !important; grid-row: span 1 !important; padding: 30px; }
             .hero h1 { font-size: 3rem; }
+            .blog-card { flex-direction: column; text-align: center; gap: 20px; }
             #cookie-banner { left: 20px; right: 20px; bottom: 20px; }
-            .logo { font-size: 1.1rem; } /* Logo un poco más pequeño en móvil */
+            .logo { font-size: 1.1rem; }
         }
     </style>
 </head>
@@ -233,14 +271,15 @@
         </a>
         <div>
             <a href="#services">Services</a>
+            <a href="#blog">Insights</a>
             <a href="#contact">Contact</a>
         </div>
     </nav>
 
     <section class="hero">
         <div class="reveal">
-            <h1>Expat Advisory <br> Solutions.</h1>
-            <p>Simplifying Spanish bureaucracy. Expert guidance on taxes and immigration, tailored for your life in Spain.</p>
+            <h1>Expat Advisory <br> <span>Solutions.</span></h1>
+            <p>Simplifying Spanish bureaucracy. Expert guidance on taxes, residency, and administrative procedures.</p>
             <div class="cta-container">
                 <a href="https://calendly.com/hello-cresvance/new-meeting" target="_blank" class="btn btn-primary">
                     Book Free Consultation
@@ -253,32 +292,84 @@
     </section>
 
     <section id="services" class="services">
-        <h2 class="reveal">Expert Solutions.</h2>
+        <h2 class="reveal">We handle the paperwork.</h2>
         <div class="bento-grid reveal">
             <div class="bento-item card-1">
+                <div class="bento-content">
+                    <h3>Residency</h3>
+                    <p>We streamline your registration process so you can focus on settling in.</p>
+                    <ul>
+                        <li>NIE & TIE Applications</li>
+                        <li>Residency Permits</li>
+                        <li>EU Registration Certificates</li>
+                    </ul>
+                </div>
                 <i class="fas fa-passport"></i>
-                <h3>Residency</h3>
-                <ul><li>• NIE, TIE & Residency Permits</li><li>• Full relocation strategy</li></ul>
             </div>
+            
             <div class="bento-item card-2">
+                <div class="bento-content">
+                    <h3>Taxation</h3>
+                    <p>Stay compliant with Spanish tax laws without the headache.</p>
+                    <ul>
+                        <li>Modelo 100 (Income Tax)</li>
+                        <li>Autónomo Registration</li>
+                        <li>Accounting & Invoicing</li>
+                    </ul>
+                </div>
                 <i class="fas fa-calculator"></i>
-                <h3>Taxation</h3>
-                <ul><li>• Personal Income Tax</li><li>• Beckham Law & Freelancers</li></ul>
             </div>
+            
             <div class="bento-item card-3">
+                <div class="bento-content">
+                    <h3>Digital ID</h3>
+                    <p>Essential for living in Spain. We set up your digital keys.</p>
+                    <ul>
+                        <li>Cl@ve Setup</li>
+                        <li>Digital Certificate Installation</li>
+                    </ul>
+                </div>
                 <i class="fas fa-fingerprint"></i>
-                <h3>Digital ID</h3>
-                <ul><li>• Cl@ve & Digital Certificates</li></ul>
             </div>
+            
             <div class="bento-item card-4">
+                <div class="bento-content">
+                    <h3>Healthcare</h3>
+                    <p>Ensure you and your family are covered.</p>
+                    <ul>
+                        <li>SIP Cards</li>
+                        <li>EHIC (European Health Card)</li>
+                        <li>Public System Access</li>
+                    </ul>
+                </div>
                 <i class="fas fa-heartbeat"></i>
-                <h3>Healthcare</h3>
-                <ul><li>• SIP Health Cards</li><li>• Public & Private Access</li></ul>
             </div>
+            
             <div class="bento-item card-5">
+                <div class="bento-content">
+                    <h3>Bureaucracy</h3>
+                    <p>Navigating the administration can be tough. We are here to help.</p>
+                    <ul>
+                        <li>Social Security Numbers</li>
+                        <li>Padron Assistance</li>
+                        <li>General Admin Support</li>
+                    </ul>
+                </div>
                 <i class="fas fa-briefcase"></i>
-                <h3>Bureaucracy</h3>
-                <ul><li>• Social Security & Admin Support</li><li>• Housing & Schooling assistance</li></ul>
+            </div>
+        </div>
+    </section>
+
+    <section id="blog" class="blog-section">
+        <h2 class="reveal">Latest Insights</h2>
+        <div class="blog-card reveal" onclick="window.location.href='#'"> <div class="blog-icon">
+                <i class="fas fa-dumbbell"></i>
+            </div>
+            <div class="blog-content">
+                <span class="blog-tag">Tax Saving Tip</span>
+                <h3>Did you know? Gym memberships are tax-deductible.</h3>
+                <p>In certain regions like the Valencian Community, you can deduct up to 30% of your gym expenses from your income tax. Ask us how to apply this to your Modelo 100.</p>
+                <span style="color: var(--primary-blue); font-weight: 600; font-size: 0.9rem;">Read more <i class="fas fa-arrow-right"></i></span>
             </div>
         </div>
     </section>
@@ -314,7 +405,7 @@
         <h4 style="margin-bottom: 8px; font-weight: 700;">Privacy Preferences</h4>
         <p style="font-size: 0.85rem; color: #555; line-height: 1.4;">
             We use cookies to improve your experience and analyze our traffic. 
-            <a href="#privacy-policy" style="color: #2d453e; text-decoration: underline;">Learn more</a>
+            <a href="#privacy-policy" style="color: var(--primary-blue); text-decoration: underline;">Learn more</a>
         </p>
         <div id="cookie-options" style="display: none; margin-top: 15px; padding-top: 15px; border-top: 1px solid #eee;">
             <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
@@ -331,7 +422,6 @@
     </div>
 
     <script>
-        // Corrección: Activar la primera sección inmediatamente al cargar el DOM
         document.addEventListener("DOMContentLoaded", () => {
             document.querySelector('.hero .reveal').classList.add('active');
         });
@@ -346,7 +436,6 @@
         }, observerOptions);
         document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 
-        // Cookie Logic
         function toggleCookieSettings() {
             const options = document.getElementById('cookie-options');
             const btn = document.getElementById('settings-btn');
