@@ -21,7 +21,7 @@
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { font-family: 'Manrope', sans-serif; color: var(--text-main); background: var(--white); line-height: 1.6; overflow-x: hidden; }
 
-        /* --- LOGO ANIMATION "COLLAPSE TO CE" --- */
+        /* --- LOGO ANIMATION: THE "BREATHING" CE EFFECT --- */
         nav { 
             padding: 1.5rem 8%; display: flex; justify-content: space-between; align-items: center;
             background: rgba(255,255,255,0.95); backdrop-filter: blur(10px); position: sticky; top: 0; z-index: 1000;
@@ -30,25 +30,25 @@
 
         .logo { 
             font-weight: 800; font-size: 1.8rem; color: var(--navy); text-decoration: none; 
-            letter-spacing: -1px; display: flex; align-items: center; overflow: hidden;
+            letter-spacing: -1px; display: flex; align-items: center;
         }
         
-        /* Contenedor de las letras que desaparecen */
         .logo .retract {
             display: inline-block;
-            max-width: 300px;
+            max-width: 500px; /* Suficiente para el nombre */
             opacity: 1;
-            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
             white-space: nowrap;
+            overflow: hidden;
         }
 
-        /* Estado cuando hacemos scroll */
-        nav.scrolled { padding: 0.8rem 8%; }
-        nav.scrolled .logo .retract {
+        /* Clase para colapsar a CE */
+        .logo.collapsed .retract {
             max-width: 0;
             opacity: 0;
-            margin: 0;
         }
+
+        nav.scrolled { padding: 0.8rem 8%; }
         nav.scrolled .logo { color: var(--electric); }
 
         .nav-links a { text-decoration: none; color: var(--navy); font-weight: 700; margin-left: 30px; font-size: 0.85rem; text-transform: uppercase; }
@@ -63,13 +63,13 @@
         .lang-badge span::before { content: "●"; color: var(--electric); margin-right: 5px; }
 
         /* --- BUTTONS --- */
-        .btn { padding: 18px 32px; border-radius: 10px; text-decoration: none; font-weight: 700; display: inline-flex; align-items: center; gap: 10px; transition: 0.3s; border: none; cursor: pointer; font-size: 1rem; }
-        .btn-primary { background: var(--navy); color: white; box-shadow: 0 10px 20px rgba(15, 23, 42, 0.15); }
+        .btn { padding: 16px 28px; border-radius: 8px; text-decoration: none; font-weight: 700; display: inline-flex; align-items: center; gap: 10px; transition: 0.3s; border: none; cursor: pointer; font-size: 0.95rem; }
+        .btn-primary { background: var(--navy); color: white; }
         .btn-primary:hover { background: var(--electric); transform: translateY(-3px); }
         .btn-whatsapp { background: #fff; color: var(--navy); border: 2px solid #E2E8F0; margin-left: 10px; }
         .btn-whatsapp:hover { border-color: var(--navy); transform: translateY(-3px); }
 
-        /* --- DEDUCCIONES EXPLICADAS 2026 --- */
+        /* --- DEDUCTIONS 2026 --- */
         .insights { padding: 80px 8%; background: var(--white); }
         .insight-card { background: var(--bg-light); padding: 50px; border-radius: 24px; border-left: 8px solid var(--electric); }
         .insight-card h3 { font-size: 2.2rem; margin-bottom: 25px; letter-spacing: -1px; color: var(--navy); }
@@ -77,40 +77,48 @@
         .deduction-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 40px; }
         .deduction-item h4 { color: var(--electric); font-size: 1.2rem; margin-bottom: 12px; display: flex; align-items: center; gap: 10px; }
         .deduction-item p { font-size: 0.95rem; color: var(--text-main); line-height: 1.6; }
-        .deduction-item b { color: var(--navy); }
 
-        /* --- SERVICES GRID --- */
+        /* --- SERVICES --- */
         .services { padding: 100px 8%; background: #fafafa; }
         .bento-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 25px; }
-        .bento-item { background: var(--white); padding: 40px; border-radius: 20px; border: 1px solid #eee; transition: 0.4s; display: flex; flex-direction: column; justify-content: space-between; }
+        .bento-item { background: var(--white); padding: 40px; border-radius: 20px; border: 1px solid #eee; transition: 0.4s; display: flex; flex-direction: column; }
         .bento-item:hover { transform: translateY(-10px); box-shadow: 0 20px 40px rgba(0,0,0,0.05); border-color: var(--electric); }
-        
-        .bento-item i { font-size: 2.5rem; color: var(--navy); margin-bottom: 20px; }
+        .bento-item i { font-size: 2.2rem; color: var(--navy); margin-bottom: 20px; }
         .bento-item h3 { font-size: 1.5rem; margin-bottom: 15px; font-weight: 800; }
-        .bento-item ul { list-style: none; }
-        .bento-item ul li { margin-bottom: 12px; font-size: 0.95rem; font-weight: 600; color: var(--text-muted); display: flex; align-items: center; gap: 10px; }
-        .bento-item ul li::before { content: "→"; color: var(--electric); font-weight: 900; }
-        
+        .bento-item ul { list-style: none; margin-top: auto; padding-top: 20px; }
+        .bento-item ul li { margin-bottom: 10px; font-size: 0.9rem; font-weight: 600; color: var(--text-muted); display: flex; align-items: center; gap: 8px; }
+        .bento-item ul li::before { content: "●"; color: var(--electric); font-size: 0.7rem; }
         .span-2 { grid-column: span 2; }
 
         /* --- FOOTER --- */
         footer { background: var(--navy); color: white; padding: 100px 8%; text-align: center; }
-        .footer-logo { font-size: 2.5rem; font-weight: 800; margin-bottom: 10px; display: block; }
-        .footer-slogan { font-size: 1.1rem; opacity: 0.8; margin-bottom: 40px; }
+        .footer-logo { font-size: 2.5rem; font-weight: 800; margin-bottom: 10px; }
 
-        /* --- COOKIES --- */
-        #cookie-banner { display: none; position: fixed; bottom: 20px; right: 20px; width: 350px; background: white; padding: 25px; border-radius: 15px; box-shadow: 0 20px 50px rgba(0,0,0,0.3); z-index: 10000; border: 1px solid #eee; }
+        /* --- COOKIE BANNER (COMPLETO) --- */
+        #cookie-banner { 
+            display: none; position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%); 
+            width: 90%; max-width: 600px; background: white; padding: 30px; border-radius: 16px; 
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.4); z-index: 10001; border: 1px solid #E2E8F0; 
+        }
+        .cookie-buttons { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 20px; }
+        .cookie-btn { flex: 1; padding: 12px; font-size: 0.85rem; border-radius: 6px; cursor: pointer; font-weight: 700; border: none; }
+        .btn-accept { background: var(--navy); color: white; }
+        .btn-reject { background: #F1F5F9; color: var(--text-main); }
+        .btn-settings { background: white; color: var(--navy); border: 1px solid #E2E8F0; }
+        
+        #cookie-settings-panel { display: none; margin-top: 20px; padding-top: 20px; border-top: 1px solid #eee; }
+        .setting-item { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; font-size: 0.85rem; }
 
         .reveal { opacity: 0; transform: translateY(30px); transition: 0.8s ease-out; }
         .reveal.active { opacity: 1; transform: translateY(0); }
 
-        @media (max-width: 900px) { .bento-grid { grid-template-columns: 1fr; } .span-2 { grid-column: span 1; } .nav-links { display: none; } }
+        @media (max-width: 900px) { .bento-grid { grid-template-columns: 1fr; } .span-2 { grid-column: span 1; } }
     </style>
 </head>
 <body>
 
     <nav id="navbar">
-        <a href="#" class="logo">C<span class="retract">RESVANC</span>E</a>
+        <a href="#" class="logo" id="logo">C<span class="retract">RESVANC</span>E</a>
         <div class="nav-links">
             <a href="#services">Expertise</a>
             <a href="#contact">Contact</a>
@@ -123,7 +131,7 @@
                 <span>ENGLISH</span> <span>DEUTSCH</span> <span>ESPAÑOL</span>
             </div>
             <h1>We walk you <br> <span>through it.</span></h1>
-            <p>Direct and personal advisory for expats in Spain. We combine professional expertise with on-site support to ensure your peace of mind.</p>
+            <p>Direct and personal advisory for expats in Spain. We combine professional expertise with on-site support for your peace of mind.</p>
             <div class="cta-container">
                 <a href="https://calendly.com/hello-cresvance/new-meeting" target="_blank" class="btn btn-primary">Free Consultation</a>
                 <a href="https://wa.me/34602593904" target="_blank" class="btn btn-whatsapp"><i class="fab fa-whatsapp"></i> Chat with us</a>
@@ -133,34 +141,24 @@
 
     <section class="insights">
         <div class="insight-card reveal">
-            <span style="color: var(--electric); font-weight: 800; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 1px;">Andalusia Fiscal Intelligence 2026</span>
-            <h3>Maximize your Tax Returns</h3>
-            <p style="margin-bottom: 40px; font-weight: 500;">Living in Andalusia allows you to claim specific regional deductions. Our team ensures you recover every euro you are entitled to:</p>
-            
+            <span style="color: var(--electric); font-weight: 800; font-size: 0.9rem; text-transform: uppercase;">Andalusia 2026 Tax Update</span>
+            <h3>Maximize your returns</h3>
             <div class="deduction-grid">
                 <div class="deduction-item">
                     <h4><i class="fas fa-dumbbell"></i> Sports and Health</h4>
-                    <p>You can recover <b>15% of your gym fees</b> and sports club memberships. This is designed to promote a healthy lifestyle among residents. Limit of 100 euros annually.</p>
+                    <p>Recover <b>15% of gym fees</b> and sports memberships. Maximize your health and your savings.</p>
                 </div>
                 <div class="deduction-item">
                     <h4><i class="fas fa-paw"></i> Pet Healthcare</h4>
-                    <p>Andalusia is a pioneer in supporting pet owners. Claim <b>15% of your veterinary expenses</b> for preventive treatments and check-ups for your pets.</p>
+                    <p>Claim <b>15% of veterinary expenses</b> for preventive care and check-ups for your pets.</p>
                 </div>
                 <div class="deduction-item">
-                    <h4><i class="fas fa-home"></i> Renting and Housing</h4>
-                    <p>Residents under 35 or over 65 years old can deduct <b>15% of their rent</b>. Additionally, there are deductions for purchasing habitual residences in protected areas.</p>
+                    <h4><i class="fas fa-home"></i> Renting</h4>
+                    <p><b>15% deduction</b> on rent for residents under 35 or over 65 years old.</p>
                 </div>
                 <div class="deduction-item">
-                    <h4><i class="fas fa-baby"></i> Family and Birth</h4>
-                    <p>Up to <b>200 euros per child</b> for birth or adoption. This increases significantly in cases of international adoption or for residents in smaller municipalities.</p>
-                </div>
-                <div class="deduction-item">
-                    <h4><i class="fas fa-book"></i> Educational Expenses</h4>
-                    <p>Deduct costs related to <b>language classes and textbooks</b> for your children. We help you categorize these expenses to lower your final tax bill.</p>
-                </div>
-                <div class="deduction-item">
-                    <h4><i class="fas fa-wheelchair"></i> Disability Support</h4>
-                    <p>Dedicated tax credits for families supporting members with disabilities, ranging from <b>100 to 150 euros</b> depending on the specific situation.</p>
+                    <h4><i class="fas fa-book"></i> Education</h4>
+                    <p>Deductions for <b>language classes and textbooks</b> to support your family's growth.</p>
                 </div>
             </div>
         </div>
@@ -170,100 +168,118 @@
         <div class="bento-grid">
             <div class="bento-item span-2 reveal">
                 <i class="fas fa-calculator"></i>
-                <div class="bento-content">
-                    <h3>Taxation and Invoicing</h3>
-                    <p>Clear tax management for individuals and freelancers. No technical jargon, just results.</p>
-                    <ul>
-                        <li>Annual Income Tax filings for residents</li>
-                        <li>Self-employed Autónomo registration and management</li>
-                        <li>Professional Invoicing setup and monthly guidance</li>
-                        <li>Wealth and asset reporting for international clients</li>
-                    </ul>
-                </div>
+                <h3>Taxation and Invoicing</h3>
+                <p>Personalized tax management with no technical jargon.</p>
+                <ul>
+                    <li>Annual Income Tax filings</li>
+                    <li>Autónomo management and registration</li>
+                    <li>Professional Invoicing setup and monthly support</li>
+                </ul>
             </div>
 
             <div class="bento-item reveal">
                 <i class="fas fa-passport"></i>
-                <div class="bento-content">
-                    <h3>Residency and NIE</h3>
-                    <p>We are your local partners. We don't just send emails, we go with you.</p>
-                    <ul>
-                        <li>White NIE with in-person accompaniment</li>
-                        <li>Green NIE for European Union Citizen Registry</li>
-                        <li>TIE Fingerprinting and card collection appointments</li>
-                    </ul>
-                </div>
+                <h3>Residency and NIE</h3>
+                <p>We accompany you physically to your appointments.</p>
+                <ul>
+                    <li>White NIE with personal support</li>
+                    <li>Green NIE for EU citizens</li>
+                    <li>TIE fingerprinting appointments</li>
+                </ul>
             </div>
 
             <div class="bento-item reveal">
                 <i class="fas fa-file-signature"></i>
-                <div class="bento-content">
-                    <h3>Bureaucracy</h3>
-                    <ul>
-                        <li>Rental Deposit management and legal filings</li>
-                        <li>Digital Notification tracking and alerts</li>
-                        <li>Social Security registration and updates</li>
-                        <li>Banking: Local recommendations and account setup</li>
-                    </ul>
-                </div>
+                <h3>Bureaucracy</h3>
+                <ul>
+                    <li>Rental Deposit management</li>
+                    <li>Digital Notification tracking</li>
+                    <li>Banking recommendations and setup</li>
+                </ul>
             </div>
 
             <div class="bento-item span-2 reveal">
                 <i class="fas fa-fingerprint"></i>
-                <div class="bento-content">
-                    <h3>Digital and Kit Digital</h3>
-                    <p>We bridge the gap between you and the Spanish digital administration.</p>
-                    <ul>
-                        <li><b>Kit Digital for Autónomos:</b> Complete grant application and management</li>
-                        <li>Full Digital Certificate request and personal installation</li>
-                        <li>Remote identification solutions for administrative tasks</li>
-                        <li>Spanish Healthcare SIP card registration</li>
-                    </ul>
-                </div>
+                <h3>Digital and Kit Digital</h3>
+                <p>We bridge the digital gap in Spain for you.</p>
+                <ul>
+                    <li><b>Kit Digital for Autónomos:</b> Complete grant management</li>
+                    <li>Digital Certificate installation and setup</li>
+                    <li>Spanish Healthcare (SIP) card registration</li>
+                </ul>
             </div>
         </div>
     </section>
 
     <footer id="contact">
-        <span class="footer-logo">CE</span>
-        <p class="footer-slogan">Simplifying Spanish bureaucracy for you.</p>
-        <div class="socials" style="margin-bottom: 30px;">
+        <div class="footer-logo">CRESVANCE</div>
+        <p style="opacity: 0.7; margin-bottom: 30px;">Simplifying Spanish bureaucracy for you.</p>
+        <div class="socials">
             <a href="https://www.linkedin.com/company/cresvance" target="_blank" style="color:white; font-size: 1.5rem; margin: 0 15px;"><i class="fab fa-linkedin"></i></a>
             <a href="https://www.instagram.com/Cresvance_support" target="_blank" style="color:white; font-size: 1.5rem; margin: 0 15px;"><i class="fab fa-instagram"></i></a>
             <a href="mailto:hello@cresvance.com" style="color:white; font-size: 1.5rem; margin: 0 15px;"><i class="fas fa-envelope"></i></a>
         </div>
-        <p style="opacity: 0.6; font-size: 0.85rem;">Málaga and Remote Advisory | DE · EN · ES</p>
+        <p style="margin-top: 40px; opacity: 0.5; font-size: 0.8rem;">Málaga and Remote | DE · EN · ES</p>
     </footer>
 
     <div id="cookie-banner">
-        <h4 style="margin-bottom: 10px;">Privacy</h4>
-        <p style="font-size: 0.8rem; color: #666; margin-bottom: 15px;">We use cookies to enhance your experience on our site. Manage your preferences below.</p>
-        <div style="display: flex; gap: 10px;">
-            <button onclick="saveCookies('all')" class="btn btn-primary" style="padding: 10px; font-size: 0.8rem; flex: 1; justify-content: center;">Accept All</button>
-            <button onclick="saveCookies('min')" class="btn btn-whatsapp" style="padding: 10px; font-size: 0.8rem; flex: 1; justify-content: center; border-color: #ddd;">Reject</button>
+        <h4 style="color: var(--navy);">Privacy Preferences</h4>
+        <p style="font-size: 0.85rem; color: var(--text-muted); margin-top: 10px;">We use cookies to ensure you get the best experience on our website. Choose how you want to proceed.</p>
+        
+        <div id="cookie-settings-panel">
+            <div class="setting-item"><span>Essential Cookies</span><span style="color:green; font-weight:700;">Always Active</span></div>
+            <div class="setting-item"><span>Analytics Cookies</span><input type="checkbox" checked></div>
+            <div class="setting-item"><span>Marketing Cookies</span><input type="checkbox"></div>
+        </div>
+
+        <div class="cookie-buttons">
+            <button onclick="saveCookies('all')" class="cookie-btn btn-accept">Accept All</button>
+            <button onclick="saveCookies('reject')" class="cookie-btn btn-reject">Reject All</button>
+            <button onclick="toggleCookieSettings()" class="cookie-btn btn-settings">Customize</button>
         </div>
     </div>
 
     <script>
-        // Scroll Effect for Logo (Collapses to CE)
+        const logo = document.getElementById("logo");
+        const nav = document.getElementById("navbar");
+        let isScrolled = false;
+
         window.onscroll = function() {
-            const nav = document.getElementById("navbar");
-            if (document.body.scrollTop > 60 || document.documentElement.scrollTop > 60) {
-                nav.classList.add("scrolled");
+            if (window.scrollY > 80) {
+                if (!isScrolled) {
+                    nav.classList.add("scrolled");
+                    logo.classList.add("collapsed"); // Se cierra a CE
+                    
+                    // Después de 2 segundos, se vuelve a abrir
+                    setTimeout(() => {
+                        logo.classList.remove("collapsed");
+                    }, 2000);
+                    
+                    isScrolled = true;
+                }
             } else {
                 nav.classList.remove("scrolled");
+                logo.classList.remove("collapsed");
+                isScrolled = false;
             }
         };
 
-        // Scroll Reveal Animation
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('active'); });
         }, { threshold: 0.1 });
         document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 
-        // Cookies Logic
-        function saveCookies(type) { localStorage.setItem('cresvance_consent', type); document.getElementById('cookie-banner').style.display = 'none'; }
-        window.onload = () => { if (!localStorage.getItem('cresvance_consent')) document.getElementById('cookie-banner').style.display = 'block'; };
+        function toggleCookieSettings() {
+            const panel = document.getElementById('cookie-settings-panel');
+            panel.style.display = panel.style.display === 'block' ? 'none' : 'block';
+        }
+        function saveCookies(type) { 
+            localStorage.setItem('cresvance_consent', type); 
+            document.getElementById('cookie-banner').style.display = 'none'; 
+        }
+        window.onload = () => { 
+            if (!localStorage.getItem('cresvance_consent')) document.getElementById('cookie-banner').style.display = 'block'; 
+        };
     </script>
 </body>
 </html>
