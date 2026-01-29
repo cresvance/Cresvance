@@ -56,7 +56,7 @@
         }
         .btn-whatsapp:hover { transform: translateY(-2px); box-shadow: 0 15px 30px rgba(37, 211, 102, 0.4); }
 
-        /* Insights (Now Second Section) */
+        /* Insights (Engagement Section) */
         .blog-section { padding: 60px 10%; background: var(--bg-light); }
         .blog-card { background: #fff; border-radius: 24px; padding: 40px; max-width: 900px; margin: 0 auto; box-shadow: 0 4px 20px rgba(0,0,0,0.03); }
         .blog-tag { background: #000; color: #fff; padding: 4px 12px; border-radius: 12px; font-size: 0.7rem; font-weight: 700; text-transform: uppercase; }
@@ -86,8 +86,17 @@
         .social-container a:hover { color: var(--primary-blue); transform: translateY(-5px); }
         .footer-info { color: #86868b; font-size: 0.9rem; }
 
-        /* Cookies */
-        #cookie-banner { display: none; position: fixed; bottom: 20px; right: 20px; left: 20px; max-width: 450px; background: #fff; padding: 30px; border-radius: 24px; z-index: 10000; box-shadow: 0 20px 50px rgba(0,0,0,0.2); border: 1px solid #eee; margin-left: auto; }
+        /* LEGAL COOKIE BANNER */
+        #cookie-banner { 
+            display: none; position: fixed; bottom: 20px; right: 20px; left: 20px; 
+            max-width: 480px; background: #fff; padding: 30px; border-radius: 24px; 
+            z-index: 10001; box-shadow: 0 20px 50px rgba(0,0,0,0.25); 
+            border: 1px solid #eee; margin-left: auto;
+        }
+        .cookie-buttons { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 20px; }
+        .btn-cookie-sec { background: #f0f0f2; color: #333; flex: 1; justify-content: center; }
+        #cookie-settings { display: none; margin-top: 15px; font-size: 0.8rem; border-top: 1px solid #eee; padding-top: 15px; }
+        .setting-row { display: flex; justify-content: space-between; margin-bottom: 10px; align-items: center; }
 
         @media (max-width: 900px) { .bento-grid { grid-template-columns: 1fr; } .card-1, .card-2, .card-3, .card-4, .card-5 { grid-column: span 1; grid-row: span 1; } }
     </style>
@@ -208,11 +217,21 @@
     </footer>
 
     <div id="cookie-banner">
-        <h4 style="margin-bottom: 10px;">Privacy Preferences</h4>
-        <p style="font-size: 0.8rem; color: #555; margin-bottom: 15px;">We use cookies to optimize your experience. Accept all, reject, or customize.</p>
-        <div style="display: flex; gap: 10px; flex-wrap: wrap;">
-            <button onclick="saveCookies('all')" class="btn btn-primary" style="flex:1; padding:10px; font-size:0.8rem;">Accept All</button>
-            <button onclick="saveCookies('essential')" class="btn btn-cookie-sec" style="flex:1;">Reject</button>
+        <h4 style="margin-bottom: 10px;">Privacy and Cookies</h4>
+        <p style="font-size: 0.85rem; color: #555; line-height: 1.4;">We use our own and third-party cookies to improve our services and show you information related to your preferences by analyzing your browsing habits.</p>
+        
+        <div id="cookie-settings">
+            <div class="setting-row"><span>Essential (Required)</span><span style="color:green; font-weight:bold;">Active</span></div>
+            <div class="cookie-row" style="display:flex; justify-content:space-between; margin-bottom:10px;">
+                <span>Analytics and Marketing</span>
+                <input type="checkbox" id="analytics-check" checked>
+            </div>
+        </div>
+
+        <div class="cookie-buttons">
+            <button onclick="saveConsent('all')" class="btn btn-primary" style="flex:1.5; padding:10px; font-size:0.8rem; justify-content:center;">Accept All</button>
+            <button onclick="saveConsent('minimal')" class="btn btn-cookie-sec" style="padding:10px; font-size:0.8rem; border-radius:40px;">Reject All</button>
+            <button onclick="toggleSettings()" class="btn btn-cookie-sec" id="settings-btn" style="padding:10px; font-size:0.8rem; border-radius:40px;">Settings</button>
         </div>
     </div>
 
@@ -238,9 +257,21 @@
             btn.innerText = body.style.display === 'block' ? 'Show less ↑' : 'Explore deductions ↓';
         }
 
-        function saveCookies(type) { localStorage.setItem('cresvance_consent', type); document.getElementById('cookie-banner').style.display = 'none'; }
+        // Cookie Logic
+        function toggleSettings() {
+            const settings = document.getElementById('cookie-settings');
+            settings.style.display = settings.style.display === 'block' ? 'none' : 'block';
+        }
+
+        function saveConsent(type) {
+            localStorage.setItem('cresvance_consent', type);
+            document.getElementById('cookie-banner').style.display = 'none';
+        }
+
         window.onload = () => { 
-            if (!localStorage.getItem('cresvance_consent')) document.getElementById('cookie-banner').style.display = 'block';
+            if (!localStorage.getItem('cresvance_consent')) {
+                setTimeout(() => { document.getElementById('cookie-banner').style.display = 'block'; }, 1000);
+            }
             document.getElementById('hero-content').classList.add('active');
         };
     </script>
