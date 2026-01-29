@@ -3,200 +3,344 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cresvance | Expat Advisory Solutions</title>
+    <title>Cresvance | The Expat Partner</title>
     
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 
     <style>
         :root {
-            --primary-blue: #0071e3;   
-            --dark-blue: #004d99;      
-            --bg-light: #f5f5f7;       
+            --navy: #0F172A;       /* Oscuro, serio, premium */
+            --electric: #2563EB;   /* Vibrante, digital, joven */
+            --ice: #F1F5F9;        /* Fondo técnico */
             --white: #ffffff;
-            --text-main: #1d1d1f;      
-            --text-sec: #86868b;       
-            --glass: rgba(255, 255, 255, 0.85);
+            --text-main: #1E293B;
+            --text-muted: #64748B;
             --whatsapp: #25D366;
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: 'Inter', sans-serif; line-height: 1.5; color: var(--text-main); background-color: var(--white); scroll-behavior: smooth; overflow-x: hidden; }
-
-        /* Navigation */
-        nav { background: var(--glass); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); padding: 1.2rem 10%; display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; z-index: 1000; border-bottom: 1px solid rgba(0,0,0,0.05); }
-        .logo { font-weight: 800; text-decoration: none; color: #000; letter-spacing: 1px; display: flex; font-size: 1.3rem; }
-        .logo span { opacity: 0; transform: translateY(10px); display: inline-block; animation: letterReveal 0.5s forwards cubic-bezier(0.215, 0.610, 0.355, 1.000); }
-        @keyframes letterReveal { to { opacity: 1; transform: translateY(0); } }
-        nav a:not(.logo) { color: var(--text-main); text-decoration: none; margin-left: 25px; font-size: 0.9rem; font-weight: 600; transition: 0.3s; }
-
-        /* Hero */
-        .hero { padding: 140px 10% 100px; text-align: center; background: radial-gradient(circle at center, #fbfbfd 0%, #ffffff 80%); }
-        .reveal { opacity: 0; transform: translateY(30px); transition: all 0.8s ease-out; }
-        .reveal.active { opacity: 1; transform: translateY(0); }
-        .hero h1 { font-size: clamp(2.5rem, 8vw, 4.5rem); font-weight: 800; letter-spacing: -2px; line-height: 1.1; margin-bottom: 1.5rem; }
-        .hero h1 span { color: var(--primary-blue); }
-        .hero p { font-size: 1.2rem; max-width: 650px; margin: 0 auto 2.5rem; color: var(--text-sec); }
         
-        /* Buttons with shadows */
-        .cta-container { display: flex; justify-content: center; gap: 15px; flex-wrap: wrap; }
-        .btn { padding: 16px 32px; text-decoration: none; font-weight: 600; border-radius: 40px; transition: 0.4s; display: inline-flex; align-items: center; gap: 10px; font-size: 0.95rem; cursor: pointer; border: none; }
+        body { 
+            font-family: 'Manrope', sans-serif; 
+            line-height: 1.5; 
+            color: var(--text-main); 
+            background-color: var(--white); 
+            scroll-behavior: smooth; 
+            overflow-x: hidden; 
+        }
+
+        /* --- NAVBAR: Minimal & Bold --- */
+        nav { 
+            background: rgba(255, 255, 255, 0.95); 
+            backdrop-filter: blur(10px);
+            padding: 1.2rem 8%; 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center; 
+            position: sticky; 
+            top: 0; 
+            z-index: 1000; 
+            border-bottom: 1px solid #E2E8F0;
+        }
+
+        .logo { 
+            font-weight: 800; 
+            text-decoration: none; 
+            color: var(--navy); 
+            font-size: 1.5rem; 
+            letter-spacing: -0.5px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        
+        /* Animación del Logo: Golpe seco */
+        .logo span { 
+            display: inline-block;
+            opacity: 0; 
+            transform: translateY(15px);
+            animation: slamIn 0.4s forwards cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        @keyframes slamIn { to { opacity: 1; transform: translateY(0); } }
+
+        .nav-links { display: flex; gap: 30px; }
+        .nav-links a { 
+            color: var(--text-main); 
+            text-decoration: none; 
+            font-weight: 700; 
+            font-size: 0.9rem; 
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            position: relative;
+        }
+        .nav-links a::after {
+            content: ''; position: absolute; width: 0; height: 3px; 
+            bottom: -5px; left: 0; background: var(--electric); transition: 0.3s;
+        }
+        .nav-links a:hover::after { width: 100%; }
+
+        /* --- HERO: "Bar Talk" Friendly but Pro --- */
+        .hero { 
+            padding: 140px 8% 100px; 
+            background: radial-gradient(circle at top right, #E0F2FE 0%, #ffffff 60%);
+            display: flex; align-items: center; min-height: 80vh;
+        }
+
+        .hero h1 { 
+            font-size: clamp(3rem, 8vw, 5.5rem); 
+            font-weight: 800; 
+            letter-spacing: -2px; 
+            line-height: 1.05; 
+            margin-bottom: 1.5rem; 
+            color: var(--navy);
+        }
+
+        .highlight-text {
+            position: relative;
+            display: inline-block;
+            color: var(--electric);
+        }
+        
+        /* Subrayado desenfadado */
+        .highlight-text::after {
+            content: ''; position: absolute; bottom: 5px; left: 0; width: 100%; height: 10px; 
+            background: rgba(37, 99, 235, 0.15); z-index: -1; transform: rotate(-1deg);
+        }
+
+        .hero p { 
+            font-size: 1.4rem; 
+            max-width: 600px; 
+            margin-bottom: 2.5rem; 
+            color: var(--text-muted); 
+            font-weight: 500;
+        }
+
+        /* Botones: Grandes, táctiles, para enseñar en el móvil */
+        .cta-container { display: flex; gap: 15px; flex-wrap: wrap; }
+        
+        .btn { 
+            padding: 18px 32px; 
+            text-decoration: none; 
+            font-weight: 700; 
+            font-size: 1rem; 
+            border-radius: 12px; /* Ni cuadrado ni redondo: App style */
+            transition: transform 0.2s, box-shadow 0.2s; 
+            display: inline-flex; align-items: center; gap: 12px; border: none; cursor: pointer;
+        }
         
         .btn-primary { 
-            background-color: var(--primary-blue); 
+            background-color: var(--navy); 
             color: white; 
-            box-shadow: 0 10px 25px rgba(0, 113, 227, 0.35); 
+            box-shadow: 0 4px 6px -1px rgba(15, 23, 42, 0.1), 0 2px 4px -1px rgba(15, 23, 42, 0.06);
         }
-        .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 15px 30px rgba(0, 113, 227, 0.45); }
+        .btn-primary:hover { transform: translateY(-3px); box-shadow: 0 10px 15px -3px rgba(15, 23, 42, 0.2); background-color: #1e293b; }
 
         .btn-whatsapp { 
-            background-color: var(--whatsapp); 
-            color: white; 
-            box-shadow: 0 10px 25px rgba(37, 211, 102, 0.3); 
+            background-color: #fff; 
+            color: var(--navy); 
+            border: 2px solid #E2E8F0;
         }
-        .btn-whatsapp:hover { transform: translateY(-2px); box-shadow: 0 15px 30px rgba(37, 211, 102, 0.4); }
+        .btn-whatsapp:hover { border-color: var(--navy); transform: translateY(-3px); }
 
-        /* Insights (Engagement Section) */
-        .blog-section { padding: 60px 10%; background: var(--bg-light); }
-        .blog-card { background: #fff; border-radius: 24px; padding: 40px; max-width: 900px; margin: 0 auto; box-shadow: 0 4px 20px rgba(0,0,0,0.03); }
-        .blog-tag { background: #000; color: #fff; padding: 4px 12px; border-radius: 12px; font-size: 0.7rem; font-weight: 700; text-transform: uppercase; }
-        .article-content { display: none; margin-top: 25px; padding-top: 25px; border-top: 1px solid #eee; line-height: 1.7; font-size: 0.95rem; color: #444; }
-
-        /* Bento Grid Services */
-        .services { padding: 100px 10%; }
-        .services h2 { text-align: center; margin-bottom: 60px; font-size: 2.8rem; font-weight: 800; }
-        .bento-grid { display: grid; grid-template-columns: repeat(6, 1fr); gap: 20px; }
-        .bento-item { border-radius: 28px; padding: 30px; background: var(--bg-light); border: 1px solid rgba(0,0,0,0.04); transition: 0.4s; display: flex; flex-direction: column; justify-content: space-between; }
-        .bento-item:hover { transform: translateY(-5px); box-shadow: 0 15px 35px rgba(0,0,0,0.06); }
-        .bento-content h3 { font-size: 1.3rem; margin-bottom: 10px; font-weight: 700; }
-        .bento-content ul { list-style: none; font-size: 0.85rem; font-weight: 600; }
-        .bento-content ul li { margin-bottom: 5px; display: flex; align-items: center; gap: 8px; }
-        .bento-content ul li::before { content: "•"; color: var(--primary-blue); font-weight: bold; }
+        /* --- INSIGHTS: Impactante y Directo --- */
+        .blog-section { padding: 60px 8%; background: var(--white); border-bottom: 1px solid #F1F5F9; }
         
-        .card-1 { grid-column: span 3; grid-row: span 2; background: #eef6ff; }
-        .card-2 { grid-column: span 3; }
-        .card-3 { grid-column: span 3; }
-        .card-4 { grid-column: span 2; }
-        .card-5 { grid-column: span 4; }
+        .blog-card { 
+            background: var(--ice); 
+            border-radius: 16px; 
+            padding: 40px; 
+            position: relative;
+            border-left: 8px solid var(--electric);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.05);
+        }
+        
+        .blog-badge {
+            background: var(--electric); color: white; padding: 5px 12px; 
+            border-radius: 6px; font-weight: 700; font-size: 0.75rem; text-transform: uppercase;
+            display: inline-block; margin-bottom: 15px;
+        }
+
+        .blog-card h3 { font-size: 2rem; margin-bottom: 20px; font-weight: 800; color: var(--navy); letter-spacing: -1px; }
+
+        .deduction-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 30px; margin-top: 30px; }
+        .deduction-item strong { display: block; color: var(--electric); font-size: 1.1rem; margin-bottom: 5px; }
+        .deduction-item p { font-size: 0.95rem; color: var(--text-main); }
+
+        /* --- SERVICES: Clean Grid --- */
+        .services { padding: 100px 8%; background: #FAFAFA; }
+        .section-header { margin-bottom: 60px; }
+        .section-header h2 { font-size: 3rem; font-weight: 800; letter-spacing: -1px; color: var(--navy); }
+        .section-header p { font-size: 1.1rem; color: var(--text-muted); max-width: 500px; margin-top: 10px; }
+
+        .bento-grid { 
+            display: grid; 
+            grid-template-columns: repeat(3, 1fr); 
+            gap: 25px; 
+        }
+
+        .bento-item { 
+            background: var(--white); 
+            padding: 35px; 
+            border-radius: 16px; 
+            border: 1px solid #E2E8F0;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            display: flex; flex-direction: column; justify-content: space-between;
+            min-height: 300px;
+        }
+        
+        .bento-item:hover { 
+            border-color: var(--electric); 
+            transform: translateY(-8px); 
+            box-shadow: 0 20px 40px -5px rgba(37, 99, 235, 0.15);
+        }
+
+        .bento-icon { font-size: 2.5rem; margin-bottom: 20px; color: var(--navy); }
+        .bento-content h3 { font-size: 1.4rem; font-weight: 800; margin-bottom: 15px; color: var(--navy); }
+        .bento-content ul li { 
+            margin-bottom: 8px; font-size: 0.9rem; font-weight: 600; display: flex; align-items: center; gap: 10px; color: var(--text-muted);
+        }
+        .bento-content ul li::before { content: ""; width: 6px; height: 6px; background: var(--electric); border-radius: 50%; }
+
+        .span-2 { grid-column: span 2; }
 
         /* Footer */
-        footer { background: #000; color: #fff; padding: 80px 10% 60px; text-align: center; }
-        .social-container { margin-bottom: 40px; display: flex; justify-content: center; gap: 40px; }
-        .social-container a { color: #fff; font-size: 2.5rem; transition: all 0.3s ease; }
-        .social-container a:hover { color: var(--primary-blue); transform: translateY(-5px); }
-        .footer-info { color: #86868b; font-size: 0.9rem; }
-
-        /* LEGAL COOKIE BANNER */
-        #cookie-banner { 
-            display: none; position: fixed; bottom: 20px; right: 20px; left: 20px; 
-            max-width: 480px; background: #fff; padding: 30px; border-radius: 24px; 
-            z-index: 10001; box-shadow: 0 20px 50px rgba(0,0,0,0.25); 
-            border: 1px solid #eee; margin-left: auto;
+        footer { background: var(--navy); color: #fff; padding: 80px 8%; }
+        .footer-brand h2 { font-size: 2rem; font-weight: 800; letter-spacing: -1px; margin-bottom: 20px; }
+        .footer-socials a { 
+            display: inline-flex; width: 50px; height: 50px; border-radius: 50%; background: rgba(255,255,255,0.1); 
+            color: #fff; align-items: center; justify-content: center; font-size: 1.5rem; margin-right: 15px; transition: 0.3s; 
         }
-        .cookie-buttons { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 20px; }
-        .btn-cookie-sec { background: #f0f0f2; color: #333; flex: 1; justify-content: center; }
-        #cookie-settings { display: none; margin-top: 15px; font-size: 0.8rem; border-top: 1px solid #eee; padding-top: 15px; }
-        .setting-row { display: flex; justify-content: space-between; margin-bottom: 10px; align-items: center; }
+        .footer-socials a:hover { background: var(--electric); transform: scale(1.1); }
 
-        @media (max-width: 900px) { .bento-grid { grid-template-columns: 1fr; } .card-1, .card-2, .card-3, .card-4, .card-5 { grid-column: span 1; grid-row: span 1; } }
+        /* Cookie Bar: Bottom, clean, app-like */
+        #cookie-banner { 
+            display: none; position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%); 
+            width: 90%; max-width: 500px; background: #fff; padding: 25px; 
+            border-radius: 20px; z-index: 10001; 
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25); border: 1px solid #E2E8F0;
+        }
+        
+        /* Animaciones */
+        .reveal { opacity: 0; transform: translateY(40px); transition: all 0.8s cubic-bezier(0.165, 0.84, 0.44, 1); }
+        .reveal.active { opacity: 1; transform: translateY(0); }
+
+        @media (max-width: 900px) {
+            .hero h1 { font-size: 3.5rem; }
+            .bento-grid { grid-template-columns: 1fr; }
+            .span-2 { grid-column: span 1; }
+            .nav-links { display: none; } /* Mobile Menu Simplificado */
+            nav { padding: 1.5rem 5%; }
+        }
     </style>
 </head>
 <body>
 
     <nav>
         <a href="#" class="logo" id="animated-logo"></a>
-        <div><a href="#blog">Insights</a><a href="#services">Services</a><a href="#contact">Contact</a></div>
+        <div class="nav-links">
+            <a href="#blog">Updates</a>
+            <a href="#services">Services</a>
+            <a href="#contact">Contact</a>
+        </div>
     </nav>
 
     <section class="hero">
-        <div class="reveal" id="hero-content">
-            <h1>Expat Advisory <br> <span>Solutions.</span></h1>
-            <p>Simplifying Spanish bureaucracy for you.</p>
+        <div class="hero-content reveal" id="hero-content">
+            <h1>We handle the <br> <span class="highlight-text">paperwork.</span></h1>
+            <p>You enjoy Spain. We take care of Taxes, Residency, and Bureaucracy. Fast, digital, and 100% in English.</p>
             <div class="cta-container">
-                <a href="https://calendly.com/hello-cresvance/new-meeting" target="_blank" class="btn btn-primary">Book Free Consultation</a>
-                <a href="https://wa.me/34602593904" target="_blank" class="btn btn-whatsapp"><i class="fab fa-whatsapp"></i> WhatsApp</a>
+                <a href="https://calendly.com/hello-cresvance/new-meeting" target="_blank" class="btn btn-primary">Book Consultation</a>
+                <a href="https://wa.me/34602593904" target="_blank" class="btn btn-whatsapp"><i class="fab fa-whatsapp"></i> WhatsApp Us</a>
             </div>
         </div>
     </section>
 
     <section id="blog" class="blog-section">
         <div class="blog-card reveal">
-            <span class="blog-tag">Andalusia 2026</span>
-            <h3 style="margin: 15px 0; font-size: 1.6rem; font-weight: 800;">Exclusive Tax Deductions in Andalusia</h3>
-            <p>The Junta de Andalucía has approved new tax credits for 2026. From sports activities to pet healthcare, find out how much you can recover.</p>
-            <a href="javascript:void(0)" onclick="toggleArticle()" id="read-more-btn" style="color: var(--primary-blue); font-weight: 700; text-decoration: none; display: inline-block; margin-top: 15px;">Explore deductions ↓</a>
+            <span class="blog-badge">New in 2026</span>
+            <h3>Living in Andalusia? Save money now.</h3>
+            <p style="font-size: 1.1rem; color: var(--text-main); margin-bottom: 20px;">The regional government just approved new tax deductions. If you are a resident, you can claim these expenses back.</p>
             
-            <div id="article-body" class="article-content">
-                <p><strong>1. Sports and Gym Deduction:</strong> Andalusian taxpayers can deduct <strong>15%</strong> of expenses related to sports services (gyms, sports centers, and federated clubs) with a maximum limit of €100.</p>
-                <br>
-                <p><strong>2. Veterinary Expenses:</strong> A major update for pet owners! You can now deduct <strong>15%</strong> of veterinary costs, including medical check-ups and preventive treatments, with a limit of €50 per animal.</p>
-                <br>
-                <p><strong>3. Renting Property:</strong> Deduct <strong>15%</strong> of your annual rent (up to €600, or €900 for people with disabilities). This applies to tenants under 35 years old or over 65.</p>
-                <br>
-                <p><strong>4. Work and Family Balance:</strong> Credits available for domestic help and childcare, alongside deductions for investment in protected or social housing.</p>
+            <div class="deduction-grid">
+                <div class="deduction-item">
+                    <strong>01. Gym & Sports</strong>
+                    <p>Get 15% back on your gym or club fees (max €100).</p>
+                </div>
+                <div class="deduction-item">
+                    <strong>02. Pet Care</strong>
+                    <p>15% deduction on vet bills for your pets.</p>
+                </div>
+                <div class="deduction-item">
+                    <strong>03. Renting</strong>
+                    <p>Under 35? Deduct 15% of your annual rent.</p>
+                </div>
+            </div>
+            
+            <div style="margin-top: 25px; border-top: 1px solid #E2E8F0; padding-top: 15px;">
+                <a href="javascript:void(0)" onclick="toggleArticle()" id="read-more-btn" style="color: var(--electric); font-weight: 800; text-decoration: none; font-size: 0.9rem;">READ MORE DETAILS ↓</a>
+                <div id="article-body" class="article-content" style="display:none; margin-top:15px; font-size:0.9rem; color:#555;">
+                    <p>These deductions apply to the regional share of the Personal Income Tax (IRPF). You must keep all invoices. We audit your expenses during the annual "Renta" campaign to ensure you get the maximum refund possible.</p>
+                </div>
             </div>
         </div>
     </section>
 
     <section id="services" class="services">
-        <h2 class="reveal">Our Expertise.</h2>
+        <div class="section-header reveal">
+            <h2>Everything you need.</h2>
+            <p>From your first NIE to filing your annual taxes. We are your local partners.</p>
+        </div>
+        
         <div class="bento-grid reveal">
-            <div class="bento-item card-1">
+            <div class="bento-item span-2">
+                <i class="fas fa-file-invoice-dollar bento-icon"></i>
                 <div class="bento-content">
-                    <h3>Taxation and Compliance</h3>
-                    <p>End-to-end tax management for expats and nomads in Spain.</p>
+                    <h3>Taxation Made Simple</h3>
+                    <p>No more fear of "La Hacienda". We keep you compliant and optimized.</p>
                     <ul>
-                        <li>Annual Income Tax Return (Modelo 100)</li>
-                        <li>Quarterly Tax Returns and Annual Summaries</li>
-                        <li>Self-Employed (Autónomo) Registration</li>
-                        <li>Rental Tax Withholding (Modelo 115)</li>
-                        <li>Invoicing and Digital Bookkeeping</li>
+                        <li>Annual Income Tax (Modelo 100)</li>
+                        <li>Quarterly Returns (303, 130) & Rental Tax (115)</li>
+                        <li>Autónomo Registration & Bookkeeping</li>
                     </ul>
                 </div>
-                <i class="fas fa-calculator" style="color:var(--primary-blue); opacity:0.1; font-size:2rem; align-self: flex-end;"></i>
             </div>
             
-            <div class="bento-item card-2">
+            <div class="bento-item">
+                <i class="fas fa-mobile-alt bento-icon"></i>
                 <div class="bento-content">
-                    <h3>Digital ID and Subsidies</h3>
-                    <p>Modern solutions for your administrative needs.</p>
+                    <h3>Digital Life</h3>
+                    <p>Skip the queues. Do it online.</p>
                     <ul>
-                        <li>Remote Digital Certificate Setup</li>
-                        <li>Kit Digital Advisory and Grant Support</li>
-                        <li>Cl@ve System Identification</li>
+                        <li>Remote Digital Certificates</li>
+                        <li>Kit Digital Grants</li>
+                        <li>Cl@ve Setup</li>
                     </ul>
                 </div>
             </div>
 
-            <div class="bento-item card-3">
+            <div class="bento-item">
+                <i class="fas fa-city bento-icon"></i>
                 <div class="bento-content">
                     <h3>Bureaucracy</h3>
-                    <p>Local and national administrative procedures.</p>
+                    <p>We speak "Spanish Administration".</p>
                     <ul>
                         <li>Rental Deposits (Modelo 806)</li>
-                        <li>Social Security Number (SSN)</li>
-                        <li>Padron and Residency Support</li>
+                        <li>Social Security (SSN)</li>
+                        <li>Padron Registration</li>
                     </ul>
                 </div>
             </div>
 
-            <div class="bento-item card-4">
+            <div class="bento-item span-2">
+                <i class="fas fa-globe-europe bento-icon"></i>
                 <div class="bento-content">
-                    <h3>Healthcare</h3>
+                    <h3>Residency & Visas</h3>
+                    <p>Start your new life in Spain the right way.</p>
                     <ul>
-                        <li>SIP Card Setup (Public System)</li>
-                        <li>EHIC Applications</li>
-                    </ul>
-                </div>
-            </div>
-
-            <div class="bento-item card-5">
-                <div class="bento-content">
-                    <h3>Residency and NIE</h3>
-                    <p>Documentation for your life and work in Spain.</p>
-                    <ul>
-                        <li>White NIE and EU Certificates</li>
-                        <li>TIE Appointments and Fingerprinting</li>
+                        <li>White NIE & EU Registry (Green NIE)</li>
+                        <li>TIE Card Processing</li>
+                        <li>Health Coverage (SIP & EHIC)</li>
                     </ul>
                 </div>
             </div>
@@ -204,74 +348,71 @@
     </section>
 
     <footer id="contact">
-        <div class="social-container reveal">
-            <a href="https://www.linkedin.com/company/cresvance" target="_blank" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
-            <a href="https://www.instagram.com/Cresvance_support" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
-            <a href="mailto:hello@cresvance.com" aria-label="Email"><i class="fas fa-envelope"></i></a>
-        </div>
-        <div class="footer-info reveal">
-            <p><strong>© 2026 CRESVANCE</strong></p>
-            <p>Málaga and Remote Support</p>
-            <p>Expat Advisory Solutions</p>
+        <div style="display: flex; flex-direction: column; align-items: center; text-align: center;">
+            <div class="footer-brand">
+                <h2>CRESVANCE</h2>
+                <p style="opacity: 0.8; max-width: 400px; margin: 0 auto 30px;">Expat Advisory Solutions. <br>Based in Málaga, helping clients everywhere.</p>
+            </div>
+            <div class="footer-socials">
+                <a href="https://www.linkedin.com/company/cresvance" target="_blank"><i class="fab fa-linkedin-in"></i></a>
+                <a href="https://www.instagram.com/Cresvance_support" target="_blank"><i class="fab fa-instagram"></i></a>
+                <a href="mailto:hello@cresvance.com"><i class="fas fa-envelope"></i></a>
+            </div>
+            <div style="margin-top: 50px; font-size: 0.8rem; opacity: 0.5;">
+                &copy; 2026 Cresvance. All rights reserved.
+            </div>
         </div>
     </footer>
 
     <div id="cookie-banner">
-        <h4 style="margin-bottom: 10px;">Privacy and Cookies</h4>
-        <p style="font-size: 0.85rem; color: #555; line-height: 1.4;">We use our own and third-party cookies to improve our services and show you information related to your preferences by analyzing your browsing habits.</p>
+        <h4 style="margin-bottom: 10px; color: var(--navy);">Privacy Preferences</h4>
+        <p style="font-size: 0.85rem; color: #64748B; margin-bottom: 20px;">We use cookies to make this site work and analyze traffic. Customize your settings.</p>
         
-        <div id="cookie-settings">
-            <div class="setting-row"><span>Essential (Required)</span><span style="color:green; font-weight:bold;">Active</span></div>
-            <div class="cookie-row" style="display:flex; justify-content:space-between; margin-bottom:10px;">
-                <span>Analytics and Marketing</span>
-                <input type="checkbox" id="analytics-check" checked>
-            </div>
+        <div id="cookie-settings" style="display:none; margin-bottom: 15px; font-size: 0.85rem;">
+             <div style="display: flex; justify-content: space-between; margin-bottom: 8px;"><span>Essential</span><span style="color:var(--whatsapp); font-weight:700;">Active</span></div>
+             <div style="display: flex; justify-content: space-between;"><span>Analytics</span><input type="checkbox" checked></div>
         </div>
 
-        <div class="cookie-buttons">
-            <button onclick="saveConsent('all')" class="btn btn-primary" style="flex:1.5; padding:10px; font-size:0.8rem; justify-content:center;">Accept All</button>
-            <button onclick="saveConsent('minimal')" class="btn btn-cookie-sec" style="padding:10px; font-size:0.8rem; border-radius:40px;">Reject All</button>
-            <button onclick="toggleSettings()" class="btn btn-cookie-sec" id="settings-btn" style="padding:10px; font-size:0.8rem; border-radius:40px;">Settings</button>
+        <div style="display: flex; gap: 10px;">
+            <button onclick="saveCookies('all')" class="btn btn-primary" style="flex:1; padding: 12px; font-size: 0.9rem; justify-content: center;">Accept</button>
+            <button onclick="toggleSettings()" class="btn btn-whatsapp" style="padding: 12px; font-size: 0.9rem; border-color: #CBD5E1; color: #64748B;">Options</button>
         </div>
     </div>
 
     <script>
+        // Animated Logo (Letter by letter slam)
         const logoText = "CRESVANCE";
         const logoContainer = document.getElementById('animated-logo');
         logoText.split('').forEach((char, i) => {
             const span = document.createElement('span');
             span.textContent = char;
-            span.style.animationDelay = `${i * 0.08}s`;
+            span.style.animationDelay = `${i * 0.05}s`;
             logoContainer.appendChild(span);
         });
 
+        // Scroll Reveal
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('active'); });
         }, { threshold: 0.1 });
         document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 
+        // Toggle Details
         function toggleArticle() {
             const body = document.getElementById('article-body');
             const btn = document.getElementById('read-more-btn');
-            body.style.display = body.style.display === 'block' ? 'none' : 'block';
-            btn.innerText = body.style.display === 'block' ? 'Show less ↑' : 'Explore deductions ↓';
+            const isHidden = body.style.display === 'none';
+            body.style.display = isHidden ? 'block' : 'none';
+            btn.innerText = isHidden ? 'HIDE DETAILS ↑' : 'READ MORE DETAILS ↓';
         }
 
-        // Cookie Logic
+        // Cookies
         function toggleSettings() {
-            const settings = document.getElementById('cookie-settings');
-            settings.style.display = settings.style.display === 'block' ? 'none' : 'block';
+             const settings = document.getElementById('cookie-settings');
+             settings.style.display = settings.style.display === 'none' ? 'block' : 'none';
         }
-
-        function saveConsent(type) {
-            localStorage.setItem('cresvance_consent', type);
-            document.getElementById('cookie-banner').style.display = 'none';
-        }
-
+        function saveCookies(type) { localStorage.setItem('cresvance_consent', type); document.getElementById('cookie-banner').style.display = 'none'; }
         window.onload = () => { 
-            if (!localStorage.getItem('cresvance_consent')) {
-                setTimeout(() => { document.getElementById('cookie-banner').style.display = 'block'; }, 1000);
-            }
+            if (!localStorage.getItem('cresvance_consent')) document.getElementById('cookie-banner').style.display = 'block';
             document.getElementById('hero-content').classList.add('active');
         };
     </script>
