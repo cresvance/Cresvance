@@ -1,303 +1,140 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='50' fill='%230F172A'/><text x='50%25' y='50%25' text-anchor='middle' dy='.3em' fill='white' font-family='Arial, sans-serif' font-weight='bold' font-size='40'>CE</text></svg>">
-    <link rel="apple-touch-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%230F172A'/><text x='50%25' y='55%25' text-anchor='middle' fill='white' font-family='sans-serif' font-weight='800' font-size='45'>CE</text></svg>">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cresvance | Professional and Personal Advisory</title>
-    
+
     <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 
     <style>
         :root {
-            --navy: #0F172A;
-            --electric: #2563EB;
-            --white: #ffffff;
-            --text-main: #1E293B;
-            --text-muted: #64748B;
-            --bg-light: #F8FAFC;
+            --navy:#0F172A; --electric:#2563EB; --white:#fff;
+            --text-main:#1E293B; --text-muted:#64748B; --bg-light:#F8FAFC;
         }
 
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: 'Manrope', sans-serif; color: var(--text-main); background: var(--white); line-height: 1.6; overflow-x: hidden; }
+        *{margin:0;padding:0;box-sizing:border-box}
+        body{font-family:'Manrope',sans-serif;color:var(--text-main);background:#fff;overflow-x:hidden}
 
-        /* --- NAVBAR --- */
-        nav { 
-            padding: 1.5rem 8%; display: flex; justify-content: space-between; align-items: center;
-            background: rgba(255,255,255,0.95); backdrop-filter: blur(10px); position: sticky; top: 0; z-index: 1000;
-            transition: all 0.4s ease; border-bottom: 1px solid #eee;
+        nav{
+            padding:1.5rem 8%;display:flex;justify-content:space-between;align-items:center;
+            background:rgba(255,255,255,.95);position:sticky;top:0;z-index:1000;
+            border-bottom:1px solid #eee;transition:.4s
+        }
+        nav.scrolled{padding:.8rem 8%}
+        .logo{font-weight:800;font-size:1.8rem;color:var(--navy);text-decoration:none}
+        .logo .retract{max-width:300px;display:inline-block;transition:.5s;overflow:hidden}
+        nav.scrolled .logo .retract{max-width:0;opacity:0}
+
+        .nav-links a{margin-left:30px;text-decoration:none;font-weight:700;color:var(--navy);font-size:.85rem}
+
+        .lang-select{
+            margin-left:20px;padding:6px 10px;font-weight:700;border-radius:6px;
+            border:1px solid #E2E8F0;cursor:pointer
         }
 
-        .logo { 
-            font-weight: 800; font-size: 1.8rem; color: var(--navy); text-decoration: none; 
-            letter-spacing: -1px; display: flex; align-items: center;
-        }
-        
-        .logo .retract { display: inline-block; max-width: 300px; opacity: 1; transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1); white-space: nowrap; overflow: hidden; }
-        nav.scrolled .logo .retract { max-width: 0; opacity: 0; }
-        nav.scrolled { padding: 0.8rem 8%; }
+        .hero{padding:100px 8%;min-height:80vh;display:flex;align-items:center;
+            background:radial-gradient(circle at top right,#f1f5f9 0%,#fff 50%)}
+        h1{font-size:clamp(3rem,7vw,5rem);font-weight:800;line-height:1.05}
+        h1 span{color:var(--electric)}
+        p{font-size:1.25rem;color:var(--text-muted);max-width:650px;margin:30px 0}
 
-        .nav-right { display: flex; align-items: center; gap: 20px; }
-        .nav-links a { text-decoration: none; color: var(--navy); font-weight: 700; margin-left: 20px; font-size: 0.85rem; text-transform: uppercase; }
-
-        .lang-select {
-            border: 1px solid #E2E8F0; padding: 5px 10px; border-radius: 6px;
-            font-family: 'Manrope'; font-weight: 700; font-size: 0.8rem; cursor: pointer; background: white;
+        .lang-badge{
+            display:inline-flex;background:#eef2ff;padding:8px 18px;border-radius:50px;
+            font-weight:800;font-size:.8rem;color:var(--navy);margin-bottom:30px;
+            overflow:hidden
         }
 
-        /* --- HERO --- */
-        .hero { padding: 100px 8%; min-height: 80vh; display: flex; align-items: center; background: radial-gradient(circle at top right, #f1f5f9 0%, #ffffff 50%); }
-        .hero h1 { font-size: clamp(3rem, 7vw, 5rem); font-weight: 800; line-height: 1.05; margin-bottom: 20px; color: var(--navy); letter-spacing: -2px; }
-        .hero h1 span { color: var(--electric); }
-        .hero p { font-size: 1.25rem; color: var(--text-muted); max-width: 650px; margin-bottom: 35px; font-weight: 500; }
-
-        .lang-badge { 
-            display: inline-flex; align-items: center; gap: 10px; margin-bottom: 30px; 
-            font-weight: 800; font-size: 0.85rem; color: var(--navy); 
-            background: #EEF2FF; padding: 10px 20px; border-radius: 50px;
-            border: 1px solid #DBEAFE;
+        #rotating-language{
+            animation:fadeSlide 2.5s ease-in-out infinite
         }
 
-        /* --- BUTTONS --- */
-        .btn { padding: 16px 28px; border-radius: 8px; text-decoration: none; font-weight: 700; display: inline-flex; align-items: center; gap: 10px; transition: 0.3s; border: none; cursor: pointer; font-size: 0.95rem; }
-        .btn-primary { background: var(--navy); color: white; }
-        .btn-primary:hover { background: var(--electric); transform: translateY(-3px); }
-        .btn-whatsapp { background: #fff; color: var(--navy); border: 2px solid #E2E8F0; margin-left: 10px; }
-        .btn-whatsapp:hover { border-color: var(--navy); transform: translateY(-3px); }
-
-        /* --- INSIGHTS --- */
-        .insights { padding: 80px 8%; background: var(--white); }
-        .insight-card { background: var(--bg-light); padding: 50px; border-radius: 24px; border-left: 8px solid var(--electric); }
-        .insight-card h3 { font-size: 2.2rem; margin-bottom: 25px; letter-spacing: -1px; color: var(--navy); }
-        .deduction-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 40px; }
-        .deduction-item h4 { color: var(--electric); font-size: 1.2rem; margin-bottom: 12px; display: flex; align-items: center; gap: 10px; }
-
-        /* --- SERVICES --- */
-        .services { padding: 100px 8%; background: #fafafa; }
-        .bento-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 25px; }
-        .bento-item { background: var(--white); padding: 40px; border-radius: 20px; border: 1px solid #eee; transition: 0.4s; display: flex; flex-direction: column; }
-        .bento-item:hover { transform: translateY(-10px); box-shadow: 0 20px 40px rgba(0,0,0,0.05); border-color: var(--electric); }
-        .bento-item i { font-size: 2.2rem; color: var(--navy); margin-bottom: 20px; }
-        .bento-item h3 { font-size: 1.5rem; margin-bottom: 15px; font-weight: 800; }
-        .bento-item ul { list-style: none; margin-top: auto; padding-top: 20px; }
-        .bento-item ul li { margin-bottom: 10px; font-size: 0.9rem; font-weight: 600; color: var(--text-muted); display: flex; align-items: center; gap: 8px; }
-        .bento-item ul li::before { content: "●"; color: var(--electric); font-size: 0.7rem; }
-        .span-2 { grid-column: span 2; }
-
-        /* --- FOOTER --- */
-        footer { background: var(--navy); color: white; padding: 100px 8%; text-align: center; }
-        .footer-logo-container { font-size: 2.5rem; font-weight: 800; margin-bottom: 15px; display: flex; justify-content: center; align-items: center; }
-        .footer-retract { display: inline-block; max-width: 0; opacity: 0; white-space: nowrap; overflow: hidden; transition: all 1s cubic-bezier(0.22, 1, 0.36, 1); }
-        .footer-logo-container.expanded .footer-retract { max-width: 400px; opacity: 1; }
-
-        /* --- UTILS --- */
-        .reveal { opacity: 0; transform: translateY(30px); transition: 0.8s ease-out; }
-        .reveal.active { opacity: 1; transform: translateY(0); }
-
-        @media (max-width: 900px) { 
-            .bento-grid { grid-template-columns: 1fr; } 
-            .span-2 { grid-column: span 1; }
-            .nav-links { display: none; }
+        @keyframes fadeSlide{
+            0%{opacity:0;transform:translateY(8px)}
+            20%{opacity:1;transform:translateY(0)}
+            80%{opacity:1}
+            100%{opacity:0;transform:translateY(-8px)}
         }
+
+        .btn{padding:16px 28px;border-radius:8px;font-weight:700;text-decoration:none;display:inline-flex;gap:10px}
+        .btn-primary{background:var(--navy);color:#fff}
+        .btn-primary:hover{background:var(--electric)}
+        .btn-whatsapp{border:2px solid #E2E8F0;color:var(--navy)}
+
+        footer{background:var(--navy);color:#fff;padding:100px 8%;text-align:center}
     </style>
 </head>
+
 <body>
 
-    <nav id="navbar">
-        <a href="#" class="logo">C<span class="retract">RESVANC</span>E</a>
-        <div class="nav-right">
-            <div class="nav-links">
-                <a href="#services" data-key="nav_expertise">Expertise</a>
-                <a href="#contact" data-key="nav_contact">Contact</a>
-            </div>
-            <select class="lang-select" onchange="changeLanguage(this.value)">
-                <option value="en">EN</option>
-                <option value="es">ES</option>
-                <option value="fr">FR</option>
-                <option value="it">IT</option>
-                <option value="de">DE</option>
-            </select>
+<nav id="navbar">
+    <a href="#" class="logo">C<span class="retract">RESVANC</span>E</a>
+    <div>
+        <span class="nav-links">
+            <a href="#services" data-key="nav_services">Expertise</a>
+            <a href="#contact" data-key="nav_contact">Contact</a>
+        </span>
+        <select class="lang-select" onchange="changeLanguage(this.value)">
+            <option value="en">EN</option>
+            <option value="es">ES</option>
+            <option value="fr">FR</option>
+            <option value="it">IT</option>
+            <option value="de">DE</option>
+        </select>
+    </div>
+</nav>
+
+<section class="hero">
+    <div>
+        <div class="lang-badge">
+            <span id="rotating-language">WE SPEAK YOUR LANGUAGE</span>
         </div>
-    </nav>
 
-    <section class="hero">
-        <div class="reveal">
-            <div class="lang-badge">
-                <i class="fas fa-globe-europe"></i>
-                <span data-key="badge_text">WE SPEAK YOUR LANGUAGE</span>
-            </div>
-            <h1 id="hero-title">We walk you <br> <span>through it.</span></h1>
-            <p data-key="hero_desc">Direct and personal advisory for expats in Spain. Professional expertise and on-site support for your peace of mind.</p>
-            <div class="cta-container">
-                <a href="https://calendly.com/hello-cresvance/new-meeting" target="_blank" class="btn btn-primary" data-key="btn_free">Free Consultation</a>
-                <a href="https://wa.me/34602593904" target="_blank" class="btn btn-whatsapp"><i class="fab fa-whatsapp"></i> <span data-key="btn_chat">Chat with us</span></a>
-            </div>
-        </div>
-    </section>
+        <h1 id="hero-title">We walk you <br><span>through it.</span></h1>
+        <p data-key="hero_desc">Direct and personal advisory for expats in Spain.</p>
 
-    <section class="insights">
-        <div class="insight-card reveal">
-            <span style="color: var(--electric); font-weight: 800; font-size: 0.9rem; text-transform: uppercase;" data-key="update_tag">Andalusia 2026 Tax Update</span>
-            <h3 data-key="update_title">Maximize your returns</h3>
-            <div class="deduction-grid">
-                <div class="deduction-item">
-                    <h4><i class="fas fa-dumbbell"></i> <span data-key="tax_1_h">Sports and Health</span></h4>
-                    <p data-key="tax_1_p">Recover 15% of gym fees and sports memberships. Maximize your health and your savings.</p>
-                </div>
-                <div class="deduction-item">
-                    <h4><i class="fas fa-paw"></i> <span data-key="tax_2_h">Pet Healthcare</span></h4>
-                    <p data-key="tax_2_p">Claim 15% of veterinary expenses for preventive care and check-ups for your pets.</p>
-                </div>
-                <div class="deduction-item">
-                    <h4><i class="fas fa-home"></i> <span data-key="tax_3_h">Renting</span></h4>
-                    <p data-key="tax_3_p">15% deduction on rent for residents under 35 or over 65 years old.</p>
-                </div>
-            </div>
-        </div>
-    </section>
+        <a href="https://calendly.com/hello-cresvance/new-meeting" class="btn btn-primary" data-key="btn_free">Free Consultation</a>
+        <a href="https://wa.me/34602593904" class="btn btn-whatsapp">
+            <i class="fab fa-whatsapp"></i><span data-key="btn_chat">Chat with us</span>
+        </a>
+    </div>
+</section>
 
-    <section id="services" class="services">
-        <div class="bento-grid">
-            <div class="bento-item span-2 reveal">
-                <i class="fas fa-calculator"></i>
-                <h3 data-key="ser_1_t">Taxation and Invoicing</h3>
-                <p data-key="ser_1_d">Personalized tax management with no technical jargon.</p>
-                <ul>
-                    <li data-key="ser_1_l1">Annual Income Tax filings</li>
-                    <li data-key="ser_1_l2">Autónomo management and registration</li>
-                </ul>
-            </div>
+<footer id="contact">
+    <p data-key="footer">Simplifying Spanish bureaucracy for you.</p>
+    <p style="opacity:.5;font-size:.8rem;margin-top:30px">Málaga & Remote · EN · ES · FR · IT · DE</p>
+</footer>
 
-            <div class="bento-item reveal">
-                <i class="fas fa-passport"></i>
-                <h3 data-key="ser_2_t">Residency and NIE</h3>
-                <p data-key="ser_2_d">We accompany you physically to your appointments.</p>
-            </div>
-        </div>
-    </section>
+<script>
+const translations={
+    en:{nav_services:"Expertise",nav_contact:"Contact",hero_title:"We walk you <br><span>through it.</span>",hero_desc:"Direct and personal advisory for expats in Spain.",btn_free:"Free Consultation",btn_chat:"Chat with us",footer:"Simplifying Spanish bureaucracy for you."},
+    es:{nav_services:"Servicios",nav_contact:"Contacto",hero_title:"Te acompañamos <br><span>en el proceso.</span>",hero_desc:"Asesoría directa y personal para expats en España.",btn_free:"Consulta gratuita",btn_chat:"Chatea con nosotros",footer:"Simplificando la burocracia española para ti."},
+    fr:{nav_services:"Expertise",nav_contact:"Contact",hero_title:"Nous vous <br><span>accompagnons.</span>",hero_desc:"Conseil personnalisé pour expatriés en Espagne.",btn_free:"Consultation gratuite",btn_chat:"Discutez avec nous",footer:"Simplifier la bureaucratie espagnole pour vous."},
+    it:{nav_services:"Servizi",nav_contact:"Contatto",hero_title:"Ti guidiamo <br><span>passo dopo passo.</span>",hero_desc:"Consulenza diretta per expat in Spagna.",btn_free:"Consulenza gratuita",btn_chat:"Parla con noi",footer:"Semplifichiamo la burocrazia spagnola per te."},
+    de:{nav_services:"Expertise",nav_contact:"Kontakt",hero_title:"Wir begleiten <br><span>Sie.</span>",hero_desc:"Persönliche Beratung für Expats in Spanien.",btn_free:"Kostenlose Beratung",btn_chat:"Chat mit uns",footer:"Wir vereinfachen die spanische Bürokratie für Sie."}
+};
 
-    <footer id="contact">
-        <div class="footer-logo-container" id="footer-logo">
-            C<span class="footer-retract">RESVANC</span>E
-        </div>
-        <p style="opacity: 0.7; margin-bottom: 30px;" data-key="footer_sub">Simplifying Spanish bureaucracy for you.</p>
-        <div class="socials">
-            <a href="https://www.linkedin.com/company/cresvance" target="_blank" style="color:white; font-size: 1.5rem; margin: 0 15px;"><i class="fab fa-linkedin"></i></a>
-            <a href="https://www.instagram.com/Cresvance_support" target="_blank" style="color:white; font-size: 1.5rem; margin: 0 15px;"><i class="fab fa-instagram"></i></a>
-            <a href="mailto:hello@cresvance.com" style="color:white; font-size: 1.5rem; margin: 0 15px;"><i class="fas fa-envelope"></i></a>
-        </div>
-        <p style="margin-top: 40px; opacity: 0.5; font-size: 0.8rem;">Málaga and Remote | EN · DE · ES · FR · IT</p>
-    </footer>
+function changeLanguage(lang){
+    document.querySelectorAll('[data-key]').forEach(el=>{
+        el.innerHTML=translations[lang][el.dataset.key];
+    });
+    document.getElementById("hero-title").innerHTML=translations[lang].hero_title;
+    localStorage.setItem("lang",lang);
+}
 
-    <script>
-        const translations = {
-            en: {
-                nav_expertise: "Expertise", nav_contact: "Contact",
-                badge_text: "WE SPEAK YOUR LANGUAGE",
-                hero_title: "We walk you <br> <span>through it.</span>",
-                hero_desc: "Direct and personal advisory for expats in Spain. Professional expertise and on-site support for your peace of mind.",
-                btn_free: "Free Consultation", btn_chat: "Chat with us",
-                update_tag: "Andalusia 2026 Tax Update", update_title: "Maximize your returns",
-                tax_1_h: "Sports and Health", tax_1_p: "Recover 15% of gym fees and sports memberships.",
-                tax_2_h: "Pet Healthcare", tax_2_p: "Claim 15% of veterinary expenses for your pets.",
-                tax_3_h: "Renting", tax_3_p: "15% deduction on rent for specific age groups.",
-                ser_1_t: "Taxation and Invoicing", ser_1_d: "Personalized tax management with no technical jargon.",
-                ser_1_l1: "Annual Income Tax filings", ser_1_l2: "Autónomo registration",
-                ser_2_t: "Residency and NIE", ser_2_d: "We accompany you physically to appointments.",
-                footer_sub: "Simplifying Spanish bureaucracy for you."
-            },
-            es: {
-                nav_expertise: "Servicios", nav_contact: "Contacto",
-                badge_text: "HABLAMOS TU IDIOMA",
-                hero_title: "Te acompañamos <br> <span>en el proceso.</span>",
-                hero_desc: "Asesoría directa y personal para expats en España. Experiencia profesional y apoyo presencial.",
-                btn_free: "Consulta Gratuita", btn_chat: "Chatea con nosotros",
-                update_tag: "Actualización Fiscal Andalucía 2026", update_title: "Maximiza tus ahorros",
-                tax_1_h: "Deporte y Salud", tax_1_p: "Recupera el 15% de tus gastos de gimnasio.",
-                tax_2_h: "Mascotas", tax_2_p: "Deduce el 15% de los gastos veterinarios.",
-                tax_3_h: "Alquiler", tax_3_p: "Deducción del 15% para menores de 35 o mayores de 65.",
-                ser_1_t: "Impuestos y Facturación", ser_1_d: "Gestión fiscal personalizada sin tecnicismos.",
-                ser_1_l1: "Declaración de la Renta", ser_1_l2: "Alta y gestión de Autónomos",
-                ser_2_t: "Residencia y NIE", ser_2_d: "Te acompañamos físicamente a tus citas.",
-                footer_sub: "Simplificando la burocracia española para ti."
-            },
-            fr: {
-                nav_expertise: "Expertise", nav_contact: "Contact",
-                badge_text: "NOUS PARLONS VOTRE LANGUE",
-                hero_title: "Nous vous <br> <span>accompagnons.</span>",
-                hero_desc: "Conseil direct et personnel pour les expatriés. Expertise professionnelle et soutien sur place.",
-                btn_free: "Consultation Gratuite", btn_chat: "Discutez avec nous",
-                update_tag: "Mise à jour fiscale Andalousie 2026", update_title: "Maximisez vos rendements",
-                tax_1_h: "Sport et Santé", tax_1_p: "Récupérez 15 % des frais de salle de sport.",
-                tax_2_h: "Animaux", tax_2_p: "Déduisez 15 % des frais vétérinaires.",
-                tax_3_h: "Loyer", tax_3_p: "Déduction de 15% sur le loyer (critères d'âge).",
-                ser_1_t: "Fiscalité", ser_1_d: "Gestion fiscale personnalisée sans jargon.",
-                ser_1_l1: "Déclarations d'impôts", ser_1_l2: "Gestion Auto-entrepreneur",
-                ser_2_t: "Résidence et NIE", ser_2_d: "Accompagnement physique aux rendez-vous.",
-                footer_sub: "Simplifier la bureaucratie espagnole pour vous."
-            },
-            it: {
-                nav_expertise: "Servizi", nav_contact: "Contatto",
-                badge_text: "PARLIAMO LA TUA LINGUA",
-                hero_title: "Ti guidiamo <br> <span>passo dopo passo.</span>",
-                hero_desc: "Consulenza diretta per expat in Spagna. Supporto fisico e professionale.",
-                btn_free: "Consulenza Gratuita", btn_chat: "Parla con noi",
-                update_tag: "Fisco Andalusia 2026", update_title: "Massimizza i risparmi",
-                tax_1_h: "Sport e Salute", tax_1_p: "Recupera il 15% delle spese in palestra.",
-                tax_2_h: "Animali", tax_2_p: "Detrai il 15% delle spese veterinarie.",
-                tax_3_h: "Affitto", tax_3_p: "Detrazione del 15% per giovani e anziani.",
-                ser_1_t: "Tasse e Fatturazione", ser_1_d: "Gestione fiscale senza complicazioni.",
-                ser_1_l1: "Dichiarazione dei redditi", ser_1_l2: "Registrazione Partita IVA",
-                ser_2_t: "Residenza e NIE", ser_2_d: "Ti accompagniamo di persona agli appuntamenti.",
-                footer_sub: "Semplifichiamo la burocrazia spagnola per te."
-            },
-            de: {
-                nav_expertise: "Expertise", nav_contact: "Kontakt",
-                badge_text: "WIR SPRECHEN IHRE SPRACHE",
-                hero_title: "Wir begleiten <br> <span>Sie dabei.</span>",
-                hero_desc: "Direkte Beratung für Expats in Spanien. Professionelle Vor-Ort-Unterstützung.",
-                btn_free: "Kostenlose Beratung", btn_chat: "Chatten Sie mit uns",
-                update_tag: "Steuer-Update Andalusien 2026", update_title: "Ersparnisse maximieren",
-                tax_1_h: "Sport und Gesundheit", tax_1_p: "15% Rückerstattung für Fitness-Gebühren.",
-                tax_2_h: "Haustiere", tax_2_p: "15% Abzug für Tierarztkosten.",
-                tax_3_h: "Miete", tax_3_p: "15% Steuerabzug auf Mietzahlungen.",
-                ser_1_t: "Steuern & Rechnungen", ser_1_d: "Persönliche Steuerberatung ohne Fachchinesisch.",
-                ser_1_l1: "Einkommensteuererklärung", ser_1_l2: "Autónomo Anmeldung",
-                ser_2_t: "Residenz & NIE", ser_2_d: "Wir begleiten Sie persönlich zu Terminen.",
-                footer_sub: "Wir vereinfachen die spanische Bürokratie für Sie."
-            }
-        };
+window.onload=()=>changeLanguage(localStorage.getItem("lang")||"en");
 
-        function changeLanguage(lang) {
-            document.querySelectorAll('[data-key]').forEach(el => {
-                const key = el.getAttribute('data-key');
-                if (translations[lang][key]) el.innerHTML = translations[lang][key];
-            });
-            document.getElementById('hero-title').innerHTML = translations[lang].hero_title;
-            localStorage.setItem('preferred_lang', lang);
-        }
+const rotating=[
+ "WE SPEAK YOUR LANGUAGE",
+ "HABLAMOS TU IDIOMA",
+ "NOUS PARLONS VOTRE LANGUE",
+ "PARLIAMO LA TUA LINGUA",
+ "WIR SPRECHEN IHRE SPRACHE"
+];
+let i=0;
+setInterval(()=>{document.getElementById("rotating-language").innerText=rotating[i++%rotating.length]},2500);
+</script>
 
-        window.addEventListener('DOMContentLoaded', () => {
-            const savedLang = localStorage.getItem('preferred_lang') || 'en';
-            document.querySelector('.lang-select').value = savedLang;
-            changeLanguage(savedLang);
-        });
-
-        const navbar = document.getElementById("navbar");
-        window.onscroll = () => {
-            window.scrollY > 50 ? navbar.classList.add("scrolled") : navbar.classList.remove("scrolled");
-        };
-
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('active'); });
-        }, { threshold: 0.1 });
-        document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
-
-        window.addEventListener('load', () => {
-            setTimeout(() => { document.getElementById('footer-logo').classList.add('expanded'); }, 2000);
-        });
-    </script>
 </body>
 </html>
