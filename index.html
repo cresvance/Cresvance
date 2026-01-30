@@ -1,140 +1,615 @@
 <!DOCTYPE html>
+
 <html lang="en">
+
 <head>
+
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='50' fill='%230F172A'/><text x='50%25' y='50%25' text-anchor='middle' dy='.3em' fill='white' font-family='Arial, sans-serif' font-weight='bold' font-size='40'>CE</text></svg>">
+
+    <link rel="apple-touch-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%230F172A'/><text x='50%25' y='55%25' text-anchor='middle' fill='white' font-family='sans-serif' font-weight='800' font-size='45'>CE</text></svg>">
+
     <meta charset="UTF-8">
+
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>Cresvance | Professional and Personal Advisory</title>
 
+    
+
     <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 
+
+
     <style>
+
         :root {
-            --navy:#0F172A; --electric:#2563EB; --white:#fff;
-            --text-main:#1E293B; --text-muted:#64748B; --bg-light:#F8FAFC;
+
+            --navy: #0F172A;
+
+            --electric: #2563EB;
+
+            --white: #ffffff;
+
+            --text-main: #1E293B;
+
+            --text-muted: #64748B;
+
+            --bg-light: #F8FAFC;
+
         }
 
-        *{margin:0;padding:0;box-sizing:border-box}
-        body{font-family:'Manrope',sans-serif;color:var(--text-main);background:#fff;overflow-x:hidden}
 
-        nav{
-            padding:1.5rem 8%;display:flex;justify-content:space-between;align-items:center;
-            background:rgba(255,255,255,.95);position:sticky;top:0;z-index:1000;
-            border-bottom:1px solid #eee;transition:.4s
-        }
-        nav.scrolled{padding:.8rem 8%}
-        .logo{font-weight:800;font-size:1.8rem;color:var(--navy);text-decoration:none}
-        .logo .retract{max-width:300px;display:inline-block;transition:.5s;overflow:hidden}
-        nav.scrolled .logo .retract{max-width:0;opacity:0}
 
-        .nav-links a{margin-left:30px;text-decoration:none;font-weight:700;color:var(--navy);font-size:.85rem}
+        * { margin: 0; padding: 0; box-sizing: border-box; }
 
-        .lang-select{
-            margin-left:20px;padding:6px 10px;font-weight:700;border-radius:6px;
-            border:1px solid #E2E8F0;cursor:pointer
-        }
+        body { font-family: 'Manrope', sans-serif; color: var(--text-main); background: var(--white); line-height: 1.6; overflow-x: hidden; }
 
-        .hero{padding:100px 8%;min-height:80vh;display:flex;align-items:center;
-            background:radial-gradient(circle at top right,#f1f5f9 0%,#fff 50%)}
-        h1{font-size:clamp(3rem,7vw,5rem);font-weight:800;line-height:1.05}
-        h1 span{color:var(--electric)}
-        p{font-size:1.25rem;color:var(--text-muted);max-width:650px;margin:30px 0}
 
-        .lang-badge{
-            display:inline-flex;background:#eef2ff;padding:8px 18px;border-radius:50px;
-            font-weight:800;font-size:.8rem;color:var(--navy);margin-bottom:30px;
-            overflow:hidden
+
+        /* --- NAVBAR AND TOP LOGO --- */
+
+        nav { 
+
+            padding: 1.5rem 8%; display: flex; justify-content: space-between; align-items: center;
+
+            background: rgba(255,255,255,0.95); backdrop-filter: blur(10px); position: sticky; top: 0; z-index: 1000;
+
+            transition: all 0.4s ease; border-bottom: 1px solid #eee;
+
         }
 
-        #rotating-language{
-            animation:fadeSlide 2.5s ease-in-out infinite
+
+
+        .logo { 
+
+            font-weight: 800; font-size: 1.8rem; color: var(--navy); text-decoration: none; 
+
+            letter-spacing: -1px; display: flex; align-items: center;
+
         }
 
-        @keyframes fadeSlide{
-            0%{opacity:0;transform:translateY(8px)}
-            20%{opacity:1;transform:translateY(0)}
-            80%{opacity:1}
-            100%{opacity:0;transform:translateY(-8px)}
+        
+
+        .logo .retract {
+
+            display: inline-block;
+
+            max-width: 300px;
+
+            opacity: 1;
+
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+
+            white-space: nowrap;
+
+            overflow: hidden;
+
         }
 
-        .btn{padding:16px 28px;border-radius:8px;font-weight:700;text-decoration:none;display:inline-flex;gap:10px}
-        .btn-primary{background:var(--navy);color:#fff}
-        .btn-primary:hover{background:var(--electric)}
-        .btn-whatsapp{border:2px solid #E2E8F0;color:var(--navy)}
 
-        footer{background:var(--navy);color:#fff;padding:100px 8%;text-align:center}
+
+        /* Comportamiento: Se cierra a CE al bajar, se abre al subir */
+
+        nav.scrolled .logo .retract {
+
+            max-width: 0;
+
+            opacity: 0;
+
+        }
+
+        nav.scrolled { padding: 0.8rem 8%; }
+
+        nav.scrolled .logo { color: var(--electric); }
+
+
+
+        .nav-links a { text-decoration: none; color: var(--navy); font-weight: 700; margin-left: 30px; font-size: 0.85rem; text-transform: uppercase; }
+
+
+
+        /* --- HERO --- */
+
+        .hero { padding: 100px 8%; min-height: 80vh; display: flex; align-items: center; background: radial-gradient(circle at top right, #f1f5f9 0%, #ffffff 50%); }
+
+        .hero h1 { font-size: clamp(3rem, 7vw, 5rem); font-weight: 800; line-height: 1.05; margin-bottom: 20px; color: var(--navy); letter-spacing: -2px; }
+
+        .hero h1 span { color: var(--electric); }
+
+        .hero p { font-size: 1.25rem; color: var(--text-muted); max-width: 650px; margin-bottom: 35px; font-weight: 500; }
+
+
+
+        .lang-badge { display: inline-flex; gap: 12px; margin-bottom: 30px; font-weight: 700; font-size: 0.8rem; color: var(--navy); flex-wrap: wrap; }
+
+        .lang-badge span::before { content: "●"; color: var(--electric); margin-right: 5px; }
+
+
+
+        /* --- BUTTONS --- */
+
+        .btn { padding: 16px 28px; border-radius: 8px; text-decoration: none; font-weight: 700; display: inline-flex; align-items: center; gap: 10px; transition: 0.3s; border: none; cursor: pointer; font-size: 0.95rem; }
+
+        .btn-primary { background: var(--navy); color: white; }
+
+        .btn-primary:hover { background: var(--electric); transform: translateY(-3px); }
+
+        .btn-whatsapp { background: #fff; color: var(--navy); border: 2px solid #E2E8F0; margin-left: 10px; }
+
+        .btn-whatsapp:hover { border-color: var(--navy); transform: translateY(-3px); }
+
+
+
+        /* --- DEDUCTIONS 2026 --- */
+
+        .insights { padding: 80px 8%; background: var(--white); }
+
+        .insight-card { background: var(--bg-light); padding: 50px; border-radius: 24px; border-left: 8px solid var(--electric); }
+
+        .insight-card h3 { font-size: 2.2rem; margin-bottom: 25px; letter-spacing: -1px; color: var(--navy); }
+
+        
+
+        .deduction-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 40px; }
+
+        .deduction-item h4 { color: var(--electric); font-size: 1.2rem; margin-bottom: 12px; display: flex; align-items: center; gap: 10px; }
+
+        .deduction-item p { font-size: 0.95rem; color: var(--text-main); line-height: 1.6; }
+
+
+
+        /* --- SERVICES --- */
+
+        .services { padding: 100px 8%; background: #fafafa; }
+
+        .bento-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 25px; }
+
+        .bento-item { background: var(--white); padding: 40px; border-radius: 20px; border: 1px solid #eee; transition: 0.4s; display: flex; flex-direction: column; }
+
+        .bento-item:hover { transform: translateY(-10px); box-shadow: 0 20px 40px rgba(0,0,0,0.05); border-color: var(--electric); }
+
+        .bento-item i { font-size: 2.2rem; color: var(--navy); margin-bottom: 20px; }
+
+        .bento-item h3 { font-size: 1.5rem; margin-bottom: 15px; font-weight: 800; }
+
+        .bento-item ul { list-style: none; margin-top: auto; padding-top: 20px; }
+
+        .bento-item ul li { margin-bottom: 10px; font-size: 0.9rem; font-weight: 600; color: var(--text-muted); display: flex; align-items: center; gap: 8px; }
+
+        .bento-item ul li::before { content: "●"; color: var(--electric); font-size: 0.7rem; }
+
+        .span-2 { grid-column: span 2; }
+
+
+
+        /* --- FOOTER AND ANIMATED LOGO --- */
+
+        footer { background: var(--navy); color: white; padding: 100px 8%; text-align: center; }
+
+        
+
+        .footer-logo-container {
+
+            font-size: 2.5rem;
+
+            font-weight: 800;
+
+            margin-bottom: 15px;
+
+            display: flex;
+
+            justify-content: center;
+
+            align-items: center;
+
+        }
+
+        
+
+        .footer-retract {
+
+            display: inline-block;
+
+            max-width: 0; /* Inicia como CE */
+
+            opacity: 0;
+
+            white-space: nowrap;
+
+            overflow: hidden;
+
+            transition: all 1s cubic-bezier(0.22, 1, 0.36, 1);
+
+        }
+
+
+
+        .footer-logo-container.expanded .footer-retract {
+
+            max-width: 400px;
+
+            opacity: 1;
+
+        }
+
+
+
+        /* --- COOKIE BANNER --- */
+
+        #cookie-banner { 
+
+            display: none; position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%); 
+
+            width: 90%; max-width: 600px; background: white; padding: 30px; border-radius: 16px; 
+
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.4); z-index: 10001; border: 1px solid #E2E8F0; 
+
+        }
+
+        .cookie-buttons { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 20px; }
+
+        .cookie-btn { flex: 1; padding: 12px; font-size: 0.85rem; border-radius: 6px; cursor: pointer; font-weight: 700; border: none; }
+
+        .btn-accept { background: var(--navy); color: white; }
+
+        .btn-reject { background: #F1F5F9; color: var(--text-main); }
+
+        .btn-settings { background: white; color: var(--navy); border: 1px solid #E2E8F0; }
+
+        
+
+        #cookie-settings-panel { display: none; margin-top: 20px; padding-top: 20px; border-top: 1px solid #eee; }
+
+        .setting-item { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; font-size: 0.85rem; }
+
+
+
+        .reveal { opacity: 0; transform: translateY(30px); transition: 0.8s ease-out; }
+
+        .reveal.active { opacity: 1; transform: translateY(0); }
+
+
+
+        @media (max-width: 900px) { 
+
+    .bento-grid { grid-template-columns: 1fr; } 
+
+    .span-2 { grid-column: span 1; } 
+
     </style>
+
 </head>
 
 <body>
 
-<nav id="navbar">
-    <a href="#" class="logo">C<span class="retract">RESVANC</span>E</a>
-    <div>
-        <span class="nav-links">
-            <a href="#services" data-key="nav_services">Expertise</a>
-            <a href="#contact" data-key="nav_contact">Contact</a>
-        </span>
-        <select class="lang-select" onchange="changeLanguage(this.value)">
-            <option value="en">EN</option>
-            <option value="es">ES</option>
-            <option value="fr">FR</option>
-            <option value="it">IT</option>
-            <option value="de">DE</option>
-        </select>
-    </div>
-</nav>
 
-<section class="hero">
-    <div>
-        <div class="lang-badge">
-            <span id="rotating-language">WE SPEAK YOUR LANGUAGE</span>
+
+    <nav id="navbar">
+
+        <a href="#" class="logo">C<span class="retract">RESVANC</span>E</a>
+
+        <div class="nav-links">
+
+            <a href="#services">Expertise</a>
+
+            <a href="#contact">Contact</a>
+
         </div>
 
-        <h1 id="hero-title">We walk you <br><span>through it.</span></h1>
-        <p data-key="hero_desc">Direct and personal advisory for expats in Spain.</p>
+    </nav>
 
-        <a href="https://calendly.com/hello-cresvance/new-meeting" class="btn btn-primary" data-key="btn_free">Free Consultation</a>
-        <a href="https://wa.me/34602593904" class="btn btn-whatsapp">
-            <i class="fab fa-whatsapp"></i><span data-key="btn_chat">Chat with us</span>
-        </a>
+
+
+    <section class="hero">
+
+        <div class="reveal">
+
+            <div class="lang-badge">
+
+                <span>ENGLISH</span> <span>DEUTSCH</span> <span>ESPAÑOL</span> <span>FRANÇAIS</span> <span>ITALIANO</span>
+
+            </div>
+
+            <h1>We walk you <br> <span>through it.</span></h1>
+
+            <p>Direct and personal advisory for expats in Spain. Professional expertise and on-site support for your peace of mind.</p>
+
+            <div class="cta-container">
+
+                <a href="https://calendly.com/hello-cresvance/new-meeting" target="_blank" class="btn btn-primary">Free Consultation</a>
+
+                <a href="https://wa.me/34602593904" target="_blank" class="btn btn-whatsapp"><i class="fab fa-whatsapp"></i> Chat with us</a>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+
+    <section class="insights">
+
+        <div class="insight-card reveal">
+
+            <span style="color: var(--electric); font-weight: 800; font-size: 0.9rem; text-transform: uppercase;">Andalusia 2026 Tax Update</span>
+
+            <h3>Maximize your returns</h3>
+
+            <div class="deduction-grid">
+
+                <div class="deduction-item">
+
+                    <h4><i class="fas fa-dumbbell"></i> Sports and Health</h4>
+
+                    <p>Recover <b>15% of gym fees</b> and sports memberships. Maximize your health and your savings.</p>
+
+                </div>
+
+                <div class="deduction-item">
+
+                    <h4><i class="fas fa-paw"></i> Pet Healthcare</h4>
+
+                    <p>Claim <b>15% of veterinary expenses</b> for preventive care and check-ups for your pets.</p>
+
+                </div>
+
+                <div class="deduction-item">
+
+                    <h4><i class="fas fa-home"></i> Renting</h4>
+
+                    <p><b>15% deduction</b> on rent for residents under 35 or over 65 years old.</p>
+
+                </div>
+
+                <div class="deduction-item">
+
+                    <h4><i class="fas fa-book"></i> Education</h4>
+
+                    <p>Deductions for <b>language classes and textbooks</b> to support your family's growth.</p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+
+    <section id="services" class="services">
+
+        <div class="bento-grid">
+
+            <div class="bento-item span-2 reveal">
+
+                <i class="fas fa-calculator"></i>
+
+                <h3>Taxation and Invoicing</h3>
+
+                <p>Personalized tax management with no technical jargon.</p>
+
+                <ul>
+
+                    <li>Annual Income Tax filings</li>
+
+                    <li>Autónomo management and registration</li>
+
+                    <li>Professional Invoicing setup and monthly support</li>
+
+                </ul>
+
+            </div>
+
+
+
+            <div class="bento-item reveal">
+
+                <i class="fas fa-passport"></i>
+
+                <h3>Residency and NIE</h3>
+
+                <p>We accompany you physically to your appointments.</p>
+
+                <ul>
+
+                    <li>White NIE with personal support</li>
+
+                    <li>Green NIE for EU citizens</li>
+
+                    <li>TIE fingerprinting appointments</li>
+
+                </ul>
+
+            </div>
+
+
+
+            <div class="bento-item reveal">
+
+                <i class="fas fa-file-signature"></i>
+
+                <h3>Bureaucracy</h3>
+
+                <ul>
+
+                    <li>Rental Deposit management</li>
+
+                    <li>Digital Notification tracking</li>
+
+                    <li>Banking recommendations and setup</li>
+
+                </ul>
+
+            </div>
+
+
+
+            <div class="bento-item span-2 reveal">
+
+                <i class="fas fa-fingerprint"></i>
+
+                <h3>Digital and Kit Digital</h3>
+
+                <p>We bridge the digital gap in Spain for you.</p>
+
+                <ul>
+
+                    <li><b>Kit Digital for Autónomos:</b> Complete grant management</li>
+
+                    <li>Digital Certificate installation and setup</li>
+
+                    <li>Spanish Healthcare (SIP) card registration</li>
+
+                </ul>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+
+    <footer id="contact">
+
+        <div class="footer-logo-container" id="footer-logo">
+
+            C<span class="footer-retract">RESVANC</span>E
+
+        </div>
+
+        <p style="opacity: 0.7; margin-bottom: 30px;">Simplifying Spanish bureaucracy for you.</p>
+
+        <div class="socials">
+
+            <a href="https://www.linkedin.com/company/cresvance" target="_blank" style="color:white; font-size: 1.5rem; margin: 0 15px;"><i class="fab fa-linkedin"></i></a>
+
+            <a href="https://www.instagram.com/Cresvance_support" target="_blank" style="color:white; font-size: 1.5rem; margin: 0 15px;"><i class="fab fa-instagram"></i></a>
+
+            <a href="mailto:hello@cresvance.com" style="color:white; font-size: 1.5rem; margin: 0 15px;"><i class="fas fa-envelope"></i></a>
+
+        </div>
+
+        <p style="margin-top: 40px; opacity: 0.5; font-size: 0.8rem;">Málaga and Remote | EN · DE · ES · FR · IT</p>
+
+    </footer>
+
+
+
+    <div id="cookie-banner">
+
+        <h4 style="color: var(--navy);">Privacy Preferences</h4>
+
+        <p style="font-size: 0.85rem; color: var(--text-muted); margin-top: 10px;">We use cookies to ensure you get the best experience. Choose how you want to proceed.</p>
+
+        
+
+        <div id="cookie-settings-panel">
+
+            <div class="setting-item"><span>Essential Cookies</span><span style="color:green; font-weight:700;">Always Active</span></div>
+
+            <div class="setting-item"><span>Analytics Cookies</span><input type="checkbox" checked></div>
+
+            <div class="setting-item"><span>Marketing Cookies</span><input type="checkbox"></div>
+
+        </div>
+
+
+
+        <div class="cookie-buttons">
+
+            <button onclick="saveCookies('all')" class="cookie-btn btn-accept">Accept All</button>
+
+            <button onclick="saveCookies('reject')" class="cookie-btn btn-reject">Reject All</button>
+
+            <button onclick="toggleCookieSettings()" class="cookie-btn btn-settings">Customize</button>
+
+        </div>
+
     </div>
-</section>
 
-<footer id="contact">
-    <p data-key="footer">Simplifying Spanish bureaucracy for you.</p>
-    <p style="opacity:.5;font-size:.8rem;margin-top:30px">Málaga & Remote · EN · ES · FR · IT · DE</p>
-</footer>
 
-<script>
-const translations={
-    en:{nav_services:"Expertise",nav_contact:"Contact",hero_title:"We walk you <br><span>through it.</span>",hero_desc:"Direct and personal advisory for expats in Spain.",btn_free:"Free Consultation",btn_chat:"Chat with us",footer:"Simplifying Spanish bureaucracy for you."},
-    es:{nav_services:"Servicios",nav_contact:"Contacto",hero_title:"Te acompañamos <br><span>en el proceso.</span>",hero_desc:"Asesoría directa y personal para expats en España.",btn_free:"Consulta gratuita",btn_chat:"Chatea con nosotros",footer:"Simplificando la burocracia española para ti."},
-    fr:{nav_services:"Expertise",nav_contact:"Contact",hero_title:"Nous vous <br><span>accompagnons.</span>",hero_desc:"Conseil personnalisé pour expatriés en Espagne.",btn_free:"Consultation gratuite",btn_chat:"Discutez avec nous",footer:"Simplifier la bureaucratie espagnole pour vous."},
-    it:{nav_services:"Servizi",nav_contact:"Contatto",hero_title:"Ti guidiamo <br><span>passo dopo passo.</span>",hero_desc:"Consulenza diretta per expat in Spagna.",btn_free:"Consulenza gratuita",btn_chat:"Parla con noi",footer:"Semplifichiamo la burocrazia spagnola per te."},
-    de:{nav_services:"Expertise",nav_contact:"Kontakt",hero_title:"Wir begleiten <br><span>Sie.</span>",hero_desc:"Persönliche Beratung für Expats in Spanien.",btn_free:"Kostenlose Beratung",btn_chat:"Chat mit uns",footer:"Wir vereinfachen die spanische Bürokratie für Sie."}
-};
 
-function changeLanguage(lang){
-    document.querySelectorAll('[data-key]').forEach(el=>{
-        el.innerHTML=translations[lang][el.dataset.key];
-    });
-    document.getElementById("hero-title").innerHTML=translations[lang].hero_title;
-    localStorage.setItem("lang",lang);
-}
+    <script>
 
-window.onload=()=>changeLanguage(localStorage.getItem("lang")||"en");
+        // --- NAVBAR LOGO: Se cierra al bajar, se abre al subir ---
 
-const rotating=[
- "WE SPEAK YOUR LANGUAGE",
- "HABLAMOS TU IDIOMA",
- "NOUS PARLONS VOTRE LANGUE",
- "PARLIAMO LA TUA LINGUA",
- "WIR SPRECHEN IHRE SPRACHE"
-];
-let i=0;
-setInterval(()=>{document.getElementById("rotating-language").innerText=rotating[i++%rotating.length]},2500);
-</script>
+        const navbar = document.getElementById("navbar");
+
+        window.onscroll = function() {
+
+            if (window.scrollY > 50) {
+
+                navbar.classList.add("scrolled");
+
+            } else {
+
+                navbar.classList.remove("scrolled");
+
+            }
+
+        };
+
+
+
+        // --- FOOTER LOGO: Se abre tras 2 segundos de carga ---
+
+        window.addEventListener('load', () => {
+
+            const footerLogo = document.getElementById('footer-logo');
+
+            setTimeout(() => {
+
+                footerLogo.classList.add('expanded');
+
+            }, 2000);
+
+        });
+
+
+
+        // --- SCROLL REVEAL ---
+
+        const observer = new IntersectionObserver((entries) => {
+
+            entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('active'); });
+
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+
+
+        // --- COOKIES ---
+
+        function toggleCookieSettings() {
+
+            const panel = document.getElementById('cookie-settings-panel');
+
+            panel.style.display = panel.style.display === 'block' ? 'none' : 'block';
+
+        }
+
+        function saveCookies(type) { 
+
+            localStorage.setItem('cresvance_consent', type); 
+
+            document.getElementById('cookie-banner').style.display = 'none'; 
+
+        }
+
+        if (!localStorage.getItem('cresvance_consent')) {
+
+             setTimeout(() => { document.getElementById('cookie-banner').style.display = 'block'; }, 1000);
+
+        }
+
+    </script>
 
 </body>
+
 </html>
