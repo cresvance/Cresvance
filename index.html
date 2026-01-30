@@ -70,6 +70,44 @@
             transform: translateY(0);
         }
 
+        /* --- LANGUAGES MESSAGE --- */
+        .languages-message {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 30px;
+            font-weight: 700;
+            font-size: 1rem;
+            color: var(--navy);
+            background: rgba(37, 99, 235, 0.08);
+            padding: 12px 20px;
+            border-radius: 12px;
+            border-left: 4px solid var(--electric);
+        }
+
+        .languages-message i {
+            color: var(--electric);
+            font-size: 1.2rem;
+        }
+
+        .languages-message-text {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 5px;
+        }
+
+        .lang-version {
+            opacity: 0;
+            transform: translateY(5px);
+            transition: all 0.3s ease;
+            position: absolute;
+        }
+
+        .lang-version.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
         /* --- NAVBAR AND TOP LOGO --- */
         nav { 
             padding: 1.5rem 8%; display: flex; justify-content: space-between; align-items: center;
@@ -137,9 +175,6 @@
         .hero h1 { font-size: clamp(3rem, 7vw, 5rem); font-weight: 800; line-height: 1.05; margin-bottom: 20px; color: var(--navy); letter-spacing: -2px; }
         .hero h1 span { color: var(--electric); }
         .hero p { font-size: 1.25rem; color: var(--text-muted); max-width: 650px; margin-bottom: 35px; font-weight: 500; }
-
-        .lang-badge { display: inline-flex; gap: 12px; margin-bottom: 30px; font-weight: 700; font-size: 0.8rem; color: var(--navy); flex-wrap: wrap; }
-        .lang-badge span::before { content: "●"; color: var(--electric); margin-right: 5px; }
 
         /* --- BUTTONS --- */
         .btn { padding: 16px 28px; border-radius: 8px; text-decoration: none; font-weight: 700; display: inline-flex; align-items: center; gap: 10px; transition: 0.3s; border: none; cursor: pointer; font-size: 0.95rem; }
@@ -220,6 +255,7 @@
             .language-selector { margin-left: 10px; padding-left: 10px; }
             .language-banner { font-size: 0.8rem; padding: 10px; }
             .lang-btn { padding: 5px 8px; font-size: 0.7rem; }
+            .languages-message { font-size: 0.9rem; padding: 10px 15px; }
         }
     </style>
 </head>
@@ -252,9 +288,18 @@
 
     <section class="hero">
         <div class="reveal">
-            <div class="lang-badge">
-                <span>ENGLISH</span> <span>DEUTSCH</span> <span>ESPAÑOL</span> <span>FRANÇAIS</span> <span>ITALIANO</span>
+            <!-- NUEVA SECCIÓN: Mensaje "We speak your language" rotativo -->
+            <div class="languages-message">
+                <i class="fas fa-globe-europe"></i>
+                <div class="languages-message-text" id="languagesMessage">
+                    <span class="lang-version active" data-lang="en">We speak your language</span>
+                    <span class="lang-version" data-lang="es">Hablamos tu idioma</span>
+                    <span class="lang-version" data-lang="de">Wir sprechen Ihre Sprache</span>
+                    <span class="lang-version" data-lang="it">Parliamo la tua lingua</span>
+                    <span class="lang-version" data-lang="fr">Nous parlons votre langue</span>
+                </div>
             </div>
+            
             <h1 data-translate="hero_title">We walk you <br> <span>through it.</span></h1>
             <p data-translate="hero_subtitle">Direct and personal advisory for expats in Spain. Professional expertise and on-site support for your peace of mind.</p>
             <div class="cta-container">
@@ -371,6 +416,7 @@
         const translations = {
             en: {
                 "banner_text": "We speak your language",
+                "message_text": "We speak your language",
                 "nav_expertise": "Expertise",
                 "nav_contact": "Contact",
                 "hero_title": "We walk you <br> <span>through it.</span>",
@@ -420,6 +466,7 @@
             },
             es: {
                 "banner_text": "Hablamos tu idioma",
+                "message_text": "Hablamos tu idioma",
                 "nav_expertise": "Servicios",
                 "nav_contact": "Contacto",
                 "hero_title": "Te acompañamos <br> <span>en cada paso.</span>",
@@ -469,6 +516,7 @@
             },
             de: {
                 "banner_text": "Wir sprechen Ihre Sprache",
+                "message_text": "Wir sprechen Ihre Sprache",
                 "nav_expertise": "Expertise",
                 "nav_contact": "Kontakt",
                 "hero_title": "Wir begleiten Sie <br> <span>dabei.</span>",
@@ -518,6 +566,7 @@
             },
             it: {
                 "banner_text": "Parliamo la tua lingua",
+                "message_text": "Parliamo la tua lingua",
                 "nav_expertise": "Servizi",
                 "nav_contact": "Contatto",
                 "hero_title": "Ti accompagniamo <br> <span>in ogni passo.</span>",
@@ -567,6 +616,7 @@
             },
             fr: {
                 "banner_text": "Nous parlons votre langue",
+                "message_text": "Nous parlons votre langue",
                 "nav_expertise": "Expertise",
                 "nav_contact": "Contact",
                 "hero_title": "Nous vous accompagnons <br> <span>pas à pas.</span>",
@@ -616,16 +666,16 @@
             }
         };
 
-        // --- BANNER ROTATIVO ---
-        let currentLangIndex = 0;
+        // --- BANNER ROTATIVO SUPERIOR ---
+        let currentBannerIndex = 0;
         const bannerTexts = document.querySelectorAll('#languageBanner span');
         const languages = ['en', 'es', 'de', 'it', 'fr'];
         
         function rotateBannerText() {
             bannerTexts.forEach(text => text.classList.remove('active'));
             
-            currentLangIndex = (currentLangIndex + 1) % languages.length;
-            const currentLang = languages[currentLangIndex];
+            currentBannerIndex = (currentBannerIndex + 1) % languages.length;
+            const currentLang = languages[currentBannerIndex];
             
             bannerTexts.forEach(text => {
                 if (text.dataset.lang === currentLang) {
@@ -643,6 +693,29 @@
         
         // Inicializar con inglés
         setTimeout(() => rotateBannerText(), 100);
+
+        // --- MENSAJE "WE SPEAK YOUR LANGUAGE" ROTATIVO ---
+        let currentMessageIndex = 0;
+        const messageVersions = document.querySelectorAll('.lang-version');
+        
+        function rotateMessageText() {
+            messageVersions.forEach(msg => msg.classList.remove('active'));
+            
+            currentMessageIndex = (currentMessageIndex + 1) % languages.length;
+            const currentLang = languages[currentMessageIndex];
+            
+            messageVersions.forEach(msg => {
+                if (msg.dataset.lang === currentLang) {
+                    msg.classList.add('active');
+                }
+            });
+        }
+        
+        // Rotar mensaje cada 4 segundos (diferente del banner)
+        setInterval(rotateMessageText, 4000);
+        
+        // Inicializar con inglés
+        setTimeout(() => rotateMessageText(), 100);
 
         // --- CAMBIO DE IDIOMA ---
         function changeLanguage(lang) {
@@ -662,6 +735,13 @@
                     }
                 }
             });
+            
+            // Actualizar mensaje "We speak your language"
+            messageVersions.forEach(msg => msg.classList.remove('active'));
+            const activeMessage = document.querySelector(`.lang-version[data-lang="${lang}"]`);
+            if (activeMessage) {
+                activeMessage.classList.add('active');
+            }
             
             // Actualizar banner
             bannerTexts.forEach(text => text.classList.remove('active'));
