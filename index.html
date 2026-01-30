@@ -135,7 +135,35 @@
         .reveal { opacity: 0; transform: translateY(30px); transition: 0.8s ease-out; }
         .reveal.active { opacity: 1; transform: translateY(0); }
 
-        @media (max-width: 900px) { .bento-grid { grid-template-columns: 1fr; } .span-2 { grid-column: span 1; } }
+        @media (max-width: 600px) {
+    nav { padding: 1rem 5%; }
+    
+    .hero { 
+        padding: 80px 6%; 
+        min-height: 60vh;
+        display: flex;
+        align-items: center;
+    }
+    
+    .hero h1 { 
+        font-size: 2.6rem !important; /* Forzamos un tamaño que quepa en cualquier móvil */
+        line-height: 1.2;
+        letter-spacing: -1px;
+    }
+
+    .cta-container { 
+        display: flex; 
+        flex-direction: column; /* Botones uno arriba de otro */
+        gap: 12px; 
+        width: 100%;
+    }
+
+    .btn { 
+        width: 100%; 
+        justify-content: center; 
+        margin-left: 0 !important; /* Quita el margen que separa los botones en PC */
+    }
+}
     </style>
 </head>
 <body>
@@ -304,5 +332,6 @@
     </script>
 </body>
 </html>
+
 
 
