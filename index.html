@@ -1,615 +1,734 @@
 <!DOCTYPE html>
-
 <html lang="en">
 
 <head>
-
     <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='50' fill='%230F172A'/><text x='50%25' y='50%25' text-anchor='middle' dy='.3em' fill='white' font-family='Arial, sans-serif' font-weight='bold' font-size='40'>CE</text></svg>">
-
     <link rel="apple-touch-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%230F172A'/><text x='50%25' y='55%25' text-anchor='middle' fill='white' font-family='sans-serif' font-weight='800' font-size='45'>CE</text></svg>">
-
     <meta charset="UTF-8">
-
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
     <title>Cresvance | Professional and Personal Advisory</title>
-
     
-
     <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 
-
-
     <style>
-
         :root {
-
             --navy: #0F172A;
-
             --electric: #2563EB;
-
             --white: #ffffff;
-
             --text-main: #1E293B;
-
             --text-muted: #64748B;
-
             --bg-light: #F8FAFC;
-
         }
-
-
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
-
         body { font-family: 'Manrope', sans-serif; color: var(--text-main); background: var(--white); line-height: 1.6; overflow-x: hidden; }
 
+        /* --- LANGUAGE BANNER --- */
+        .language-banner {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background: linear-gradient(90deg, var(--navy), var(--electric));
+            color: white;
+            padding: 12px;
+            text-align: center;
+            font-weight: 700;
+            font-size: 0.9rem;
+            letter-spacing: 0.5px;
+            z-index: 1001;
+            box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+            overflow: hidden;
+            height: 40px;
+        }
 
+        .language-banner i {
+            color: #FFD700;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+
+        .language-banner span {
+            opacity: 0;
+            transform: translateY(10px);
+            transition: all 0.5s ease;
+            position: absolute;
+            white-space: nowrap;
+        }
+
+        .language-banner span.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
 
         /* --- NAVBAR AND TOP LOGO --- */
-
         nav { 
-
             padding: 1.5rem 8%; display: flex; justify-content: space-between; align-items: center;
-
-            background: rgba(255,255,255,0.95); backdrop-filter: blur(10px); position: sticky; top: 0; z-index: 1000;
-
+            background: rgba(255,255,255,0.95); backdrop-filter: blur(10px); position: sticky; top: 40px; z-index: 1000;
             transition: all 0.4s ease; border-bottom: 1px solid #eee;
-
         }
-
-
 
         .logo { 
-
             font-weight: 800; font-size: 1.8rem; color: var(--navy); text-decoration: none; 
-
             letter-spacing: -1px; display: flex; align-items: center;
-
         }
-
         
-
         .logo .retract {
-
             display: inline-block;
-
             max-width: 300px;
-
             opacity: 1;
-
             transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-
             white-space: nowrap;
-
             overflow: hidden;
-
         }
-
-
-
-        /* Comportamiento: Se cierra a CE al bajar, se abre al subir */
 
         nav.scrolled .logo .retract {
-
             max-width: 0;
-
             opacity: 0;
-
         }
-
         nav.scrolled { padding: 0.8rem 8%; }
-
         nav.scrolled .logo { color: var(--electric); }
 
-
-
-        .nav-links a { text-decoration: none; color: var(--navy); font-weight: 700; margin-left: 30px; font-size: 0.85rem; text-transform: uppercase; }
-
-
+        .nav-links { display: flex; align-items: center; gap: 20px; }
+        .nav-links a { text-decoration: none; color: var(--navy); font-weight: 700; font-size: 0.85rem; text-transform: uppercase; }
+        
+        .language-selector {
+            display: flex;
+            gap: 8px;
+            margin-left: 20px;
+            padding-left: 20px;
+            border-left: 1px solid #E2E8F0;
+        }
+        
+        .lang-btn {
+            background: none;
+            border: 1px solid #E2E8F0;
+            padding: 6px 12px;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            color: var(--text-muted);
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        
+        .lang-btn:hover {
+            border-color: var(--electric);
+            color: var(--electric);
+        }
+        
+        .lang-btn.active {
+            background: var(--electric);
+            color: white;
+            border-color: var(--electric);
+        }
 
         /* --- HERO --- */
-
         .hero { padding: 100px 8%; min-height: 80vh; display: flex; align-items: center; background: radial-gradient(circle at top right, #f1f5f9 0%, #ffffff 50%); }
-
         .hero h1 { font-size: clamp(3rem, 7vw, 5rem); font-weight: 800; line-height: 1.05; margin-bottom: 20px; color: var(--navy); letter-spacing: -2px; }
-
         .hero h1 span { color: var(--electric); }
-
         .hero p { font-size: 1.25rem; color: var(--text-muted); max-width: 650px; margin-bottom: 35px; font-weight: 500; }
 
-
-
         .lang-badge { display: inline-flex; gap: 12px; margin-bottom: 30px; font-weight: 700; font-size: 0.8rem; color: var(--navy); flex-wrap: wrap; }
-
         .lang-badge span::before { content: "●"; color: var(--electric); margin-right: 5px; }
 
-
-
         /* --- BUTTONS --- */
-
         .btn { padding: 16px 28px; border-radius: 8px; text-decoration: none; font-weight: 700; display: inline-flex; align-items: center; gap: 10px; transition: 0.3s; border: none; cursor: pointer; font-size: 0.95rem; }
-
         .btn-primary { background: var(--navy); color: white; }
-
         .btn-primary:hover { background: var(--electric); transform: translateY(-3px); }
-
         .btn-whatsapp { background: #fff; color: var(--navy); border: 2px solid #E2E8F0; margin-left: 10px; }
-
         .btn-whatsapp:hover { border-color: var(--navy); transform: translateY(-3px); }
 
-
-
         /* --- DEDUCTIONS 2026 --- */
-
         .insights { padding: 80px 8%; background: var(--white); }
-
         .insight-card { background: var(--bg-light); padding: 50px; border-radius: 24px; border-left: 8px solid var(--electric); }
-
         .insight-card h3 { font-size: 2.2rem; margin-bottom: 25px; letter-spacing: -1px; color: var(--navy); }
-
         
-
         .deduction-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 40px; }
-
         .deduction-item h4 { color: var(--electric); font-size: 1.2rem; margin-bottom: 12px; display: flex; align-items: center; gap: 10px; }
-
         .deduction-item p { font-size: 0.95rem; color: var(--text-main); line-height: 1.6; }
 
-
-
         /* --- SERVICES --- */
-
         .services { padding: 100px 8%; background: #fafafa; }
-
         .bento-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 25px; }
-
         .bento-item { background: var(--white); padding: 40px; border-radius: 20px; border: 1px solid #eee; transition: 0.4s; display: flex; flex-direction: column; }
-
         .bento-item:hover { transform: translateY(-10px); box-shadow: 0 20px 40px rgba(0,0,0,0.05); border-color: var(--electric); }
-
         .bento-item i { font-size: 2.2rem; color: var(--navy); margin-bottom: 20px; }
-
         .bento-item h3 { font-size: 1.5rem; margin-bottom: 15px; font-weight: 800; }
-
         .bento-item ul { list-style: none; margin-top: auto; padding-top: 20px; }
-
         .bento-item ul li { margin-bottom: 10px; font-size: 0.9rem; font-weight: 600; color: var(--text-muted); display: flex; align-items: center; gap: 8px; }
-
         .bento-item ul li::before { content: "●"; color: var(--electric); font-size: 0.7rem; }
-
         .span-2 { grid-column: span 2; }
 
-
-
         /* --- FOOTER AND ANIMATED LOGO --- */
-
         footer { background: var(--navy); color: white; padding: 100px 8%; text-align: center; }
-
         
-
         .footer-logo-container {
-
             font-size: 2.5rem;
-
             font-weight: 800;
-
             margin-bottom: 15px;
-
             display: flex;
-
             justify-content: center;
-
             align-items: center;
-
         }
-
         
-
         .footer-retract {
-
             display: inline-block;
-
-            max-width: 0; /* Inicia como CE */
-
+            max-width: 0;
             opacity: 0;
-
             white-space: nowrap;
-
             overflow: hidden;
-
             transition: all 1s cubic-bezier(0.22, 1, 0.36, 1);
-
         }
-
-
 
         .footer-logo-container.expanded .footer-retract {
-
             max-width: 400px;
-
             opacity: 1;
-
         }
-
-
 
         /* --- COOKIE BANNER --- */
-
         #cookie-banner { 
-
             display: none; position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%); 
-
             width: 90%; max-width: 600px; background: white; padding: 30px; border-radius: 16px; 
-
             box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.4); z-index: 10001; border: 1px solid #E2E8F0; 
-
         }
-
         .cookie-buttons { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 20px; }
-
         .cookie-btn { flex: 1; padding: 12px; font-size: 0.85rem; border-radius: 6px; cursor: pointer; font-weight: 700; border: none; }
-
         .btn-accept { background: var(--navy); color: white; }
-
         .btn-reject { background: #F1F5F9; color: var(--text-main); }
-
         .btn-settings { background: white; color: var(--navy); border: 1px solid #E2E8F0; }
-
         
-
         #cookie-settings-panel { display: none; margin-top: 20px; padding-top: 20px; border-top: 1px solid #eee; }
-
         .setting-item { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; font-size: 0.85rem; }
 
-
-
         .reveal { opacity: 0; transform: translateY(30px); transition: 0.8s ease-out; }
-
         .reveal.active { opacity: 1; transform: translateY(0); }
 
-
-
         @media (max-width: 900px) { 
-
-    .bento-grid { grid-template-columns: 1fr; } 
-
-    .span-2 { grid-column: span 1; } 
-
+            .bento-grid { grid-template-columns: 1fr; } 
+            .span-2 { grid-column: span 1; } 
+            .nav-links { flex-wrap: wrap; justify-content: flex-end; }
+            .language-selector { margin-left: 10px; padding-left: 10px; }
+            .language-banner { font-size: 0.8rem; padding: 10px; }
+            .lang-btn { padding: 5px 8px; font-size: 0.7rem; }
+        }
     </style>
-
 </head>
 
 <body>
-
-
-
-    <nav id="navbar">
-
-        <a href="#" class="logo">C<span class="retract">RESVANC</span>E</a>
-
-        <div class="nav-links">
-
-            <a href="#services">Expertise</a>
-
-            <a href="#contact">Contact</a>
-
-        </div>
-
-    </nav>
-
-
-
-    <section class="hero">
-
-        <div class="reveal">
-
-            <div class="lang-badge">
-
-                <span>ENGLISH</span> <span>DEUTSCH</span> <span>ESPAÑOL</span> <span>FRANÇAIS</span> <span>ITALIANO</span>
-
-            </div>
-
-            <h1>We walk you <br> <span>through it.</span></h1>
-
-            <p>Direct and personal advisory for expats in Spain. Professional expertise and on-site support for your peace of mind.</p>
-
-            <div class="cta-container">
-
-                <a href="https://calendly.com/hello-cresvance/new-meeting" target="_blank" class="btn btn-primary">Free Consultation</a>
-
-                <a href="https://wa.me/34602593904" target="_blank" class="btn btn-whatsapp"><i class="fab fa-whatsapp"></i> Chat with us</a>
-
-            </div>
-
-        </div>
-
-    </section>
-
-
-
-    <section class="insights">
-
-        <div class="insight-card reveal">
-
-            <span style="color: var(--electric); font-weight: 800; font-size: 0.9rem; text-transform: uppercase;">Andalusia 2026 Tax Update</span>
-
-            <h3>Maximize your returns</h3>
-
-            <div class="deduction-grid">
-
-                <div class="deduction-item">
-
-                    <h4><i class="fas fa-dumbbell"></i> Sports and Health</h4>
-
-                    <p>Recover <b>15% of gym fees</b> and sports memberships. Maximize your health and your savings.</p>
-
-                </div>
-
-                <div class="deduction-item">
-
-                    <h4><i class="fas fa-paw"></i> Pet Healthcare</h4>
-
-                    <p>Claim <b>15% of veterinary expenses</b> for preventive care and check-ups for your pets.</p>
-
-                </div>
-
-                <div class="deduction-item">
-
-                    <h4><i class="fas fa-home"></i> Renting</h4>
-
-                    <p><b>15% deduction</b> on rent for residents under 35 or over 65 years old.</p>
-
-                </div>
-
-                <div class="deduction-item">
-
-                    <h4><i class="fas fa-book"></i> Education</h4>
-
-                    <p>Deductions for <b>language classes and textbooks</b> to support your family's growth.</p>
-
-                </div>
-
-            </div>
-
-        </div>
-
-    </section>
-
-
-
-    <section id="services" class="services">
-
-        <div class="bento-grid">
-
-            <div class="bento-item span-2 reveal">
-
-                <i class="fas fa-calculator"></i>
-
-                <h3>Taxation and Invoicing</h3>
-
-                <p>Personalized tax management with no technical jargon.</p>
-
-                <ul>
-
-                    <li>Annual Income Tax filings</li>
-
-                    <li>Autónomo management and registration</li>
-
-                    <li>Professional Invoicing setup and monthly support</li>
-
-                </ul>
-
-            </div>
-
-
-
-            <div class="bento-item reveal">
-
-                <i class="fas fa-passport"></i>
-
-                <h3>Residency and NIE</h3>
-
-                <p>We accompany you physically to your appointments.</p>
-
-                <ul>
-
-                    <li>White NIE with personal support</li>
-
-                    <li>Green NIE for EU citizens</li>
-
-                    <li>TIE fingerprinting appointments</li>
-
-                </ul>
-
-            </div>
-
-
-
-            <div class="bento-item reveal">
-
-                <i class="fas fa-file-signature"></i>
-
-                <h3>Bureaucracy</h3>
-
-                <ul>
-
-                    <li>Rental Deposit management</li>
-
-                    <li>Digital Notification tracking</li>
-
-                    <li>Banking recommendations and setup</li>
-
-                </ul>
-
-            </div>
-
-
-
-            <div class="bento-item span-2 reveal">
-
-                <i class="fas fa-fingerprint"></i>
-
-                <h3>Digital and Kit Digital</h3>
-
-                <p>We bridge the digital gap in Spain for you.</p>
-
-                <ul>
-
-                    <li><b>Kit Digital for Autónomos:</b> Complete grant management</li>
-
-                    <li>Digital Certificate installation and setup</li>
-
-                    <li>Spanish Healthcare (SIP) card registration</li>
-
-                </ul>
-
-            </div>
-
-        </div>
-
-    </section>
-
-
-
-    <footer id="contact">
-
-        <div class="footer-logo-container" id="footer-logo">
-
-            C<span class="footer-retract">RESVANC</span>E
-
-        </div>
-
-        <p style="opacity: 0.7; margin-bottom: 30px;">Simplifying Spanish bureaucracy for you.</p>
-
-        <div class="socials">
-
-            <a href="https://www.linkedin.com/company/cresvance" target="_blank" style="color:white; font-size: 1.5rem; margin: 0 15px;"><i class="fab fa-linkedin"></i></a>
-
-            <a href="https://www.instagram.com/Cresvance_support" target="_blank" style="color:white; font-size: 1.5rem; margin: 0 15px;"><i class="fab fa-instagram"></i></a>
-
-            <a href="mailto:hello@cresvance.com" style="color:white; font-size: 1.5rem; margin: 0 15px;"><i class="fas fa-envelope"></i></a>
-
-        </div>
-
-        <p style="margin-top: 40px; opacity: 0.5; font-size: 0.8rem;">Málaga and Remote | EN · DE · ES · FR · IT</p>
-
-    </footer>
-
-
-
-    <div id="cookie-banner">
-
-        <h4 style="color: var(--navy);">Privacy Preferences</h4>
-
-        <p style="font-size: 0.85rem; color: var(--text-muted); margin-top: 10px;">We use cookies to ensure you get the best experience. Choose how you want to proceed.</p>
-
-        
-
-        <div id="cookie-settings-panel">
-
-            <div class="setting-item"><span>Essential Cookies</span><span style="color:green; font-weight:700;">Always Active</span></div>
-
-            <div class="setting-item"><span>Analytics Cookies</span><input type="checkbox" checked></div>
-
-            <div class="setting-item"><span>Marketing Cookies</span><input type="checkbox"></div>
-
-        </div>
-
-
-
-        <div class="cookie-buttons">
-
-            <button onclick="saveCookies('all')" class="cookie-btn btn-accept">Accept All</button>
-
-            <button onclick="saveCookies('reject')" class="cookie-btn btn-reject">Reject All</button>
-
-            <button onclick="toggleCookieSettings()" class="cookie-btn btn-settings">Customize</button>
-
-        </div>
-
+    <!-- LANGUAGE BANNER ROTATIVO -->
+    <div class="language-banner" id="languageBanner">
+        <i class="fas fa-comments"></i>
+        <span class="active" data-lang="en">We speak your language</span>
+        <span data-lang="es">Hablamos tu idioma</span>
+        <span data-lang="de">Wir sprechen Ihre Sprache</span>
+        <span data-lang="it">Parliamo la tua lingua</span>
+        <span data-lang="fr">Nous parlons votre langue</span>
     </div>
 
+    <nav id="navbar">
+        <a href="#" class="logo">C<span class="retract">RESVANC</span>E</a>
+        <div class="nav-links">
+            <a href="#services" data-translate="nav_expertise">Expertise</a>
+            <a href="#contact" data-translate="nav_contact">Contact</a>
+            <div class="language-selector">
+                <button class="lang-btn active" data-lang="en">EN</button>
+                <button class="lang-btn" data-lang="es">ES</button>
+                <button class="lang-btn" data-lang="de">DE</button>
+                <button class="lang-btn" data-lang="it">IT</button>
+                <button class="lang-btn" data-lang="fr">FR</button>
+            </div>
+        </div>
+    </nav>
 
+    <section class="hero">
+        <div class="reveal">
+            <div class="lang-badge">
+                <span>ENGLISH</span> <span>DEUTSCH</span> <span>ESPAÑOL</span> <span>FRANÇAIS</span> <span>ITALIANO</span>
+            </div>
+            <h1 data-translate="hero_title">We walk you <br> <span>through it.</span></h1>
+            <p data-translate="hero_subtitle">Direct and personal advisory for expats in Spain. Professional expertise and on-site support for your peace of mind.</p>
+            <div class="cta-container">
+                <a href="https://calendly.com/hello-cresvance/new-meeting" target="_blank" class="btn btn-primary" data-translate="btn_consultation">Free Consultation</a>
+                <a href="https://wa.me/34602593904" target="_blank" class="btn btn-whatsapp"><i class="fab fa-whatsapp"></i> <span data-translate="btn_whatsapp">Chat with us</span></a>
+            </div>
+        </div>
+    </section>
+
+    <section class="insights">
+        <div class="insight-card reveal">
+            <span style="color: var(--electric); font-weight: 800; font-size: 0.9rem; text-transform: uppercase;" data-translate="insight_badge">Andalusia 2026 Tax Update</span>
+            <h3 data-translate="insight_title">Maximize your returns</h3>
+            <div class="deduction-grid">
+                <div class="deduction-item">
+                    <h4><i class="fas fa-dumbbell"></i> <span data-translate="deduction1_title">Sports and Health</span></h4>
+                    <p data-translate="deduction1_desc">Recover <b>15% of gym fees</b> and sports memberships. Maximize your health and your savings.</p>
+                </div>
+                <div class="deduction-item">
+                    <h4><i class="fas fa-paw"></i> <span data-translate="deduction2_title">Pet Healthcare</span></h4>
+                    <p data-translate="deduction2_desc">Claim <b>15% of veterinary expenses</b> for preventive care and check-ups for your pets.</p>
+                </div>
+                <div class="deduction-item">
+                    <h4><i class="fas fa-home"></i> <span data-translate="deduction3_title">Renting</span></h4>
+                    <p data-translate="deduction3_desc"><b>15% deduction</b> on rent for residents under 35 or over 65 years old.</p>
+                </div>
+                <div class="deduction-item">
+                    <h4><i class="fas fa-book"></i> <span data-translate="deduction4_title">Education</span></h4>
+                    <p data-translate="deduction4_desc">Deductions for <b>language classes and textbooks</b> to support your family's growth.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="services" class="services">
+        <div class="bento-grid">
+            <div class="bento-item span-2 reveal">
+                <i class="fas fa-calculator"></i>
+                <h3 data-translate="service1_title">Taxation and Invoicing</h3>
+                <p data-translate="service1_desc">Personalized tax management with no technical jargon.</p>
+                <ul>
+                    <li data-translate="service1_item1">Annual Income Tax filings</li>
+                    <li data-translate="service1_item2">Autónomo management and registration</li>
+                    <li data-translate="service1_item3">Professional Invoicing setup and monthly support</li>
+                </ul>
+            </div>
+
+            <div class="bento-item reveal">
+                <i class="fas fa-passport"></i>
+                <h3 data-translate="service2_title">Residency and NIE</h3>
+                <p data-translate="service2_desc">We accompany you physically to your appointments.</p>
+                <ul>
+                    <li data-translate="service2_item1">White NIE with personal support</li>
+                    <li data-translate="service2_item2">Green NIE for EU citizens</li>
+                    <li data-translate="service2_item3">TIE fingerprinting appointments</li>
+                </ul>
+            </div>
+
+            <div class="bento-item reveal">
+                <i class="fas fa-file-signature"></i>
+                <h3 data-translate="service3_title">Bureaucracy</h3>
+                <ul>
+                    <li data-translate="service3_item1">Rental Deposit management</li>
+                    <li data-translate="service3_item2">Digital Notification tracking</li>
+                    <li data-translate="service3_item3">Banking recommendations and setup</li>
+                </ul>
+            </div>
+
+            <div class="bento-item span-2 reveal">
+                <i class="fas fa-fingerprint"></i>
+                <h3 data-translate="service4_title">Digital and Kit Digital</h3>
+                <p data-translate="service4_desc">We bridge the digital gap in Spain for you.</p>
+                <ul>
+                    <li><b data-translate="service4_item1_bold">Kit Digital for Autónomos:</b> <span data-translate="service4_item1_text">Complete grant management</span></li>
+                    <li data-translate="service4_item2">Digital Certificate installation and setup</li>
+                    <li data-translate="service4_item3">Spanish Healthcare (SIP) card registration</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <footer id="contact">
+        <div class="footer-logo-container" id="footer-logo">
+            C<span class="footer-retract">RESVANC</span>E
+        </div>
+        <p style="opacity: 0.7; margin-bottom: 30px;" data-translate="footer_tagline">Simplifying Spanish bureaucracy for you.</p>
+        <div class="socials">
+            <a href="https://www.linkedin.com/company/cresvance" target="_blank" style="color:white; font-size: 1.5rem; margin: 0 15px;"><i class="fab fa-linkedin"></i></a>
+            <a href="https://www.instagram.com/Cresvance_support" target="_blank" style="color:white; font-size: 1.5rem; margin: 0 15px;"><i class="fab fa-instagram"></i></a>
+            <a href="mailto:hello@cresvance.com" style="color:white; font-size: 1.5rem; margin: 0 15px;"><i class="fas fa-envelope"></i></a>
+        </div>
+        <p style="margin-top: 40px; opacity: 0.5; font-size: 0.8rem;">Málaga and Remote | EN · DE · ES · FR · IT</p>
+    </footer>
+
+    <div id="cookie-banner">
+        <h4 style="color: var(--navy);" data-translate="cookie_title">Privacy Preferences</h4>
+        <p style="font-size: 0.85rem; color: var(--text-muted); margin-top: 10px;" data-translate="cookie_desc">We use cookies to ensure you get the best experience. Choose how you want to proceed.</p>
+        
+        <div id="cookie-settings-panel">
+            <div class="setting-item"><span data-translate="cookie_essential">Essential Cookies</span><span style="color:green; font-weight:700;" data-translate="cookie_always">Always Active</span></div>
+            <div class="setting-item"><span data-translate="cookie_analytics">Analytics Cookies</span><input type="checkbox" checked></div>
+            <div class="setting-item"><span data-translate="cookie_marketing">Marketing Cookies</span><input type="checkbox"></div>
+        </div>
+
+        <div class="cookie-buttons">
+            <button onclick="saveCookies('all')" class="cookie-btn btn-accept" data-translate="cookie_accept">Accept All</button>
+            <button onclick="saveCookies('reject')" class="cookie-btn btn-reject" data-translate="cookie_reject">Reject All</button>
+            <button onclick="toggleCookieSettings()" class="cookie-btn btn-settings" data-translate="cookie_customize">Customize</button>
+        </div>
+    </div>
 
     <script>
-
-        // --- NAVBAR LOGO: Se cierra al bajar, se abre al subir ---
-
-        const navbar = document.getElementById("navbar");
-
-        window.onscroll = function() {
-
-            if (window.scrollY > 50) {
-
-                navbar.classList.add("scrolled");
-
-            } else {
-
-                navbar.classList.remove("scrolled");
-
+        // --- TRADUCCIONES COMPLETAS ---
+        const translations = {
+            en: {
+                "banner_text": "We speak your language",
+                "nav_expertise": "Expertise",
+                "nav_contact": "Contact",
+                "hero_title": "We walk you <br> <span>through it.</span>",
+                "hero_subtitle": "Direct and personal advisory for expats in Spain. Professional expertise and on-site support for your peace of mind.",
+                "btn_consultation": "Free Consultation",
+                "btn_whatsapp": "Chat with us",
+                "insight_badge": "Andalusia 2026 Tax Update",
+                "insight_title": "Maximize your returns",
+                "deduction1_title": "Sports and Health",
+                "deduction1_desc": "Recover <b>15% of gym fees</b> and sports memberships. Maximize your health and your savings.",
+                "deduction2_title": "Pet Healthcare",
+                "deduction2_desc": "Claim <b>15% of veterinary expenses</b> for preventive care and check-ups for your pets.",
+                "deduction3_title": "Renting",
+                "deduction3_desc": "<b>15% deduction</b> on rent for residents under 35 or over 65 years old.",
+                "deduction4_title": "Education",
+                "deduction4_desc": "Deductions for <b>language classes and textbooks</b> to support your family's growth.",
+                "service1_title": "Taxation and Invoicing",
+                "service1_desc": "Personalized tax management with no technical jargon.",
+                "service1_item1": "Annual Income Tax filings",
+                "service1_item2": "Autónomo management and registration",
+                "service1_item3": "Professional Invoicing setup and monthly support",
+                "service2_title": "Residency and NIE",
+                "service2_desc": "We accompany you physically to your appointments.",
+                "service2_item1": "White NIE with personal support",
+                "service2_item2": "Green NIE for EU citizens",
+                "service2_item3": "TIE fingerprinting appointments",
+                "service3_title": "Bureaucracy",
+                "service3_item1": "Rental Deposit management",
+                "service3_item2": "Digital Notification tracking",
+                "service3_item3": "Banking recommendations and setup",
+                "service4_title": "Digital and Kit Digital",
+                "service4_desc": "We bridge the digital gap in Spain for you.",
+                "service4_item1_bold": "Kit Digital for Autónomos:",
+                "service4_item1_text": "Complete grant management",
+                "service4_item2": "Digital Certificate installation and setup",
+                "service4_item3": "Spanish Healthcare (SIP) card registration",
+                "footer_tagline": "Simplifying Spanish bureaucracy for you.",
+                "cookie_title": "Privacy Preferences",
+                "cookie_desc": "We use cookies to ensure you get the best experience. Choose how you want to proceed.",
+                "cookie_essential": "Essential Cookies",
+                "cookie_always": "Always Active",
+                "cookie_analytics": "Analytics Cookies",
+                "cookie_marketing": "Marketing Cookies",
+                "cookie_accept": "Accept All",
+                "cookie_reject": "Reject All",
+                "cookie_customize": "Customize"
+            },
+            es: {
+                "banner_text": "Hablamos tu idioma",
+                "nav_expertise": "Servicios",
+                "nav_contact": "Contacto",
+                "hero_title": "Te acompañamos <br> <span>en cada paso.</span>",
+                "hero_subtitle": "Asesoramiento directo y personal para expatriados en España. Experiencia profesional y apoyo presencial para tu tranquilidad.",
+                "btn_consultation": "Consulta Gratuita",
+                "btn_whatsapp": "Chatea con nosotros",
+                "insight_badge": "Actualización Fiscal Andalucía 2026",
+                "insight_title": "Maximiza tus devoluciones",
+                "deduction1_title": "Deporte y Salud",
+                "deduction1_desc": "Recupera <b>15% de las cuotas del gimnasio</b> y membresías deportivas. Maximiza tu salud y tus ahorros.",
+                "deduction2_title": "Salud de Mascotas",
+                "deduction2_desc": "Deducción del <b>15% de gastos veterinarios</b> para cuidados preventivos y revisiones de tus mascotas.",
+                "deduction3_title": "Alquiler",
+                "deduction3_desc": "<b>15% de deducción</b> en alquiler para residentes menores de 35 o mayores de 65 años.",
+                "deduction4_title": "Educación",
+                "deduction4_desc": "Deducciones para <b>clases de idiomas y libros de texto</b> para apoyar el crecimiento de tu familia.",
+                "service1_title": "Fiscalidad y Facturación",
+                "service1_desc": "Gestión fiscal personalizada sin tecnicismos.",
+                "service1_item1": "Declaraciones anuales de Renta",
+                "service1_item2": "Gestión y registro de Autónomos",
+                "service1_item3": "Configuración de Facturación Profesional y soporte mensual",
+                "service2_title": "Residencia y NIE",
+                "service2_desc": "Te acompañamos físicamente a tus citas.",
+                "service2_item1": "NIE blanco con apoyo personal",
+                "service2_item2": "NIE verde para ciudadanos UE",
+                "service2_item3": "Citas de huellas para TIE",
+                "service3_title": "Burocracia",
+                "service3_item1": "Gestión del Depósito de Alquiler",
+                "service3_item2": "Seguimiento de Notificaciones Digitales",
+                "service3_item3": "Recomendaciones bancarias y configuración",
+                "service4_title": "Digital y Kit Digital",
+                "service4_desc": "Cerramos la brecha digital en España por ti.",
+                "service4_item1_bold": "Kit Digital para Autónomos:",
+                "service4_item1_text": "Gestión completa de subvenciones",
+                "service4_item2": "Instalación y configuración de Certificado Digital",
+                "service4_item3": "Registro de Tarjeta Sanitaria (SIP)",
+                "footer_tagline": "Simplificando la burocracia española para ti.",
+                "cookie_title": "Preferencias de Privacidad",
+                "cookie_desc": "Usamos cookies para garantizarte la mejor experiencia. Elige cómo quieres proceder.",
+                "cookie_essential": "Cookies Esenciales",
+                "cookie_always": "Siempre Activas",
+                "cookie_analytics": "Cookies Analíticas",
+                "cookie_marketing": "Cookies de Marketing",
+                "cookie_accept": "Aceptar Todo",
+                "cookie_reject": "Rechazar Todo",
+                "cookie_customize": "Personalizar"
+            },
+            de: {
+                "banner_text": "Wir sprechen Ihre Sprache",
+                "nav_expertise": "Expertise",
+                "nav_contact": "Kontakt",
+                "hero_title": "Wir begleiten Sie <br> <span>dabei.</span>",
+                "hero_subtitle": "Direkte und persönliche Beratung für Expats in Spanien. Professionelle Expertise und Vor-Ort-Unterstützung für Ihr Wohlbefinden.",
+                "btn_consultation": "Kostenlose Beratung",
+                "btn_whatsapp": "Chatten Sie mit uns",
+                "insight_badge": "Andalusien 2026 Steuerupdate",
+                "insight_title": "Maximieren Sie Ihre Rückerstattungen",
+                "deduction1_title": "Sport und Gesundheit",
+                "deduction1_desc": "Erhalten Sie <b>15% der Fitnessstudio-Gebühren</b> und Sportmitgliedschaften zurück. Maximieren Sie Ihre Gesundheit und Ihre Ersparnisse.",
+                "deduction2_title": "Tiergesundheit",
+                "deduction2_desc": "<b>15% der Tierarztkosten</b> für Vorsorge und Untersuchungen Ihrer Haustiere absetzen.",
+                "deduction3_title": "Mieten",
+                "deduction3_desc": "<b>15% Abzug</b> auf Miete für Einwohner unter 35 oder über 65 Jahre.",
+                "deduction4_title": "Bildung",
+                "deduction4_desc": "Abzüge für <b>Sprachkurse und Lehrbücher</b> zur Unterstützung des Wachstums Ihrer Familie.",
+                "service1_title": "Besteuerung und Rechnungsstellung",
+                "service1_desc": "Personalisierte Steuerverwaltung ohne Fachjargon.",
+                "service1_item1": "Jährliche Einkommensteuererklärungen",
+                "service1_item2": "Freiberufler-Management und Registrierung",
+                "service1_item3": "Einrichtung professioneller Rechnungsstellung und monatlicher Support",
+                "service2_title": "Aufenthalt und NIE",
+                "service2_desc": "Wir begleiten Sie persönlich zu Ihren Terminen.",
+                "service2_item1": "Weißes NIE mit persönlicher Unterstützung",
+                "service2_item2": "Grünes NIE für EU-Bürger",
+                "service2_item3": "TIE Fingerabdruck-Termine",
+                "service3_title": "Bürokratie",
+                "service3_item1": "Verwaltung der Mietkaution",
+                "service3_item2": "Verfolgung digitaler Benachrichtigungen",
+                "service3_item3": "Bankempfehlungen und Einrichtung",
+                "service4_title": "Digital und Kit Digital",
+                "service4_desc": "Wir überbrücken die digitale Lücke in Spanien für Sie.",
+                "service4_item1_bold": "Kit Digital für Freiberufler:",
+                "service4_item1_text": "Komplette Fördermittelverwaltung",
+                "service4_item2": "Installation und Einrichtung des Digitalen Zertifikats",
+                "service4_item3": "Registrierung der spanischen Gesundheitskarte (SIP)",
+                "footer_tagline": "Vereinfachung der spanischen Bürokratie für Sie.",
+                "cookie_title": "Datenschutzeinstellungen",
+                "cookie_desc": "Wir verwenden Cookies, um Ihnen das beste Erlebnis zu garantieren. Wählen Sie, wie Sie fortfahren möchten.",
+                "cookie_essential": "Essentielle Cookies",
+                "cookie_always": "Immer aktiv",
+                "cookie_analytics": "Analytics Cookies",
+                "cookie_marketing": "Marketing Cookies",
+                "cookie_accept": "Alle akzeptieren",
+                "cookie_reject": "Alle ablehnen",
+                "cookie_customize": "Anpassen"
+            },
+            it: {
+                "banner_text": "Parliamo la tua lingua",
+                "nav_expertise": "Servizi",
+                "nav_contact": "Contatto",
+                "hero_title": "Ti accompagniamo <br> <span>in ogni passo.</span>",
+                "hero_subtitle": "Consulenza diretta e personale per espatriati in Spagna. Competenza professionale e supporto in loco per la tua tranquillità.",
+                "btn_consultation": "Consultazione Gratuita",
+                "btn_whatsapp": "Chatta con noi",
+                "insight_badge": "Aggiornamento Fiscale Andalusia 2026",
+                "insight_title": "Massimizza i tuoi rimborsi",
+                "deduction1_title": "Sport e Salute",
+                "deduction1_desc": "Recupera il <b>15% delle quote della palestra</b> e degli abbonamenti sportivi. Massimizza la tua salute e i tuoi risparmi.",
+                "deduction2_title": "Salute degli Animali",
+                "deduction2_desc": "Deduzione del <b>15% delle spese veterinarie</b> per cure preventive e controlli dei tuoi animali domestici.",
+                "deduction3_title": "Affitto",
+                "deduction3_desc": "<b>15% di deduzione</b> sull'affitto per residenti sotto i 35 o sopra i 65 anni.",
+                "deduction4_title": "Educazione",
+                "deduction4_desc": "Deduzioni per <b>lezioni di lingua e libri di testo</b> per sostenere la crescita della tua famiglia.",
+                "service1_title": "Tassazione e Fatturazione",
+                "service1_desc": "Gestione fiscale personalizzata senza gergo tecnico.",
+                "service1_item1": "Dichiarazioni annuali dei redditi",
+                "service1_item2": "Gestione e registrazione lavoratori autonomi",
+                "service1_item3": "Configurazione fatturazione professionale e supporto mensile",
+                "service2_title": "Residenza e NIE",
+                "service2_desc": "Ti accompagniamo fisicamente ai tuoi appuntamenti.",
+                "service2_item1": "NIE bianco con supporto personale",
+                "service2_item2": "NIE verde per cittadini UE",
+                "service2_item3": "Appuntamenti impronte digitali TIE",
+                "service3_title": "Burocrazia",
+                "service3_item1": "Gestione deposito cauzionale",
+                "service3_item2": "Tracciamento notifiche digitali",
+                "service3_item3": "Raccomandazioni bancarie e configurazione",
+                "service4_title": "Digitale e Kit Digital",
+                "service4_desc": "Colmiamo il divario digitale in Spagna per te.",
+                "service4_item1_bold": "Kit Digital per lavoratori autonomi:",
+                "service4_item1_text": "Gestione completa delle sovvenzioni",
+                "service4_item2": "Installazione e configurazione del Certificato Digitale",
+                "service4_item3": "Registrazione della Tessera Sanitaria (SIP)",
+                "footer_tagline": "Semplificazione della burocrazia spagnola per te.",
+                "cookie_title": "Preferenze sulla Privacy",
+                "cookie_desc": "Utilizziamo i cookie per garantirti la migliore esperienza. Scegli come procedere.",
+                "cookie_essential": "Cookie Essenziali",
+                "cookie_always": "Sempre Attivi",
+                "cookie_analytics": "Cookie Analitici",
+                "cookie_marketing": "Cookie di Marketing",
+                "cookie_accept": "Accetta Tutto",
+                "cookie_reject": "Rifiuta Tutto",
+                "cookie_customize": "Personalizza"
+            },
+            fr: {
+                "banner_text": "Nous parlons votre langue",
+                "nav_expertise": "Expertise",
+                "nav_contact": "Contact",
+                "hero_title": "Nous vous accompagnons <br> <span>pas à pas.</span>",
+                "hero_subtitle": "Conseil direct et personnalisé pour les expatriés en Espagne. Expertise professionnelle et soutien sur place pour votre tranquillité d'esprit.",
+                "btn_consultation": "Consultation Gratuite",
+                "btn_whatsapp": "Discutez avec nous",
+                "insight_badge": "Mise à jour fiscale Andalousie 2026",
+                "insight_title": "Maximisez vos remboursements",
+                "deduction1_title": "Sport et Santé",
+                "deduction1_desc": "Récupérez <b>15% des frais de salle de sport</b> et abonnements sportifs. Maximisez votre santé et vos économies.",
+                "deduction2_title": "Santé Animale",
+                "deduction2_desc": "Déduction de <b>15% des frais vétérinaires</b> pour les soins préventifs et les contrôles de vos animaux.",
+                "deduction3_title": "Location",
+                "deduction3_desc": "<b>15% de déduction</b> sur le loyer pour les résidents de moins de 35 ans ou plus de 65 ans.",
+                "deduction4_title": "Éducation",
+                "deduction4_desc": "Déductions pour <b>cours de langues et manuels scolaires</b> pour soutenir la croissance de votre famille.",
+                "service1_title": "Fiscalité et Facturation",
+                "service1_desc": "Gestion fiscale personnalisée sans jargon technique.",
+                "service1_item1": "Déclarations annuelles de revenus",
+                "service1_item2": "Gestion et enregistrement des travailleurs indépendants",
+                "service1_item3": "Configuration de la facturation professionnelle et support mensuel",
+                "service2_title": "Résidence et NIE",
+                "service2_desc": "Nous vous accompagnons physiquement à vos rendez-vous.",
+                "service2_item1": "NIE blanc avec soutien personnel",
+                "service2_item2": "NIE vert pour les citoyens UE",
+                "service2_item3": "Rendez-vous empreintes TIE",
+                "service3_title": "Bureaucratie",
+                "service3_item1": "Gestion du dépôt de garantie",
+                "service3_item2": "Suivi des notifications numériques",
+                "service3_item3": "Recommandations bancaires et configuration",
+                "service4_title": "Numérique et Kit Digital",
+                "service4_desc": "Nous comblons le fossé numérique en Espagne pour vous.",
+                "service4_item1_bold": "Kit Digital pour travailleurs indépendants:",
+                "service4_item1_text": "Gestion complète des subventions",
+                "service4_item2": "Installation et configuration du Certificat Numérique",
+                "service4_item3": "Inscription à la Carte Santé (SIP)",
+                "footer_tagline": "Simplifier la bureaucratie espagnole pour vous.",
+                "cookie_title": "Préférences de Confidentialité",
+                "cookie_desc": "Nous utilisons des cookies pour vous garantir la meilleure expérience. Choisissez comment procéder.",
+                "cookie_essential": "Cookies Essentiels",
+                "cookie_always": "Toujours Actifs",
+                "cookie_analytics": "Cookies Analytiques",
+                "cookie_marketing": "Cookies Marketing",
+                "cookie_accept": "Accepter Tout",
+                "cookie_reject": "Refuser Tout",
+                "cookie_customize": "Personnaliser"
             }
-
         };
 
+        // --- BANNER ROTATIVO ---
+        let currentLangIndex = 0;
+        const bannerTexts = document.querySelectorAll('#languageBanner span');
+        const languages = ['en', 'es', 'de', 'it', 'fr'];
+        
+        function rotateBannerText() {
+            bannerTexts.forEach(text => text.classList.remove('active'));
+            
+            currentLangIndex = (currentLangIndex + 1) % languages.length;
+            const currentLang = languages[currentLangIndex];
+            
+            bannerTexts.forEach(text => {
+                if (text.dataset.lang === currentLang) {
+                    text.classList.add('active');
+                }
+            });
+            
+            // Actualizar texto según idioma activo
+            const bannerText = translations[currentLang]?.banner_text || "We speak your language";
+            document.querySelector('#languageBanner span.active').textContent = bannerText;
+        }
+        
+        // Iniciar rotación cada 3 segundos
+        setInterval(rotateBannerText, 3000);
+        
+        // Inicializar con inglés
+        setTimeout(() => rotateBannerText(), 100);
 
+        // --- CAMBIO DE IDIOMA ---
+        function changeLanguage(lang) {
+            // Actualizar botones activos
+            document.querySelectorAll('.lang-btn').forEach(btn => {
+                btn.classList.toggle('active', btn.dataset.lang === lang);
+            });
+            
+            // Actualizar contenido
+            document.querySelectorAll('[data-translate]').forEach(element => {
+                const key = element.dataset.translate;
+                if (translations[lang] && translations[lang][key]) {
+                    if (element.tagName === 'H1' || element.tagName === 'H3' || element.tagName === 'P') {
+                        element.innerHTML = translations[lang][key];
+                    } else {
+                        element.textContent = translations[lang][key];
+                    }
+                }
+            });
+            
+            // Actualizar banner
+            bannerTexts.forEach(text => text.classList.remove('active'));
+            const activeBannerText = document.querySelector(`#languageBanner span[data-lang="${lang}"]`);
+            if (activeBannerText) {
+                activeBannerText.classList.add('active');
+            }
+            
+            // Guardar preferencia
+            localStorage.setItem('preferred_language', lang);
+            document.documentElement.lang = lang;
+        }
 
-        // --- FOOTER LOGO: Se abre tras 2 segundos de carga ---
-
-        window.addEventListener('load', () => {
-
-            const footerLogo = document.getElementById('footer-logo');
-
-            setTimeout(() => {
-
-                footerLogo.classList.add('expanded');
-
-            }, 2000);
-
+        // Event listeners para botones de idioma
+        document.querySelectorAll('.lang-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                changeLanguage(btn.dataset.lang);
+            });
         });
 
+        // Cargar idioma guardado o detectar navegador
+        const savedLang = localStorage.getItem('preferred_language');
+        const browserLang = navigator.language.substring(0, 2);
+        const defaultLang = savedLang || (['es', 'de', 'it', 'fr'].includes(browserLang) ? browserLang : 'en');
+        
+        if (defaultLang !== 'en') {
+            setTimeout(() => changeLanguage(defaultLang), 100);
+        }
 
+        // --- NAVBAR LOGO ---
+        const navbar = document.getElementById("navbar");
+        window.onscroll = function() {
+            if (window.scrollY > 50) {
+                navbar.classList.add("scrolled");
+            } else {
+                navbar.classList.remove("scrolled");
+            }
+        };
+
+        // --- FOOTER LOGO ---
+        window.addEventListener('load', () => {
+            const footerLogo = document.getElementById('footer-logo');
+            setTimeout(() => {
+                footerLogo.classList.add('expanded');
+            }, 2000);
+        });
 
         // --- SCROLL REVEAL ---
-
         const observer = new IntersectionObserver((entries) => {
-
             entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('active'); });
-
         }, { threshold: 0.1 });
-
         document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 
-
-
         // --- COOKIES ---
-
         function toggleCookieSettings() {
-
             const panel = document.getElementById('cookie-settings-panel');
-
             panel.style.display = panel.style.display === 'block' ? 'none' : 'block';
-
         }
-
+        
         function saveCookies(type) { 
-
             localStorage.setItem('cresvance_consent', type); 
-
             document.getElementById('cookie-banner').style.display = 'none'; 
-
         }
-
+        
         if (!localStorage.getItem('cresvance_consent')) {
-
              setTimeout(() => { document.getElementById('cookie-banner').style.display = 'block'; }, 1000);
-
         }
-
     </script>
-
 </body>
-
 </html>
