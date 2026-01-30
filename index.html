@@ -24,86 +24,31 @@
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { font-family: 'Manrope', sans-serif; color: var(--text-main); background: var(--white); line-height: 1.6; overflow-x: hidden; }
 
-        /* --- LANGUAGE BANNER --- */
-        .language-banner {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            background: linear-gradient(90deg, var(--navy), var(--electric));
-            color: white;
-            padding: 12px;
-            text-align: center;
-            font-weight: 700;
-            font-size: 0.9rem;
-            letter-spacing: 0.5px;
-            z-index: 1001;
-            box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 10px;
-            overflow: hidden;
-            height: 40px;
-        }
-
-        .language-banner i {
-            color: #FFD700;
-            animation: pulse 2s infinite;
-        }
-
-        @keyframes pulse {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.1); }
-        }
-
-        .language-banner span {
-            opacity: 0;
-            transform: translateY(10px);
-            transition: all 0.5s ease;
-            position: absolute;
-            white-space: nowrap;
-        }
-
-        .language-banner span.active {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        /* --- LANGUAGES MESSAGE --- */
-        .languages-message {
+        /* --- LANGUAGES TEXT SIMPLE --- */
+        .languages-simple {
             display: inline-flex;
             align-items: center;
-            gap: 10px;
+            gap: 12px;
             margin-bottom: 30px;
             font-weight: 700;
-            font-size: 1rem;
+            font-size: 0.9rem;
             color: var(--navy);
-            background: rgba(37, 99, 235, 0.08);
-            padding: 12px 20px;
-            border-radius: 12px;
-            border-left: 4px solid var(--electric);
-        }
-
-        .languages-message i {
-            color: var(--electric);
-            font-size: 1.2rem;
-        }
-
-        .languages-message-text {
-            display: flex;
             flex-wrap: wrap;
-            gap: 5px;
         }
 
-        .lang-version {
+        .languages-simple i {
+            color: var(--electric);
+            font-size: 1rem;
+        }
+
+        .lang-text {
             opacity: 0;
             transform: translateY(5px);
             transition: all 0.3s ease;
             position: absolute;
         }
 
-        .lang-version.active {
+        .lang-text.active {
             opacity: 1;
             transform: translateY(0);
         }
@@ -111,7 +56,7 @@
         /* --- NAVBAR AND TOP LOGO --- */
         nav { 
             padding: 1.5rem 8%; display: flex; justify-content: space-between; align-items: center;
-            background: rgba(255,255,255,0.95); backdrop-filter: blur(10px); position: sticky; top: 40px; z-index: 1000;
+            background: rgba(255,255,255,0.95); backdrop-filter: blur(10px); position: sticky; top: 0; z-index: 1000;
             transition: all 0.4s ease; border-bottom: 1px solid #eee;
         }
 
@@ -253,23 +198,14 @@
             .span-2 { grid-column: span 1; } 
             .nav-links { flex-wrap: wrap; justify-content: flex-end; }
             .language-selector { margin-left: 10px; padding-left: 10px; }
-            .language-banner { font-size: 0.8rem; padding: 10px; }
             .lang-btn { padding: 5px 8px; font-size: 0.7rem; }
-            .languages-message { font-size: 0.9rem; padding: 10px 15px; }
+            .languages-simple { font-size: 0.8rem; gap: 10px; }
         }
     </style>
 </head>
 
 <body>
-    <!-- LANGUAGE BANNER ROTATIVO -->
-    <div class="language-banner" id="languageBanner">
-        <i class="fas fa-comments"></i>
-        <span class="active" data-lang="en">We speak your language</span>
-        <span data-lang="es">Hablamos tu idioma</span>
-        <span data-lang="de">Wir sprechen Ihre Sprache</span>
-        <span data-lang="it">Parliamo la tua lingua</span>
-        <span data-lang="fr">Nous parlons votre langue</span>
-    </div>
+    <!-- NO HAY BANNER SUPERIOR - ELIMINADO -->
 
     <nav id="navbar">
         <a href="#" class="logo">C<span class="retract">RESVANC</span>E</a>
@@ -288,15 +224,15 @@
 
     <section class="hero">
         <div class="reveal">
-            <!-- NUEVA SECCIÓN: Mensaje "We speak your language" rotativo -->
-            <div class="languages-message">
-                <i class="fas fa-globe-europe"></i>
-                <div class="languages-message-text" id="languagesMessage">
-                    <span class="lang-version active" data-lang="en">We speak your language</span>
-                    <span class="lang-version" data-lang="es">Hablamos tu idioma</span>
-                    <span class="lang-version" data-lang="de">Wir sprechen Ihre Sprache</span>
-                    <span class="lang-version" data-lang="it">Parliamo la tua lingua</span>
-                    <span class="lang-version" data-lang="fr">Nous parlons votre langue</span>
+            <!-- TEXTO SIMPLE "We speak your language" rotativo -->
+            <div class="languages-simple">
+                <i class="fas fa-language"></i>
+                <div class="languages-text-container">
+                    <span class="lang-text active" data-lang="en">We speak your language</span>
+                    <span class="lang-text" data-lang="es">Hablamos tu idioma</span>
+                    <span class="lang-text" data-lang="de">Wir sprechen Ihre Sprache</span>
+                    <span class="lang-text" data-lang="it">Parliamo la tua lingua</span>
+                    <span class="lang-text" data-lang="fr">Nous parlons votre langue</span>
                 </div>
             </div>
             
@@ -415,7 +351,6 @@
         // --- TRADUCCIONES COMPLETAS ---
         const translations = {
             en: {
-                "banner_text": "We speak your language",
                 "message_text": "We speak your language",
                 "nav_expertise": "Expertise",
                 "nav_contact": "Contact",
@@ -465,7 +400,6 @@
                 "cookie_customize": "Customize"
             },
             es: {
-                "banner_text": "Hablamos tu idioma",
                 "message_text": "Hablamos tu idioma",
                 "nav_expertise": "Servicios",
                 "nav_contact": "Contacto",
@@ -515,7 +449,6 @@
                 "cookie_customize": "Personalizar"
             },
             de: {
-                "banner_text": "Wir sprechen Ihre Sprache",
                 "message_text": "Wir sprechen Ihre Sprache",
                 "nav_expertise": "Expertise",
                 "nav_contact": "Kontakt",
@@ -565,7 +498,6 @@
                 "cookie_customize": "Anpassen"
             },
             it: {
-                "banner_text": "Parliamo la tua lingua",
                 "message_text": "Parliamo la tua lingua",
                 "nav_expertise": "Servizi",
                 "nav_contact": "Contatto",
@@ -615,7 +547,6 @@
                 "cookie_customize": "Personalizza"
             },
             fr: {
-                "banner_text": "Nous parlons votre langue",
                 "message_text": "Nous parlons votre langue",
                 "nav_expertise": "Expertise",
                 "nav_contact": "Contact",
@@ -666,52 +597,25 @@
             }
         };
 
-        // --- BANNER ROTATIVO SUPERIOR ---
-        let currentBannerIndex = 0;
-        const bannerTexts = document.querySelectorAll('#languageBanner span');
+        // --- TEXTO "We speak your language" ROTATIVO ---
+        let currentMessageIndex = 0;
+        const messageTexts = document.querySelectorAll('.lang-text');
         const languages = ['en', 'es', 'de', 'it', 'fr'];
         
-        function rotateBannerText() {
-            bannerTexts.forEach(text => text.classList.remove('active'));
-            
-            currentBannerIndex = (currentBannerIndex + 1) % languages.length;
-            const currentLang = languages[currentBannerIndex];
-            
-            bannerTexts.forEach(text => {
-                if (text.dataset.lang === currentLang) {
-                    text.classList.add('active');
-                }
-            });
-            
-            // Actualizar texto según idioma activo
-            const bannerText = translations[currentLang]?.banner_text || "We speak your language";
-            document.querySelector('#languageBanner span.active').textContent = bannerText;
-        }
-        
-        // Iniciar rotación cada 3 segundos
-        setInterval(rotateBannerText, 3000);
-        
-        // Inicializar con inglés
-        setTimeout(() => rotateBannerText(), 100);
-
-        // --- MENSAJE "WE SPEAK YOUR LANGUAGE" ROTATIVO ---
-        let currentMessageIndex = 0;
-        const messageVersions = document.querySelectorAll('.lang-version');
-        
         function rotateMessageText() {
-            messageVersions.forEach(msg => msg.classList.remove('active'));
+            messageTexts.forEach(msg => msg.classList.remove('active'));
             
             currentMessageIndex = (currentMessageIndex + 1) % languages.length;
             const currentLang = languages[currentMessageIndex];
             
-            messageVersions.forEach(msg => {
+            messageTexts.forEach(msg => {
                 if (msg.dataset.lang === currentLang) {
                     msg.classList.add('active');
                 }
             });
         }
         
-        // Rotar mensaje cada 4 segundos (diferente del banner)
+        // Rotar mensaje cada 4 segundos
         setInterval(rotateMessageText, 4000);
         
         // Inicializar con inglés
@@ -737,17 +641,10 @@
             });
             
             // Actualizar mensaje "We speak your language"
-            messageVersions.forEach(msg => msg.classList.remove('active'));
-            const activeMessage = document.querySelector(`.lang-version[data-lang="${lang}"]`);
+            messageTexts.forEach(msg => msg.classList.remove('active'));
+            const activeMessage = document.querySelector(`.lang-text[data-lang="${lang}"]`);
             if (activeMessage) {
                 activeMessage.classList.add('active');
-            }
-            
-            // Actualizar banner
-            bannerTexts.forEach(text => text.classList.remove('active'));
-            const activeBannerText = document.querySelector(`#languageBanner span[data-lang="${lang}"]`);
-            if (activeBannerText) {
-                activeBannerText.classList.add('active');
             }
             
             // Guardar preferencia
