@@ -1,16 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='50' fill='%230F172A'/><text x='50%25' y='50%25' text-anchor='middle' dy='.3em' fill='white' font-family='Arial, sans-serif' font-weight='bold' font-size='40'>CE</text></svg>">
-    <link rel="apple-touch-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%230F172A'/><text x='50%25' y='55%25' text-anchor='middle' fill='white' font-family='sans-serif' font-weight='800' font-size='45'>CE</text></svg>">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cresvance | Professional and Personal Advisory</title>
-    
-    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-
     <style>
         :root {
             --navy: #0F172A;
@@ -22,247 +18,484 @@
             --nomad-accent: #0EA5E9;
             --nomad-deep: #0369A1;
             --star-color: #00b67a;
+            --border: #E2E8F0;
+            --surface: #F1F5F9;
+        }
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body { font-family: 'DM Sans', sans-serif; color: var(--text-main); background: var(--white); line-height: 1.6; overflow-x: hidden; }
+        h1, h2, h3, h4, h5 { font-family: 'Syne', sans-serif; }
+
+        /* ── NOISE TEXTURE OVERLAY ── */
+        body::before {
+            content: '';
+            position: fixed; inset: 0; pointer-events: none; z-index: 0;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.025'/%3E%3C/svg%3E");
+            opacity: 0.4;
         }
 
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: 'Manrope', sans-serif; color: var(--text-main); background: var(--white); line-height: 1.6; overflow-x: hidden; }
-
-        /* --- LANGUAGES TEXT SIMPLE --- */
-        .languages-simple {
-            display: inline-flex;
-            align-items: center;
-            gap: 12px;
-            margin-bottom: 30px;
-            font-weight: 700;
-            font-size: 0.9rem;
-            color: var(--navy);
-            flex-wrap: wrap;
+        /* ── NAV ── */
+        nav {
+            padding: 1.4rem 6%;
+            display: flex; justify-content: space-between; align-items: center;
+            background: rgba(255,255,255,0.9);
+            backdrop-filter: blur(16px) saturate(180%);
+            -webkit-backdrop-filter: blur(16px) saturate(180%);
+            position: sticky; top: 0; z-index: 1000;
+            border-bottom: 1px solid var(--border);
+            transition: all 0.4s cubic-bezier(0.4,0,0.2,1);
         }
-        .languages-simple i { color: var(--electric); font-size: 1rem; }
-        .lang-text { opacity: 0; transform: translateY(5px); transition: all 0.3s ease; position: absolute; }
-        .lang-text.active { opacity: 1; transform: translateY(0); }
-
-        /* --- NAVBAR --- */
-        nav { 
-            padding: 1.5rem 8%; display: flex; justify-content: space-between; align-items: center;
-            background: rgba(255,255,255,0.95); backdrop-filter: blur(10px); position: sticky; top: 0; z-index: 1000;
-            transition: all 0.4s ease; border-bottom: 1px solid #eee;
+        nav.scrolled { padding: 0.8rem 6%; }
+        .logo {
+            font-family: 'Syne', sans-serif;
+            font-weight: 800; font-size: 1.7rem; color: var(--navy);
+            text-decoration: none; letter-spacing: -1px;
+            display: flex; align-items: center; gap: 0;
+            transition: color 0.3s;
         }
-        .logo { font-weight: 800; font-size: 1.8rem; color: var(--navy); text-decoration: none; letter-spacing: -1px; display: flex; align-items: center; }
-        .logo .retract { display: inline-block; max-width: 300px; opacity: 1; transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1); white-space: nowrap; overflow: hidden; }
+        .logo .retract { display: inline-block; max-width: 300px; opacity: 1; transition: all 0.5s cubic-bezier(0.4,0,0.2,1); white-space: nowrap; overflow: hidden; }
         nav.scrolled .logo .retract { max-width: 0; opacity: 0; }
-        nav.scrolled { padding: 0.8rem 8%; }
         nav.scrolled .logo { color: var(--electric); }
-        .nav-links { display: flex; align-items: center; gap: 20px; }
-        .nav-links a { text-decoration: none; color: var(--navy); font-weight: 700; font-size: 0.85rem; text-transform: uppercase; }
-        .language-selector { display: flex; gap: 8px; margin-left: 20px; padding-left: 20px; border-left: 1px solid #E2E8F0; }
-        .lang-btn { background: none; border: 1px solid #E2E8F0; padding: 6px 12px; border-radius: 4px; font-size: 0.75rem; font-weight: 700; color: var(--text-muted); cursor: pointer; transition: all 0.2s ease; }
-        .lang-btn:hover { border-color: var(--electric); color: var(--electric); }
-        .lang-btn.active { background: var(--electric); color: white; border-color: var(--electric); }
+        .nav-links { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; justify-content: flex-end; }
+        .nav-links a {
+            text-decoration: none; color: var(--text-muted);
+            font-weight: 500; font-size: 0.875rem;
+            padding: 8px 14px; border-radius: 8px;
+            transition: all 0.2s; letter-spacing: 0.01em;
+        }
+        .nav-links a:hover { color: var(--navy); background: var(--surface); }
+        .language-selector { display: flex; gap: 4px; margin-left: 16px; padding-left: 16px; border-left: 1px solid var(--border); }
+        .lang-btn {
+            background: none; border: 1px solid transparent;
+            padding: 5px 10px; border-radius: 6px; font-size: 0.75rem; font-weight: 700;
+            color: var(--text-muted); cursor: pointer; transition: all 0.2s; font-family: 'DM Sans', sans-serif;
+        }
+        .lang-btn:hover { border-color: var(--border); color: var(--navy); }
+        .lang-btn.active { background: var(--navy); color: white; border-color: var(--navy); }
 
-        /* --- HERO --- */
-        .hero { padding: 100px 8%; min-height: 80vh; display: flex; align-items: center; background: radial-gradient(circle at top right, #f1f5f9 0%, #ffffff 50%); }
-        .hero h1 { font-size: clamp(3rem, 7vw, 5rem); font-weight: 800; line-height: 1.05; margin-bottom: 20px; color: var(--navy); letter-spacing: -2px; }
+        /* ── HERO ── */
+        .hero {
+            padding: 110px 6% 90px;
+            min-height: 88vh;
+            display: flex; align-items: center;
+            position: relative; overflow: hidden;
+            background: var(--white);
+        }
+        .hero-bg-circle {
+            position: absolute; border-radius: 50%;
+            pointer-events: none;
+        }
+        .hero-bg-circle-1 {
+            width: 700px; height: 700px;
+            background: radial-gradient(circle, rgba(37,99,235,0.06) 0%, transparent 70%);
+            top: -200px; right: -200px;
+        }
+        .hero-bg-circle-2 {
+            width: 500px; height: 500px;
+            background: radial-gradient(circle, rgba(14,165,233,0.05) 0%, transparent 70%);
+            bottom: -150px; left: -100px;
+        }
+        .hero-content { position: relative; z-index: 1; max-width: 780px; }
+
+        /* ── HERO TOP ROW: languages + trustpilot separated ── */
+        .hero-meta-row {
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 16px;
+            margin-bottom: 32px;
+        }
+        .languages-pill {
+            display: inline-flex; align-items: center; gap: 8px;
+            background: var(--surface); border: 1px solid var(--border);
+            border-radius: 50px; padding: 7px 14px;
+            font-weight: 600; font-size: 0.8rem; color: var(--navy);
+            white-space: nowrap;
+        }
+        .languages-pill i { color: var(--electric); font-size: 0.9rem; }
+        .lang-text { opacity: 0; transform: translateY(4px); transition: all 0.35s ease; position: absolute; }
+        .lang-text.active { opacity: 1; transform: translateY(0); }
+        .lang-rotating-wrap { position: relative; min-width: 160px; height: 1.2em; overflow: visible; }
+
+        .tp-pill {
+            display: inline-flex; align-items: center; gap: 8px;
+            background: #f0fdf8; border: 1px solid #bbf7d0;
+            border-radius: 50px; padding: 7px 14px;
+            font-weight: 700; font-size: 0.8rem; color: var(--text-main);
+            white-space: nowrap;
+        }
+        .tp-stars-sm { display: flex; gap: 2px; }
+        .tp-star-sm { width: 14px; height: 14px; background: var(--star-color); display: flex; align-items: center; justify-content: center; border-radius: 2px; }
+        .tp-star-sm svg { width: 9px; height: 9px; fill: white; }
+        .tp-logo-text { color: var(--star-color); font-weight: 800; }
+
+        .hero h1 {
+            font-size: clamp(3.2rem, 7vw, 5.5rem);
+            font-weight: 800; line-height: 1.02;
+            color: var(--navy); letter-spacing: -3px;
+            margin-bottom: 22px;
+        }
         .hero h1 span { color: var(--electric); }
-        .hero p { font-size: 1.25rem; color: var(--text-muted); max-width: 650px; margin-bottom: 35px; font-weight: 500; }
-
-        /* --- TRUSTPILOT BADGE HERO --- */
-        .trustpilot-hero-badge {
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-            background: #fff;
-            border: 1px solid #E2E8F0;
-            border-radius: 8px;
-            padding: 10px 18px;
-            margin-bottom: 28px;
-            font-size: 0.85rem;
-            font-weight: 700;
-            color: var(--text-main);
+        .hero p {
+            font-size: 1.15rem; color: var(--text-muted);
+            max-width: 560px; margin-bottom: 36px; font-weight: 400; line-height: 1.7;
         }
-        .tp-stars { display: flex; gap: 2px; }
-        .tp-star { width: 18px; height: 18px; background: var(--star-color); display: flex; align-items: center; justify-content: center; border-radius: 2px; }
-        .tp-star svg { width: 12px; height: 12px; fill: white; }
-        .tp-logo-text { color: var(--star-color); font-weight: 800; font-size: 0.9rem; }
+        .hero-ctas { display: flex; gap: 12px; flex-wrap: wrap; align-items: center; }
+        .btn {
+            padding: 14px 26px; border-radius: 10px;
+            text-decoration: none; font-weight: 600;
+            display: inline-flex; align-items: center; gap: 9px;
+            transition: all 0.25s cubic-bezier(0.4,0,0.2,1);
+            border: none; cursor: pointer; font-size: 0.9rem; font-family: 'DM Sans', sans-serif;
+        }
+        .btn-primary { background: var(--navy); color: white; box-shadow: 0 4px 16px rgba(15,23,42,0.2); }
+        .btn-primary:hover { background: var(--electric); transform: translateY(-2px); box-shadow: 0 8px 24px rgba(37,99,235,0.3); }
+        .btn-whatsapp { background: white; color: var(--navy); border: 1.5px solid var(--border); }
+        .btn-whatsapp:hover { border-color: var(--navy); transform: translateY(-2px); background: var(--surface); }
 
-        /* --- BUTTONS --- */
-        .btn { padding: 16px 28px; border-radius: 8px; text-decoration: none; font-weight: 700; display: inline-flex; align-items: center; gap: 10px; transition: 0.3s; border: none; cursor: pointer; font-size: 0.95rem; }
-        .btn-primary { background: var(--navy); color: white; }
-        .btn-primary:hover { background: var(--electric); transform: translateY(-3px); }
-        .btn-whatsapp { background: #fff; color: var(--navy); border: 2px solid #E2E8F0; margin-left: 10px; }
-        .btn-whatsapp:hover { border-color: var(--navy); transform: translateY(-3px); }
+        /* ── SCROLL INDICATOR ── */
+        .scroll-hint {
+            position: absolute; bottom: 36px; left: 6%;
+            display: flex; align-items: center; gap: 10px;
+            font-size: 0.75rem; color: var(--text-muted); font-weight: 500;
+        }
+        .scroll-line { width: 40px; height: 1px; background: var(--border); }
 
-        /* --- INSIGHTS --- */
-        .insights { padding: 80px 8%; background: var(--white); }
-        .insight-card { background: var(--bg-light); padding: 50px; border-radius: 24px; border-left: 8px solid var(--electric); }
-        .insight-card h3 { font-size: 2.2rem; margin-bottom: 25px; letter-spacing: -1px; color: var(--navy); }
-        .deduction-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 40px; }
-        .deduction-item h4 { color: var(--electric); font-size: 1.2rem; margin-bottom: 12px; display: flex; align-items: center; gap: 10px; }
-        .deduction-item p { font-size: 0.95rem; color: var(--text-main); line-height: 1.6; }
+        /* ── SECTION LABELS ── */
+        .section-label {
+            display: inline-flex; align-items: center; gap: 8px;
+            font-size: 0.72rem; font-weight: 700; text-transform: uppercase;
+            letter-spacing: 0.12em; color: var(--electric);
+            margin-bottom: 16px;
+        }
+        .section-label::before { content: ''; display: block; width: 20px; height: 2px; background: var(--electric); border-radius: 2px; }
 
-        /* --- SERVICES --- */
-        .services { padding: 100px 8%; background: #fafafa; }
-        .bento-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 25px; }
-        .bento-item { background: var(--white); padding: 40px; border-radius: 20px; border: 1px solid #eee; transition: 0.4s; display: flex; flex-direction: column; }
-        .bento-item:hover { transform: translateY(-10px); box-shadow: 0 20px 40px rgba(0,0,0,0.05); border-color: var(--electric); }
-        .bento-item i { font-size: 2.2rem; color: var(--navy); margin-bottom: 20px; }
-        .bento-item h3 { font-size: 1.5rem; margin-bottom: 15px; font-weight: 800; }
-        .bento-item ul { list-style: none; margin-top: auto; padding-top: 20px; }
-        .bento-item ul li { margin-bottom: 10px; font-size: 0.9rem; font-weight: 600; color: var(--text-muted); display: flex; align-items: center; gap: 8px; }
-        .bento-item ul li::before { content: "●"; color: var(--electric); font-size: 0.7rem; }
+        /* ── INSIGHTS ── */
+        .insights { padding: 80px 6%; background: var(--bg-light); }
+        .insight-card {
+            background: white;
+            padding: 48px 52px;
+            border-radius: 24px;
+            border: 1px solid var(--border);
+            box-shadow: 0 2px 24px rgba(15,23,42,0.04);
+            position: relative; overflow: hidden;
+        }
+        .insight-card::after {
+            content: '2026'; position: absolute;
+            right: -20px; bottom: -40px;
+            font-family: 'Syne', sans-serif; font-weight: 800;
+            font-size: 10rem; color: rgba(37,99,235,0.04);
+            pointer-events: none; line-height: 1; user-select: none;
+        }
+        .insight-card h3 { font-size: 2rem; margin-bottom: 32px; letter-spacing: -1px; color: var(--navy); }
+        .deduction-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 28px; }
+        .deduction-item {
+            padding: 24px; border-radius: 14px;
+            background: var(--bg-light); border: 1px solid var(--border);
+            transition: all 0.25s;
+        }
+        .deduction-item:hover { transform: translateY(-3px); border-color: var(--electric); box-shadow: 0 8px 24px rgba(37,99,235,0.08); }
+        .deduction-item h4 { color: var(--navy); font-size: 1rem; margin-bottom: 10px; display: flex; align-items: center; gap: 10px; }
+        .deduction-item h4 i { color: var(--electric); font-size: 1rem; width: 20px; }
+        .deduction-item p { font-size: 0.9rem; color: var(--text-muted); line-height: 1.6; }
+        .deduction-item p b { color: var(--text-main); }
+
+        /* ── SERVICES ── */
+        .services { padding: 100px 6%; background: white; }
+        .services-header { margin-bottom: 52px; }
+        .services-header h2 { font-size: clamp(2rem, 4vw, 3rem); letter-spacing: -1.5px; color: var(--navy); max-width: 500px; }
+        .bento-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+        .bento-item {
+            background: var(--bg-light); padding: 36px;
+            border-radius: 20px; border: 1px solid var(--border);
+            transition: all 0.3s cubic-bezier(0.4,0,0.2,1);
+            display: flex; flex-direction: column; position: relative; overflow: hidden;
+        }
+        .bento-item::before {
+            content: ''; position: absolute; inset: 0;
+            background: linear-gradient(135deg, rgba(37,99,235,0.04) 0%, transparent 60%);
+            opacity: 0; transition: opacity 0.3s; border-radius: 20px;
+        }
+        .bento-item:hover { transform: translateY(-6px); border-color: rgba(37,99,235,0.3); box-shadow: 0 16px 40px rgba(15,23,42,0.08); }
+        .bento-item:hover::before { opacity: 1; }
+        .bento-icon {
+            width: 48px; height: 48px; border-radius: 12px;
+            background: white; border: 1px solid var(--border);
+            display: flex; align-items: center; justify-content: center;
+            font-size: 1.3rem; color: var(--navy); margin-bottom: 20px;
+            box-shadow: 0 2px 8px rgba(15,23,42,0.06);
+        }
+        .bento-item h3 { font-size: 1.25rem; margin-bottom: 10px; font-weight: 700; color: var(--navy); }
+        .bento-item p { font-size: 0.875rem; color: var(--text-muted); margin-bottom: 0; }
+        .bento-item ul { list-style: none; margin-top: auto; padding-top: 20px; border-top: 1px solid var(--border); }
+        .bento-item ul li {
+            margin-bottom: 8px; font-size: 0.85rem; font-weight: 500;
+            color: var(--text-muted); display: flex; align-items: center; gap: 8px;
+        }
+        .bento-item ul li::before { content: "→"; color: var(--electric); font-size: 0.75rem; }
         .span-2 { grid-column: span 2; }
+        .bento-item.featured { background: var(--navy); border-color: var(--navy); }
+        .bento-item.featured .bento-icon { background: rgba(255,255,255,0.1); border-color: rgba(255,255,255,0.15); color: white; }
+        .bento-item.featured h3 { color: white; }
+        .bento-item.featured p { color: rgba(255,255,255,0.6); }
+        .bento-item.featured ul { border-top-color: rgba(255,255,255,0.1); }
+        .bento-item.featured ul li { color: rgba(255,255,255,0.7); }
+        .bento-item.featured ul li::before { color: var(--nomad-accent); }
 
-        /* --- NOMAD SECTION --- */
-        .nomad-section { padding: 100px 8%; background: var(--navy); position: relative; overflow: hidden; }
-        .nomad-section::before { content: ''; position: absolute; top: -150px; right: -150px; width: 500px; height: 500px; border-radius: 50%; background: radial-gradient(circle, rgba(37,99,235,0.25) 0%, transparent 70%); pointer-events: none; }
-        .nomad-section::after { content: ''; position: absolute; bottom: -100px; left: -100px; width: 400px; height: 400px; border-radius: 50%; background: radial-gradient(circle, rgba(14,165,233,0.15) 0%, transparent 70%); pointer-events: none; }
+        /* ── STATS STRIP ── */
+        .stats-strip {
+            padding: 48px 6%; background: var(--navy);
+            display: grid; grid-template-columns: repeat(4, 1fr); gap: 2px;
+        }
+        .stat-item {
+            padding: 28px 32px;
+            border-right: 1px solid rgba(255,255,255,0.08);
+        }
+        .stat-item:last-child { border-right: none; }
+        .stat-num { font-family: 'Syne', sans-serif; font-size: 2.4rem; font-weight: 800; color: white; letter-spacing: -1.5px; line-height: 1; }
+        .stat-num span { color: var(--nomad-accent); }
+        .stat-label { font-size: 0.8rem; color: rgba(255,255,255,0.5); margin-top: 6px; font-weight: 400; }
+
+        /* ── NOMAD SECTION ── */
+        .nomad-section { padding: 100px 6%; background: var(--navy); position: relative; overflow: hidden; }
+        .nomad-section::before {
+            content: ''; position: absolute;
+            top: -200px; right: -200px; width: 600px; height: 600px; border-radius: 50%;
+            background: radial-gradient(circle, rgba(37,99,235,0.2) 0%, transparent 70%);
+            pointer-events: none;
+        }
+        .nomad-section::after {
+            content: ''; position: absolute;
+            bottom: -100px; left: -100px; width: 400px; height: 400px; border-radius: 50%;
+            background: radial-gradient(circle, rgba(14,165,233,0.12) 0%, transparent 70%);
+            pointer-events: none;
+        }
         .nomad-inner { position: relative; z-index: 1; }
-        .nomad-badge { display: inline-flex; align-items: center; gap: 8px; background: rgba(14,165,233,0.15); border: 1px solid rgba(14,165,233,0.4); color: var(--nomad-accent); font-size: 0.8rem; font-weight: 800; text-transform: uppercase; letter-spacing: 1px; padding: 8px 16px; border-radius: 50px; margin-bottom: 28px; }
-        .nomad-header { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: start; margin-bottom: 60px; }
-        .nomad-title { font-size: clamp(2.5rem, 5vw, 3.8rem); font-weight: 800; color: white; line-height: 1.05; letter-spacing: -2px; }
+        .nomad-badge {
+            display: inline-flex; align-items: center; gap: 8px;
+            background: rgba(14,165,233,0.15); border: 1px solid rgba(14,165,233,0.35);
+            color: var(--nomad-accent); font-size: 0.75rem; font-weight: 700;
+            text-transform: uppercase; letter-spacing: 0.1em;
+            padding: 7px 14px; border-radius: 50px; margin-bottom: 28px;
+        }
+        .nomad-header { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: start; margin-bottom: 56px; }
+        .nomad-title { font-size: clamp(2.4rem, 5vw, 3.8rem); font-weight: 800; color: white; line-height: 1.05; letter-spacing: -2px; }
         .nomad-title span { color: var(--nomad-accent); }
-        .nomad-intro-text { padding-top: 10px; }
-        .nomad-intro-text p { font-size: 1.1rem; color: rgba(255,255,255,0.7); margin-bottom: 16px; font-weight: 500; line-height: 1.7; }
-        .nomad-intro-text p strong { color: white; font-weight: 700; }
-        .nomad-cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-bottom: 50px; }
-        .nomad-card { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); border-radius: 20px; padding: 32px; transition: all 0.35s ease; position: relative; overflow: hidden; }
-        .nomad-card::before { content: ''; position: absolute; inset: 0; background: linear-gradient(135deg, rgba(14,165,233,0.08) 0%, transparent 60%); opacity: 0; transition: opacity 0.35s ease; border-radius: 20px; }
-        .nomad-card:hover { transform: translateY(-8px); border-color: rgba(14,165,233,0.5); box-shadow: 0 20px 40px rgba(0,0,0,0.3); }
-        .nomad-card:hover::before { opacity: 1; }
-        .nomad-card-icon { width: 52px; height: 52px; border-radius: 14px; background: rgba(14,165,233,0.15); border: 1px solid rgba(14,165,233,0.3); display: flex; align-items: center; justify-content: center; margin-bottom: 20px; font-size: 1.3rem; color: var(--nomad-accent); position: relative; z-index: 1; }
-        .nomad-card h4 { font-size: 1.1rem; font-weight: 800; color: white; margin-bottom: 10px; position: relative; z-index: 1; }
-        .nomad-card p { font-size: 0.9rem; color: rgba(255,255,255,0.6); line-height: 1.6; position: relative; z-index: 1; }
-        .nomad-cta-strip { background: rgba(14,165,233,0.12); border: 1px solid rgba(14,165,233,0.3); border-radius: 20px; padding: 40px 50px; display: flex; align-items: center; justify-content: space-between; gap: 30px; flex-wrap: wrap; }
-        .nomad-cta-strip-text h4 { font-size: 1.6rem; font-weight: 800; color: white; margin-bottom: 8px; letter-spacing: -0.5px; }
-        .nomad-cta-strip-text p { font-size: 0.95rem; color: rgba(255,255,255,0.6); font-weight: 500; }
-        .nomad-cta-buttons { display: flex; gap: 14px; flex-wrap: wrap; flex-shrink: 0; }
-        .btn-nomad-primary { background: var(--nomad-accent); color: var(--navy); padding: 15px 28px; border-radius: 8px; font-weight: 800; font-size: 0.9rem; text-decoration: none; display: inline-flex; align-items: center; gap: 9px; transition: all 0.3s ease; border: none; cursor: pointer; }
-        .btn-nomad-primary:hover { background: white; transform: translateY(-3px); box-shadow: 0 10px 25px rgba(14,165,233,0.3); }
-        .btn-nomad-outline { background: transparent; color: white; padding: 15px 28px; border-radius: 8px; font-weight: 700; font-size: 0.9rem; text-decoration: none; display: inline-flex; align-items: center; gap: 9px; border: 1px solid rgba(255,255,255,0.3); transition: all 0.3s ease; }
-        .btn-nomad-outline:hover { border-color: white; background: rgba(255,255,255,0.08); transform: translateY(-3px); }
-        .nomad-consulate-note { display: flex; align-items: center; gap: 14px; background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08); border-radius: 12px; padding: 18px 24px; margin-top: 24px; }
-        .nomad-consulate-note i { color: var(--nomad-accent); font-size: 1.2rem; flex-shrink: 0; }
-        .nomad-consulate-note p { font-size: 0.85rem; color: rgba(255,255,255,0.55); font-weight: 500; line-height: 1.5; }
-        .nomad-consulate-note p strong { color: rgba(255,255,255,0.85); }
+        .nomad-intro-text p { font-size: 1rem; color: rgba(255,255,255,0.65); margin-bottom: 14px; line-height: 1.75; }
+        .nomad-intro-text p strong { color: white; }
+        .nomad-cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-bottom: 48px; }
+        .nomad-card {
+            background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.09);
+            border-radius: 18px; padding: 28px; transition: all 0.3s ease; position: relative; overflow: hidden;
+        }
+        .nomad-card:hover { transform: translateY(-6px); border-color: rgba(14,165,233,0.4); background: rgba(255,255,255,0.07); }
+        .nomad-card-icon {
+            width: 44px; height: 44px; border-radius: 12px;
+            background: rgba(14,165,233,0.12); border: 1px solid rgba(14,165,233,0.25);
+            display: flex; align-items: center; justify-content: center;
+            margin-bottom: 16px; font-size: 1.1rem; color: var(--nomad-accent);
+        }
+        .nomad-card h4 { font-size: 1rem; font-weight: 700; color: white; margin-bottom: 8px; }
+        .nomad-card p { font-size: 0.85rem; color: rgba(255,255,255,0.55); line-height: 1.65; }
+        .nomad-cta-strip {
+            background: rgba(14,165,233,0.1); border: 1px solid rgba(14,165,233,0.25);
+            border-radius: 20px; padding: 40px 48px;
+            display: flex; align-items: center; justify-content: space-between; gap: 30px; flex-wrap: wrap;
+        }
+        .nomad-cta-strip-text h4 { font-size: 1.5rem; font-weight: 800; color: white; margin-bottom: 6px; letter-spacing: -0.5px; }
+        .nomad-cta-strip-text p { font-size: 0.9rem; color: rgba(255,255,255,0.55); }
+        .nomad-cta-buttons { display: flex; gap: 12px; flex-wrap: wrap; flex-shrink: 0; }
+        .btn-nomad-primary {
+            background: var(--nomad-accent); color: var(--navy); padding: 13px 24px;
+            border-radius: 10px; font-weight: 700; font-size: 0.875rem;
+            text-decoration: none; display: inline-flex; align-items: center; gap: 8px;
+            transition: all 0.25s; border: none; cursor: pointer;
+        }
+        .btn-nomad-primary:hover { background: white; transform: translateY(-2px); box-shadow: 0 8px 20px rgba(14,165,233,0.25); }
+        .btn-nomad-outline {
+            background: transparent; color: white; padding: 13px 24px;
+            border-radius: 10px; font-weight: 600; font-size: 0.875rem;
+            text-decoration: none; display: inline-flex; align-items: center; gap: 8px;
+            border: 1px solid rgba(255,255,255,0.25); transition: all 0.25s;
+        }
+        .btn-nomad-outline:hover { border-color: white; background: rgba(255,255,255,0.07); transform: translateY(-2px); }
+        .nomad-consulate-note {
+            display: flex; align-items: center; gap: 14px;
+            background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.07);
+            border-radius: 12px; padding: 16px 22px; margin-top: 20px;
+        }
+        .nomad-consulate-note i { color: var(--nomad-accent); font-size: 1rem; flex-shrink: 0; }
+        .nomad-consulate-note p { font-size: 0.82rem; color: rgba(255,255,255,0.5); line-height: 1.5; }
+        .nomad-consulate-note p strong { color: rgba(255,255,255,0.8); }
 
-        /* --- TRUSTPILOT SECTION --- */
-        .trustpilot-section {
-            padding: 80px 8%;
-            background: var(--bg-light);
-        }
-        .tp-section-header {
-            text-align: center;
-            margin-bottom: 50px;
-        }
-        .tp-section-header h2 {
-            font-size: 2.2rem;
-            font-weight: 800;
-            color: var(--navy);
-            letter-spacing: -1px;
-            margin-bottom: 10px;
-        }
-        .tp-overall {
-            display: inline-flex;
-            align-items: center;
-            gap: 12px;
-            margin-top: 16px;
-        }
-        .tp-score {
-            font-size: 2.5rem;
-            font-weight: 800;
-            color: var(--navy);
-        }
+        /* ── REVIEWS ── */
+        .trustpilot-section { padding: 100px 6%; background: var(--bg-light); }
+        .tp-section-header { margin-bottom: 52px; }
+        .tp-section-header h2 { font-size: clamp(2rem, 4vw, 3rem); font-weight: 800; color: var(--navy); letter-spacing: -1.5px; margin-bottom: 16px; }
+        .tp-overall { display: flex; align-items: center; gap: 14px; flex-wrap: wrap; }
+        .tp-score { font-family: 'Syne', sans-serif; font-size: 2.8rem; font-weight: 800; color: var(--navy); line-height: 1; }
         .tp-stars-large { display: flex; gap: 4px; }
-        .tp-star-lg { width: 36px; height: 36px; background: var(--star-color); display: flex; align-items: center; justify-content: center; border-radius: 3px; }
-        .tp-star-lg svg { width: 22px; height: 22px; fill: white; }
-        .tp-star-lg.half { background: linear-gradient(90deg, var(--star-color) 60%, #ddd 60%); }
-        .tp-label { font-size: 0.9rem; color: var(--text-muted); font-weight: 600; }
-        .tp-link { color: var(--star-color); font-weight: 700; font-size: 0.85rem; text-decoration: none; display: inline-flex; align-items: center; gap: 6px; margin-top: 8px; }
+        .tp-star-lg { width: 34px; height: 34px; background: var(--star-color); display: flex; align-items: center; justify-content: center; border-radius: 4px; }
+        .tp-star-lg svg { width: 20px; height: 20px; fill: white; }
+        .tp-star-lg.empty { background: #ddd; }
+        .tp-meta { display: flex; flex-direction: column; gap: 4px; }
+        .tp-label { font-size: 0.85rem; color: var(--text-muted); font-weight: 500; }
+        .tp-link { color: var(--star-color); font-weight: 700; font-size: 0.82rem; text-decoration: none; display: inline-flex; align-items: center; gap: 5px; }
         .tp-link:hover { text-decoration: underline; }
 
-        .reviews-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: 24px;
-        }
+        .reviews-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 20px; }
         .review-card {
-            background: white;
-            border: 1px solid #E2E8F0;
-            border-radius: 16px;
-            padding: 28px;
-            transition: 0.3s;
+            background: white; border: 1px solid var(--border);
+            border-radius: 18px; padding: 28px; transition: all 0.25s;
         }
-        .review-card:hover { transform: translateY(-5px); box-shadow: 0 15px 35px rgba(0,0,0,0.07); border-color: var(--star-color); }
-        .review-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 16px; }
-        .reviewer-name { font-weight: 800; color: var(--navy); font-size: 0.95rem; }
-        .review-date { font-size: 0.75rem; color: var(--text-muted); margin-top: 2px; }
-        .review-stars { display: flex; gap: 2px; margin-bottom: 12px; }
-        .review-star { width: 20px; height: 20px; background: var(--star-color); display: flex; align-items: center; justify-content: center; border-radius: 2px; }
-        .review-star svg { width: 13px; height: 13px; fill: white; }
-        .review-title { font-weight: 800; color: var(--navy); margin-bottom: 8px; font-size: 0.95rem; }
-        .review-text { font-size: 0.88rem; color: var(--text-muted); line-height: 1.65; }
-        .tp-verified { display: inline-flex; align-items: center; gap: 5px; font-size: 0.75rem; color: var(--star-color); font-weight: 700; margin-top: 14px; }
+        .review-card:hover { transform: translateY(-4px); box-shadow: 0 12px 32px rgba(15,23,42,0.08); border-color: var(--star-color); }
+        .review-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 14px; }
+        .reviewer-name { font-weight: 700; color: var(--navy); font-size: 0.95rem; }
+        .review-date { font-size: 0.72rem; color: var(--text-muted); margin-top: 3px; }
+        .review-stars { display: flex; gap: 3px; margin-bottom: 12px; }
+        .review-star { width: 18px; height: 18px; background: var(--star-color); display: flex; align-items: center; justify-content: center; border-radius: 2px; }
+        .review-star svg { width: 11px; height: 11px; fill: white; }
+        .review-title { font-weight: 700; color: var(--navy); margin-bottom: 10px; font-size: 0.95rem; }
+        .review-text { font-size: 0.875rem; color: var(--text-muted); line-height: 1.7; }
+        .tp-verified { display: inline-flex; align-items: center; gap: 5px; font-size: 0.72rem; color: var(--star-color); font-weight: 700; margin-top: 16px; }
 
-        /* --- FOOTER --- */
-        footer { background: var(--navy); color: white; padding: 100px 8%; text-align: center; border-top: 1px solid rgba(255,255,255,0.08); }
-        .footer-logo-container { font-size: 2.5rem; font-weight: 800; margin-bottom: 15px; display: flex; justify-content: center; align-items: center; }
-        .footer-retract { display: inline-block; max-width: 0; opacity: 0; white-space: nowrap; overflow: hidden; transition: all 1s cubic-bezier(0.22, 1, 0.36, 1); }
-        .footer-logo-container.expanded .footer-retract { max-width: 400px; opacity: 1; }
+        .review-cta-card {
+            display: flex; flex-direction: column; justify-content: center; align-items: center;
+            text-align: center; background: linear-gradient(135deg, #f0fdf8, #ecfdf5);
+            border: 1px solid #bbf7d0; border-radius: 18px; padding: 40px 28px;
+        }
+        .review-cta-card .star-icon { font-size: 2rem; color: var(--star-color); margin-bottom: 14px; }
+        .review-cta-card h4 { font-weight: 800; color: var(--navy); font-size: 1.05rem; margin-bottom: 8px; }
+        .review-cta-card p { font-size: 0.85rem; color: var(--text-muted); margin-bottom: 22px; max-width: 220px; }
+        .btn-review {
+            background: var(--star-color); color: white; padding: 11px 20px;
+            border-radius: 8px; font-weight: 700; font-size: 0.82rem;
+            text-decoration: none; display: inline-flex; align-items: center; gap: 8px; transition: 0.25s;
+        }
+        .btn-review:hover { opacity: 0.88; transform: translateY(-2px); }
 
-        /* --- COOKIE BANNER --- */
-        #cookie-banner { display: none; position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%); width: 90%; max-width: 600px; background: white; padding: 30px; border-radius: 16px; box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.4); z-index: 10001; border: 1px solid #E2E8F0; }
-        .cookie-buttons { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 20px; }
-        .cookie-btn { flex: 1; padding: 12px; font-size: 0.85rem; border-radius: 6px; cursor: pointer; font-weight: 700; border: none; }
+        /* ── FOOTER ── */
+        footer { background: var(--navy); color: white; padding: 80px 6%; }
+        .footer-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: start; }
+        .footer-brand .footer-logo { font-family: 'Syne', sans-serif; font-size: 2rem; font-weight: 800; color: white; margin-bottom: 12px; }
+        .footer-brand p { font-size: 0.875rem; color: rgba(255,255,255,0.5); max-width: 280px; line-height: 1.7; }
+        .footer-socials { display: flex; gap: 14px; margin-top: 24px; }
+        .footer-socials a {
+            width: 40px; height: 40px; border-radius: 10px;
+            background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1);
+            display: flex; align-items: center; justify-content: center;
+            color: rgba(255,255,255,0.7); font-size: 0.95rem; text-decoration: none; transition: all 0.2s;
+        }
+        .footer-socials a:hover { background: rgba(255,255,255,0.12); color: white; transform: translateY(-2px); }
+        .footer-right { display: flex; flex-direction: column; align-items: flex-end; }
+        .footer-contact-item { font-size: 0.85rem; color: rgba(255,255,255,0.5); margin-bottom: 8px; display: flex; align-items: center; gap: 8px; }
+        .footer-contact-item a { color: rgba(255,255,255,0.6); text-decoration: none; }
+        .footer-contact-item a:hover { color: white; }
+        .footer-bottom { margin-top: 60px; padding-top: 28px; border-top: 1px solid rgba(255,255,255,0.08); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; }
+        .footer-bottom p { font-size: 0.78rem; color: rgba(255,255,255,0.35); }
+        .footer-langs { font-size: 0.78rem; color: rgba(255,255,255,0.35); }
+
+        /* ── COOKIE BANNER (RGPD) ── */
+        #cookie-banner {
+            display: none; position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%);
+            width: calc(100% - 40px); max-width: 560px;
+            background: white; padding: 24px 28px; border-radius: 18px;
+            box-shadow: 0 20px 60px rgba(15,23,42,0.2); z-index: 10001;
+            border: 1px solid var(--border);
+        }
+        #cookie-banner h4 { font-family: 'Syne', sans-serif; font-size: 1rem; font-weight: 700; color: var(--navy); margin-bottom: 8px; }
+        #cookie-banner p { font-size: 0.82rem; color: var(--text-muted); line-height: 1.6; }
+        .cookie-buttons { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 18px; }
+        .cookie-btn { flex: 1; min-width: 100px; padding: 10px 14px; font-size: 0.82rem; border-radius: 8px; cursor: pointer; font-weight: 700; border: none; font-family: 'DM Sans', sans-serif; transition: all 0.2s; }
         .btn-accept { background: var(--navy); color: white; }
-        .btn-reject { background: #F1F5F9; color: var(--text-main); }
-        .btn-settings { background: white; color: var(--navy); border: 1px solid #E2E8F0; }
-        #cookie-settings-panel { display: none; margin-top: 20px; padding-top: 20px; border-top: 1px solid #eee; }
-        .setting-item { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; font-size: 0.85rem; }
-        .reveal { opacity: 0; transform: translateY(30px); transition: 0.8s ease-out; }
-        .reveal.active { opacity: 1; transform: translateY(0); }
+        .btn-accept:hover { background: var(--electric); }
+        .btn-reject { background: var(--surface); color: var(--text-main); }
+        .btn-reject:hover { background: var(--border); }
+        .btn-settings { background: white; color: var(--navy); border: 1px solid var(--border) !important; }
+        #cookie-settings-panel { display: none; margin-top: 16px; padding-top: 16px; border-top: 1px solid var(--border); }
+        .setting-item { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; font-size: 0.82rem; color: var(--text-main); }
 
+        /* ── ANIMATIONS ── */
+        .reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.7s cubic-bezier(0.4,0,0.2,1), transform 0.7s cubic-bezier(0.4,0,0.2,1); }
+        .reveal.active { opacity: 1; transform: translateY(0); }
+        .reveal-delay-1 { transition-delay: 0.1s; }
+        .reveal-delay-2 { transition-delay: 0.2s; }
+        .reveal-delay-3 { transition-delay: 0.3s; }
+
+        /* ── MOBILE ── */
         @media (max-width: 1024px) {
-            .nomad-header { grid-template-columns: 1fr; gap: 30px; }
+            .nomad-header { grid-template-columns: 1fr; gap: 28px; }
             .nomad-cards { grid-template-columns: repeat(2, 1fr); }
+            .stats-strip { grid-template-columns: repeat(2, 1fr); }
+            .stat-item:nth-child(2) { border-right: none; }
         }
-        @media (max-width: 900px) { 
-            .bento-grid { grid-template-columns: 1fr; } 
-            .span-2 { grid-column: span 1; } 
-            .nav-links { flex-wrap: wrap; justify-content: flex-end; }
-            .language-selector { margin-left: 10px; padding-left: 10px; }
-            .lang-btn { padding: 5px 8px; font-size: 0.7rem; }
-            .languages-simple { font-size: 0.8rem; gap: 10px; }
+        @media (max-width: 768px) {
+            nav { padding: 1rem 5%; }
+            .hero { padding: 80px 5% 70px; min-height: auto; }
+            .hero h1 { font-size: clamp(2.6rem, 10vw, 3.6rem); letter-spacing: -2px; }
+            .insights { padding: 60px 5%; }
+            .insight-card { padding: 32px 28px; }
+            .services { padding: 70px 5%; }
+            .bento-grid { grid-template-columns: 1fr; }
+            .span-2 { grid-column: span 1; }
+            .nomad-section { padding: 70px 5%; }
             .nomad-cards { grid-template-columns: 1fr; }
-            .nomad-cta-strip { flex-direction: column; text-align: center; padding: 30px 25px; }
+            .nomad-cta-strip { flex-direction: column; text-align: center; padding: 28px 24px; }
             .nomad-cta-buttons { justify-content: center; }
-            .nomad-title { font-size: 2.4rem; }
+            .trustpilot-section { padding: 70px 5%; }
+            .stats-strip { grid-template-columns: repeat(2, 1fr); padding: 32px 5%; }
+            .stat-item { padding: 20px; }
+            footer { padding: 60px 5%; }
+            .footer-inner { grid-template-columns: 1fr; gap: 40px; }
+            .footer-right { align-items: flex-start; }
+            .footer-bottom { flex-direction: column; align-items: flex-start; }
+            .scroll-hint { display: none; }
+            .nav-links { gap: 4px; }
+            .nav-links a { padding: 6px 10px; font-size: 0.8rem; }
+            .language-selector { margin-left: 8px; padding-left: 8px; }
+            .lang-btn { padding: 4px 8px; }
+            .hero-meta-row { gap: 10px; }
+            .lang-rotating-wrap { min-width: 140px; }
+            .nomad-cta-strip { padding: 24px 20px; }
+        }
+        @media (max-width: 480px) {
+            .hero h1 { font-size: 2.4rem; letter-spacing: -1.5px; }
+            .hero-ctas { flex-direction: column; align-items: flex-start; }
+            .hero-ctas .btn { width: 100%; justify-content: center; }
+            .tp-overall { gap: 10px; }
+            .tp-score { font-size: 2.2rem; }
+            .nomad-header { gap: 20px; }
         }
     </style>
 </head>
-
 <body>
 
-    <nav id="navbar">
-        <a href="#" class="logo">C<span class="retract">RESVANC</span>E</a>
-        <div class="nav-links">
-            <a href="#services" data-translate="nav_expertise">Expertise</a>
-            <a href="#nomad" data-translate="nav_nomad">Nomad Visa</a>
-            <a href="#contact" data-translate="nav_contact">Contact</a>
-            <div class="language-selector">
-                <button class="lang-btn active" data-lang="en">EN</button>
-                <button class="lang-btn" data-lang="es">ES</button>
-                <button class="lang-btn" data-lang="de">DE</button>
-                <button class="lang-btn" data-lang="it">IT</button>
-                <button class="lang-btn" data-lang="fr">FR</button>
-            </div>
+<nav id="navbar">
+    <a href="#" class="logo">C<span class="retract">RESVANC</span>E</a>
+    <div class="nav-links">
+        <a href="#services" data-translate="nav_expertise">Expertise</a>
+        <a href="#nomad" data-translate="nav_nomad">Nomad Visa</a>
+        <a href="#contact" data-translate="nav_contact">Contact</a>
+        <div class="language-selector">
+            <button class="lang-btn active" data-lang="en">EN</button>
+            <button class="lang-btn" data-lang="es">ES</button>
+            <button class="lang-btn" data-lang="de">DE</button>
+            <button class="lang-btn" data-lang="it">IT</button>
+            <button class="lang-btn" data-lang="fr">FR</button>
         </div>
-    </nav>
+    </div>
+</nav>
 
-    <section class="hero">
-        <div class="reveal">
-            <div class="languages-simple">
+<!-- HERO -->
+<section class="hero">
+    <div class="hero-bg-circle hero-bg-circle-1"></div>
+    <div class="hero-bg-circle hero-bg-circle-2"></div>
+    <div class="hero-content">
+        <div class="hero-meta-row reveal">
+            <!-- Languages pill -->
+            <div class="languages-pill">
                 <i class="fas fa-language"></i>
-                <div class="languages-text-container">
+                <div class="lang-rotating-wrap">
                     <span class="lang-text active" data-lang="en">We speak your language</span>
                     <span class="lang-text" data-lang="es">Hablamos tu idioma</span>
                     <span class="lang-text" data-lang="de">Wir sprechen Ihre Sprache</span>
@@ -270,774 +503,576 @@
                     <span class="lang-text" data-lang="fr">Nous parlons votre langue</span>
                 </div>
             </div>
-
-            <div class="trustpilot-hero-badge">
-                <div class="tp-stars">
-                    <div class="tp-star"><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg></div>
-                    <div class="tp-star"><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg></div>
-                    <div class="tp-star"><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg></div>
-                    <div class="tp-star"><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg></div>
-                    <div class="tp-star"><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg></div>
+            <!-- Trustpilot pill — separate from languages -->
+            <div class="tp-pill">
+                <div class="tp-stars-sm">
+                    <div class="tp-star-sm"><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg></div>
+                    <div class="tp-star-sm"><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg></div>
+                    <div class="tp-star-sm"><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg></div>
+                    <div class="tp-star-sm"><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg></div>
+                    <div class="tp-star-sm"><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg></div>
                 </div>
                 <span class="tp-logo-text">Trustpilot</span>
                 <span style="color:var(--text-muted);">·</span>
                 <span data-translate="tp_hero_label">Rated 5.0 by our clients</span>
             </div>
-            
-            <h1 data-translate="hero_title">We walk you <br> <span>through it.</span></h1>
-            <p data-translate="hero_subtitle">Direct and personal advisory for expats in Spain. Professional expertise and on-site support for your peace of mind.</p>
-            <div class="cta-container">
-                <a href="https://calendly.com/hello-cresvance/new-meeting" target="_blank" class="btn btn-primary" data-translate="btn_consultation">Free Consultation</a>
-                <a href="https://api.whatsapp.com/send/?phone=34602593904&text&type=phone_number&app_absent=0" target="_blank" class="btn btn-whatsapp"><i class="fab fa-whatsapp"></i> <span data-translate="btn_whatsapp">Chat with us</span></a>
-            </div>
-        </div>
-    </section>
-
-    <section class="insights">
-        <div class="insight-card reveal">
-            <span style="color: var(--electric); font-weight: 800; font-size: 0.9rem; text-transform: uppercase;" data-translate="insight_badge">Andalusia 2026 Tax Update</span>
-            <h3 data-translate="insight_title">Maximize your returns</h3>
-            <div class="deduction-grid">
-                <div class="deduction-item">
-                    <h4><i class="fas fa-dumbbell"></i> <span data-translate="deduction1_title">Sports and Health</span></h4>
-                    <p data-translate="deduction1_desc">Recover <b>15% of gym fees</b> and sports memberships. Maximize your health and your savings.</p>
-                </div>
-                <div class="deduction-item">
-                    <h4><i class="fas fa-paw"></i> <span data-translate="deduction2_title">Pet Healthcare</span></h4>
-                    <p data-translate="deduction2_desc">Claim <b>15% of veterinary expenses</b> for preventive care and check-ups for your pets.</p>
-                </div>
-                <div class="deduction-item">
-                    <h4><i class="fas fa-home"></i> <span data-translate="deduction3_title">Renting</span></h4>
-                    <p data-translate="deduction3_desc"><b>15% deduction</b> on rent for residents under 35 or over 65 years old.</p>
-                </div>
-                <div class="deduction-item">
-                    <h4><i class="fas fa-book"></i> <span data-translate="deduction4_title">Education</span></h4>
-                    <p data-translate="deduction4_desc">Deductions for <b>language classes and textbooks</b> to support your family's growth.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section id="services" class="services">
-        <div class="bento-grid">
-            <div class="bento-item span-2 reveal">
-                <i class="fas fa-calculator"></i>
-                <h3 data-translate="service1_title">Taxation and Invoicing</h3>
-                <p data-translate="service1_desc">Personalized tax management with no technical jargon.</p>
-                <ul>
-                    <li data-translate="service1_item1">Annual Income Tax filings</li>
-                    <li data-translate="service1_item2">Autónomo management and registration</li>
-                    <li data-translate="service1_item3">Professional Invoicing setup and monthly support</li>
-                </ul>
-            </div>
-            <div class="bento-item reveal">
-                <i class="fas fa-passport"></i>
-                <h3 data-translate="service2_title">Residency and NIE</h3>
-                <p data-translate="service2_desc">We accompany you to your appointments — every step of the way.</p>
-                <ul>
-                    <li data-translate="service2_item1">NIE for non-EU nationals</li>
-                    <li data-translate="service2_item2">NIE for EU citizens</li>
-                    <li data-translate="service2_item3">TIE fingerprinting appointments</li>
-                </ul>
-            </div>
-            <div class="bento-item reveal">
-                <i class="fas fa-file-signature"></i>
-                <h3 data-translate="service3_title">Bureaucracy</h3>
-                <ul>
-                    <li data-translate="service3_item1">Rental Deposit management</li>
-                    <li data-translate="service3_item2">Digital Notification tracking</li>
-                    <li data-translate="service3_item3">Banking recommendations and setup</li>
-                </ul>
-            </div>
-            <div class="bento-item span-2 reveal">
-                <i class="fas fa-fingerprint"></i>
-                <h3 data-translate="service4_title">Digital and Kit Digital</h3>
-                <p data-translate="service4_desc">We bridge the digital gap in Spain for you.</p>
-                <ul>
-                    <li><b data-translate="service4_item1_bold">Kit Digital for Autónomos:</b> <span data-translate="service4_item1_text">Complete grant management</span></li>
-                    <li data-translate="service4_item2">Digital Certificate installation and setup</li>
-                    <li data-translate="service4_item3">Spanish Healthcare (SIP) card registration</li>
-                </ul>
-            </div>
-        </div>
-    </section>
-
-    <!-- DIGITAL NOMAD VISA SECTION -->
-    <section id="nomad" class="nomad-section">
-        <div class="nomad-inner">
-
-            <div class="reveal">
-                <div class="nomad-badge">
-                    <i class="fas fa-globe"></i>
-                    <span data-translate="nomad_badge">Digital Nomad Visa · Spain</span>
-                </div>
-            </div>
-
-            <div class="nomad-header reveal">
-                <div>
-                    <h2 class="nomad-title" data-translate="nomad_title">Live &amp; work in Spain. <span>Legally.</span></h2>
-                </div>
-                <div class="nomad-intro-text">
-                    <p data-translate="nomad_intro1">Spain's Digital Nomad Visa opens the door to a new way of living. Our advisory team guides you through every requirement, so you can focus on the move.</p>
-                    <p data-translate="nomad_intro2">We handle the process with you from start to finish, <strong>whether you apply from your home country or already from within Spain.</strong></p>
-                </div>
-            </div>
-
-            <div class="nomad-cards reveal">
-                <div class="nomad-card">
-                    <div class="nomad-card-icon"><i class="fas fa-laptop-house"></i></div>
-                    <h4 data-translate="nomad_card1_title">Who qualifies</h4>
-                    <p data-translate="nomad_card1_desc">Remote workers employed under a foreign contract or W-2, freelancers with international clients, and self-employed professionals earning above Spain's income threshold. If you are unsure whether your situation qualifies, book a free call and we will tell you.</p>
-                </div>
-                <div class="nomad-card">
-                    <div class="nomad-card-icon"><i class="fas fa-file-alt"></i></div>
-                    <h4 data-translate="nomad_card2_title">Document preparation</h4>
-                    <p data-translate="nomad_card2_desc">We guide you through every required document: contracts, apostilles, criminal records, health insurance and more.</p>
-                </div>
-                <div class="nomad-card">
-                    <div class="nomad-card-icon"><i class="fas fa-building-columns"></i></div>
-                    <h4 data-translate="nomad_card3_title">Consulate or in-country</h4>
-                    <p data-translate="nomad_card3_desc">Apply from your home consulate before arriving, or switch status from inside Spain. We support both routes.</p>
-                </div>
-                <div class="nomad-card">
-                    <div class="nomad-card-icon"><i class="fas fa-percent"></i></div>
-                    <h4 data-translate="nomad_card4_title">Beckham Law tax benefit</h4>
-                    <p data-translate="nomad_card4_desc">Pay a flat 24% income tax rate instead of up to 47% for the first 6 years. We handle the application for you.</p>
-                </div>
-                <div class="nomad-card">
-                    <div class="nomad-card-icon"><i class="fas fa-sun"></i></div>
-                    <h4 data-translate="nomad_card5_title">Non-Lucrative Visa (NLV)</h4>
-                    <p data-translate="nomad_card5_desc">Not working remotely but want to live in Spain on passive income or savings? The NLV may be your route. We assess your eligibility and manage the full application.</p>
-                </div>
-                <div class="nomad-card">
-                    <div class="nomad-card-icon"><i class="fas fa-arrows-rotate"></i></div>
-                    <h4 data-translate="nomad_card6_title">Renewal support</h4>
-                    <p data-translate="nomad_card6_desc">We track your renewal deadlines and handle the entire process proactively, so you never have to worry about lapsing status.</p>
-                </div>
-            </div>
-
-            <div class="nomad-cta-strip reveal">
-                <div class="nomad-cta-strip-text">
-                    <h4 data-translate="nomad_cta_title">Check if you are eligible</h4>
-                    <p data-translate="nomad_cta_desc">Book a free 30-minute call and find out if the Digital Nomad Visa is the right path for you.</p>
-                </div>
-                <div class="nomad-cta-buttons">
-                    <a href="https://calendly.com/hello-cresvance/new-meeting" target="_blank" class="btn-nomad-primary">
-                        <i class="fas fa-arrow-right"></i> <span data-translate="nomad_btn_eligibility_text">Free eligibility check</span>
-                    </a>
-                    <a href="https://api.whatsapp.com/send/?phone=34602593904&text&type=phone_number&app_absent=0" target="_blank" class="btn-nomad-outline">
-                        <i class="fab fa-whatsapp"></i> <span data-translate="nomad_btn_whatsapp">Ask us on WhatsApp</span>
-                    </a>
-                </div>
-            </div>
-
-            <div class="nomad-consulate-note reveal">
-                <i class="fas fa-info-circle"></i>
-                <p data-translate="nomad_consulate_note"><strong>Applying from abroad?</strong> We work with you remotely and coordinate directly with your local Spanish consulate. No need to be in Spain to get started.</p>
-            </div>
-
-        </div>
-    </section>
-
-    <!-- TRUSTPILOT REVIEWS SECTION -->
-    <section class="trustpilot-section">
-        <div class="tp-section-header reveal">
-            <h2 data-translate="tp_title">What our clients say</h2>
-            <div class="tp-overall">
-                <span class="tp-score">4.0</span>
-                <div class="tp-stars-large">
-                    <div class="tp-star-lg"><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg></div>
-                    <div class="tp-star-lg"><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg></div>
-                    <div class="tp-star-lg"><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg></div>
-                    <div class="tp-star-lg"><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg></div>
-                    <div class="tp-star-lg" style="background:linear-gradient(90deg,var(--star-color) 0%,#ddd 0%)"><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg></div>
-                </div>
-                <span class="tp-label" data-translate="tp_on">on</span>
-                <span class="tp-logo-text" style="font-size:1.1rem;">Trustpilot</span>
-            </div>
-            <br>
-            <a href="https://es.trustpilot.com/review/cresvance.com" target="_blank" class="tp-link">
-                <i class="fas fa-external-link-alt" style="font-size:0.75rem;"></i>
-                <span data-translate="tp_see_all">See all reviews</span>
-            </a>
         </div>
 
-        <div class="reviews-grid reveal">
-            <div class="review-card">
-                <div class="review-header">
-                    <div>
-                        <div class="reviewer-name">A. Mitchell</div>
-                        <div class="review-date" data-translate="review1_date">April 2026</div>
-                    </div>
-                </div>
-                <div class="review-stars">
-                    <div class="review-star"><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg></div>
-                    <div class="review-star"><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg></div>
-                    <div class="review-star"><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg></div>
-                    <div class="review-star"><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg></div>
-                    <div class="review-star"><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg></div>
-                </div>
-                <div class="review-title" data-translate="review1_title">Tax refund in less than two weeks</div>
-                <div class="review-text" data-translate="review1_text">I used Cresvance for the Spanish tax season and they were great. As an expat in Málaga it was my first declaración de la renta and I had no idea how to handle it. The team managed everything — I only needed to provide my payslips. I received my refund in less than two weeks. Highly recommended.</div>
-                <div class="tp-verified"><i class="fas fa-check-circle"></i> <span data-translate="tp_verified">Verified review</span></div>
-            </div>
+        <h1 class="reveal reveal-delay-1" data-translate="hero_title">We walk you <br> <span>through it.</span></h1>
+        <p class="reveal reveal-delay-2" data-translate="hero_subtitle">Direct and personal advisory for expats in Spain. Professional expertise and on-site support for your peace of mind.</p>
+        <div class="hero-ctas reveal reveal-delay-3">
+            <a href="https://calendly.com/hello-cresvance/new-meeting" target="_blank" class="btn btn-primary" data-translate="btn_consultation">Free Consultation</a>
+            <a href="https://api.whatsapp.com/send/?phone=34602593904&text&type=phone_number&app_absent=0" target="_blank" class="btn btn-whatsapp"><i class="fab fa-whatsapp"></i> <span data-translate="btn_whatsapp">Chat with us</span></a>
+        </div>
+    </div>
+    <div class="scroll-hint">
+        <div class="scroll-line"></div>
+        <span>Scroll</span>
+    </div>
+</section>
 
-            <div class="review-card">
-                <div class="review-header">
-                    <div>
-                        <div class="reviewer-name">R. Kovács</div>
-                        <div class="review-date" data-translate="review2_date">2025</div>
-                    </div>
-                </div>
-                <div class="review-stars">
-                    <div class="review-star"><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg></div>
-                    <div class="review-star"><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg></div>
-                    <div class="review-star"><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg></div>
-                    <div class="review-star"><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg></div>
-                    <div class="review-star"><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg></div>
-                </div>
-                <div class="review-title" data-translate="review2_title">Always up to date with Spanish authorities</div>
-                <div class="review-text" data-translate="review2_text">I have used them for several different bureaucratic procedures and they have been great. They are very up to date with all the changes with the Spanish authorities — knowledgeable, communicative, and reliable. I will absolutely keep using them.</div>
-                <div class="tp-verified"><i class="fas fa-check-circle"></i> <span data-translate="tp_verified">Verified review</span></div>
-            </div>
+<!-- STATS STRIP -->
+<div class="stats-strip">
+    <div class="stat-item reveal">
+        <div class="stat-num">5<span>.0</span></div>
+        <div class="stat-label">Trustpilot score</div>
+    </div>
+    <div class="stat-item reveal reveal-delay-1">
+        <div class="stat-num">5<span>+</span></div>
+        <div class="stat-label" data-translate="stat_languages">Languages spoken</div>
+    </div>
+    <div class="stat-item reveal reveal-delay-2">
+        <div class="stat-num">100<span>%</span></div>
+        <div class="stat-label" data-translate="stat_expat">Expat-focused</div>
+    </div>
+    <div class="stat-item reveal reveal-delay-3">
+        <div class="stat-num">2<span>w</span></div>
+        <div class="stat-label" data-translate="stat_refund">Avg. tax refund time</div>
+    </div>
+</div>
 
-            <div class="review-card" style="display:flex; flex-direction:column; justify-content:center; align-items:center; text-align:center; background: linear-gradient(135deg, #f8fafc, #f1f5f9);">
-                <div style="font-size:2rem; color:var(--star-color); margin-bottom:12px;">
-                    <i class="fas fa-star"></i>
-                </div>
-                <div style="font-weight:800; color:var(--navy); font-size:1.1rem; margin-bottom:8px;" data-translate="tp_cta_card_title">Happy with our service?</div>
-                <div style="font-size:0.88rem; color:var(--text-muted); margin-bottom:20px;" data-translate="tp_cta_card_text">Your review helps other expats find the right support.</div>
-                <a href="https://es.trustpilot.com/review/cresvance.com" target="_blank" style="background:var(--star-color); color:white; padding:12px 22px; border-radius:8px; font-weight:800; font-size:0.85rem; text-decoration:none; display:inline-flex; align-items:center; gap:8px; transition:0.3s;" onmouseover="this.style.opacity='0.85'" onmouseout="this.style.opacity='1'">
-                    <i class="fas fa-pen"></i> <span data-translate="tp_write_review">Write a review</span>
+<!-- INSIGHTS -->
+<section class="insights">
+    <div class="insight-card reveal">
+        <div class="section-label" data-translate="insight_badge">Andalusia 2026 Tax Update</div>
+        <h3 data-translate="insight_title">Maximize your returns</h3>
+        <div class="deduction-grid">
+            <div class="deduction-item">
+                <h4><i class="fas fa-dumbbell"></i> <span data-translate="deduction1_title">Sports and Health</span></h4>
+                <p data-translate="deduction1_desc">Recover <b>15% of gym fees</b> and sports memberships. Maximize your health and your savings.</p>
+            </div>
+            <div class="deduction-item">
+                <h4><i class="fas fa-paw"></i> <span data-translate="deduction2_title">Pet Healthcare</span></h4>
+                <p data-translate="deduction2_desc">Claim <b>15% of veterinary expenses</b> for preventive care and check-ups for your pets.</p>
+            </div>
+            <div class="deduction-item">
+                <h4><i class="fas fa-home"></i> <span data-translate="deduction3_title">Renting</span></h4>
+                <p data-translate="deduction3_desc"><b>15% deduction</b> on rent for residents under 35 or over 65 years old.</p>
+            </div>
+            <div class="deduction-item">
+                <h4><i class="fas fa-book"></i> <span data-translate="deduction4_title">Education</span></h4>
+                <p data-translate="deduction4_desc">Deductions for <b>language classes and textbooks</b> to support your family's growth.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- SERVICES -->
+<section id="services" class="services">
+    <div class="services-header reveal">
+        <div class="section-label" data-translate="services_label">What we do</div>
+        <h2 data-translate="services_heading">Everything you need.<br>Nothing you don't.</h2>
+    </div>
+    <div class="bento-grid">
+        <div class="bento-item featured span-2 reveal">
+            <div class="bento-icon"><i class="fas fa-calculator"></i></div>
+            <h3 data-translate="service1_title">Taxation and Invoicing</h3>
+            <p data-translate="service1_desc">Personalized tax management with no technical jargon.</p>
+            <ul>
+                <li data-translate="service1_item1">Annual Income Tax filings</li>
+                <li data-translate="service1_item2">Autónomo management and registration</li>
+                <li data-translate="service1_item3">Professional Invoicing setup and monthly support</li>
+            </ul>
+        </div>
+        <div class="bento-item reveal">
+            <div class="bento-icon"><i class="fas fa-passport"></i></div>
+            <h3 data-translate="service2_title">Residency and NIE</h3>
+            <p data-translate="service2_desc">We accompany you to your appointments — every step of the way.</p>
+            <ul>
+                <li data-translate="service2_item1">NIE for non-EU nationals</li>
+                <li data-translate="service2_item2">NIE for EU citizens</li>
+                <li data-translate="service2_item3">TIE fingerprinting appointments</li>
+            </ul>
+        </div>
+        <div class="bento-item reveal reveal-delay-1">
+            <div class="bento-icon"><i class="fas fa-file-signature"></i></div>
+            <h3 data-translate="service3_title">Bureaucracy</h3>
+            <ul>
+                <li data-translate="service3_item1">Rental Deposit management</li>
+                <li data-translate="service3_item2">Digital Notification tracking</li>
+                <li data-translate="service3_item3">Banking recommendations and setup</li>
+            </ul>
+        </div>
+        <div class="bento-item span-2 reveal reveal-delay-2">
+            <div class="bento-icon"><i class="fas fa-fingerprint"></i></div>
+            <h3 data-translate="service4_title">Digital and Kit Digital</h3>
+            <p data-translate="service4_desc">We bridge the digital gap in Spain for you.</p>
+            <ul>
+                <li><b data-translate="service4_item1_bold">Kit Digital for Autónomos:</b> <span data-translate="service4_item1_text">Complete grant management</span></li>
+                <li data-translate="service4_item2">Digital Certificate installation and setup</li>
+                <li data-translate="service4_item3">Spanish Healthcare (SIP) card registration</li>
+            </ul>
+        </div>
+    </div>
+</section>
+
+<!-- NOMAD -->
+<section id="nomad" class="nomad-section">
+    <div class="nomad-inner">
+        <div class="reveal">
+            <div class="nomad-badge"><i class="fas fa-globe"></i> <span data-translate="nomad_badge">Digital Nomad Visa · Spain</span></div>
+        </div>
+        <div class="nomad-header reveal">
+            <h2 class="nomad-title" data-translate="nomad_title">Live &amp; work in Spain. <span>Legally.</span></h2>
+            <div class="nomad-intro-text">
+                <p data-translate="nomad_intro1">Spain's Digital Nomad Visa opens the door to a new way of living. Our advisory team guides you through every requirement, so you can focus on the move.</p>
+                <p data-translate="nomad_intro2">We handle the process with you from start to finish, <strong>whether you apply from your home country or already from within Spain.</strong></p>
+            </div>
+        </div>
+        <div class="nomad-cards reveal">
+            <div class="nomad-card">
+                <div class="nomad-card-icon"><i class="fas fa-laptop-house"></i></div>
+                <h4 data-translate="nomad_card1_title">Who qualifies</h4>
+                <p data-translate="nomad_card1_desc">Remote workers employed under a foreign contract or W-2, freelancers with international clients, and self-employed professionals earning above Spain's income threshold.</p>
+            </div>
+            <div class="nomad-card">
+                <div class="nomad-card-icon"><i class="fas fa-file-alt"></i></div>
+                <h4 data-translate="nomad_card2_title">Document preparation</h4>
+                <p data-translate="nomad_card2_desc">We guide you through every required document: contracts, apostilles, criminal records, health insurance and more.</p>
+            </div>
+            <div class="nomad-card">
+                <div class="nomad-card-icon"><i class="fas fa-building-columns"></i></div>
+                <h4 data-translate="nomad_card3_title">Consulate or in-country</h4>
+                <p data-translate="nomad_card3_desc">Apply from your home consulate before arriving, or switch status from inside Spain. We support both routes.</p>
+            </div>
+            <div class="nomad-card">
+                <div class="nomad-card-icon"><i class="fas fa-percent"></i></div>
+                <h4 data-translate="nomad_card4_title">Beckham Law tax benefit</h4>
+                <p data-translate="nomad_card4_desc">Pay a flat 24% income tax rate instead of up to 47% for the first 6 years. We handle the application for you.</p>
+            </div>
+            <div class="nomad-card">
+                <div class="nomad-card-icon"><i class="fas fa-sun"></i></div>
+                <h4 data-translate="nomad_card5_title">Non-Lucrative Visa (NLV)</h4>
+                <p data-translate="nomad_card5_desc">Not working remotely but want to live in Spain on passive income or savings? We assess your eligibility and manage the full application.</p>
+            </div>
+            <div class="nomad-card">
+                <div class="nomad-card-icon"><i class="fas fa-arrows-rotate"></i></div>
+                <h4 data-translate="nomad_card6_title">Renewal support</h4>
+                <p data-translate="nomad_card6_desc">We track your renewal deadlines and handle the entire process proactively, so you never have to worry about lapsing status.</p>
+            </div>
+        </div>
+        <div class="nomad-cta-strip reveal">
+            <div class="nomad-cta-strip-text">
+                <h4 data-translate="nomad_cta_title">Check if you are eligible</h4>
+                <p data-translate="nomad_cta_desc">Book a free 30-minute call and find out if the Digital Nomad Visa is the right path for you.</p>
+            </div>
+            <div class="nomad-cta-buttons">
+                <a href="https://calendly.com/hello-cresvance/new-meeting" target="_blank" class="btn-nomad-primary">
+                    <i class="fas fa-arrow-right"></i> <span data-translate="nomad_btn_eligibility_text">Free eligibility check</span>
+                </a>
+                <a href="https://api.whatsapp.com/send/?phone=34602593904&text&type=phone_number&app_absent=0" target="_blank" class="btn-nomad-outline">
+                    <i class="fab fa-whatsapp"></i> <span data-translate="nomad_btn_whatsapp">Ask us on WhatsApp</span>
                 </a>
             </div>
         </div>
-    </section>
+        <div class="nomad-consulate-note reveal">
+            <i class="fas fa-info-circle"></i>
+            <p data-translate="nomad_consulate_note"><strong>Applying from abroad?</strong> We work with you remotely and coordinate directly with your local Spanish consulate. No need to be in Spain to get started.</p>
+        </div>
+    </div>
+</section>
 
-    <footer id="contact">
-        <div class="footer-logo-container" id="footer-logo">
-            C<span class="footer-retract">RESVANC</span>E
-        </div>
-        <p style="opacity: 0.7; margin-bottom: 30px;" data-translate="footer_tagline">Simplifying Spanish bureaucracy for you.</p>
-        <div class="socials">
-            <a href="https://www.linkedin.com/company/cresvance" target="_blank" style="color:white; font-size: 1.5rem; margin: 0 15px;"><i class="fab fa-linkedin"></i></a>
-            <a href="https://www.instagram.com/Cresvance_support" target="_blank" style="color:white; font-size: 1.5rem; margin: 0 15px;"><i class="fab fa-instagram"></i></a>
-            <a href="mailto:hello@cresvance.com" style="color:white; font-size: 1.5rem; margin: 0 15px;"><i class="fas fa-envelope"></i></a>
-        </div>
-        <p style="margin-top: 40px; opacity: 0.5; font-size: 0.8rem;">Málaga and Remote | EN · DE · ES · FR · IT</p>
-    </footer>
-
-    <div id="cookie-banner">
-        <h4 style="color: var(--navy);" data-translate="cookie_title">Privacy Preferences</h4>
-        <p style="font-size: 0.85rem; color: var(--text-muted); margin-top: 10px;" data-translate="cookie_desc">We use cookies to ensure you get the best experience. Choose how you want to proceed.</p>
-        <div id="cookie-settings-panel">
-            <div class="setting-item"><span data-translate="cookie_essential">Essential Cookies</span><span style="color:green; font-weight:700;" data-translate="cookie_always">Always Active</span></div>
-            <div class="setting-item"><span data-translate="cookie_analytics">Analytics Cookies</span><input type="checkbox" checked></div>
-            <div class="setting-item"><span data-translate="cookie_marketing">Marketing Cookies</span><input type="checkbox"></div>
-        </div>
-        <div class="cookie-buttons">
-            <button onclick="saveCookies('all')" class="cookie-btn btn-accept" data-translate="cookie_accept">Accept All</button>
-            <button onclick="saveCookies('reject')" class="cookie-btn btn-reject" data-translate="cookie_reject">Reject All</button>
-            <button onclick="toggleCookieSettings()" class="cookie-btn btn-settings" data-translate="cookie_customize">Customize</button>
+<!-- REVIEWS -->
+<section class="trustpilot-section">
+    <div class="tp-section-header reveal">
+        <div class="section-label">Trustpilot</div>
+        <h2 data-translate="tp_title">What our clients say</h2>
+        <div class="tp-overall">
+            <span class="tp-score">5.0</span>
+            <div class="tp-stars-large">
+                <div class="tp-star-lg"><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg></div>
+                <div class="tp-star-lg"><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg></div>
+                <div class="tp-star-lg"><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg></div>
+                <div class="tp-star-lg"><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg></div>
+                <div class="tp-star-lg"><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg></div>
+            </div>
+            <div class="tp-meta">
+                <span class="tp-label"><span data-translate="tp_on">on</span> <span class="tp-logo-text" style="color:var(--star-color);font-weight:800;">Trustpilot</span></span>
+                <a href="https://es.trustpilot.com/review/cresvance.com" target="_blank" class="tp-link">
+                    <i class="fas fa-external-link-alt" style="font-size:0.7rem;"></i>
+                    <span data-translate="tp_see_all">See all reviews</span>
+                </a>
+            </div>
         </div>
     </div>
 
-    <script>
-        const translations = {
-            en: {
-                "nav_expertise": "Expertise",
-                "nav_nomad": "Nomad Visa",
-                "nav_contact": "Contact",
-                "tp_hero_label": "Rated 4.0 by our clients",
-                "hero_title": "We walk you <br> <span>through it.</span>",
-                "hero_subtitle": "Direct and personal advisory for expats in Spain. Professional expertise and on-site support for your peace of mind.",
-                "btn_consultation": "Free Consultation",
-                "btn_whatsapp": "Chat with us",
-                "insight_badge": "Andalusia 2026 Tax Update",
-                "insight_title": "Maximize your returns",
-                "deduction1_title": "Sports and Health",
-                "deduction1_desc": "Recover <b>15% of gym fees</b> and sports memberships. Maximize your health and your savings.",
-                "deduction2_title": "Pet Healthcare",
-                "deduction2_desc": "Claim <b>15% of veterinary expenses</b> for preventive care and check-ups for your pets.",
-                "deduction3_title": "Renting",
-                "deduction3_desc": "<b>15% deduction</b> on rent for residents under 35 or over 65 years old.",
-                "deduction4_title": "Education",
-                "deduction4_desc": "Deductions for <b>language classes and textbooks</b> to support your family's growth.",
-                "service1_title": "Taxation and Invoicing",
-                "service1_desc": "Personalized tax management with no technical jargon.",
-                "service1_item1": "Annual Income Tax filings",
-                "service1_item2": "Autónomo management and registration",
-                "service1_item3": "Professional Invoicing setup and monthly support",
-                "service2_title": "Residency and NIE",
-                "service2_desc": "We accompany you to your appointments — every step of the way.",
-                "service2_item1": "NIE for non-EU nationals",
-                "service2_item2": "NIE for EU citizens",
-                "service2_item3": "TIE fingerprinting appointments",
-                "service3_title": "Bureaucracy",
-                "service3_item1": "Rental Deposit management",
-                "service3_item2": "Digital Notification tracking",
-                "service3_item3": "Banking recommendations and setup",
-                "service4_title": "Digital and Kit Digital",
-                "service4_desc": "We bridge the digital gap in Spain for you.",
-                "service4_item1_bold": "Kit Digital for Autónomos:",
-                "service4_item1_text": "Complete grant management",
-                "service4_item2": "Digital Certificate installation and setup",
-                "service4_item3": "Spanish Healthcare (SIP) card registration",
-                "nomad_badge": "Digital Nomad Visa · Spain",
-                "nomad_title": "Live &amp; work in Spain. <span>Legally.</span>",
-                "nomad_intro1": "Spain's Digital Nomad Visa opens the door to a new way of living. Our advisory team guides you through every requirement, so you can focus on the move.",
-                "nomad_intro2": "We handle the process with you from start to finish, <strong>whether you apply from your home country or already from within Spain.</strong>",
-                "nomad_card1_title": "Who qualifies",
-                "nomad_card1_desc": "Remote workers employed under a foreign contract or W-2, freelancers with international clients, and self-employed professionals earning above Spain's income threshold. If you are unsure whether your situation qualifies, book a free call and we will tell you.",
-                "nomad_card2_title": "Document preparation",
-                "nomad_card2_desc": "We guide you through every required document: contracts, apostilles, criminal records, health insurance and more.",
-                "nomad_card3_title": "Consulate or in-country",
-                "nomad_card3_desc": "Apply from your home consulate before arriving, or switch status from inside Spain. We support both routes.",
-                "nomad_card4_title": "Beckham Law tax benefit",
-                "nomad_card4_desc": "Pay a flat 24% income tax rate instead of up to 47% for the first 6 years. We handle the application for you.",
-                "nomad_card5_title": "Non-Lucrative Visa (NLV)",
-                "nomad_card5_desc": "Not working remotely but want to live in Spain on passive income or savings? The NLV may be your route. We assess your eligibility and manage the full application.",
-                "nomad_card6_title": "Renewal support",
-                "nomad_card6_desc": "We track your renewal deadlines and handle the entire process proactively, so you never have to worry about lapsing status.",
-                "nomad_cta_title": "Check if you are eligible",
-                "nomad_cta_desc": "Book a free 30-minute call and find out if the Digital Nomad Visa is the right path for you.",
-                "nomad_btn_eligibility_text": "Free eligibility check",
-                "nomad_btn_whatsapp": "Ask us on WhatsApp",
-                "nomad_consulate_note": "<strong>Applying from abroad?</strong> We work with you remotely and coordinate directly with your local Spanish consulate. No need to be in Spain to get started.",
-                "tp_title": "What our clients say",
-                "tp_on": "on",
-                "tp_see_all": "See all reviews on Trustpilot",
-                "tp_verified": "Verified review",
-                "review1_date": "April 2026",
-                "review1_title": "Tax refund in less than two weeks",
-                "review1_text": "I used Cresvance for the Spanish tax season and they were great. As an expat in Málaga it was my first declaración de la renta and I had no idea how to handle it. The team managed everything — I only needed to provide my payslips. I received my refund in less than two weeks. Highly recommended.",
-                "review2_date": "2025",
-                "review2_title": "Always up to date with Spanish authorities",
-                "review2_text": "I have used them for several different bureaucratic procedures and they have been great. They are very up to date with all the changes with the Spanish authorities — knowledgeable, communicative, and reliable. I will absolutely keep using them.",
-                "tp_cta_card_title": "Happy with our service?",
-                "tp_cta_card_text": "Your review helps other expats find the right support.",
-                "tp_write_review": "Write a review",
-                "footer_tagline": "Simplifying Spanish bureaucracy for you.",
-                "cookie_title": "Privacy Preferences",
-                "cookie_desc": "We use cookies to ensure you get the best experience. Choose how you want to proceed.",
-                "cookie_essential": "Essential Cookies",
-                "cookie_always": "Always Active",
-                "cookie_analytics": "Analytics Cookies",
-                "cookie_marketing": "Marketing Cookies",
-                "cookie_accept": "Accept All",
-                "cookie_reject": "Reject All",
-                "cookie_customize": "Customize"
-            },
-            es: {
-                "nav_expertise": "Servicios",
-                "nav_nomad": "Visa Nómada",
-                "nav_contact": "Contacto",
-                "tp_hero_label": "Valorado 4.0 por nuestros clientes",
-                "hero_title": "Te acompañamos <br> <span>en cada paso.</span>",
-                "hero_subtitle": "Asesoramiento directo y personal para expatriados en España. Experiencia profesional y apoyo presencial para tu tranquilidad.",
-                "btn_consultation": "Consulta Gratuita",
-                "btn_whatsapp": "Chatea con nosotros",
-                "insight_badge": "Actualización Fiscal Andalucía 2026",
-                "insight_title": "Maximiza tus devoluciones",
-                "deduction1_title": "Deporte y Salud",
-                "deduction1_desc": "Recupera <b>15% de las cuotas del gimnasio</b> y membresías deportivas.",
-                "deduction2_title": "Salud de Mascotas",
-                "deduction2_desc": "Deducción del <b>15% de gastos veterinarios</b> para cuidados preventivos de tus mascotas.",
-                "deduction3_title": "Alquiler",
-                "deduction3_desc": "<b>15% de deducción</b> en alquiler para residentes menores de 35 o mayores de 65 años.",
-                "deduction4_title": "Educación",
-                "deduction4_desc": "Deducciones para <b>clases de idiomas y libros de texto</b> para apoyar el crecimiento de tu familia.",
-                "service1_title": "Fiscalidad y Facturación",
-                "service1_desc": "Gestión fiscal personalizada sin tecnicismos.",
-                "service1_item1": "Declaraciones anuales de Renta",
-                "service1_item2": "Gestión y registro de Autónomos",
-                "service1_item3": "Configuración de Facturación Profesional y soporte mensual",
-                "service2_title": "Residencia y NIE",
-                "service2_desc": "Te acompañamos a tus citas en cada paso del proceso.",
-                "service2_item1": "NIE para ciudadanos no-UE",
-                "service2_item2": "NIE para ciudadanos UE",
-                "service2_item3": "Citas de huellas para TIE",
-                "service3_title": "Burocracia",
-                "service3_item1": "Gestión del Depósito de Alquiler",
-                "service3_item2": "Seguimiento de Notificaciones Digitales",
-                "service3_item3": "Recomendaciones bancarias y configuración",
-                "service4_title": "Digital y Kit Digital",
-                "service4_desc": "Cerramos la brecha digital en España por ti.",
-                "service4_item1_bold": "Kit Digital para Autónomos:",
-                "service4_item1_text": "Gestión completa de subvenciones",
-                "service4_item2": "Instalación y configuración de Certificado Digital",
-                "service4_item3": "Registro de Tarjeta Sanitaria (SIP)",
-                "nomad_badge": "Visa Nómada Digital · España",
-                "nomad_title": "Vive y trabaja en España. <span>Legalmente.</span>",
-                "nomad_intro1": "La Visa de Nómada Digital abre la puerta a una nueva forma de vivir. Nuestro equipo de asesores te guía en cada requisito para que tú te centres en el traslado.",
-                "nomad_intro2": "Gestionamos el proceso contigo de principio a fin, <strong>tanto si solicitas desde tu país como si ya estás en España.</strong>",
-                "nomad_card1_title": "¿Quién cumple los requisitos?",
-                "nomad_card1_desc": "Trabajadores en remoto con contrato extranjero o W-2, freelancers con clientes internacionales y autónomos con ingresos por encima del umbral requerido. Si no estás seguro de si tu situación cumple los requisitos, reserva una llamada gratuita y te lo explicamos.",
-                "nomad_card2_title": "Preparación de documentos",
-                "nomad_card2_desc": "Te guiamos en cada documento requerido: contratos, apostillas, antecedentes penales, seguro médico y más.",
-                "nomad_card3_title": "Consulado o en España",
-                "nomad_card3_desc": "Solicítala desde tu consulado antes de llegar, o cambia tu estatus estando ya en España. Apoyamos ambas vías.",
-                "nomad_card4_title": "Ventaja fiscal Ley Beckham",
-                "nomad_card4_desc": "Paga un tipo fijo del 24% en lugar de hasta el 47% durante los primeros 6 años. Nosotros gestionamos la solicitud.",
-                "nomad_card5_title": "Visa No Lucrativa (NLV)",
-                "nomad_card5_desc": "¿No trabajas en remoto pero quieres vivir en España con ingresos pasivos o ahorros? La NLV puede ser tu vía. Evaluamos tu elegibilidad y gestionamos la solicitud completa.",
-                "nomad_card6_title": "Apoyo en renovaciones",
-                "nomad_card6_desc": "Hacemos seguimiento de tus plazos de renovación y gestionamos todo el proceso de forma proactiva, para que nunca tengas que preocuparte por perder tu estatus.",
-                "nomad_cta_title": "Comprueba si cumples los requisitos",
-                "nomad_cta_desc": "Reserva una llamada gratuita de 30 minutos y descubre si la Visa de Nómada Digital es el camino correcto para ti.",
-                "nomad_btn_eligibility_text": "Verificación gratuita",
-                "nomad_btn_whatsapp": "Pregúntanos por WhatsApp",
-                "nomad_consulate_note": "<strong>¿Solicitando desde el extranjero?</strong> Trabajamos contigo a distancia y coordinamos directamente con tu consulado español local. No necesitas estar en España para empezar.",
-                "tp_title": "Lo que dicen nuestros clientes",
-                "tp_on": "en",
-                "tp_see_all": "Ver todas las reseñas en Trustpilot",
-                "tp_verified": "Reseña verificada",
-                "review1_date": "Abril 2026",
-                "review1_title": "Devolución de impuestos en menos de dos semanas",
-                "review1_text": "Usé Cresvance para la temporada fiscal española y fueron geniales. Como expatriado en Málaga era mi primera declaración de la renta y no sabía cómo manejarlo. El equipo gestionó todo; solo necesité proporcionar mis nóminas. Recibí mi devolución en menos de dos semanas. Muy recomendable.",
-                "review2_date": "2025",
-                "review2_title": "Siempre al día con las autoridades españolas",
-                "review2_text": "Los he utilizado para varios trámites burocráticos diferentes y han sido excelentes. Están muy al día con todos los cambios de las autoridades españolas, son conocedores, comunicativos y fiables. Los seguiré usando sin duda.",
-                "tp_cta_card_title": "¿Satisfecho con nuestro servicio?",
-                "tp_cta_card_text": "Tu reseña ayuda a otros expatriados a encontrar el apoyo adecuado.",
-                "tp_write_review": "Escribir una reseña",
-                "footer_tagline": "Simplificando la burocracia española para ti.",
-                "cookie_title": "Preferencias de Privacidad",
-                "cookie_desc": "Usamos cookies para garantizarte la mejor experiencia. Elige cómo quieres proceder.",
-                "cookie_essential": "Cookies Esenciales",
-                "cookie_always": "Siempre Activas",
-                "cookie_analytics": "Cookies Analíticas",
-                "cookie_marketing": "Cookies de Marketing",
-                "cookie_accept": "Aceptar Todo",
-                "cookie_reject": "Rechazar Todo",
-                "cookie_customize": "Personalizar"
-            },
-            de: {
-                "nav_expertise": "Expertise",
-                "nav_nomad": "Nomaden-Visum",
-                "nav_contact": "Kontakt",
-                "tp_hero_label": "Bewertet mit 4.0 von unseren Kunden",
-                "hero_title": "Wir begleiten Sie <br> <span>dabei.</span>",
-                "hero_subtitle": "Direkte und persönliche Beratung für Expats in Spanien. Professionelle Expertise und Vor-Ort-Unterstützung für Ihr Wohlbefinden.",
-                "btn_consultation": "Kostenlose Beratung",
-                "btn_whatsapp": "Chatten Sie mit uns",
-                "insight_badge": "Andalusien 2026 Steuerupdate",
-                "insight_title": "Maximieren Sie Ihre Rückerstattungen",
-                "deduction1_title": "Sport und Gesundheit",
-                "deduction1_desc": "Erhalten Sie <b>15% der Fitnessstudio-Gebühren</b> und Sportmitgliedschaften zurück.",
-                "deduction2_title": "Tiergesundheit",
-                "deduction2_desc": "<b>15% der Tierarztkosten</b> für Vorsorge Ihrer Haustiere absetzen.",
-                "deduction3_title": "Mieten",
-                "deduction3_desc": "<b>15% Abzug</b> auf Miete für Einwohner unter 35 oder über 65 Jahre.",
-                "deduction4_title": "Bildung",
-                "deduction4_desc": "Abzüge für <b>Sprachkurse und Lehrbücher</b> zur Unterstützung Ihrer Familie.",
-                "service1_title": "Besteuerung und Rechnungsstellung",
-                "service1_desc": "Personalisierte Steuerverwaltung ohne Fachjargon.",
-                "service1_item1": "Jährliche Einkommensteuererklärungen",
-                "service1_item2": "Freiberufler-Management und Registrierung",
-                "service1_item3": "Einrichtung professioneller Rechnungsstellung und monatlicher Support",
-                "service2_title": "Aufenthalt und NIE",
-                "service2_desc": "Wir begleiten Sie zu Ihren Terminen — Schritt für Schritt.",
-                "service2_item1": "NIE für Nicht-EU-Bürger",
-                "service2_item2": "NIE für EU-Bürger",
-                "service2_item3": "TIE Fingerabdruck-Termine",
-                "service3_title": "Bürokratie",
-                "service3_item1": "Verwaltung der Mietkaution",
-                "service3_item2": "Verfolgung digitaler Benachrichtigungen",
-                "service3_item3": "Bankempfehlungen und Einrichtung",
-                "service4_title": "Digital und Kit Digital",
-                "service4_desc": "Wir überbrücken die digitale Lücke in Spanien für Sie.",
-                "service4_item1_bold": "Kit Digital für Freiberufler:",
-                "service4_item1_text": "Komplette Fördermittelverwaltung",
-                "service4_item2": "Installation und Einrichtung des Digitalen Zertifikats",
-                "service4_item3": "Registrierung der spanischen Gesundheitskarte (SIP)",
-                "nomad_badge": "Digitales Nomaden-Visum · Spanien",
-                "nomad_title": "Leben &amp; Arbeiten in Spanien. <span>Legal.</span>",
-                "nomad_intro1": "Das Spanische Digitale Nomaden-Visum öffnet die Tür zu einer neuen Lebensweise. Unser Beratungsteam führt Sie durch alle Anforderungen, damit Sie sich auf den Umzug konzentrieren können.",
-                "nomad_intro2": "Wir begleiten Sie von Anfang bis Ende durch den Prozess, <strong>ob Sie vom Heimatkonsulat oder bereits aus Spanien heraus beantragen.</strong>",
-                "nomad_card1_title": "Wer qualifiziert sich",
-                "nomad_card1_desc": "Remote-Arbeitnehmer mit ausländischem Vertrag oder W-2, Freiberufler mit internationalen Kunden und Selbstständige, die über Spaniens Einkommensschwelle verdienen. Unsicher, ob Ihre Situation qualifiziert? Buchen Sie ein kostenloses Gespräch.",
-                "nomad_card2_title": "Dokumentenvorbereitung",
-                "nomad_card2_desc": "Wir begleiten Sie durch alle erforderlichen Dokumente: Verträge, Apostillen, Führungszeugnisse, Krankenversicherung und mehr.",
-                "nomad_card3_title": "Konsulat oder in Spanien",
-                "nomad_card3_desc": "Beantragen Sie vom Heimatkonsulat vor der Anreise oder wechseln Sie den Status aus Spanien heraus. Wir unterstützen beide Wege.",
-                "nomad_card4_title": "Beckham-Gesetz Steuervorteil",
-                "nomad_card4_desc": "Zahlen Sie einen pauschalen Einkommensteuersatz von 24% statt bis zu 47% für die ersten 6 Jahre. Wir erledigen den Antrag für Sie.",
-                "nomad_card5_title": "Nicht-Erwerbs-Visum (NLV)",
-                "nomad_card5_desc": "Kein Remote-Job, aber Sie möchten von passivem Einkommen in Spanien leben? Das NLV könnte Ihr Weg sein. Wir prüfen Ihre Berechtigung und verwalten den gesamten Antrag.",
-                "nomad_card6_title": "Verlängerungsunterstützung",
-                "nomad_card6_desc": "Wir verfolgen Ihre Verlängerungsfristen und erledigen den gesamten Prozess proaktiv, damit Sie sich keine Sorgen um Ihren Aufenthaltsstatus machen müssen.",
-                "nomad_cta_title": "Prüfen Sie Ihre Berechtigung",
-                "nomad_cta_desc": "Buchen Sie ein kostenloses 30-minütiges Gespräch und finden Sie heraus, ob das Digitale Nomaden-Visum der richtige Weg für Sie ist.",
-                "nomad_btn_eligibility_text": "Kostenlose Prüfung",
-                "nomad_btn_whatsapp": "Fragen Sie uns per WhatsApp",
-                "nomad_consulate_note": "<strong>Antrag aus dem Ausland?</strong> Wir arbeiten remote mit Ihnen und koordinieren direkt mit Ihrem örtlichen spanischen Konsulat. Sie müssen nicht in Spanien sein, um anzufangen.",
-                "tp_title": "Was unsere Kunden sagen",
-                "tp_on": "auf",
-                "tp_see_all": "Alle Bewertungen auf Trustpilot ansehen",
-                "tp_verified": "Verifizierte Bewertung",
-                "review1_date": "April 2026",
-                "review1_title": "Steuererstattung in weniger als zwei Wochen",
-                "review1_text": "Ich habe Cresvance für die spanische Steuersaison genutzt und sie waren großartig. Als Expat in Málaga war es meine erste Einkommensteuererklärung. Das Team hat alles verwaltet, ich musste nur meine Gehaltsabrechnungen bereitstellen. Ich erhielt meine Erstattung in weniger als zwei Wochen.",
-                "review2_date": "2025",
-                "review2_title": "Immer auf dem neuesten Stand mit den spanischen Behörden",
-                "review2_text": "Ich habe sie für verschiedene bürokratische Verfahren genutzt und sie waren großartig. Sie sind sehr auf dem neuesten Stand aller Änderungen bei den spanischen Behörden — kompetent, kommunikativ und zuverlässig.",
-                "tp_cta_card_title": "Zufrieden mit unserem Service?",
-                "tp_cta_card_text": "Ihre Bewertung hilft anderen Expats, die richtige Unterstützung zu finden.",
-                "tp_write_review": "Bewertung schreiben",
-                "footer_tagline": "Vereinfachung der spanischen Bürokratie für Sie.",
-                "cookie_title": "Datenschutzeinstellungen",
-                "cookie_desc": "Wir verwenden Cookies, um Ihnen das beste Erlebnis zu garantieren.",
-                "cookie_essential": "Essentielle Cookies",
-                "cookie_always": "Immer aktiv",
-                "cookie_analytics": "Analytics Cookies",
-                "cookie_marketing": "Marketing Cookies",
-                "cookie_accept": "Alle akzeptieren",
-                "cookie_reject": "Alle ablehnen",
-                "cookie_customize": "Anpassen"
-            },
-            it: {
-                "nav_expertise": "Servizi",
-                "nav_nomad": "Visto Nomade",
-                "nav_contact": "Contatto",
-                "tp_hero_label": "Valutato 4.0 dai nostri clienti",
-                "hero_title": "Ti accompagniamo <br> <span>in ogni passo.</span>",
-                "hero_subtitle": "Consulenza diretta e personale per espatriati in Spagna. Competenza professionale e supporto in loco per la tua tranquillità.",
-                "btn_consultation": "Consultazione Gratuita",
-                "btn_whatsapp": "Chatta con noi",
-                "insight_badge": "Aggiornamento Fiscale Andalusia 2026",
-                "insight_title": "Massimizza i tuoi rimborsi",
-                "deduction1_title": "Sport e Salute",
-                "deduction1_desc": "Recupera il <b>15% delle quote della palestra</b> e degli abbonamenti sportivi.",
-                "deduction2_title": "Salute degli Animali",
-                "deduction2_desc": "Deduzione del <b>15% delle spese veterinarie</b> per cure preventive dei tuoi animali.",
-                "deduction3_title": "Affitto",
-                "deduction3_desc": "<b>15% di deduzione</b> sull'affitto per residenti sotto i 35 o sopra i 65 anni.",
-                "deduction4_title": "Educazione",
-                "deduction4_desc": "Deduzioni per <b>lezioni di lingua e libri di testo</b> per sostenere la tua famiglia.",
-                "service1_title": "Tassazione e Fatturazione",
-                "service1_desc": "Gestione fiscale personalizzata senza gergo tecnico.",
-                "service1_item1": "Dichiarazioni annuali dei redditi",
-                "service1_item2": "Gestione e registrazione lavoratori autonomi",
-                "service1_item3": "Configurazione fatturazione professionale e supporto mensile",
-                "service2_title": "Residenza e NIE",
-                "service2_desc": "Ti accompagniamo ai tuoi appuntamenti in ogni fase del processo.",
-                "service2_item1": "NIE per cittadini non-UE",
-                "service2_item2": "NIE per cittadini UE",
-                "service2_item3": "Appuntamenti impronte digitali TIE",
-                "service3_title": "Burocrazia",
-                "service3_item1": "Gestione deposito cauzionale",
-                "service3_item2": "Tracciamento notifiche digitali",
-                "service3_item3": "Raccomandazioni bancarie e configurazione",
-                "service4_title": "Digitale e Kit Digital",
-                "service4_desc": "Colmiamo il divario digitale in Spagna per te.",
-                "service4_item1_bold": "Kit Digital per lavoratori autonomi:",
-                "service4_item1_text": "Gestione completa delle sovvenzioni",
-                "service4_item2": "Installazione e configurazione del Certificato Digitale",
-                "service4_item3": "Registrazione della Tessera Sanitaria (SIP)",
-                "nomad_badge": "Visto Nomade Digitale · Spagna",
-                "nomad_title": "Vivi e lavora in Spagna. <span>Legalmente.</span>",
-                "nomad_intro1": "Il Visto da Nomade Digitale spagnolo apre la porta a un nuovo modo di vivere. Il nostro team di consulenti ti guida in ogni requisito, così puoi concentrarti sul trasferimento.",
-                "nomad_intro2": "Gestiamo il processo con te dall'inizio alla fine, <strong>sia che tu faccia domanda dal tuo paese sia già dall'interno della Spagna.</strong>",
-                "nomad_card1_title": "Chi può accedervi",
-                "nomad_card1_desc": "Lavoratori da remoto con contratto estero o W-2, freelance con clienti internazionali e liberi professionisti con reddito superiore alla soglia spagnola. Non sei sicuro di qualificarti? Prenota una chiamata gratuita e te lo diciamo noi.",
-                "nomad_card2_title": "Preparazione documenti",
-                "nomad_card2_desc": "Ti guidiamo attraverso ogni documento richiesto: contratti, apostille, casellario giudiziale, assicurazione sanitaria e altro.",
-                "nomad_card3_title": "Consolato o dall'interno",
-                "nomad_card3_desc": "Fai domanda dal consolato prima di arrivare, o cambia il tuo status stando già in Spagna. Supportiamo entrambi i percorsi.",
-                "nomad_card4_title": "Vantaggio fiscale Legge Beckham",
-                "nomad_card4_desc": "Paga un'aliquota fissa del 24% invece di fino al 47% per i primi 6 anni. Ci occupiamo noi della domanda.",
-                "nomad_card5_title": "Visto Non Lucrativo (NLV)",
-                "nomad_card5_desc": "Non lavori da remoto ma vuoi vivere in Spagna con reddito passivo o risparmi? Il NLV potrebbe essere la tua via. Valutiamo la tua idoneità e gestiamo l'intera domanda.",
-                "nomad_card6_title": "Supporto al rinnovo",
-                "nomad_card6_desc": "Monitoriamo le tue scadenze di rinnovo e gestiamo l'intero processo proattivamente, così non devi mai preoccuparti di perdere il tuo status.",
-                "nomad_cta_title": "Verifica la tua idoneità",
-                "nomad_cta_desc": "Prenota una chiamata gratuita di 30 minuti e scopri se il Visto da Nomade Digitale è la strada giusta per te.",
-                "nomad_btn_eligibility_text": "Verifica gratuita",
-                "nomad_btn_whatsapp": "Chiedici su WhatsApp",
-                "nomad_consulate_note": "<strong>Fai domanda dall'estero?</strong> Lavoriamo con te da remoto e coordiniamo direttamente con il tuo consolato spagnolo locale. Non devi essere in Spagna per iniziare.",
-                "tp_title": "Cosa dicono i nostri clienti",
-                "tp_on": "su",
-                "tp_see_all": "Vedi tutte le recensioni su Trustpilot",
-                "tp_verified": "Recensione verificata",
-                "review1_date": "Aprile 2026",
-                "review1_title": "Rimborso fiscale in meno di due settimane",
-                "review1_text": "Ho usato Cresvance per la stagione fiscale spagnola ed è stato ottimo. Come espatriato a Málaga era la mia prima dichiarazione dei redditi. Il team ha gestito tutto, dovevo solo fornire le buste paga. Ho ricevuto il rimborso in meno di due settimane.",
-                "review2_date": "2025",
-                "review2_title": "Sempre aggiornati con le autorità spagnole",
-                "review2_text": "Li ho usati per diverse pratiche burocratiche e sono stati ottimi. Sono molto aggiornati su tutti i cambiamenti delle autorità spagnole — competenti, comunicativi e affidabili. Li userò sicuramente ancora.",
-                "tp_cta_card_title": "Soddisfatto del nostro servizio?",
-                "tp_cta_card_text": "La tua recensione aiuta altri espatriati a trovare il supporto giusto.",
-                "tp_write_review": "Scrivi una recensione",
-                "footer_tagline": "Semplificazione della burocrazia spagnola per te.",
-                "cookie_title": "Preferenze sulla Privacy",
-                "cookie_desc": "Utilizziamo i cookie per garantirti la migliore esperienza.",
-                "cookie_essential": "Cookie Essenziali",
-                "cookie_always": "Sempre Attivi",
-                "cookie_analytics": "Cookie Analitici",
-                "cookie_marketing": "Cookie di Marketing",
-                "cookie_accept": "Accetta Tutto",
-                "cookie_reject": "Rifiuta Tutto",
-                "cookie_customize": "Personalizza"
-            },
-            fr: {
-                "nav_expertise": "Expertise",
-                "nav_nomad": "Visa Nomade",
-                "nav_contact": "Contact",
-                "tp_hero_label": "Noté 4.0 par nos clients",
-                "hero_title": "Nous vous accompagnons <br> <span>pas à pas.</span>",
-                "hero_subtitle": "Conseil direct et personnalisé pour les expatriés en Espagne. Expertise professionnelle et soutien sur place pour votre tranquillité d'esprit.",
-                "btn_consultation": "Consultation Gratuite",
-                "btn_whatsapp": "Discutez avec nous",
-                "insight_badge": "Mise à jour fiscale Andalousie 2026",
-                "insight_title": "Maximisez vos remboursements",
-                "deduction1_title": "Sport et Santé",
-                "deduction1_desc": "Récupérez <b>15% des frais de salle de sport</b> et abonnements sportifs.",
-                "deduction2_title": "Santé Animale",
-                "deduction2_desc": "Déduction de <b>15% des frais vétérinaires</b> pour les soins préventifs de vos animaux.",
-                "deduction3_title": "Location",
-                "deduction3_desc": "<b>15% de déduction</b> sur le loyer pour les résidents de moins de 35 ans ou plus de 65 ans.",
-                "deduction4_title": "Éducation",
-                "deduction4_desc": "Déductions pour <b>cours de langues et manuels scolaires</b> pour votre famille.",
-                "service1_title": "Fiscalité et Facturation",
-                "service1_desc": "Gestion fiscale personnalisée sans jargon technique.",
-                "service1_item1": "Déclarations annuelles de revenus",
-                "service1_item2": "Gestion et enregistrement des travailleurs indépendants",
-                "service1_item3": "Configuration de la facturation professionnelle et support mensuel",
-                "service2_title": "Résidence et NIE",
-                "service2_desc": "Nous vous accompagnons à vos rendez-vous à chaque étape.",
-                "service2_item1": "NIE pour les ressortissants non-UE",
-                "service2_item2": "NIE pour les citoyens UE",
-                "service2_item3": "Rendez-vous empreintes TIE",
-                "service3_title": "Bureaucratie",
-                "service3_item1": "Gestion du dépôt de garantie",
-                "service3_item2": "Suivi des notifications numériques",
-                "service3_item3": "Recommandations bancaires et configuration",
-                "service4_title": "Numérique et Kit Digital",
-                "service4_desc": "Nous comblons le fossé numérique en Espagne pour vous.",
-                "service4_item1_bold": "Kit Digital pour travailleurs indépendants:",
-                "service4_item1_text": "Gestion complète des subventions",
-                "service4_item2": "Installation et configuration du Certificat Numérique",
-                "service4_item3": "Inscription à la Carte Santé (SIP)",
-                "nomad_badge": "Visa Nomade Numérique · Espagne",
-                "nomad_title": "Vivre &amp; travailler en Espagne. <span>Légalement.</span>",
-                "nomad_intro1": "Le Visa Nomade Numérique espagnol ouvre les portes d'une nouvelle façon de vivre. Notre équipe de conseillers vous guide à travers chaque exigence pour que vous puissiez vous concentrer sur le déménagement.",
-                "nomad_intro2": "Nous gérons le processus avec vous du début à la fin, <strong>que vous déposiez votre demande depuis votre pays ou déjà depuis l'Espagne.</strong>",
-                "nomad_card1_title": "Qui est éligible",
-                "nomad_card1_desc": "Télétravailleurs sous contrat étranger ou W-2, freelances avec clients internationaux et professionnels indépendants au-dessus du seuil de revenus espagnol. Pas sûr de votre situation ? Réservez un appel gratuit.",
-                "nomad_card2_title": "Préparation des documents",
-                "nomad_card2_desc": "Nous vous guidons pour chaque document requis : contrats, apostilles, casier judiciaire, assurance maladie et plus encore.",
-                "nomad_card3_title": "Consulat ou en Espagne",
-                "nomad_card3_desc": "Faites votre demande depuis le consulat avant d'arriver, ou changez votre statut depuis l'Espagne. Nous soutenons les deux voies.",
-                "nomad_card4_title": "Avantage fiscal Loi Beckham",
-                "nomad_card4_desc": "Payez un taux forfaitaire de 24% au lieu de jusqu'à 47% pendant les 6 premières années. Nous gérons la demande pour vous.",
-                "nomad_card5_title": "Visa Non Lucratif (NLV)",
-                "nomad_card5_desc": "Pas de télétravail mais vous souhaitez vivre en Espagne sur revenus passifs ou épargne ? Le NLV est peut-être votre voie. Nous évaluons votre éligibilité et gérons la demande complète.",
-                "nomad_card6_title": "Soutien au renouvellement",
-                "nomad_card6_desc": "Nous suivons vos délais de renouvellement et gérons tout le processus de façon proactive pour que vous ne vous inquiétiez jamais de votre statut.",
-                "nomad_cta_title": "Vérifiez votre éligibilité",
-                "nomad_cta_desc": "Réservez un appel gratuit de 30 minutes et découvrez si le Visa Nomade Numérique est la bonne voie pour vous.",
-                "nomad_btn_eligibility_text": "Vérification gratuite",
-                "nomad_btn_whatsapp": "Demandez-nous sur WhatsApp",
-                "nomad_consulate_note": "<strong>Demande depuis l'étranger?</strong> Nous travaillons avec vous à distance et coordonnons directement avec votre consulat espagnol local. Vous n'avez pas besoin d'être en Espagne pour commencer.",
-                "tp_title": "Ce que disent nos clients",
-                "tp_on": "sur",
-                "tp_see_all": "Voir tous les avis sur Trustpilot",
-                "tp_verified": "Avis vérifié",
-                "review1_date": "Avril 2026",
-                "review1_title": "Remboursement fiscal en moins de deux semaines",
-                "review1_text": "J'ai utilisé Cresvance pour la saison fiscale espagnole et c'était excellent. En tant qu'expatrié à Málaga, c'était ma première déclaration de revenus. L'équipe a tout géré, je n'ai eu qu'à fournir mes fiches de paie. J'ai reçu mon remboursement en moins de deux semaines.",
-                "review2_date": "2025",
-                "review2_title": "Toujours à jour avec les autorités espagnoles",
-                "review2_text": "Je les ai utilisés pour plusieurs procédures bureaucratiques et ils ont été excellents. Ils sont très à jour avec tous les changements des autorités espagnoles, compétents, communicatifs et fiables. Je continuerai certainement à les utiliser.",
-                "tp_cta_card_title": "Satisfait de notre service?",
-                "tp_cta_card_text": "Votre avis aide d'autres expatriés à trouver le bon soutien.",
-                "tp_write_review": "Écrire un avis",
-                "footer_tagline": "Simplifier la bureaucratie espagnole pour vous.",
-                "cookie_title": "Préférences de Confidentialité",
-                "cookie_desc": "Nous utilisons des cookies pour vous garantir la meilleure expérience.",
-                "cookie_essential": "Cookies Essentiels",
-                "cookie_always": "Toujours Actifs",
-                "cookie_analytics": "Cookies Analytiques",
-                "cookie_marketing": "Cookies Marketing",
-                "cookie_accept": "Accepter Tout",
-                "cookie_reject": "Refuser Tout",
-                "cookie_customize": "Personnaliser"
-            }
-        };
+    <div class="reviews-grid reveal">
+        <!-- Review 1: G S -->
+        <div class="review-card">
+            <div class="review-header">
+                <div>
+                    <div class="reviewer-name">G S</div>
+                    <div class="review-date">May 2026</div>
+                </div>
+            </div>
+            <div class="review-stars">
+                <div class="review-star"><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg></div>
+                <div class="review-star"><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg></div>
+                <div class="review-star"><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg></div>
+                <div class="review-star"><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg></div>
+                <div class="review-star"><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg></div>
+            </div>
+            <div class="review-title">TIE biometric appointment — highly recommended</div>
+            <div class="review-text">I used their services to book an appointment for TIE biometrics. My contact was Pool and I am happy with his services. He accompanied us and was helpful in translating — he actually explained to the police authorities that as digital nomad visa holders, we don't need the padrón. If he was not there, we would have been turned away. I highly recommend Pool and their services.</div>
+            <div class="tp-verified"><i class="fas fa-check-circle"></i> <span data-translate="tp_verified">Verified review</span></div>
+        </div>
 
-        // --- ROTATING LANGUAGE TEXT ---
-        let currentMessageIndex = 0;
-        const messageTexts = document.querySelectorAll('.lang-text');
-        const languages = ['en', 'es', 'de', 'it', 'fr'];
-        function rotateMessageText() {
-            messageTexts.forEach(msg => msg.classList.remove('active'));
-            currentMessageIndex = (currentMessageIndex + 1) % languages.length;
-            const currentLang = languages[currentMessageIndex];
-            messageTexts.forEach(msg => { if (msg.dataset.lang === currentLang) msg.classList.add('active'); });
+        <!-- Review 2: Josefina Leanes -->
+        <div class="review-card">
+            <div class="review-header">
+                <div>
+                    <div class="reviewer-name">Josefina Leanes</div>
+                    <div class="review-date">23 Apr 2026</div>
+                </div>
+            </div>
+            <div class="review-stars">
+                <div class="review-star"><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg></div>
+                <div class="review-star"><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg></div>
+                <div class="review-star"><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg></div>
+                <div class="review-star"><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg></div>
+                <div class="review-star"><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg></div>
+            </div>
+            <div class="review-title">Declaración de impuestos</div>
+            <div class="review-text">Excelente servicio. Me ayudaron con mi declaración de impuestos de manera rápida y muy profesional. Tenía varias dudas sobre deducciones y Dylan me explicó todo con mucha claridad, asegurándose de que todo estuviera en orden. Sin duda, volveré el próximo año. ¡Muy recomendados!</div>
+            <div class="tp-verified"><i class="fas fa-check-circle"></i> <span data-translate="tp_verified">Verified review</span></div>
+        </div>
+
+        <!-- CTA card -->
+        <div class="review-cta-card">
+            <div class="star-icon"><i class="fas fa-star"></i></div>
+            <h4 data-translate="tp_cta_card_title">Happy with our service?</h4>
+            <p data-translate="tp_cta_card_text">Your review helps other expats find the right support.</p>
+            <a href="https://es.trustpilot.com/review/cresvance.com" target="_blank" class="btn-review">
+                <i class="fas fa-pen"></i> <span data-translate="tp_write_review">Write a review</span>
+            </a>
+        </div>
+    </div>
+</section>
+
+<!-- FOOTER -->
+<footer id="contact">
+    <div class="footer-inner">
+        <div class="footer-brand">
+            <div class="footer-logo">CRESVANCE</div>
+            <p data-translate="footer_tagline">Simplifying Spanish bureaucracy for you.</p>
+            <div class="footer-socials">
+                <a href="https://www.linkedin.com/company/cresvance" target="_blank" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+                <a href="https://www.instagram.com/Cresvance_support" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                <a href="mailto:hello@cresvance.com" aria-label="Email"><i class="fas fa-envelope"></i></a>
+                <a href="https://api.whatsapp.com/send/?phone=34602593904" target="_blank" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+            </div>
+        </div>
+        <div class="footer-right">
+            <div class="footer-contact-item"><i class="fas fa-map-marker-alt" style="color:var(--nomad-accent);"></i> Málaga &amp; Remote</div>
+            <div class="footer-contact-item"><i class="fas fa-envelope" style="color:var(--nomad-accent);"></i> <a href="mailto:hello@cresvance.com">hello@cresvance.com</a></div>
+            <div class="footer-contact-item"><i class="fab fa-whatsapp" style="color:var(--nomad-accent);"></i> <a href="https://api.whatsapp.com/send/?phone=34602593904" target="_blank">+34 602 593 904</a></div>
+        </div>
+    </div>
+    <div class="footer-bottom">
+        <p>© 2026 Cresvance. All rights reserved.</p>
+        <span class="footer-langs">EN · DE · ES · FR · IT</span>
+    </div>
+</footer>
+
+<!-- COOKIE BANNER (RGPD compliant) -->
+<div id="cookie-banner" role="dialog" aria-label="Cookie preferences" aria-modal="true">
+    <h4 data-translate="cookie_title">Privacy Preferences</h4>
+    <p data-translate="cookie_desc">We use cookies to ensure you get the best experience on our website. Some are essential and cannot be disabled. You may choose which optional cookies to accept.</p>
+    <div id="cookie-settings-panel">
+        <div class="setting-item"><span data-translate="cookie_essential">Essential Cookies</span><span style="color:var(--star-color);font-weight:700;" data-translate="cookie_always">Always Active</span></div>
+        <div class="setting-item"><span data-translate="cookie_analytics">Analytics Cookies</span><input type="checkbox" id="analytics-cb" checked aria-label="Analytics cookies"></div>
+        <div class="setting-item"><span data-translate="cookie_marketing">Marketing Cookies</span><input type="checkbox" id="marketing-cb" aria-label="Marketing cookies"></div>
+    </div>
+    <div class="cookie-buttons">
+        <button onclick="saveCookies('all')" class="cookie-btn btn-accept" data-translate="cookie_accept">Accept All</button>
+        <button onclick="saveCookies('reject')" class="cookie-btn btn-reject" data-translate="cookie_reject">Reject All</button>
+        <button onclick="toggleCookieSettings()" class="cookie-btn btn-settings" data-translate="cookie_customize">Customize</button>
+    </div>
+</div>
+
+<script>
+const translations = {
+    en: {
+        "nav_expertise":"Expertise","nav_nomad":"Nomad Visa","nav_contact":"Contact",
+        "tp_hero_label":"Rated 5.0 by our clients",
+        "hero_title":"We walk you <br> <span>through it.</span>",
+        "hero_subtitle":"Direct and personal advisory for expats in Spain. Professional expertise and on-site support for your peace of mind.",
+        "btn_consultation":"Free Consultation","btn_whatsapp":"Chat with us",
+        "stat_languages":"Languages spoken","stat_expat":"Expat-focused","stat_refund":"Avg. tax refund time",
+        "insight_badge":"Andalusia 2026 Tax Update","insight_title":"Maximize your returns",
+        "deduction1_title":"Sports and Health","deduction1_desc":"Recover <b>15% of gym fees</b> and sports memberships. Maximize your health and your savings.",
+        "deduction2_title":"Pet Healthcare","deduction2_desc":"Claim <b>15% of veterinary expenses</b> for preventive care and check-ups for your pets.",
+        "deduction3_title":"Renting","deduction3_desc":"<b>15% deduction</b> on rent for residents under 35 or over 65 years old.",
+        "deduction4_title":"Education","deduction4_desc":"Deductions for <b>language classes and textbooks</b> to support your family's growth.",
+        "services_label":"What we do","services_heading":"Everything you need.<br>Nothing you don't.",
+        "service1_title":"Taxation and Invoicing","service1_desc":"Personalized tax management with no technical jargon.",
+        "service1_item1":"Annual Income Tax filings","service1_item2":"Autónomo management and registration","service1_item3":"Professional Invoicing setup and monthly support",
+        "service2_title":"Residency and NIE","service2_desc":"We accompany you to your appointments — every step of the way.",
+        "service2_item1":"NIE for non-EU nationals","service2_item2":"NIE for EU citizens","service2_item3":"TIE fingerprinting appointments",
+        "service3_title":"Bureaucracy","service3_item1":"Rental Deposit management","service3_item2":"Digital Notification tracking","service3_item3":"Banking recommendations and setup",
+        "service4_title":"Digital and Kit Digital","service4_desc":"We bridge the digital gap in Spain for you.",
+        "service4_item1_bold":"Kit Digital for Autónomos:","service4_item1_text":"Complete grant management","service4_item2":"Digital Certificate installation and setup","service4_item3":"Spanish Healthcare (SIP) card registration",
+        "nomad_badge":"Digital Nomad Visa · Spain","nomad_title":"Live &amp; work in Spain. <span>Legally.</span>",
+        "nomad_intro1":"Spain's Digital Nomad Visa opens the door to a new way of living. Our advisory team guides you through every requirement, so you can focus on the move.",
+        "nomad_intro2":"We handle the process with you from start to finish, <strong>whether you apply from your home country or already from within Spain.</strong>",
+        "nomad_card1_title":"Who qualifies","nomad_card1_desc":"Remote workers employed under a foreign contract or W-2, freelancers with international clients, and self-employed professionals earning above Spain's income threshold.",
+        "nomad_card2_title":"Document preparation","nomad_card2_desc":"We guide you through every required document: contracts, apostilles, criminal records, health insurance and more.",
+        "nomad_card3_title":"Consulate or in-country","nomad_card3_desc":"Apply from your home consulate before arriving, or switch status from inside Spain. We support both routes.",
+        "nomad_card4_title":"Beckham Law tax benefit","nomad_card4_desc":"Pay a flat 24% income tax rate instead of up to 47% for the first 6 years. We handle the application for you.",
+        "nomad_card5_title":"Non-Lucrative Visa (NLV)","nomad_card5_desc":"Not working remotely but want to live in Spain on passive income or savings? We assess your eligibility and manage the full application.",
+        "nomad_card6_title":"Renewal support","nomad_card6_desc":"We track your renewal deadlines and handle the entire process proactively, so you never have to worry about lapsing status.",
+        "nomad_cta_title":"Check if you are eligible","nomad_cta_desc":"Book a free 30-minute call and find out if the Digital Nomad Visa is the right path for you.",
+        "nomad_btn_eligibility_text":"Free eligibility check","nomad_btn_whatsapp":"Ask us on WhatsApp",
+        "nomad_consulate_note":"<strong>Applying from abroad?</strong> We work with you remotely and coordinate directly with your local Spanish consulate. No need to be in Spain to get started.",
+        "tp_title":"What our clients say","tp_on":"on","tp_see_all":"See all reviews on Trustpilot","tp_verified":"Verified review",
+        "tp_cta_card_title":"Happy with our service?","tp_cta_card_text":"Your review helps other expats find the right support.","tp_write_review":"Write a review",
+        "footer_tagline":"Simplifying Spanish bureaucracy for you.",
+        "cookie_title":"Privacy Preferences","cookie_desc":"We use cookies to ensure you get the best experience on our website. Some are essential and cannot be disabled. You may choose which optional cookies to accept.",
+        "cookie_essential":"Essential Cookies","cookie_always":"Always Active","cookie_analytics":"Analytics Cookies","cookie_marketing":"Marketing Cookies",
+        "cookie_accept":"Accept All","cookie_reject":"Reject All","cookie_customize":"Customize"
+    },
+    es: {
+        "nav_expertise":"Servicios","nav_nomad":"Visa Nómada","nav_contact":"Contacto",
+        "tp_hero_label":"Valorado 5.0 por nuestros clientes",
+        "hero_title":"Te acompañamos <br> <span>en cada paso.</span>",
+        "hero_subtitle":"Asesoramiento directo y personal para expatriados en España. Experiencia profesional y apoyo presencial para tu tranquilidad.",
+        "btn_consultation":"Consulta Gratuita","btn_whatsapp":"Chatea con nosotros",
+        "stat_languages":"Idiomas hablados","stat_expat":"Enfocados en expats","stat_refund":"Plazo medio de devolución",
+        "insight_badge":"Actualización Fiscal Andalucía 2026","insight_title":"Maximiza tus devoluciones",
+        "deduction1_title":"Deporte y Salud","deduction1_desc":"Recupera <b>el 15% de las cuotas del gimnasio</b> y membresías deportivas.",
+        "deduction2_title":"Salud de Mascotas","deduction2_desc":"Deducción del <b>15% de gastos veterinarios</b> para cuidados preventivos.",
+        "deduction3_title":"Alquiler","deduction3_desc":"<b>15% de deducción</b> en alquiler para residentes menores de 35 o mayores de 65 años.",
+        "deduction4_title":"Educación","deduction4_desc":"Deducciones para <b>clases de idiomas y libros de texto</b>.",
+        "services_label":"Lo que hacemos","services_heading":"Todo lo que necesitas.<br>Nada más.",
+        "service1_title":"Fiscalidad y Facturación","service1_desc":"Gestión fiscal personalizada sin tecnicismos.",
+        "service1_item1":"Declaraciones anuales de Renta","service1_item2":"Gestión y registro de Autónomos","service1_item3":"Facturación Profesional y soporte mensual",
+        "service2_title":"Residencia y NIE","service2_desc":"Te acompañamos a tus citas en cada paso.",
+        "service2_item1":"NIE para ciudadanos no-UE","service2_item2":"NIE para ciudadanos UE","service2_item3":"Citas de huellas para TIE",
+        "service3_title":"Burocracia","service3_item1":"Gestión del Depósito de Alquiler","service3_item2":"Seguimiento de Notificaciones Digitales","service3_item3":"Recomendaciones bancarias",
+        "service4_title":"Digital y Kit Digital","service4_desc":"Cerramos la brecha digital en España por ti.",
+        "service4_item1_bold":"Kit Digital para Autónomos:","service4_item1_text":"Gestión completa de subvenciones","service4_item2":"Instalación de Certificado Digital","service4_item3":"Registro de Tarjeta Sanitaria (SIP)",
+        "nomad_badge":"Visa Nómada Digital · España","nomad_title":"Vive y trabaja en España. <span>Legalmente.</span>",
+        "nomad_intro1":"La Visa de Nómada Digital abre la puerta a una nueva forma de vivir. Nuestro equipo te guía en cada requisito para que tú te centres en el traslado.",
+        "nomad_intro2":"Gestionamos el proceso contigo de principio a fin, <strong>tanto si solicitas desde tu país como si ya estás en España.</strong>",
+        "nomad_card1_title":"¿Quién cumple los requisitos?","nomad_card1_desc":"Trabajadores en remoto con contrato extranjero, freelancers con clientes internacionales y autónomos con ingresos por encima del umbral requerido.",
+        "nomad_card2_title":"Preparación de documentos","nomad_card2_desc":"Te guiamos en cada documento: contratos, apostillas, antecedentes penales, seguro médico y más.",
+        "nomad_card3_title":"Consulado o en España","nomad_card3_desc":"Solicítala desde tu consulado antes de llegar, o cambia tu estatus estando ya en España.",
+        "nomad_card4_title":"Ventaja fiscal Ley Beckham","nomad_card4_desc":"Paga un tipo fijo del 24% en lugar de hasta el 47% durante los primeros 6 años.",
+        "nomad_card5_title":"Visa No Lucrativa (NLV)","nomad_card5_desc":"¿No trabajas en remoto pero quieres vivir en España? La NLV puede ser tu vía. Evaluamos tu elegibilidad.",
+        "nomad_card6_title":"Apoyo en renovaciones","nomad_card6_desc":"Hacemos seguimiento de tus plazos y gestionamos todo proactivamente.",
+        "nomad_cta_title":"Comprueba si cumples los requisitos","nomad_cta_desc":"Reserva una llamada gratuita de 30 minutos y descubre si la Visa de Nómada Digital es para ti.",
+        "nomad_btn_eligibility_text":"Verificación gratuita","nomad_btn_whatsapp":"Pregúntanos por WhatsApp",
+        "nomad_consulate_note":"<strong>¿Solicitando desde el extranjero?</strong> Trabajamos contigo a distancia y coordinamos con tu consulado español local.",
+        "tp_title":"Lo que dicen nuestros clientes","tp_on":"en","tp_see_all":"Ver todas las reseñas en Trustpilot","tp_verified":"Reseña verificada",
+        "tp_cta_card_title":"¿Satisfecho con nuestro servicio?","tp_cta_card_text":"Tu reseña ayuda a otros expatriados a encontrar el apoyo adecuado.","tp_write_review":"Escribir una reseña",
+        "footer_tagline":"Simplificando la burocracia española para ti.",
+        "cookie_title":"Preferencias de Privacidad","cookie_desc":"Usamos cookies para garantizarte la mejor experiencia. Algunas son esenciales y no pueden desactivarse. Puedes elegir las opcionales.",
+        "cookie_essential":"Cookies Esenciales","cookie_always":"Siempre Activas","cookie_analytics":"Cookies Analíticas","cookie_marketing":"Cookies de Marketing",
+        "cookie_accept":"Aceptar Todo","cookie_reject":"Rechazar Todo","cookie_customize":"Personalizar"
+    },
+    de: {
+        "nav_expertise":"Expertise","nav_nomad":"Nomaden-Visum","nav_contact":"Kontakt",
+        "tp_hero_label":"Bewertet mit 5.0 von unseren Kunden",
+        "hero_title":"Wir begleiten Sie <br> <span>dabei.</span>",
+        "hero_subtitle":"Direkte und persönliche Beratung für Expats in Spanien. Professionelle Expertise und Vor-Ort-Unterstützung.",
+        "btn_consultation":"Kostenlose Beratung","btn_whatsapp":"Chatten Sie mit uns",
+        "stat_languages":"Gesprochene Sprachen","stat_expat":"Expat-fokussiert","stat_refund":"Ø Erstattungszeit",
+        "insight_badge":"Andalusien 2026 Steuerupdate","insight_title":"Maximieren Sie Ihre Rückerstattungen",
+        "deduction1_title":"Sport und Gesundheit","deduction1_desc":"<b>15% der Fitnessstudio-Gebühren</b> zurückerhalten.",
+        "deduction2_title":"Tiergesundheit","deduction2_desc":"<b>15% der Tierarztkosten</b> absetzen.",
+        "deduction3_title":"Mieten","deduction3_desc":"<b>15% Abzug</b> auf Miete für unter 35 oder über 65 Jahre.",
+        "deduction4_title":"Bildung","deduction4_desc":"Abzüge für <b>Sprachkurse und Lehrbücher</b>.",
+        "services_label":"Was wir tun","services_heading":"Alles was Sie brauchen.<br>Nichts mehr.",
+        "service1_title":"Besteuerung und Rechnungsstellung","service1_desc":"Personalisierte Steuerverwaltung ohne Fachjargon.",
+        "service1_item1":"Jährliche Einkommensteuererklärungen","service1_item2":"Freiberufler-Management","service1_item3":"Professionelle Rechnungsstellung",
+        "service2_title":"Aufenthalt und NIE","service2_desc":"Wir begleiten Sie zu Ihren Terminen.",
+        "service2_item1":"NIE für Nicht-EU-Bürger","service2_item2":"NIE für EU-Bürger","service2_item3":"TIE Fingerabdruck-Termine",
+        "service3_title":"Bürokratie","service3_item1":"Mietkaution","service3_item2":"Digitale Benachrichtigungen","service3_item3":"Bankempfehlungen",
+        "service4_title":"Digital und Kit Digital","service4_desc":"Wir überbrücken die digitale Lücke in Spanien.",
+        "service4_item1_bold":"Kit Digital:","service4_item1_text":"Komplette Fördermittelverwaltung","service4_item2":"Digitales Zertifikat","service4_item3":"Gesundheitskarte (SIP)",
+        "nomad_badge":"Digitales Nomaden-Visum · Spanien","nomad_title":"Leben &amp; Arbeiten in Spanien. <span>Legal.</span>",
+        "nomad_intro1":"Das Spanische Nomaden-Visum öffnet die Tür zu einer neuen Lebensweise. Unser Team führt Sie durch alle Anforderungen.",
+        "nomad_intro2":"Wir begleiten Sie von Anfang bis Ende, <strong>ob vom Heimatkonsulat oder aus Spanien heraus.</strong>",
+        "nomad_card1_title":"Wer qualifiziert sich","nomad_card1_desc":"Remote-Arbeitnehmer, Freiberufler mit internationalen Kunden und Selbstständige über Spaniens Einkommensschwelle.",
+        "nomad_card2_title":"Dokumentenvorbereitung","nomad_card2_desc":"Verträge, Apostillen, Führungszeugnisse, Krankenversicherung und mehr.",
+        "nomad_card3_title":"Konsulat oder in Spanien","nomad_card3_desc":"Beantragen Sie vom Heimatkonsulat oder wechseln Sie den Status aus Spanien heraus.",
+        "nomad_card4_title":"Beckham-Gesetz","nomad_card4_desc":"24% Pauschalsteuer statt bis zu 47% für die ersten 6 Jahre.",
+        "nomad_card5_title":"Nicht-Erwerbs-Visum (NLV)","nomad_card5_desc":"Von passivem Einkommen in Spanien leben? Wir prüfen Ihre Berechtigung.",
+        "nomad_card6_title":"Verlängerungsunterstützung","nomad_card6_desc":"Wir verfolgen Ihre Verlängerungsfristen proaktiv.",
+        "nomad_cta_title":"Prüfen Sie Ihre Berechtigung","nomad_cta_desc":"Buchen Sie ein kostenloses 30-minütiges Gespräch.",
+        "nomad_btn_eligibility_text":"Kostenlose Prüfung","nomad_btn_whatsapp":"Per WhatsApp fragen",
+        "nomad_consulate_note":"<strong>Antrag aus dem Ausland?</strong> Wir arbeiten remote und koordinieren mit Ihrem spanischen Konsulat.",
+        "tp_title":"Was unsere Kunden sagen","tp_on":"auf","tp_see_all":"Alle Bewertungen auf Trustpilot","tp_verified":"Verifizierte Bewertung",
+        "tp_cta_card_title":"Zufrieden?","tp_cta_card_text":"Ihre Bewertung hilft anderen Expats.","tp_write_review":"Bewertung schreiben",
+        "footer_tagline":"Spanische Bürokratie vereinfacht.",
+        "cookie_title":"Datenschutzeinstellungen","cookie_desc":"Wir verwenden Cookies. Einige sind essenziell, andere optional.",
+        "cookie_essential":"Essentielle Cookies","cookie_always":"Immer aktiv","cookie_analytics":"Analytics Cookies","cookie_marketing":"Marketing Cookies",
+        "cookie_accept":"Alle akzeptieren","cookie_reject":"Alle ablehnen","cookie_customize":"Anpassen"
+    },
+    it: {
+        "nav_expertise":"Servizi","nav_nomad":"Visto Nomade","nav_contact":"Contatto",
+        "tp_hero_label":"Valutato 5.0 dai nostri clienti",
+        "hero_title":"Ti accompagniamo <br> <span>in ogni passo.</span>",
+        "hero_subtitle":"Consulenza diretta e personale per espatriati in Spagna. Competenza professionale e supporto in loco.",
+        "btn_consultation":"Consultazione Gratuita","btn_whatsapp":"Chatta con noi",
+        "stat_languages":"Lingue parlate","stat_expat":"Focalizzati sugli expat","stat_refund":"Tempo medio rimborso",
+        "insight_badge":"Aggiornamento Fiscale Andalusia 2026","insight_title":"Massimizza i tuoi rimborsi",
+        "deduction1_title":"Sport e Salute","deduction1_desc":"Recupera il <b>15% delle quote della palestra</b>.",
+        "deduction2_title":"Salute degli Animali","deduction2_desc":"Deduzione del <b>15% delle spese veterinarie</b>.",
+        "deduction3_title":"Affitto","deduction3_desc":"<b>15% di deduzione</b> sull'affitto per under 35 o over 65.",
+        "deduction4_title":"Educazione","deduction4_desc":"Deduzioni per <b>lezioni di lingua e libri di testo</b>.",
+        "services_label":"Cosa facciamo","services_heading":"Tutto quello che ti serve.<br>Niente di più.",
+        "service1_title":"Tassazione e Fatturazione","service1_desc":"Gestione fiscale personalizzata senza gergo tecnico.",
+        "service1_item1":"Dichiarazioni annuali dei redditi","service1_item2":"Gestione lavoratori autonomi","service1_item3":"Fatturazione professionale",
+        "service2_title":"Residenza e NIE","service2_desc":"Ti accompagniamo agli appuntamenti.",
+        "service2_item1":"NIE per non-UE","service2_item2":"NIE per UE","service2_item3":"Appuntamenti TIE",
+        "service3_title":"Burocrazia","service3_item1":"Deposito cauzionale","service3_item2":"Notifiche digitali","service3_item3":"Raccomandazioni bancarie",
+        "service4_title":"Digitale e Kit Digital","service4_desc":"Colmiamo il divario digitale in Spagna.",
+        "service4_item1_bold":"Kit Digital:","service4_item1_text":"Gestione completa sovvenzioni","service4_item2":"Certificato Digitale","service4_item3":"Tessera Sanitaria (SIP)",
+        "nomad_badge":"Visto Nomade Digitale · Spagna","nomad_title":"Vivi e lavora in Spagna. <span>Legalmente.</span>",
+        "nomad_intro1":"Il Visto Nomade spagnolo apre la porta a un nuovo modo di vivere.",
+        "nomad_intro2":"Gestiamo il processo con te dall'inizio alla fine, <strong>dall'estero o già dall'interno della Spagna.</strong>",
+        "nomad_card1_title":"Chi può accedervi","nomad_card1_desc":"Lavoratori da remoto, freelance con clienti internazionali e liberi professionisti.",
+        "nomad_card2_title":"Preparazione documenti","nomad_card2_desc":"Contratti, apostille, casellario, assicurazione sanitaria e altro.",
+        "nomad_card3_title":"Consolato o dall'interno","nomad_card3_desc":"Dal consolato o cambiando status dall'interno della Spagna.",
+        "nomad_card4_title":"Legge Beckham","nomad_card4_desc":"24% fisso invece di fino al 47% per i primi 6 anni.",
+        "nomad_card5_title":"Visto Non Lucrativo (NLV)","nomad_card5_desc":"Vuoi vivere in Spagna con reddito passivo? Valutiamo la tua idoneità.",
+        "nomad_card6_title":"Supporto al rinnovo","nomad_card6_desc":"Monitoriamo le scadenze e gestiamo tutto proattivamente.",
+        "nomad_cta_title":"Verifica la tua idoneità","nomad_cta_desc":"Prenota una chiamata gratuita di 30 minuti.",
+        "nomad_btn_eligibility_text":"Verifica gratuita","nomad_btn_whatsapp":"Chiedici su WhatsApp",
+        "nomad_consulate_note":"<strong>Domanda dall'estero?</strong> Lavoriamo da remoto e coordiniamo con il tuo consolato spagnolo.",
+        "tp_title":"Cosa dicono i nostri clienti","tp_on":"su","tp_see_all":"Vedi tutte le recensioni","tp_verified":"Recensione verificata",
+        "tp_cta_card_title":"Soddisfatto?","tp_cta_card_text":"La tua recensione aiuta altri espatriati.","tp_write_review":"Scrivi una recensione",
+        "footer_tagline":"Semplifichiamo la burocrazia spagnola per te.",
+        "cookie_title":"Preferenze Privacy","cookie_desc":"Usiamo cookie per garantirti la migliore esperienza. Alcuni sono essenziali, altri opzionali.",
+        "cookie_essential":"Cookie Essenziali","cookie_always":"Sempre Attivi","cookie_analytics":"Cookie Analitici","cookie_marketing":"Cookie Marketing",
+        "cookie_accept":"Accetta Tutto","cookie_reject":"Rifiuta Tutto","cookie_customize":"Personalizza"
+    },
+    fr: {
+        "nav_expertise":"Expertise","nav_nomad":"Visa Nomade","nav_contact":"Contact",
+        "tp_hero_label":"Noté 5.0 par nos clients",
+        "hero_title":"Nous vous accompagnons <br> <span>pas à pas.</span>",
+        "hero_subtitle":"Conseil direct et personnalisé pour les expatriés en Espagne. Expertise professionnelle et soutien sur place.",
+        "btn_consultation":"Consultation Gratuite","btn_whatsapp":"Discutez avec nous",
+        "stat_languages":"Langues parlées","stat_expat":"Axé sur les expats","stat_refund":"Délai moyen remboursement",
+        "insight_badge":"Mise à jour fiscale Andalousie 2026","insight_title":"Maximisez vos remboursements",
+        "deduction1_title":"Sport et Santé","deduction1_desc":"Récupérez <b>15% des frais de salle de sport</b>.",
+        "deduction2_title":"Santé Animale","deduction2_desc":"<b>15% des frais vétérinaires</b> déductibles.",
+        "deduction3_title":"Location","deduction3_desc":"<b>15% de déduction</b> sur le loyer pour moins de 35 ou plus de 65 ans.",
+        "deduction4_title":"Éducation","deduction4_desc":"Déductions pour <b>cours de langues et manuels</b>.",
+        "services_label":"Ce que nous faisons","services_heading":"Tout ce qu'il vous faut.<br>Rien de plus.",
+        "service1_title":"Fiscalité et Facturation","service1_desc":"Gestion fiscale personnalisée sans jargon.",
+        "service1_item1":"Déclarations annuelles","service1_item2":"Gestion indépendants","service1_item3":"Facturation professionnelle",
+        "service2_title":"Résidence et NIE","service2_desc":"Nous vous accompagnons à chaque étape.",
+        "service2_item1":"NIE non-UE","service2_item2":"NIE UE","service2_item3":"Rendez-vous TIE",
+        "service3_title":"Bureaucratie","service3_item1":"Dépôt de garantie","service3_item2":"Notifications numériques","service3_item3":"Recommandations bancaires",
+        "service4_title":"Numérique et Kit Digital","service4_desc":"Nous comblons le fossé numérique en Espagne.",
+        "service4_item1_bold":"Kit Digital:","service4_item1_text":"Gestion complète subventions","service4_item2":"Certificat Numérique","service4_item3":"Carte Santé (SIP)",
+        "nomad_badge":"Visa Nomade Numérique · Espagne","nomad_title":"Vivre &amp; travailler en Espagne. <span>Légalement.</span>",
+        "nomad_intro1":"Le Visa Nomade Numérique espagnol ouvre les portes d'une nouvelle façon de vivre.",
+        "nomad_intro2":"Nous gérons le processus du début à la fin, <strong>depuis votre pays ou déjà depuis l'Espagne.</strong>",
+        "nomad_card1_title":"Qui est éligible","nomad_card1_desc":"Télétravailleurs, freelances avec clients internationaux et indépendants au-dessus du seuil espagnol.",
+        "nomad_card2_title":"Préparation documents","nomad_card2_desc":"Contrats, apostilles, casier judiciaire, assurance maladie et plus.",
+        "nomad_card3_title":"Consulat ou en Espagne","nomad_card3_desc":"Demandez depuis le consulat ou changez de statut depuis l'Espagne.",
+        "nomad_card4_title":"Loi Beckham","nomad_card4_desc":"24% forfaitaire au lieu de jusqu'à 47% pour les 6 premières années.",
+        "nomad_card5_title":"Visa Non Lucratif (NLV)","nomad_card5_desc":"Vivre en Espagne sur revenus passifs? Nous évaluons votre éligibilité.",
+        "nomad_card6_title":"Soutien renouvellement","nomad_card6_desc":"Nous suivons vos délais et gérons tout proactivement.",
+        "nomad_cta_title":"Vérifiez votre éligibilité","nomad_cta_desc":"Réservez un appel gratuit de 30 minutes.",
+        "nomad_btn_eligibility_text":"Vérification gratuite","nomad_btn_whatsapp":"Demandez sur WhatsApp",
+        "nomad_consulate_note":"<strong>Demande depuis l'étranger?</strong> Nous travaillons à distance et coordonnons avec votre consulat local.",
+        "tp_title":"Ce que disent nos clients","tp_on":"sur","tp_see_all":"Voir tous les avis Trustpilot","tp_verified":"Avis vérifié",
+        "tp_cta_card_title":"Satisfait?","tp_cta_card_text":"Votre avis aide d'autres expatriés.","tp_write_review":"Écrire un avis",
+        "footer_tagline":"Simplifier la bureaucratie espagnole pour vous.",
+        "cookie_title":"Préférences Confidentialité","cookie_desc":"Nous utilisons des cookies. Certains sont essentiels, d'autres optionnels.",
+        "cookie_essential":"Cookies Essentiels","cookie_always":"Toujours Actifs","cookie_analytics":"Cookies Analytiques","cookie_marketing":"Cookies Marketing",
+        "cookie_accept":"Accepter Tout","cookie_reject":"Refuser Tout","cookie_customize":"Personnaliser"
+    }
+};
+
+// ── LANGUAGE ROTATION ──
+let currentMsgIdx = 0;
+const msgTexts = document.querySelectorAll('.lang-text');
+const langOrder = ['en','es','de','it','fr'];
+function rotateLang() {
+    msgTexts.forEach(m => m.classList.remove('active'));
+    currentMsgIdx = (currentMsgIdx + 1) % langOrder.length;
+    const l = langOrder[currentMsgIdx];
+    msgTexts.forEach(m => { if (m.dataset.lang === l) m.classList.add('active'); });
+}
+setInterval(rotateLang, 3800);
+
+// ── LANGUAGE SWITCHING ──
+function changeLanguage(lang) {
+    document.querySelectorAll('.lang-btn').forEach(b => b.classList.toggle('active', b.dataset.lang === lang));
+    document.querySelectorAll('[data-translate]').forEach(el => {
+        const key = el.dataset.translate;
+        if (translations[lang]?.[key]) {
+            const inline = ['H1','H2','H3','H4','P','SPAN','DIV'];
+            if (inline.includes(el.tagName)) el.innerHTML = translations[lang][key];
+            else el.textContent = translations[lang][key];
         }
-        setInterval(rotateMessageText, 4000);
-        setTimeout(() => rotateMessageText(), 100);
+    });
+    msgTexts.forEach(m => m.classList.remove('active'));
+    const active = document.querySelector(`.lang-text[data-lang="${lang}"]`);
+    if (active) active.classList.add('active');
+    localStorage.setItem('preferred_language', lang);
+    document.documentElement.lang = lang;
+}
+document.querySelectorAll('.lang-btn').forEach(b => b.addEventListener('click', () => changeLanguage(b.dataset.lang)));
+const saved = localStorage.getItem('preferred_language');
+const browser = navigator.language.substring(0,2);
+const def = saved || (['es','de','it','fr'].includes(browser) ? browser : 'en');
+if (def !== 'en') setTimeout(() => changeLanguage(def), 150);
 
-        // --- LANGUAGE SWITCHING ---
-        function changeLanguage(lang) {
-            document.querySelectorAll('.lang-btn').forEach(btn => {
-                btn.classList.toggle('active', btn.dataset.lang === lang);
-            });
-            document.querySelectorAll('[data-translate]').forEach(element => {
-                const key = element.dataset.translate;
-                if (translations[lang] && translations[lang][key]) {
-                    const tags = ['H1','H2','H3','H4','P','SPAN'];
-                    if (tags.includes(element.tagName)) {
-                        element.innerHTML = translations[lang][key];
-                    } else {
-                        element.textContent = translations[lang][key];
-                    }
-                }
-            });
-            messageTexts.forEach(msg => msg.classList.remove('active'));
-            const activeMessage = document.querySelector(`.lang-text[data-lang="${lang}"]`);
-            if (activeMessage) activeMessage.classList.add('active');
-            localStorage.setItem('preferred_language', lang);
-            document.documentElement.lang = lang;
-        }
+// ── NAVBAR SCROLL ──
+const navbar = document.getElementById('navbar');
+window.addEventListener('scroll', () => navbar.classList.toggle('scrolled', window.scrollY > 50), { passive: true });
 
-        document.querySelectorAll('.lang-btn').forEach(btn => {
-            btn.addEventListener('click', () => changeLanguage(btn.dataset.lang));
-        });
+// ── SCROLL REVEAL ──
+const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('active'); observer.unobserve(e.target); } });
+}, { threshold: 0.08 });
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 
-        const savedLang = localStorage.getItem('preferred_language');
-        const browserLang = navigator.language.substring(0, 2);
-        const defaultLang = savedLang || (['es', 'de', 'it', 'fr'].includes(browserLang) ? browserLang : 'en');
-        if (defaultLang !== 'en') setTimeout(() => changeLanguage(defaultLang), 100);
-
-        // --- NAVBAR ---
-        const navbar = document.getElementById("navbar");
-        window.onscroll = function() { navbar.classList.toggle("scrolled", window.scrollY > 50); };
-
-        // --- FOOTER LOGO ---
-        window.addEventListener('load', () => {
-            setTimeout(() => { document.getElementById('footer-logo').classList.add('expanded'); }, 2000);
-        });
-
-        // --- SCROLL REVEAL ---
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('active'); });
-        }, { threshold: 0.1 });
-        document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
-
-        // --- COOKIES ---
-        function toggleCookieSettings() {
-            const panel = document.getElementById('cookie-settings-panel');
-            panel.style.display = panel.style.display === 'block' ? 'none' : 'block';
-        }
-        function saveCookies(type) { 
-            localStorage.setItem('cresvance_consent', type); 
-            document.getElementById('cookie-banner').style.display = 'none'; 
-        }
-        if (!localStorage.getItem('cresvance_consent')) {
-            setTimeout(() => { document.getElementById('cookie-banner').style.display = 'block'; }, 1000);
-        }
-    </script>
+// ── COOKIES ──
+function toggleCookieSettings() {
+    const p = document.getElementById('cookie-settings-panel');
+    p.style.display = p.style.display === 'block' ? 'none' : 'block';
+}
+function saveCookies(type) {
+    const consent = {
+        essential: true,
+        analytics: type === 'all' || (type === 'custom' && document.getElementById('analytics-cb').checked),
+        marketing: type === 'all' || (type === 'custom' && document.getElementById('marketing-cb').checked),
+        timestamp: new Date().toISOString(),
+        version: '1.0'
+    };
+    localStorage.setItem('cresvance_consent', JSON.stringify(consent));
+    document.getElementById('cookie-banner').style.display = 'none';
+}
+if (!localStorage.getItem('cresvance_consent')) {
+    setTimeout(() => { document.getElementById('cookie-banner').style.display = 'block'; }, 1200);
+}
+</script>
 </body>
 </html>
