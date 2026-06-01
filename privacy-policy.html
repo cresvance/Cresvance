@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Política de Privacidad — Cresvance</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --cream: #f7f4ee;
+      --ink:   #1a1814;
+      --muted: #6b6860;
+      --accent:#2d5a4b;
+      --line:  #dedad2;
+      --max:   720px;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 300;
+      font-size: 15px;
+      line-height: 1.75;
+      color: var(--ink);
+      background: var(--cream);
+      padding: 0 1.5rem 5rem;
+    }
+
+    /* ── Header bar ── */
+    .site-header {
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 2.5rem 0 2rem;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      border-bottom: 1px solid var(--line);
+    }
+    .site-header a {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.3rem;
+      font-weight: 600;
+      color: var(--accent);
+      text-decoration: none;
+      letter-spacing: 0.01em;
+    }
+    .site-header a:hover { opacity: 0.75; }
+
+    /* ── Content wrapper ── */
+    .wrapper {
+      max-width: var(--max);
+      margin: 0 auto;
+    }
+
+    /* ── Document title block ── */
+    .doc-title {
+      padding: 3.5rem 0 1.5rem;
+    }
+    .doc-title h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1.9rem, 4vw, 2.6rem);
+      font-weight: 600;
+      line-height: 1.2;
+      color: var(--ink);
+      letter-spacing: -0.01em;
+    }
+    .doc-title .date {
+      margin-top: 0.5rem;
+      font-size: 0.85rem;
+      color: var(--muted);
+      font-style: italic;
+    }
+
+    /* ── Section headings ── */
+    h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.2rem;
+      font-weight: 600;
+      color: var(--ink);
+      margin: 3rem 0 0.75rem;
+      padding-top: 2rem;
+      border-top: 1px solid var(--line);
+    }
+    h3 {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.95rem;
+      font-weight: 500;
+      color: var(--ink);
+      margin: 1.75rem 0 0.5rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    /* ── Body text ── */
+    p { margin-bottom: 1rem; color: var(--muted); }
+    p:last-child { margin-bottom: 0; }
+
+    ul, ol {
+      margin: 0.5rem 0 1rem 1.4rem;
+      color: var(--muted);
+    }
+    li { margin-bottom: 0.35rem; }
+    li strong { color: var(--ink); }
+
+    /* ── Highlight box (summary) ── */
+    .summary-box {
+      background: #fff;
+      border-left: 3px solid var(--accent);
+      padding: 1.4rem 1.6rem;
+      margin: 2rem 0;
+      border-radius: 0 6px 6px 0;
+    }
+    .summary-box p { margin-bottom: 0.6rem; }
+
+    /* ── Table of contents ── */
+    .toc {
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 1.4rem 1.6rem;
+      margin: 2rem 0;
+    }
+    .toc h3 { margin-top: 0; }
+    .toc ol { margin-bottom: 0; }
+    .toc li { margin-bottom: 0.25rem; }
+    .toc a {
+      color: var(--accent);
+      text-decoration: none;
+      font-size: 0.9rem;
+    }
+    .toc a:hover { text-decoration: underline; }
+
+    /* ── Data table ── */
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.88rem;
+      margin: 1rem 0 1.5rem;
+    }
+    th {
+      background: var(--ink);
+      color: #fff;
+      padding: 0.6rem 0.8rem;
+      text-align: left;
+      font-weight: 500;
+      font-family: 'DM Sans', sans-serif;
+    }
+    td {
+      padding: 0.6rem 0.8rem;
+      border: 1px solid var(--line);
+      color: var(--muted);
+      vertical-align: top;
+    }
+    tr:nth-child(even) td { background: #fbf9f5; }
+    td strong { color: var(--ink); }
+
+    /* ── Links ── */
+    a { color: var(--accent); }
+    a:hover { opacity: 0.75; }
+
+    /* ── Contact card ── */
+    .contact-card {
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 1.4rem 1.6rem;
+      margin-top: 1.5rem;
+      font-size: 0.92rem;
+      color: var(--muted);
+      line-height: 1.9;
+    }
+    .contact-card strong { color: var(--ink); display: block; font-size: 1rem; margin-bottom: 0.3rem; }
+
+    /* ── Footer ── */
+    .doc-footer {
+      max-width: var(--max);
+      margin: 4rem auto 0;
+      padding-top: 2rem;
+      border-top: 1px solid var(--line);
+      font-size: 0.8rem;
+      color: var(--muted);
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+    .doc-footer a { color: var(--accent); text-decoration: none; }
+
+    @media (max-width: 540px) {
+      .doc-footer { flex-direction: column; }
+    }
+  </style>
+</head>
+<body>
+
+  <header class="site-header">
+    <a href="https://www.cresvance.com">Cresvance</a>
+  </header>
+
+  <div class="wrapper">
+
+    <div class="doc-title">
+      <h1>Política de Privacidad</h1>
+      <p class="date">Última actualización: 1 de junio de 2026</p>
+    </div>
+
+    <p>
+      Esta Política de Privacidad describe cómo <strong>Pool Dilan Trejo Estupiñan</strong>, que opera bajo el nombre comercial <strong>Cresvance</strong> («nosotros», «nos» o «nuestro»), accede, recopila, almacena, usa y/o comparte («trata») su información personal cuando utiliza nuestros servicios («Servicios»), incluyendo cuando:
+    </p>
+    <ul>
+      <li>Visita nuestro sitio web en <a href="https://www.cresvance.com" target="_blank">https://www.cresvance.com</a> o cualquier otro sitio web nuestro que enlace a esta Política.</li>
+      <li>Usa nuestros servicios de asesoría en inmigración y fiscalidad para expatriados y profesionales internacionales que se trasladan a España (solicitudes de Visa para Nómadas Digitales, NIE, permisos de residencia, declaraciones de IRPF y registro como Autónomo).</li>
+      <li>Interactúa con nosotros de cualquier otra forma relacionada, incluidas acciones de marketing o eventos.</li>
+    </ul>
+    <p>
+      <strong>¿Preguntas o dudas?</strong> Si no está de acuerdo con nuestra política y prácticas, le rogamos que no utilice nuestros Servicios. Si tiene cualquier pregunta, contáctenos en <a href="mailto:hello@cresvance.com">hello@cresvance.com</a>.
+    </p>
+
+    <!-- SUMMARY -->
+    <div class="summary-box">
+      <h3 style="margin-top:0">Resumen de puntos clave</h3>
+      <p><strong>¿Qué información personal tratamos?</strong> Dependiendo de cómo interactúe con nosotros y los Servicios, las opciones que elija y los productos o funciones que utilice.</p>
+      <p><strong>¿Tratamos información personal sensible?</strong> Sí, cuando es necesario y con su consentimiento explícito o según lo permita la ley aplicable.</p>
+      <p><strong>¿Recopilamos información de terceros?</strong> No.</p>
+      <p><strong>¿Cómo tratamos su información?</strong> Para prestar, mejorar y administrar nuestros Servicios, comunicarnos con usted, garantizar la seguridad y cumplir la ley.</p>
+      <p><strong>¿Cuáles son sus derechos?</strong> Dependiendo de su ubicación, puede tener derechos de acceso, rectificación, supresión, portabilidad y oposición, entre otros.</p>
+      <p><strong>¿Cómo ejercer sus derechos?</strong> Enviando una solicitud de acceso a datos en <a href="https://app.termly.io/dsar/0cc16278-fe49-47c7-810d-7093c28cabfb" target="_blank">este enlace</a> o contactándonos directamente.</p>
+    </div>
+
+    <!-- TOC -->
+    <div class="toc" id="toc">
+      <h3>Tabla de contenidos</h3>
+      <ol>
+        <li><a href="#infocollect">¿Qué información recopilamos?</a></li>
+        <li><a href="#infouse">¿Cómo tratamos su información?</a></li>
+        <li><a href="#legalbases">¿En qué bases legales nos apoyamos?</a></li>
+        <li><a href="#whoshare">¿Cuándo y con quién compartimos su información?</a></li>
+        <li><a href="#cookies">¿Usamos cookies y otras tecnologías de seguimiento?</a></li>
+        <li><a href="#intltransfers">¿Se transfiere su información internacionalmente?</a></li>
+        <li><a href="#inforetain">¿Cuánto tiempo conservamos su información?</a></li>
+        <li><a href="#infosafe">¿Cómo protegemos su información?</a></li>
+        <li><a href="#infominors">¿Recopilamos información de menores?</a></li>
+        <li><a href="#privacyrights">¿Cuáles son sus derechos de privacidad?</a></li>
+        <li><a href="#DNT">Controles de «No rastrear»</a></li>
+        <li><a href="#uslaws">Derechos específicos de residentes en EE. UU.</a></li>
+        <li><a href="#clausea">Tratamiento de categorías especiales (Art. 9 RGPD)</a></li>
+        <li><a href="#policyupdates">¿Actualizamos esta política?</a></li>
+        <li><a href="#contact">¿Cómo puede contactarnos?</a></li>
+        <li><a href="#request">¿Cómo revisar, actualizar o eliminar sus datos?</a></li>
+      </ol>
+    </div>
+
+    <!-- 1 -->
+    <h2 id="infocollect">1. ¿Qué información recopilamos?</h2>
+    <h3>Información personal que usted nos facilita</h3>
+    <p>Recopilamos la información personal que nos proporciona voluntariamente cuando expresa interés en obtener información sobre nosotros o nuestros Servicios, cuando participa en actividades en los Servicios o cuando nos contacta.</p>
+    <p>La información personal que recopilamos puede incluir: números de teléfono, nombres, direcciones de correo electrónico, cargos profesionales, direcciones postales, preferencias de contacto y direcciones de facturación.</p>
+
+    <h3>Información sensible</h3>
+    <p>Cuando sea necesario y con su consentimiento o según lo permita la ley, tratamos las siguientes categorías de información sensible: datos financieros, números de seguridad social u otros identificadores gubernamentales, y documentos de antecedentes penales.</p>
+    <p>Toda la información personal que nos facilite debe ser veraz, completa y exacta. Debe notificarnos cualquier cambio.</p>
+
+    <h3>Información recopilada automáticamente</h3>
+    <p>Recopilamos automáticamente cierta información cuando visita, usa o navega por los Servicios: dirección IP, características del navegador y dispositivo, sistema operativo, preferencias de idioma, URLs de referencia, nombre del dispositivo, país, ubicación e información sobre cómo y cuándo utiliza nuestros Servicios.</p>
+    <p>Esta información se utiliza principalmente para mantener la seguridad y el funcionamiento de nuestros Servicios y con fines de análisis interno. También recopilamos información mediante cookies y tecnologías similares; consulte nuestra <a href="cookie-policy.html">Política de Cookies</a>.</p>
+    <p>La información que recopilamos incluye datos de registro y uso (dirección IP, tipo de navegador, páginas vistas, marcas de tiempo, etc.) y datos de ubicación (basados en la IP del dispositivo).</p>
+
+    <h3>API de Google</h3>
+    <p>Nuestro uso de la información recibida de las API de Google se ajustará a la <a href="https://developers.google.com/terms/api-services-user-data-policy" target="_blank">Política de datos de usuario de los Servicios de API de Google</a>, incluidos los requisitos de uso limitado.</p>
+
+    <!-- 2 -->
+    <h2 id="infouse">2. ¿Cómo tratamos su información?</h2>
+    <p>Tratamos su información para prestar, mejorar y administrar nuestros Servicios, comunicarnos con usted, garantizar la seguridad y prevenir fraudes, y cumplir la ley. Tratamos su información personal solo cuando disponemos de una base legal válida para hacerlo.</p>
+    <ul>
+      <li><strong>Para prestar y facilitar la prestación de servicios</strong> — Para proporcionarle el servicio solicitado.</li>
+      <li><strong>Para responder a consultas y ofrecer soporte</strong> — Para responder a sus consultas y resolver cualquier problema.</li>
+      <li><strong>Para enviarle información administrativa</strong> — Detalles sobre nuestros productos y servicios, cambios en términos y políticas.</li>
+      <li><strong>Para gestionar sus pedidos</strong> — Gestión de pedidos, pagos, devoluciones e intercambios.</li>
+      <li><strong>Para solicitar su opinión</strong> — Cuando sea necesario para contactarle sobre el uso de nuestros Servicios.</li>
+      <li><strong>Para proteger nuestros Servicios</strong> — Como parte de nuestros esfuerzos por mantener la seguridad y prevenir fraudes.</li>
+      <li><strong>Para identificar tendencias de uso</strong> — Para mejorar nuestros Servicios.</li>
+      <li><strong>Para proteger intereses vitales</strong> — Cuando sea necesario para salvar o proteger los intereses vitales de una persona.</li>
+      <li><strong>Para cumplir obligaciones legales y fiscales</strong> — Requeridas por la legislación española en la prestación de servicios de asesoría en inmigración y fiscalidad.</li>
+    </ul>
+
+    <!-- 3 -->
+    <h2 id="legalbases">3. ¿En qué bases legales nos apoyamos?</h2>
+    <p>El RGPD y el UK GDPR nos exigen explicar las bases legales en las que nos apoyamos para tratar su información personal. Podemos apoyarnos en las siguientes:</p>
+    <ul>
+      <li><strong>Consentimiento</strong> — Si nos ha dado permiso para usar su información personal para un fin específico. Puede retirar su consentimiento en cualquier momento.</li>
+      <li><strong>Ejecución de un contrato</strong> — Cuando es necesario para cumplir nuestras obligaciones contractuales con usted.</li>
+      <li><strong>Intereses legítimos</strong> — Cuando consideramos que es razonablemente necesario para lograr nuestros intereses legítimos y esos intereses no prevalecen sobre sus derechos fundamentales.</li>
+      <li><strong>Obligaciones legales</strong> — Cuando el tratamiento es necesario para cumplir la ley.</li>
+      <li><strong>Intereses vitales</strong> — Cuando es necesario para proteger los intereses vitales de usted o de un tercero.</li>
+    </ul>
+    <p>Si se encuentra en Canadá, también podemos tratar su información si tiene una necesidad clara y urgente y no sea posible obtener su consentimiento a tiempo, para investigaciones y detección de fraudes, o en otras circunstancias excepcionales permitidas por la ley.</p>
+
+    <!-- 4 -->
+    <h2 id="whoshare">4. ¿Cuándo y con quién compartimos su información?</h2>
+    <p>Podemos compartir información en situaciones específicas y con los siguientes terceros:</p>
+    <p><strong>Proveedores, consultores y otros prestadores de servicios de terceros.</strong> Podemos compartir sus datos con proveedores de servicios de terceros que realizan servicios para nosotros y necesitan acceso a dicha información. Disponemos de contratos con nuestros terceros diseñados para salvaguardar su información personal.</p>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Categoría</th>
+          <th>Proveedor</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>Computación en la nube</td><td>Google Cloud Platform</td></tr>
+        <tr><td>Comunicación y chat</td><td>Google Analytics</td></tr>
+        <tr><td>Copia de seguridad y seguridad de datos</td><td>Google Drive Backup</td></tr>
+        <tr><td>Facturación</td><td>Stripe y Odoo</td></tr>
+        <tr><td>Alojamiento web</td><td>GitHub</td></tr>
+        <tr><td>Programación de citas</td><td>Calendly</td></tr>
+        <tr><td>Procesamiento de pagos</td><td>Stripe</td></tr>
+      </tbody>
+    </table>
+
+    <p>También podemos necesitar compartir su información en las siguientes situaciones:</p>
+    <ul>
+      <li><strong>Transferencias empresariales</strong> — En relación con cualquier fusión, venta de activos, financiación o adquisición de todo o parte de nuestro negocio.</li>
+    </ul>
+
+    <!-- 5 -->
+    <h2 id="cookies">5. ¿Usamos cookies y otras tecnologías de seguimiento?</h2>
+    <p>Podemos usar cookies y tecnologías de seguimiento similares (como balizas web y píxeles) para recopilar información cuando interactúa con nuestros Servicios. Algunas tecnologías de seguimiento en línea nos ayudan a mantener la seguridad de los Servicios, evitar fallos, guardar sus preferencias y asistir con funciones básicas del sitio.</p>
+    <p>También permitimos que terceros y proveedores de servicios usen tecnologías de seguimiento en línea en nuestros Servicios para análisis y publicidad.</p>
+    <p>Para más información sobre el uso específico de dichas tecnologías y cómo puede rechazar ciertas cookies, consulte nuestra <a href="cookie-policy.html">Política de Cookies</a>.</p>
+
+    <h3>Google Analytics</h3>
+    <p>Podemos compartir su información con Google Analytics para rastrear y analizar el uso de los Servicios. Podemos utilizar las funciones de publicidad de Google Analytics: Informes demográficos e intereses. Para dejar de ser rastreado por Google Analytics, visite <a href="https://tools.google.com/dlpage/gaoptout" target="_blank">https://tools.google.com/dlpage/gaoptout</a>. Puede obtener más información sobre las prácticas de privacidad de Google en su <a href="https://policies.google.com/privacy" target="_blank">página de privacidad y términos</a>.</p>
+
+    <!-- 6 -->
+    <h2 id="intltransfers">6. ¿Se transfiere su información internacionalmente?</h2>
+    <p>Nuestros servidores están ubicados en Estados Unidos. Si se encuentra fuera de ese país, tenga en cuenta que su información puede ser transferida, almacenada y tratada en nuestras instalaciones y en las instalaciones de los terceros con quienes podemos compartir su información personal, incluyendo instalaciones en Estados Unidos y otros países.</p>
+    <p>Si es residente del Espacio Económico Europeo (EEE), Reino Unido o Suiza, estos países pueden no tener leyes de protección de datos tan completas como las de su país. Sin embargo, tomaremos todas las medidas necesarias para proteger su información personal de conformidad con esta Política de Privacidad y la ley aplicable.</p>
+    <p>Hemos implementado las Cláusulas Contractuales Tipo de la Comisión Europea para las transferencias de información personal entre nuestras empresas del grupo y con nuestros proveedores de servicios externos. Estas cláusulas exigen que todos los destinatarios protejan la información personal originaria del EEE o el Reino Unido de conformidad con la normativa europea de protección de datos. Nuestras Cláusulas Contractuales Tipo pueden facilitarse previa solicitud.</p>
+
+    <!-- 7 -->
+    <h2 id="inforetain">7. ¿Cuánto tiempo conservamos su información?</h2>
+    <p>Conservaremos su información personal únicamente durante el tiempo necesario para los fines establecidos en esta Política de Privacidad, a menos que la ley exija o permita un período de conservación más prolongado.</p>
+    <ul>
+      <li><strong>Registros fiscales y financieros:</strong> mínimo 4 años, conforme a la Ley General Tributaria y los plazos de prescripción aplicables.</li>
+      <li><strong>Documentos de inmigración y residencia:</strong> 3 años desde la finalización del servicio.</li>
+      <li><strong>Datos generales del cliente:</strong> durante la relación de servicio y 3 años adicionales para cubrir posibles reclamaciones civiles.</li>
+      <li><strong>Documentos sensibles (antecedentes penales):</strong> eliminados inmediatamente tras la finalización del procedimiento de inmigración para el que fueron facilitados.</li>
+      <li><strong>Registros de facturación y pagos:</strong> 4 años conforme a las obligaciones contables y fiscales españolas.</li>
+    </ul>
+    <p>Al expirar el período de conservación aplicable, la información personal se elimina de forma segura o se anonimiza conforme al artículo 17 del RGPD.</p>
+
+    <!-- 8 -->
+    <h2 id="infosafe">8. ¿Cómo protegemos su información?</h2>
+    <p>Hemos implementado medidas de seguridad técnicas y organizativas apropiadas y razonables para proteger la seguridad de cualquier información personal que tratemos. Sin embargo, ninguna transmisión electrónica por Internet ni tecnología de almacenamiento de información puede garantizarse al 100 % segura. La transmisión de información personal hacia y desde nuestros Servicios es a su propio riesgo. Acceda a los Servicios únicamente en un entorno seguro.</p>
+
+    <!-- 9 -->
+    <h2 id="infominors">9. ¿Recopilamos información de menores?</h2>
+    <p>No recopilamos, solicitamos ni comercializamos a sabiendas datos de personas menores de 18 años, ni vendemos conscientemente dicha información personal. Al usar los Servicios, declara que tiene al menos 18 años o que es el padre, madre o tutor legal de un menor dependiente y consiente el uso de los Servicios por dicho menor. Si tenemos conocimiento de que hemos recopilado información personal de usuarios menores de 18 años, desactivaremos la cuenta y tomaremos las medidas razonables para eliminar dichos datos. Si tiene conocimiento de datos que podamos haber recopilado de menores de 18 años, contáctenos en <a href="mailto:hello@cresvance.com">hello@cresvance.com</a>.</p>
+
+    <!-- 10 -->
+    <h2 id="privacyrights">10. ¿Cuáles son sus derechos de privacidad?</h2>
+    <p>En algunas regiones (como el EEE, el Reino Unido, Suiza y Canadá), usted tiene ciertos derechos en virtud de las leyes de protección de datos aplicables. Estos pueden incluir el derecho a:</p>
+    <ul>
+      <li>Solicitar acceso y obtener una copia de su información personal.</li>
+      <li>Solicitar la rectificación o eliminación de su información personal.</li>
+      <li>Restringir el tratamiento de su información personal.</li>
+      <li>Si procede, a la portabilidad de los datos.</li>
+      <li>No ser objeto de decisiones automatizadas con efectos jurídicos o significativos similares. En tal caso, le informaremos, explicaremos los factores principales y ofreceremos un método sencillo para solicitar revisión humana.</li>
+      <li>Oponerse al tratamiento de su información personal en determinadas circunstancias.</li>
+    </ul>
+    <p>Para realizar cualquiera de estas solicitudes, contáctenos mediante los datos que figuran en la sección <a href="#contact">«¿Cómo puede contactarnos?»</a>.</p>
+    <p>Si se encuentra en el EEE o el Reino Unido y cree que estamos tratando su información personal de forma ilícita, también tiene derecho a presentar una reclamación ante la autoridad de protección de datos de su Estado miembro o ante la <a href="https://ico.org.uk/make-a-complaint/data-protection-complaints/data-protection-complaints/" target="_blank">autoridad de protección de datos del Reino Unido</a>. Si se encuentra en España, puede contactar con la <a href="https://www.aepd.es/" target="_blank">Agencia Española de Protección de Datos (AEPD)</a>.</p>
+    <p>Si se encuentra en Suiza, puede contactar con el <a href="https://www.edoeb.admin.ch/edoeb/en/home.html" target="_blank">Comisionado Federal de Protección de Datos e Información</a>.</p>
+
+    <h3>Retirar su consentimiento</h3>
+    <p>Si nos basamos en su consentimiento para tratar su información personal, tiene derecho a retirarlo en cualquier momento contactándonos mediante los datos de la sección <a href="#contact">«¿Cómo puede contactarnos?»</a>. Tenga en cuenta que esto no afectará a la licitud del tratamiento realizado antes de la retirada del consentimiento, ni al tratamiento basado en otras bases legales.</p>
+
+    <h3>Cookies y tecnologías similares</h3>
+    <p>La mayoría de los navegadores web están configurados para aceptar cookies de forma predeterminada. Si lo prefiere, puede configurar su navegador para eliminar o rechazar cookies. Para más información, consulte nuestra <a href="cookie-policy.html">Política de Cookies</a>.</p>
+    <p>Si tiene preguntas o comentarios sobre sus derechos de privacidad, puede enviarnos un correo electrónico a <a href="mailto:hello@cresvance.com">hello@cresvance.com</a>.</p>
+
+    <!-- 11 -->
+    <h2 id="DNT">11. Controles de «No rastrear»</h2>
+    <p>La mayoría de los navegadores web y algunos sistemas operativos móviles incluyen una función o ajuste de «Do-Not-Track» (DNT) que puede activar para indicar su preferencia de privacidad de no tener datos sobre su actividad de navegación en línea monitorizados y recopilados. Actualmente no existe un estándar tecnológico uniforme para reconocer e implementar señales DNT. Por ello, actualmente no respondemos a señales DNT del navegador ni a ningún otro mecanismo que comunique automáticamente su elección de no ser rastreado en línea. Si en el futuro se adopta un estándar de seguimiento en línea que debamos cumplir, le informaremos en una versión revisada de esta Política de Privacidad.</p>
+    <p>La ley de California nos exige informarle de cómo respondemos a las señales DNT de los navegadores web. Debido a que actualmente no existe un estándar del sector para reconocer u honrar señales DNT, no respondemos a ellas en este momento.</p>
+
+    <!-- 12 -->
+    <h2 id="uslaws">12. Derechos específicos de residentes en EE. UU.</h2>
+    <p>Si reside en California, Colorado, Connecticut, Delaware, Florida, Indiana, Iowa, Kentucky, Maryland, Minnesota, Montana, Nebraska, New Hampshire, New Jersey, Oregón, Rhode Island, Tennessee, Texas, Utah o Virginia, puede tener derecho a solicitar acceso a la información personal que mantenemos sobre usted, corregir inexactitudes, obtener una copia o eliminar su información personal, y retirar su consentimiento para el tratamiento. Estos derechos pueden estar limitados en determinadas circunstancias por la ley aplicable.</p>
+
+    <h3>Categorías de información personal recopilada</h3>
+    <table>
+      <thead>
+        <tr><th>Categoría</th><th>Ejemplos</th><th>Recopilada</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>A. Identificadores</td><td>Nombre, dirección postal, número de teléfono, dirección IP, correo electrónico</td><td>Sí</td></tr>
+        <tr><td>B. Información personal (Ley de registros de clientes de California)</td><td>Nombre, información de contacto, empleo, historial laboral, información financiera</td><td>Sí</td></tr>
+        <tr><td>C. Características de clasificación protegida</td><td>Género, edad, raza, origen nacional, estado civil</td><td>No</td></tr>
+        <tr><td>D. Información comercial</td><td>Historial de transacciones, detalles financieros, información de pago</td><td>Sí</td></tr>
+        <tr><td>E. Información biométrica</td><td>Huellas dactilares y patrones de voz</td><td>No</td></tr>
+        <tr><td>F. Actividad en Internet o redes similares</td><td>Historial de navegación, datos de interacción con el sitio web</td><td>Sí</td></tr>
+        <tr><td>G. Datos de geolocalización</td><td>Ubicación del dispositivo</td><td>Sí</td></tr>
+        <tr><td>H. Información de audio, electrónica o visual</td><td>Imágenes y grabaciones de audio/vídeo</td><td>No</td></tr>
+        <tr><td>I. Información profesional o laboral</td><td>Datos de contacto profesional, historial laboral</td><td>Sí</td></tr>
+        <tr><td>J. Información educativa</td><td>Registros de estudiantes</td><td>No</td></tr>
+        <tr><td>K. Inferencias derivadas de la información personal</td><td>Perfiles o resúmenes de preferencias individuales</td><td>No</td></tr>
+        <tr><td>L. Información personal sensible</td><td>Números de pasaporte, números de seguridad social, datos financieros, estado de ciudadanía o inmigración, etc.</td><td>Sí</td></tr>
+      </tbody>
+    </table>
+
+    <h3>Sus derechos</h3>
+    <ul>
+      <li><strong>Derecho a saber</strong> si estamos tratando sus datos.</li>
+      <li><strong>Derecho de acceso</strong> a sus datos personales.</li>
+      <li><strong>Derecho de rectificación</strong> de inexactitudes.</li>
+      <li><strong>Derecho de supresión</strong> de sus datos personales.</li>
+      <li><strong>Derecho a obtener una copia</strong> de los datos que nos facilitó anteriormente.</li>
+      <li><strong>Derecho a la no discriminación</strong> por ejercer sus derechos.</li>
+      <li><strong>Derecho a oponerse</strong> al tratamiento de sus datos para publicidad dirigida, venta de datos personales o elaboración de perfiles.</li>
+    </ul>
+
+    <h3>Cómo ejercer sus derechos</h3>
+    <p>Para ejercer estos derechos, puede ponerse en contacto con nosotros enviando una <a href="https://app.termly.io/dsar/0cc16278-fe49-47c7-810d-7093c28cabfb" target="_blank">solicitud de acceso a datos</a>, enviándonos un correo electrónico a <a href="mailto:hello@cresvance.com">hello@cresvance.com</a>, o llamando al <a href="tel:+34602593904">+34 602 593 904</a>.</p>
+
+    <h3>Verificación de solicitudes</h3>
+    <p>Al recibir su solicitud, necesitaremos verificar su identidad. Solo usaremos la información personal proporcionada en su solicitud para verificar su identidad o autoridad para realizarla.</p>
+
+    <h3>Recursos</h3>
+    <p>Si rechazamos actuar en respuesta a su solicitud, puede apelar nuestra decisión enviando un correo electrónico a <a href="mailto:hello@cresvance.com">hello@cresvance.com</a>. Le informaremos por escrito de cualquier acción tomada o no tomada en respuesta a la apelación, junto con una explicación escrita de los motivos.</p>
+
+    <h3>Ley de California «Shine the Light»</h3>
+    <p>El Código Civil de California, sección 1798.83, permite a los usuarios residentes en California solicitar y obtener de nosotros, una vez al año y de forma gratuita, información sobre las categorías de información personal (si las hubiere) que divulgamos a terceros para fines de marketing directo. Si es residente en California y desea realizar dicha solicitud, envíenosla por escrito mediante los datos de contacto que figuran en la sección <a href="#contact">«¿Cómo puede contactarnos?»</a>.</p>
+
+    <!-- 13 -->
+    <h2 id="clausea">13. Tratamiento de categorías especiales de datos (Art. 9 RGPD)</h2>
+    <p>Como parte de nuestros servicios de asesoría en inmigración, residencia y visados, Cresvance trata datos personales que pueden constituir categorías especiales en virtud del artículo 9 del Reglamento (UE) 2016/679 (RGPD), incluidos la nacionalidad, el origen nacional y la documentación de inmigración.</p>
+    <p>Dichos datos se tratan exclusivamente sobre la base del <strong>consentimiento explícito del interesado</strong> (art. 9.2.a RGPD), prestado en el momento de contratar nuestros servicios, y únicamente con el fin de gestionar su procedimiento de residencia, visado o trámite administrativo en España.</p>
+    <p>Los datos se conservarán durante la vigencia del servicio y un período adicional de 4 años, de conformidad con los plazos de prescripción aplicables en la legislación española.</p>
+    <p>El interesado podrá retirar su consentimiento en cualquier momento sin que ello afecte a la licitud del tratamiento previo, contactando con nosotros en <a href="mailto:hello@cresvance.com">hello@cresvance.com</a>.</p>
+    <p>El interesado también tiene derecho a presentar una reclamación ante la <strong>Agencia Española de Protección de Datos (AEPD)</strong> en <a href="https://www.aepd.es/" target="_blank">https://www.aepd.es/</a>.</p>
+
+    <!-- 14 -->
+    <h2 id="policyupdates">14. ¿Actualizamos esta política?</h2>
+    <p>Podemos actualizar esta Política de Privacidad de vez en cuando. La versión actualizada se indicará con una fecha de «Última actualización» revisada en la parte superior de esta Política. Si realizamos cambios sustanciales en esta Política, podemos notificárselo publicando de forma destacada un aviso de dichos cambios o enviándole directamente una notificación. Le recomendamos que revise esta Política de Privacidad con frecuencia para estar informado de cómo protegemos su información.</p>
+
+    <!-- 15 -->
+    <h2 id="contact">15. ¿Cómo puede contactarnos?</h2>
+    <p>Si tiene preguntas o comentarios sobre este aviso, puede enviarnos un correo electrónico a <a href="mailto:hello@cresvance.com">hello@cresvance.com</a> o contactarnos por correo postal en:</p>
+    <div class="contact-card">
+      <strong>Pool Dilan Trejo Estupiñan (Cresvance)</strong>
+      C. Martínez de la Rosa, 132, 4-G<br />
+      29010 Málaga, Andalucía<br />
+      España<br />
+      <a href="tel:+34602593904">+34 602 593 904</a><br />
+      <a href="mailto:hello@cresvance.com">hello@cresvance.com</a>
+    </div>
+
+    <!-- 16 -->
+    <h2 id="request">16. ¿Cómo revisar, actualizar o eliminar sus datos?</h2>
+    <p>Basándonos en las leyes aplicables de su país o estado de residencia, puede tener derecho a solicitar acceso a la información personal que recopilamos de usted, detalles sobre cómo la hemos tratado, corregir inexactitudes o eliminar su información personal. También puede tener derecho a retirar su consentimiento al tratamiento. Para solicitar la revisión, actualización o eliminación de su información personal, cumplimente y envíe una <a href="https://app.termly.io/dsar/0cc16278-fe49-47c7-810d-7093c28cabfb" target="_blank">solicitud de acceso a datos</a>.</p>
+
+  </div><!-- /.wrapper -->
+
+  <footer class="doc-footer">
+    <span>© <script>document.write(new Date().getFullYear())</script> Cresvance · Todos los derechos reservados</span>
+    <span>
+      <a href="privacy-policy.html">Política de Privacidad</a> ·
+      <a href="cookie-policy.html">Política de Cookies</a>
+    </span>
+  </footer>
+
+</body>
+</html>
