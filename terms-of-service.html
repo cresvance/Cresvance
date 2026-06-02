@@ -1,0 +1,599 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Términos de Servicio | Cresvance</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --navy: #0F172A;
+            --electric: #2563EB;
+            --white: #ffffff;
+            --text-main: #1E293B;
+            --text-muted: #64748B;
+            --bg-light: #F8FAFC;
+            --border: #E2E8F0;
+            --surface: #F1F5F9;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            color: var(--text-main);
+            background: var(--white);
+            line-height: 1.7;
+            font-size: 0.95rem;
+        }
+
+        /* ── NAV ── */
+        nav {
+            padding: 1.2rem 6%;
+            display: flex; justify-content: space-between; align-items: center;
+            background: rgba(255,255,255,0.95);
+            backdrop-filter: blur(16px);
+            border-bottom: 1px solid var(--border);
+            position: sticky; top: 0; z-index: 100;
+        }
+        .logo {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-weight: 800; font-size: 1.5rem;
+            color: var(--navy); text-decoration: none; letter-spacing: -0.03em;
+        }
+        .nav-back {
+            display: inline-flex; align-items: center; gap: 8px;
+            font-size: 0.85rem; font-weight: 600; color: var(--text-muted);
+            text-decoration: none; transition: color 0.2s;
+        }
+        .nav-back:hover { color: var(--electric); }
+        .nav-back svg { width: 16px; height: 16px; }
+
+        /* ── HERO HEADER ── */
+        .page-header {
+            background: var(--navy);
+            padding: 64px 6% 52px;
+            position: relative; overflow: hidden;
+        }
+        .page-header::before {
+            content: ''; position: absolute;
+            top: -150px; right: -150px; width: 500px; height: 500px; border-radius: 50%;
+            background: radial-gradient(circle, rgba(37,99,235,0.25) 0%, transparent 70%);
+            pointer-events: none;
+        }
+        .page-header-inner { position: relative; z-index: 1; max-width: 820px; }
+        .page-label {
+            display: inline-flex; align-items: center; gap: 8px;
+            font-size: 0.72rem; font-weight: 700; text-transform: uppercase;
+            letter-spacing: 0.12em; color: rgba(255,255,255,0.5);
+            margin-bottom: 14px;
+        }
+        .page-label::before { content: ''; display: block; width: 20px; height: 2px; background: var(--electric); border-radius: 2px; }
+        .page-header h1 {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-size: clamp(2rem, 5vw, 3.2rem);
+            font-weight: 800; color: white;
+            letter-spacing: -0.04em; line-height: 1.1;
+            margin-bottom: 14px;
+        }
+        .page-header .last-updated {
+            font-size: 0.82rem; color: rgba(255,255,255,0.45);
+            font-style: italic;
+        }
+
+        /* ── LAYOUT ── */
+        .page-layout {
+            display: grid;
+            grid-template-columns: 260px 1fr;
+            gap: 0;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 6%;
+            align-items: start;
+        }
+
+        /* ── SIDEBAR TOC ── */
+        .sidebar {
+            position: sticky; top: 80px;
+            padding: 36px 0 36px 0;
+            border-right: 1px solid var(--border);
+            padding-right: 32px;
+            margin-right: 48px;
+        }
+        .sidebar h2 {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-size: 0.72rem; font-weight: 700;
+            text-transform: uppercase; letter-spacing: 0.12em;
+            color: var(--text-muted); margin-bottom: 16px;
+        }
+        .sidebar ol {
+            list-style: none; counter-reset: toc-counter;
+        }
+        .sidebar ol li {
+            counter-increment: toc-counter;
+            margin-bottom: 4px;
+        }
+        .sidebar ol li a {
+            display: flex; align-items: baseline; gap: 8px;
+            text-decoration: none; color: var(--text-muted);
+            font-size: 0.8rem; font-weight: 500;
+            padding: 5px 8px; border-radius: 6px;
+            transition: all 0.2s; line-height: 1.4;
+        }
+        .sidebar ol li a::before {
+            content: counter(toc-counter, decimal-leading-zero);
+            font-size: 0.68rem; color: var(--electric); font-weight: 700;
+            flex-shrink: 0; opacity: 0.7;
+        }
+        .sidebar ol li a:hover { color: var(--navy); background: var(--surface); }
+
+        /* ── CONTENT ── */
+        .content {
+            padding: 48px 0 80px;
+            max-width: 720px;
+        }
+
+        /* ── INTRO BOX ── */
+        .intro-box {
+            background: var(--bg-light);
+            border: 1px solid var(--border);
+            border-left: 4px solid var(--electric);
+            border-radius: 12px;
+            padding: 28px 32px;
+            margin-bottom: 48px;
+        }
+        .intro-box p { font-size: 0.9rem; color: var(--text-muted); line-height: 1.75; margin-bottom: 10px; }
+        .intro-box p:last-child { margin-bottom: 0; }
+        .intro-box strong { color: var(--text-main); }
+
+        /* ── SECTIONS ── */
+        .section {
+            margin-bottom: 0;
+            padding: 36px 0;
+            border-bottom: 1px solid var(--border);
+        }
+        .section:last-child { border-bottom: none; }
+
+        .section-num {
+            font-size: 0.72rem; font-weight: 700; color: var(--electric);
+            text-transform: uppercase; letter-spacing: 0.1em;
+            margin-bottom: 6px; display: block;
+        }
+        .section h2 {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-size: 1.15rem; font-weight: 800;
+            color: var(--navy); letter-spacing: -0.02em;
+            margin-bottom: 16px; line-height: 1.3;
+        }
+        .section h3 {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-size: 0.95rem; font-weight: 700;
+            color: var(--navy); margin-top: 20px; margin-bottom: 8px;
+        }
+        .section p {
+            color: var(--text-muted);
+            margin-bottom: 12px;
+            line-height: 1.75;
+        }
+        .section p:last-child { margin-bottom: 0; }
+        .section p strong { color: var(--text-main); }
+
+        /* Uppercase legal paragraphs */
+        .section p.legal-caps {
+            font-size: 0.82rem;
+            font-weight: 600;
+            color: var(--text-main);
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 16px 18px;
+            line-height: 1.7;
+        }
+
+        .section ul, .section ol {
+            padding-left: 0;
+            list-style: none;
+            margin: 12px 0 12px 0;
+        }
+        .section ul li, .section ol li {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            line-height: 1.7;
+            padding: 6px 0 6px 20px;
+            position: relative;
+            border-bottom: 1px solid var(--border);
+        }
+        .section ul li:last-child, .section ol li:last-child { border-bottom: none; }
+        .section ul li::before {
+            content: '→';
+            position: absolute; left: 0;
+            color: var(--electric); font-size: 0.8rem;
+        }
+        .section ol { counter-reset: ol-counter; }
+        .section ol li { counter-increment: ol-counter; }
+        .section ol li::before {
+            content: counter(ol-counter) '.';
+            position: absolute; left: 0;
+            color: var(--electric); font-size: 0.8rem; font-weight: 700;
+        }
+
+        hr { border: none; border-top: 1px solid var(--border); margin: 0; }
+
+        /* ── CONTACT BLOCK ── */
+        .contact-block {
+            background: var(--navy);
+            border-radius: 16px;
+            padding: 32px 36px;
+            margin-top: 8px;
+        }
+        .contact-block p {
+            color: rgba(255,255,255,0.6);
+            margin-bottom: 6px;
+            font-size: 0.875rem;
+        }
+        .contact-block p strong { color: white; }
+        .contact-block a { color: rgba(255,255,255,0.6); text-decoration: none; }
+        .contact-block a:hover { color: white; text-decoration: underline; }
+
+        /* ── FOOTER ── */
+        footer {
+            background: var(--navy);
+            color: rgba(255,255,255,0.4);
+            font-size: 0.78rem;
+            text-align: center;
+            padding: 28px 6%;
+            border-top: 1px solid rgba(255,255,255,0.06);
+        }
+        footer a { color: rgba(255,255,255,0.5); text-decoration: none; }
+        footer a:hover { color: white; }
+
+        /* ── MOBILE ── */
+        @media (max-width: 900px) {
+            .page-layout { grid-template-columns: 1fr; padding: 0 5%; }
+            .sidebar { display: none; }
+            .content { padding: 32px 0 60px; }
+            .page-header { padding: 48px 5% 40px; }
+        }
+        @media (max-width: 600px) {
+            .page-header h1 { font-size: 1.8rem; }
+            .intro-box { padding: 20px 22px; }
+            .contact-block { padding: 24px 22px; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+    <a href="https://www.cresvance.com" class="logo">CRESVANCE</a>
+    <a href="https://www.cresvance.com" class="nav-back">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>
+        Volver al inicio
+    </a>
+</nav>
+
+<!-- HEADER -->
+<div class="page-header">
+    <div class="page-header-inner">
+        <div class="page-label">Aviso legal</div>
+        <h1>Términos de Servicio</h1>
+        <p class="last-updated">Última actualización: 1 de junio de 2026</p>
+    </div>
+</div>
+
+<!-- LAYOUT -->
+<div class="page-layout">
+
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
+        <h2>Índice</h2>
+        <ol>
+            <li><a href="#s1">Nuestros servicios</a></li>
+            <li><a href="#s2">Propiedad intelectual</a></li>
+            <li><a href="#s3">Declaraciones del usuario</a></li>
+            <li><a href="#s4">Actividades prohibidas</a></li>
+            <li><a href="#s5">Contribuciones de usuarios</a></li>
+            <li><a href="#s6">Licencia de contribuciones</a></li>
+            <li><a href="#s7">Directrices para reseñas</a></li>
+            <li><a href="#s8">Sitios web de terceros</a></li>
+            <li><a href="#s9">Gestión de los servicios</a></li>
+            <li><a href="#s10">Política de privacidad</a></li>
+            <li><a href="#s11">Vigencia y resolución</a></li>
+            <li><a href="#s12">Modificaciones e interrupciones</a></li>
+            <li><a href="#s13">Ley aplicable</a></li>
+            <li><a href="#s14">Resolución de conflictos</a></li>
+            <li><a href="#s15">Correcciones</a></li>
+            <li><a href="#s16">Exención de responsabilidad</a></li>
+            <li><a href="#s17">Limitación de responsabilidad</a></li>
+            <li><a href="#s18">Indemnización</a></li>
+            <li><a href="#s19">Datos del usuario</a></li>
+            <li><a href="#s20">Comunicaciones electrónicas</a></li>
+            <li><a href="#s21">Usuarios en California</a></li>
+            <li><a href="#s22">Disposiciones generales</a></li>
+            <li><a href="#s23">Aviso sobre servicios</a></li>
+            <li><a href="#s24">Contacto</a></li>
+        </ol>
+    </aside>
+
+    <!-- CONTENT -->
+    <main class="content">
+
+        <!-- INTRO -->
+        <div class="intro-box">
+            <p>Somos <strong>Pool Dilan Trejo Estupiñan</strong>, operando bajo la marca <strong>Cresvance</strong> («la Empresa», «nosotros», «nos», «nuestro»). Nuestro número de IVA es <strong>ES78329861A</strong>.</p>
+            <p>Operamos el sitio web <strong>https://www.cresvance.com</strong> («el Sitio»), así como cualquier otro producto o servicio relacionado que haga referencia a estos términos legales (conjuntamente, los «Servicios»).</p>
+            <p>Ofrecemos asesoramiento en materia de inmigración y fiscalidad para expatriados y profesionales internacionales que se trasladan a España. Prestamos apoyo personalizado para solicitudes de Visa de Nómada Digital, NIE y permisos de residencia, declaraciones anuales de la renta y registro como Autónomo. Recopilamos y tratamos datos personales y financieros exclusivamente para prestar nuestros servicios de asesoramiento.</p>
+            <p>Puede contactarnos por teléfono en <strong>(+34) 602 593 904</strong>, por correo electrónico en <strong>hello@cresvance.com</strong>, o por correo postal en C/ Martínez de la Rosa 132, 4-G, Málaga, Andalucía 29010, España.</p>
+            <p>Estos Términos Legales constituyen un acuerdo legalmente vinculante entre usted y Pool Dilan Trejo Estupiñan en relación con su acceso y uso de los Servicios. <strong>Al acceder a los Servicios, usted declara haber leído, comprendido y aceptado quedar vinculado por todos estos Términos Legales. SI NO ESTÁ DE ACUERDO CON TODOS ESTOS TÉRMINOS, QUEDA EXPRESAMENTE PROHIBIDO EL USO DE LOS SERVICIOS Y DEBE CESAR EN SU USO DE INMEDIATO.</strong></p>
+            <p>Le informaremos con antelación de cualquier cambio programado en los Servicios. Los Términos Legales modificados entrarán en vigor tras su publicación o notificación a través de hello@cresvance.com. Al continuar utilizando los Servicios tras la fecha de entrada en vigor de los cambios, acepta quedar vinculado por los términos modificados.</p>
+            <p>Los Servicios están destinados a usuarios mayores de 18 años. Las personas menores de 18 años no están autorizadas a utilizarlos ni a registrarse.</p>
+            <p>Le recomendamos que imprima una copia de estos Términos Legales para sus registros.</p>
+        </div>
+
+        <!-- 1 -->
+        <div class="section" id="s1">
+            <span class="section-num">01</span>
+            <h2>Nuestros Servicios</h2>
+            <p>La información facilitada a través de los Servicios no está destinada a su distribución ni uso por parte de personas o entidades en jurisdicciones donde dicha distribución o uso sea contrario a la ley o la normativa, o que pudiera someter a la Empresa a requisitos de registro en dichas jurisdicciones. Las personas que accedan a los Servicios desde otras ubicaciones lo hacen por iniciativa propia y son las únicas responsables del cumplimiento de la normativa local aplicable.</p>
+            <p>Nuestra plataforma presta servicios de asesoramiento fiscal y en materia de inmigración en España, sujetos a la Ley General Tributaria (Ley 58/2003), la Ley Orgánica sobre derechos y libertades de los extranjeros (Ley Orgánica 4/2000), la Ley Orgánica de Protección de Datos (LOPDGDD 3/2018) y la normativa de prevención del blanqueo de capitales (Ley 10/2010).</p>
+        </div>
+
+        <!-- 2 -->
+        <div class="section" id="s2">
+            <span class="section-num">02</span>
+            <h2>Derechos de Propiedad Intelectual</h2>
+            <h3>Nuestra propiedad intelectual</h3>
+            <p>Somos propietarios o licenciatarios de todos los derechos de propiedad intelectual sobre los Servicios, incluido todo el código fuente, bases de datos, funcionalidades, software, diseños web, contenido de audio, vídeo, texto, fotografías y gráficos (conjuntamente, el «Contenido»), así como las marcas comerciales, marcas de servicio y logotipos contenidos en ellos (las «Marcas»).</p>
+            <p>El Contenido y las Marcas están protegidos por la legislación española e internacional sobre propiedad intelectual e industrial.</p>
+            <p>El Contenido y las Marcas se ponen a disposición a través de los Servicios «TAL CUAL» para su uso personal y no comercial o para uso interno empresarial únicamente.</p>
+            <h3>Su uso de nuestros Servicios</h3>
+            <p>Sujeto al cumplimiento de estos Términos Legales, incluida la sección de «ACTIVIDADES PROHIBIDAS», le concedemos una licencia no exclusiva, intransferible y revocable para acceder a los Servicios y descargar o imprimir una copia de cualquier parte del Contenido al que haya accedido legítimamente, exclusivamente para su uso personal, no comercial o para uso interno empresarial.</p>
+            <p>Salvo lo dispuesto en esta sección o en otro lugar de estos Términos Legales, ninguna parte de los Servicios, el Contenido ni las Marcas podrá ser copiada, reproducida, agrupada, republicada, subida, publicada, exhibida públicamente, codificada, traducida, transmitida, distribuida, vendida, licenciada ni explotada de ningún otro modo con fines comerciales sin nuestro previo consentimiento escrito y expreso.</p>
+            <p>Si desea hacer un uso de los Servicios, el Contenido o las Marcas distinto al previsto en esta sección, diríjase a: <strong>hello@cresvance.com</strong>. Si le concedemos permiso para publicar, reproducir o exhibir públicamente cualquier parte de nuestros Servicios o Contenido, deberá identificarnos como propietarios o licenciantes e incluir cualquier aviso de derechos de autor o aviso de propiedad visible.</p>
+            <p>Nos reservamos todos los derechos no concedidos expresamente sobre los Servicios, el Contenido y las Marcas. Cualquier infracción de estos derechos constituirá un incumplimiento material de estos Términos Legales y su derecho a utilizar los Servicios cesará de inmediato.</p>
+            <h3>Sus envíos</h3>
+            <p>Al enviarnos directamente cualquier pregunta, comentario, sugerencia, idea, valoración u otra información sobre los Servicios («Envíos»), acepta cedernos todos los derechos de propiedad intelectual sobre dicho Envío. Acepta que seremos propietarios de dicho Envío y tendremos derecho a su uso y difusión sin restricciones para cualquier fin lícito, sin reconocimiento ni compensación a su favor.</p>
+            <p>Es responsable de lo que publica o sube. Al enviarnos Envíos a través de cualquier parte de los Servicios, usted: (i) confirma haber leído y aceptado las «ACTIVIDADES PROHIBIDAS»; (ii) renuncia, en la medida permitida por la ley, a cualquier derecho moral sobre dichos Envíos; (iii) garantiza que los Envíos son originales o que tiene los derechos necesarios para realizarlos; y (iv) garantiza que los Envíos no constituyen información confidencial.</p>
+            <p>Es el único responsable de sus Envíos y acepta expresamente resarcirnos de cualquier pérdida derivada del incumplimiento de esta sección, de los derechos de propiedad intelectual de terceros o de la normativa aplicable.</p>
+        </div>
+
+        <!-- 3 -->
+        <div class="section" id="s3">
+            <span class="section-num">03</span>
+            <h2>Declaraciones del Usuario</h2>
+            <p>Al utilizar los Servicios, usted declara y garantiza que: (1) tiene capacidad legal para aceptar estos Términos Legales; (2) no es menor de edad en su jurisdicción de residencia; (3) no accederá a los Servicios mediante medios automatizados o no humanos; (4) no utilizará los Servicios para ningún fin ilegal o no autorizado; y (5) su uso de los Servicios no infringirá ninguna ley o normativa aplicable.</p>
+            <p>Si facilita información falsa, inexacta, desactualizada o incompleta, tenemos derecho a suspender o cancelar su cuenta y denegar cualquier uso presente o futuro de los Servicios.</p>
+        </div>
+
+        <!-- 4 -->
+        <div class="section" id="s4">
+            <span class="section-num">04</span>
+            <h2>Actividades Prohibidas</h2>
+            <p>No puede acceder a los Servicios ni utilizarlos para ningún fin distinto a aquel para el que los ponemos a disposición. Los Servicios no podrán utilizarse en relación con iniciativas comerciales distintas de las específicamente respaldadas o aprobadas por nosotros.</p>
+            <p>Como usuario de los Servicios, usted se compromete a no:</p>
+            <ul>
+                <li>Recuperar sistemáticamente datos u otro contenido de los Servicios para crear o compilar, directa o indirectamente, una colección, base de datos o directorio sin nuestro permiso escrito.</li>
+                <li>Engañar, defraudar o inducir a error a nosotros o a otros usuarios, especialmente en cualquier intento de obtener información confidencial de cuentas, como contraseñas.</li>
+                <li>Eludir, deshabilitar o interferir de cualquier otro modo con las funciones de seguridad de los Servicios.</li>
+                <li>Desacreditar, menoscabar o perjudicar, en nuestra opinión, a nosotros o a los Servicios.</li>
+                <li>Utilizar cualquier información obtenida de los Servicios para acosar, abusar o perjudicar a otra persona.</li>
+                <li>Hacer un uso indebido de nuestros servicios de asistencia o presentar denuncias falsas de abuso o conducta indebida.</li>
+                <li>Utilizar los Servicios de manera incompatible con las leyes o normativas aplicables.</li>
+                <li>Realizar enmarcado o enlazado no autorizado a los Servicios.</li>
+                <li>Subir o transmitir virus, troyanos u otro material malicioso que interfiera con el uso de los Servicios.</li>
+                <li>Realizar cualquier uso automatizado del sistema, como el uso de scripts para enviar comentarios o mensajes, o el uso de herramientas de extracción de datos o robots.</li>
+                <li>Eliminar los avisos de derechos de autor u otras marcas de propiedad del Contenido.</li>
+                <li>Intentar suplantar la identidad de otro usuario o persona.</li>
+                <li>Subir o transmitir cualquier material que actúe como mecanismo de recopilación o transmisión de información pasiva o activa (spyware, píxeles de seguimiento, cookies no autorizadas, etc.).</li>
+                <li>Interferir, perturbar o crear una carga excesiva sobre los Servicios o las redes conectadas a ellos.</li>
+                <li>Acosar, molestar, intimidar o amenazar a cualquiera de nuestros empleados o agentes.</li>
+                <li>Intentar eludir cualquier medida de los Servicios diseñada para prevenir o restringir el acceso.</li>
+                <li>Copiar o adaptar el software de los Servicios, incluidos, entre otros, Flash, PHP, HTML, JavaScript u otro código.</li>
+                <li>Salvo lo permitido por la ley, descifrar, descompilar, desensamblar o realizar ingeniería inversa sobre cualquier software de los Servicios.</li>
+                <li>Usar, lanzar, desarrollar o distribuir cualquier sistema automatizado, incluidos arañas web, robots, utilidades de trampa, raspadores o lectores sin conexión que accedan a los Servicios.</li>
+                <li>Utilizar un agente de compras para realizar adquisiciones en los Servicios.</li>
+                <li>Realizar cualquier uso no autorizado de los Servicios, incluida la recopilación de direcciones de correo electrónico de usuarios para el envío de correo no deseado o la creación de cuentas por medios automatizados.</li>
+                <li>Utilizar los Servicios en el marco de cualquier iniciativa para competir con nosotros o con fines que generen ingresos o actividades comerciales no autorizadas.</li>
+                <li>Utilizar los Servicios para publicitar u ofrecer la venta de bienes y servicios.</li>
+            </ul>
+        </div>
+
+        <!-- 5 -->
+        <div class="section" id="s5">
+            <span class="section-num">05</span>
+            <h2>Contribuciones de Usuarios</h2>
+            <p>Los Servicios no ofrecen a los usuarios la posibilidad de enviar o publicar contenido de forma general. No obstante, podemos brindarle la oportunidad de crear, enviar, publicar, exhibir, transmitir, realizar, distribuir o difundir contenido y materiales a través de los Servicios, incluyendo texto, escritos, vídeo, audio, fotografías, gráficos, comentarios, sugerencias u otro material (conjuntamente, las «Contribuciones»).</p>
+            <p>Al crear o poner a disposición cualquier Contribución, usted declara y garantiza que:</p>
+            <ul>
+                <li>La creación, distribución, transmisión, exhibición pública o ejecución, y el acceso, descarga o copia de sus Contribuciones no infringen los derechos de propiedad de terceros, incluidos derechos de autor, patentes, marcas comerciales, secretos comerciales o derechos morales.</li>
+                <li>Es el creador y propietario, o dispone de las licencias, derechos, consentimientos y permisos necesarios para usar sus Contribuciones y autorizar a los Servicios y a otros usuarios a hacerlo.</li>
+                <li>Cuenta con el consentimiento por escrito de cada persona identificable en sus Contribuciones para el uso de su nombre o imagen en los Servicios.</li>
+                <li>Sus Contribuciones no son falsas, inexactas ni engañosas.</li>
+                <li>Sus Contribuciones no constituyen publicidad no solicitada, materiales promocionales, esquemas piramidales, cadenas de correo, spam ni otras formas de solicitud.</li>
+                <li>Sus Contribuciones no son obscenas, lascivas, violentas, acosadoras, difamatorias ni de otro modo objetables.</li>
+                <li>Sus Contribuciones no ridiculizan, insultan, menosprecian, intimidan ni abusan de nadie.</li>
+                <li>Sus Contribuciones no se utilizan para acosar o amenazar a ninguna persona ni para promover la violencia.</li>
+                <li>Sus Contribuciones no infringen ninguna ley, normativa o reglamento aplicable.</li>
+                <li>Sus Contribuciones no vulneran los derechos de privacidad o publicidad de terceros.</li>
+                <li>Sus Contribuciones no infringen ninguna ley relativa a la pornografía infantil ni a la protección de menores.</li>
+                <li>Sus Contribuciones no incluyen comentarios ofensivos relacionados con raza, origen nacional, género, preferencia sexual o discapacidad física.</li>
+                <li>Sus Contribuciones no vulneran ni enlazan a material que vulnere ninguna disposición de estos Términos Legales o de la normativa aplicable.</li>
+            </ul>
+            <p>Cualquier uso de los Servicios que infrinja lo anterior constituirá un incumplimiento de estos Términos Legales y podrá dar lugar, entre otras consecuencias, a la suspensión o cancelación de sus derechos de uso.</p>
+        </div>
+
+        <!-- 6 -->
+        <div class="section" id="s6">
+            <span class="section-num">06</span>
+            <h2>Licencia de Contribuciones</h2>
+            <p>Usted y los Servicios acuerdan que podemos acceder, almacenar, procesar y usar cualquier información y datos personales que usted facilite de conformidad con lo establecido en la Política de Privacidad y sus preferencias (incluida la configuración).</p>
+            <p>Al enviar sugerencias u otros comentarios sobre los Servicios, acepta que podemos usar y compartir dichos comentarios para cualquier fin sin ninguna compensación para usted.</p>
+            <p>No afirmamos ninguna titularidad sobre sus Contribuciones. Usted conserva todos los derechos de propiedad sobre sus Contribuciones y cualquier derecho de propiedad intelectual o de propiedad asociado a ellas. No somos responsables de ninguna declaración o representación en sus Contribuciones proporcionadas por usted en cualquier área de los Servicios.</p>
+        </div>
+
+        <!-- 7 -->
+        <div class="section" id="s7">
+            <span class="section-num">07</span>
+            <h2>Directrices para Reseñas</h2>
+            <p>Podemos ofrecerle áreas en los Servicios para dejar reseñas u opiniones. Al publicar una reseña, debe cumplir los siguientes criterios:</p>
+            <ul>
+                <li>Debe haber tenido experiencia directa con la persona o entidad objeto de la reseña.</li>
+                <li>Sus reseñas no deben contener expresiones ofensivas, blasfemias ni lenguaje abusivo, racista, ofensivo o de carácter odioso.</li>
+                <li>Sus reseñas no deben incluir referencias discriminatorias basadas en religión, raza, género, origen nacional, edad, estado civil, orientación sexual o discapacidad.</li>
+                <li>Sus reseñas no deben incluir referencias a actividades ilegales.</li>
+                <li>No debe ser empleado de la competencia si publica reseñas negativas sobre la competencia.</li>
+                <li>No debe emitir juicios sobre la legalidad de la conducta.</li>
+                <li>No puede publicar declaraciones falsas o engañosas.</li>
+                <li>No puede organizar campañas de reseñas positivas o negativas contra ninguna persona.</li>
+            </ul>
+            <p>Podemos aceptar, rechazar o eliminar reseñas a nuestra entera discreción. No tenemos ninguna obligación de revisar las reseñas ni de eliminarlas, incluso si alguien las considera objetables. Las reseñas no están respaldadas por nosotros y no representan necesariamente nuestras opiniones.</p>
+        </div>
+
+        <!-- 8 -->
+        <div class="section" id="s8">
+            <span class="section-num">08</span>
+            <h2>Sitios Web y Contenido de Terceros</h2>
+            <p>Los Servicios pueden contener enlaces a sitios web de terceros («Sitios de Terceros»), así como artículos, fotografías, texto, gráficos, imágenes, diseños, música, sonido, vídeo, información, aplicaciones, software y otro contenido o elementos pertenecientes o procedentes de terceros («Contenido de Terceros»). No investigamos, supervisamos ni comprobamos la exactitud, pertinencia, actualidad, integridad, adecuación ni exhaustividad de dichos Sitios o Contenido de Terceros.</p>
+            <p>No somos responsables de los Sitios de Terceros a los que se acceda a través de los Servicios, ni de ningún Contenido de Terceros publicado, disponible o instalado desde los mismos, incluidos el contenido, los datos de privacidad, las opiniones, la fiabilidad, las prácticas de recopilación de información o las políticas de dichos sitios web. La inclusión de, el enlace a, o la posibilidad de usar o instalar Sitios o Contenido de Terceros no implica nuestra aprobación ni respaldo de los mismos.</p>
+            <p>Cualquier compra que realice a través de Sitios de Terceros se efectuará en dichos sitios web y con otras empresas, y no asumimos ninguna responsabilidad en relación con dichas compras, que serán exclusivamente entre usted y el tercero correspondiente.</p>
+        </div>
+
+        <!-- 9 -->
+        <div class="section" id="s9">
+            <span class="section-num">09</span>
+            <h2>Gestión de los Servicios</h2>
+            <p>Nos reservamos el derecho, aunque no la obligación, de: (1) supervisar los Servicios para detectar infracciones de estos Términos Legales; (2) emprender las acciones legales oportunas contra quien, a nuestro exclusivo criterio, infrinja la ley o estos Términos Legales, incluyendo la denuncia ante las autoridades competentes; (3) a nuestra entera discreción y sin limitación, rechazar, restringir el acceso, limitar la disponibilidad o deshabilitar cualquiera de sus Contribuciones; (4) eliminar de los Servicios o deshabilitar todos los archivos y contenidos de tamaño excesivo o que resulten gravosos para nuestros sistemas; y (5) gestionar de cualquier otro modo los Servicios de manera que proteja nuestros derechos y bienes y garantice su correcto funcionamiento.</p>
+        </div>
+
+        <!-- 10 -->
+        <div class="section" id="s10">
+            <span class="section-num">10</span>
+            <h2>Política de Privacidad</h2>
+            <p>Nos preocupamos por la privacidad y la seguridad de los datos. Consulte nuestra Política de Privacidad en <strong>http://www.cresvance.com</strong>. Al utilizar los Servicios, acepta quedar vinculado por nuestra Política de Privacidad, que se incorpora a estos Términos Legales. Los Servicios están operados desde España y sujetos al Reglamento General de Protección de Datos (RGPD) y a la LOPDGDD.</p>
+        </div>
+
+        <!-- 11 -->
+        <div class="section" id="s11">
+            <span class="section-num">11</span>
+            <h2>Vigencia y Resolución</h2>
+            <p>Estos Términos Legales permanecerán en plena vigencia mientras utilice los Servicios. SIN PERJUICIO DE CUALQUIER OTRA DISPOSICIÓN DE ESTOS TÉRMINOS LEGALES, NOS RESERVAMOS EL DERECHO DE DENEGAR, A NUESTRA ENTERA DISCRECIÓN Y SIN PREVIO AVISO NI RESPONSABILIDAD, EL ACCESO A LOS SERVICIOS A CUALQUIER PERSONA POR CUALQUIER MOTIVO, INCLUYENDO EL INCUMPLIMIENTO DE CUALQUIER DECLARACIÓN, GARANTÍA O COMPROMISO CONTENIDO EN ESTOS TÉRMINOS LEGALES O DE CUALQUIER LEY O NORMATIVA APLICABLE.</p>
+            <p>Si terminamos o suspendemos su cuenta por cualquier motivo, le quedará prohibido registrarse y crear una nueva cuenta bajo su nombre, un nombre ficticio o el nombre de un tercero. Además de terminar o suspender su cuenta, nos reservamos el derecho de emprender las acciones legales oportunas.</p>
+        </div>
+
+        <!-- 12 -->
+        <div class="section" id="s12">
+            <span class="section-num">12</span>
+            <h2>Modificaciones e Interrupciones</h2>
+            <p>Nos reservamos el derecho de cambiar, modificar o retirar el contenido de los Servicios en cualquier momento y por cualquier razón, a nuestra entera discreción y sin previo aviso. No obstante, no tenemos ninguna obligación de actualizar la información de nuestros Servicios y no seremos responsables ante usted ni ante terceros por ninguna modificación, cambio de precio, suspensión o interrupción de los Servicios.</p>
+            <p>No podemos garantizar que los Servicios estén disponibles en todo momento. Podemos experimentar problemas de hardware, software u otro tipo, o necesitar realizar tareas de mantenimiento relacionadas con los Servicios, lo que puede dar lugar a interrupciones, demoras o errores. Acepta que no tenemos ninguna responsabilidad por ninguna pérdida, daño o inconveniencia causados por su incapacidad de acceder a los Servicios durante cualquier tiempo de inactividad o interrupción.</p>
+        </div>
+
+        <!-- 13 -->
+        <div class="section" id="s13">
+            <span class="section-num">13</span>
+            <h2>Ley Aplicable</h2>
+            <p>Estos Términos Legales se rigen e interpretan de conformidad con las leyes de España, excluyéndose expresamente la aplicación de la Convención de las Naciones Unidas sobre los Contratos de Compraventa Internacional de Mercaderías. Si su residencia habitual se encuentra en la UE y es consumidor, también se beneficiará de la protección que le otorguen las disposiciones imperativas de la ley de su país de residencia.</p>
+            <p>Pool Dilan Trejo Estupiñan y usted acuerdan someterse a la jurisdicción no exclusiva de los juzgados y tribunales de Málaga, lo que significa que puede reclamar la defensa de sus derechos como consumidor en España o en el país de la UE en el que resida.</p>
+        </div>
+
+        <!-- 14 -->
+        <div class="section" id="s14">
+            <span class="section-num">14</span>
+            <h2>Resolución de Conflictos</h2>
+            <p>La Comisión Europea proporciona información sobre la resolución de litigios de consumo, incluyendo una lista de organismos de resolución alternativa de litigios por país, a la que puede acceder en la plataforma europea de resolución de litigios en línea (ODR). Si desea comunicarnos cualquier asunto relacionado, póngase en contacto con nosotros a través de hello@cresvance.com.</p>
+        </div>
+
+        <!-- 15 -->
+        <div class="section" id="s15">
+            <span class="section-num">15</span>
+            <h2>Correcciones</h2>
+            <p>Puede haber información en los Servicios que contenga errores tipográficos, inexactitudes u omisiones, incluidas descripciones, precios, disponibilidad y diversa información. Nos reservamos el derecho de corregir cualquier error, inexactitud u omisión y de modificar o actualizar la información de los Servicios en cualquier momento y sin previo aviso.</p>
+        </div>
+
+        <!-- 16 -->
+        <div class="section" id="s16">
+            <span class="section-num">16</span>
+            <h2>Exención de Responsabilidad</h2>
+            <p class="legal-caps">LOS SERVICIOS SE PRESTAN «TAL CUAL» Y «SEGÚN DISPONIBILIDAD». ACEPTA QUE EL USO DE LOS SERVICIOS SE REALIZARÁ BAJO SU ÚNICA RESPONSABILIDAD. EN LA MÁXIMA MEDIDA PERMITIDA POR LA LEY, RENUNCIAMOS A TODAS LAS GARANTÍAS, EXPRESAS O IMPLÍCITAS, EN RELACIÓN CON LOS SERVICIOS Y SU USO DE LOS MISMOS, INCLUIDAS, SIN LIMITACIÓN, LAS GARANTÍAS IMPLÍCITAS DE COMERCIABILIDAD, IDONEIDAD PARA UN FIN PARTICULAR Y NO INFRACCIÓN. NO GARANTIZAMOS LA EXACTITUD O INTEGRIDAD DEL CONTENIDO NI DE LOS CONTENIDOS DE LOS SITIOS WEB VINCULADOS A LOS SERVICIOS, NI ASUMIREMOS NINGUNA RESPONSABILIDAD POR CUALQUIER ERROR, INEXACTITUD U OMISIÓN EN LOS CONTENIDOS; POR DAÑOS PERSONALES O MATERIALES, DE CUALQUIER NATURALEZA, DERIVADOS DE SU ACCESO A LOS SERVICIOS Y DE SU USO DE LOS MISMOS; NI POR CUALQUIER ACCESO NO AUTORIZADO A NUESTROS SERVIDORES SEGUROS O AL USO DE CUALQUIER INFORMACIÓN PERSONAL ALMACENADA EN ELLOS.</p>
+        </div>
+
+        <!-- 17 -->
+        <div class="section" id="s17">
+            <span class="section-num">17</span>
+            <h2>Limitación de Responsabilidad</h2>
+            <p class="legal-caps">EN NINGÚN CASO NOSOTROS, NI NUESTROS ADMINISTRADORES, EMPLEADOS O AGENTES SEREMOS RESPONSABLES ANTE USTED O CUALQUIER TERCERO POR DAÑOS DIRECTOS, INDIRECTOS, CONSECUENTES, EJEMPLARES, INCIDENTALES, ESPECIALES O PUNITIVOS, INCLUIDAS LAS PÉRDIDAS DE BENEFICIOS, INGRESOS, DATOS U OTROS DAÑOS DERIVADOS DEL USO DE LOS SERVICIOS, INCLUSO SI HEMOS SIDO ADVERTIDOS DE LA POSIBILIDAD DE DICHOS DAÑOS. SIN PERJUICIO DE CUALQUIER OTRA DISPOSICIÓN CONTENIDA EN EL PRESENTE DOCUMENTO, NUESTRA RESPONSABILIDAD ANTE USTED POR CUALQUIER CAUSA Y CUALQUIERA QUE SEA LA FORMA DE LA ACCIÓN QUEDARÁ LIMITADA EN TODO MOMENTO AL IMPORTE ABONADO, EN SU CASO, POR USTED.</p>
+        </div>
+
+        <!-- 18 -->
+        <div class="section" id="s18">
+            <span class="section-num">18</span>
+            <h2>Indemnización</h2>
+            <p>Usted acepta defender, indemnizar y mantener indemnes a Pool Dilan Trejo Estupiñan, Cresvance, y sus respectivos directivos, agentes, socios y empleados frente a cualquier pérdida, daño, responsabilidad, reclamación o demanda, incluidos los honorarios razonables de abogados, efectuada por cualquier tercero debido a: (1) el uso de los Servicios; (2) el incumplimiento de estos Términos Legales; (3) cualquier incumplimiento de sus declaraciones y garantías; (4) la infracción de los derechos de un tercero, incluidos los derechos de propiedad intelectual; o (5) cualquier acto perjudicial manifiesto hacia otro usuario de los Servicios.</p>
+            <p>Nos reservamos el derecho, a su cargo, de asumir la defensa exclusiva y el control de cualquier asunto por el que deba indemnizarnos, y acepta cooperar, a su cargo, en nuestra defensa de dichas reclamaciones.</p>
+        </div>
+
+        <!-- 19 -->
+        <div class="section" id="s19">
+            <span class="section-num">19</span>
+            <h2>Datos del Usuario</h2>
+            <p>Conservaremos determinados datos que transmita a los Servicios con el fin de gestionar su rendimiento, así como datos relacionados con su uso de los Servicios. Aunque realizamos copias de seguridad periódicas, usted es el único responsable de todos los datos que transmita o que estén relacionados con cualquier actividad que haya llevado a cabo mediante los Servicios. Acepta que no tenemos ninguna responsabilidad ante usted por cualquier pérdida o corrupción de dichos datos, y por la presente renuncia a cualquier derecho de acción contra nosotros derivado de dicha pérdida o corrupción.</p>
+        </div>
+
+        <!-- 20 -->
+        <div class="section" id="s20">
+            <span class="section-num">20</span>
+            <h2>Comunicaciones, Transacciones y Firmas Electrónicas</h2>
+            <p>Visitar los Servicios, enviarnos correos electrónicos y completar formularios en línea constituyen comunicaciones electrónicas. Consiente recibir comunicaciones electrónicas y acepta que todos los acuerdos, avisos, divulgaciones y otras comunicaciones que le proporcionemos electrónicamente, por correo electrónico y en los Servicios, satisfacen cualquier requisito legal de comunicación por escrito.</p>
+            <p class="legal-caps">POR LA PRESENTE, ACEPTA EL USO DE FIRMAS ELECTRÓNICAS, CONTRATOS, PEDIDOS Y OTROS REGISTROS, ASÍ COMO LA ENTREGA ELECTRÓNICA DE AVISOS, POLÍTICAS Y REGISTROS DE TRANSACCIONES INICIADAS O COMPLETADAS POR NOSOTROS O A TRAVÉS DE LOS SERVICIOS. RENUNCIA A CUALQUIER DERECHO O REQUISITO ESTABLECIDO EN CUALQUIER ESTATUTO, REGLAMENTO, NORMA U OTRAS LEYES EN CUALQUIER JURISDICCIÓN QUE EXIJAN UNA FIRMA ORIGINAL O LA ENTREGA O CONSERVACIÓN DE REGISTROS NO ELECTRÓNICOS.</p>
+        </div>
+
+        <!-- 21 -->
+        <div class="section" id="s21">
+            <span class="section-num">21</span>
+            <h2>Usuarios en California (EE. UU.)</h2>
+            <p>Si alguna reclamación frente a nosotros no se resuelve satisfactoriamente, puede ponerse en contacto con la Unidad de Asistencia en Reclamaciones de la División de Servicios al Consumidor del Departamento de Asuntos del Consumidor de California por escrito en 1625 North Market Blvd., Suite N 112, Sacramento, California 95834, o por teléfono en el (800) 952-5210 o el (916) 445-1254.</p>
+        </div>
+
+        <!-- 22 -->
+        <div class="section" id="s22">
+            <span class="section-num">22</span>
+            <h2>Disposiciones Generales</h2>
+            <p>Estos Términos Legales y cualesquiera políticas o normas de funcionamiento publicadas por nosotros en los Servicios constituyen el acuerdo y el entendimiento íntegros entre usted y nosotros. El hecho de que no ejerzamos o hagamos cumplir cualquier derecho o disposición de estos Términos Legales no operará como una renuncia a dicho derecho o disposición.</p>
+            <p>Podemos ceder cualquiera o todos nuestros derechos y obligaciones a terceros en cualquier momento. No seremos responsables de ninguna pérdida, daño, retraso o falta de actuación causados por cualquier causa ajena a nuestro control razonable. Si alguna disposición de estos Términos Legales se determina ilegal, nula o inaplicable, dicha disposición se considerará separable de estos Términos Legales y no afectará a la validez y aplicabilidad del resto de las disposiciones.</p>
+            <p>No existe ninguna relación de empresa conjunta, sociedad, empleo o agencia entre usted y nosotros como resultado de estos Términos Legales o del uso de los Servicios.</p>
+        </div>
+
+        <!-- 23 -->
+        <div class="section" id="s23">
+            <span class="section-num">23</span>
+            <h2>Aviso sobre los Servicios: Inmigración y Asesoramiento Fiscal</h2>
+            <p>Cresvance presta servicios de asesoramiento en materia de inmigración y fiscalidad en España. Todo asesoramiento y asistencia se presta exclusivamente con fines informativos y de apoyo procedimental, y no constituye representación legal. Los resultados de las solicitudes de visado, permisos de residencia, procedimientos de NIE o declaraciones fiscales dependen de las decisiones adoptadas por las autoridades públicas españolas, la Agencia Tributaria o las oficinas de extranjería (Extranjería), que están completamente fuera del control de Cresvance.</p>
+            <p>Cresvance no acepta ninguna responsabilidad por las decisiones adoptadas por ninguna autoridad pública u organismo administrativo. Los clientes son responsables de facilitar documentación e información exacta, completa y veraz. Cresvance no acepta ninguna responsabilidad por demoras, denegaciones o resultados adversos derivados de información incompleta, inexacta o fraudulenta facilitada por el cliente.</p>
+            <p>Todos los honorarios abonados a Cresvance corresponden exclusivamente a servicios de asesoramiento y apoyo procedimental, independientemente del resultado de cualquier solicitud o trámite. Estos términos se rigen por la ley española. Cualquier litigio se resolverá ante los juzgados y tribunales competentes de Málaga, España.</p>
+        </div>
+
+        <!-- 24 -->
+        <div class="section" id="s24">
+            <span class="section-num">24</span>
+            <h2>Contacto</h2>
+            <p>Para resolver cualquier reclamación relacionada con los Servicios o para obtener más información sobre su uso, póngase en contacto con nosotros:</p>
+            <div class="contact-block">
+                <p><strong>Pool Dilan Trejo Estupiñan</strong></p>
+                <p>C/ Martínez de la Rosa 132, 4-G</p>
+                <p>Málaga, Andalucía 29010</p>
+                <p>España</p>
+                <p>Teléfono: <a href="tel:+34602593904">(+34) 602 593 904</a></p>
+                <p>Correo electrónico: <a href="mailto:hello@cresvance.com">hello@cresvance.com</a></p>
+            </div>
+        </div>
+
+    </main>
+</div>
+
+<footer>
+    <p>© 2026 Cresvance · Pool Dilan Trejo Estupiñan · NIF ES78329861A · Málaga, España &nbsp;·&nbsp; <a href="https://www.cresvance.com">www.cresvance.com</a></p>
+</footer>
+
+</body>
+</html>
